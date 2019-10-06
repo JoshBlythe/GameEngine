@@ -6,9 +6,9 @@ public:
 Object();
 ~Object();
 
-void getMesh();
+void GetMesh();
 
 private:
 
 
-}
+};
