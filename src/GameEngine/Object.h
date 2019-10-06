@@ -1,14 +1,21 @@
 #include <iostream>
+#include <memory>
+
+#include "Mesh.h"
+#include "Material.h"
 
 class Object
 {
 public:
-Object();
-~Object();
+	Object();
+	~Object();
 
-void GetMesh();
+	void GetMesh(std::shared_ptr<Mesh> mesh);
+	void setMaterial(std::shared_ptr<Material> mat);
 
-private:
+protected:
 
+	std::shared_ptr<Mesh> m_mesh;
+	std::shared_ptr<Material> m_material;
 
 };
