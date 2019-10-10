@@ -1,7 +1,8 @@
-#include <glm/glm.hpp>
-
+//includes
 #include <string>
 
+//include libraries
+#include <glm/glm.hpp>
 #include "GL/glew.h"
 
 class Material

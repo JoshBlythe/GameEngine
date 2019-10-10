@@ -1,7 +1,15 @@
 #include "Core.h"
 
+Core::Core()
+{
+}
 
-void doSomething()
+Core::~Core()
+{
+}
+
+void Core::RunCore()
 {
 
 }
+

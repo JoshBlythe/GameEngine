@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.6)
 project(GAMEENGINE)
 
+include_directories(
+	src
+)
+
 add_library(gameengine
 	src/gameengine/core.cpp
 	src/gameengine/core.h
