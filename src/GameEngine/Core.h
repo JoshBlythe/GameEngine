@@ -16,7 +16,7 @@ public:
 
 	~Core();
 	//init Glew
-	bool initaliseGlew();
+	//bool initaliseGlew();
 	//main loop
 	void runCore();
 	//stop running main loop

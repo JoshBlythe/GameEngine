@@ -24,8 +24,6 @@ public:
 
 protected:
 	
-
-
 	std::shared_ptr<Mesh> m_mesh;
 	std::shared_ptr<Material> m_material;
 
