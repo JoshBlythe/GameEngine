@@ -17,6 +17,11 @@ std::shared_ptr<Object> Entity::addObject()
 	return obj;
 }
 
+void Entity::update()
+{
+	std::cout << "Updating Entity!!" << std::endl;
+}
+
 void Entity::display()
 {
 	//interate though the list and draw each Object

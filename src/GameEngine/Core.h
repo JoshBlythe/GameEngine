@@ -15,8 +15,6 @@ public:
 	std::shared_ptr<Entity> addEntity();
 
 	~Core();
-	//init Glew
-	//bool initaliseGlew();
 	//main loop
 	void runCore();
 	//stop running main loop
