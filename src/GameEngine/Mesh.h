@@ -10,8 +10,6 @@ public:
 	void LoadObject(std::string ObjectFile);
 	void Draw();
 
-
-
 private:
 
 };

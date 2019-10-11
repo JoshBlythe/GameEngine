@@ -12,5 +12,5 @@ public:
 
 private:
 
-	std::weak_ptr<Core> core;
+	std::weak_ptr<Core> m_core;
 };

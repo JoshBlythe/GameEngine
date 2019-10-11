@@ -17,21 +17,26 @@ public:
 	std::shared_ptr<Entity> addEntity();
 
 	~Core();
-	//bool initaliseGlew();
+	//init Glew
+	bool initaliseGlew();
+	//main loop
 	void runCore();
+	//stop running main loop
 	void stopCore();
 
 
 private:
 	Core();
 
-	int windowX;
-	int windowY;
-	int windowW;
-	int windowH;
+	bool m_systemLoop;
+
+	int m_windowX;
+	int m_windowY;
+	int m_windowW;
+	int m_windowH;
 
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
 
-	std::list < std::shared_ptr<Entity>> entities;
+	std::list < std::shared_ptr<Entity>> m_entities;
 };
