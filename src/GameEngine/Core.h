@@ -1,8 +1,6 @@
-#include <iostream>
+//#include <iostream>
 #include <Windows.h>
-#include <memory>
-#include <list>
-
+//#include <memory>
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 

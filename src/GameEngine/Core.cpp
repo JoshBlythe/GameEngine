@@ -100,6 +100,7 @@ void Core::runCore()
 	//loop condition
 	while (m_systemLoop)
 	{
+		
 
 	}
 
