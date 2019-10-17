@@ -16,5 +16,10 @@ void Object::Draw()
 
 }
 
+void Object::update()
+{
+	std::cout << "This is Object Update! " << std::endl;
+}
+
 
 

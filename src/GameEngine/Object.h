@@ -12,6 +12,7 @@ public:
 	Object();
 	~Object();
 
+
 	void setMesh(std::shared_ptr<Mesh> mesh) { m_mesh = mesh; }
 	void setMaterial(std::shared_ptr<Material> mat) { m_material = mat; }
 
@@ -23,6 +24,7 @@ public:
 	void getEntity();
 
 protected:
+	virtual void update();
 	
 	std::shared_ptr<Mesh> m_mesh;
 	std::shared_ptr<Material> m_material;

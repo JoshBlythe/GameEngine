@@ -25,7 +25,7 @@ std::shared_ptr<Entity> Core::addEntity()
 void Core::runCore()
 {
 	//loop through m_entites using iterator.
-	for (std::list<std::shared_ptr<Entity>> ::iterator 
+	for (std::list<std::shared_ptr<Entity>>::iterator 
 		iter = m_entities.begin(); iter != m_entities.end(); iter++)
 	{
 		//unasign pointer allowing use to access Entity functions

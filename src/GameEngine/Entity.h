@@ -7,7 +7,7 @@
 
 class Core;
 
-class Entity
+class Entity : public Object
 {
 public:
 	Entity();
@@ -17,14 +17,16 @@ public:
 	template<typename T> 
 	std::shared_ptr<T> addObject()
 	{
-		std::shared_ptr<T> rtn = std::make_shared<T>;
+		std::shared_ptr<T> rtn = std::make_shared<T>();
+		return rtn;
 	}
 
 	//create object template with value
 	template <typename T, typename V>
-	std::shared_ptr<T> addObject(V)
+	std::shared_ptr<T> addObject()
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>(U);
+		return rtn;
 	}
 
 	void update();

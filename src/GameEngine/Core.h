@@ -26,13 +26,13 @@ private:
 
 	bool m_systemLoop;
 
-	int m_windowX;
+	/*int m_windowX;
 	int m_windowY;
 	int m_windowW;
 	int m_windowH;
 
 	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;
+	SDL_Renderer* m_renderer;*/
 
 	std::list < std::shared_ptr<Entity>> m_entities;
 };
