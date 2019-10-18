@@ -18,6 +18,8 @@ add_library(gameengine
 
 add_executable(sandbox
 	src/sandbox/main.cpp
+	src/sandbox/testscene.cpp
+	src/sandbox/testscene.h
 )
 
 

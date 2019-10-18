@@ -32,6 +32,8 @@ public:
 	virtual void update();
 protected:
 	
+	std::weak_ptr<Entity> entity;
+
 	std::shared_ptr<Mesh> m_mesh;
 	std::shared_ptr<Material> m_material;
 

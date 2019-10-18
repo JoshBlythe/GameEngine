@@ -30,7 +30,11 @@ void Entity::update()
 
 void Entity::ticks()
 {
-	std::cout << "ticking through! " << std::endl;
+	//std::cout << "ticking through! " << std::endl;
+	for (tick = 0; tick < 5; tick++)
+	{
+		std::cout << tick << std::endl;
+	}
 }
 
 void Entity::display()

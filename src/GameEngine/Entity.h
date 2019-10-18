@@ -35,6 +35,8 @@ public:
 
 private:
 
+	int tick;
+
 	std::list < std::shared_ptr<Object>> m_objects;
 	std::weak_ptr<Core> m_core;
 };
