@@ -1,12 +1,16 @@
 #include "Core.h"
 
-Core::Core()
-{
-}
+#include "Entity.h"
+
+//Core::Core()
+//{
+//}
 
 std::shared_ptr<Core> Core::initalize()
 {
-	return std::shared_ptr<Core>();
+	std::shared_ptr<Core> c = std::make_shared<Core>();
+
+	return c;
 }
 
 Core::~Core()

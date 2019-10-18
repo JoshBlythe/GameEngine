@@ -5,6 +5,8 @@
 #include "Mesh.h"
 #include "Material.h"
 
+class Entity;
+
 class Object : public Transform
 
 {
@@ -16,15 +18,19 @@ public:
 	void setMesh(std::shared_ptr<Mesh> mesh) { m_mesh = mesh; }
 	void setMaterial(std::shared_ptr<Material> mat) { m_material = mat; }
 
-
-	void Draw();
-
 	float getPos() { return m_objectPosition.x, m_objectPosition.y, m_objectPosition.z; }
 
-	void getEntity();
+	std::shared_ptr<Entity> getEntity();
+	//void getEntity();  //shared_ptr of entity
 
-protected:
+	void Draw();
+	virtual void onInitalise();
+	virtual void begin();
+	virtual void onTicks();
+	virtual void onDisplay();
+
 	virtual void update();
+protected:
 	
 	std::shared_ptr<Mesh> m_mesh;
 	std::shared_ptr<Material> m_material;

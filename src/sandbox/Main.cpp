@@ -1,4 +1,4 @@
-#include <GameEngine/Core.h>
+#include <GameEngine/GameEngine.h>
 
 #include <memory>
 #include <iostream>
@@ -16,6 +16,8 @@ int main()
 
 	//start the engine's main loop
 	core->runCore();
+
+	//system("PAUSE");
 
 	//std::cout << "GamesEngine" << std::endl;
 

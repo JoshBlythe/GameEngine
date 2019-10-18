@@ -1,10 +1,13 @@
 //#include <iostream>
 #include <Windows.h>
-//#include <memory>
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 
-#include "Entity.h"
+#include <list>
+#include <memory>
+
+//#include "Entity.h"
+class Entity;
 
 class Core
 {
@@ -22,7 +25,7 @@ public:
 
 
 private:
-	Core();
+	//Core();
 
 	bool m_systemLoop;
 

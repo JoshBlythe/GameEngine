@@ -1,13 +1,11 @@
 #include <iostream>
 #include <list>
 #include <memory>
-#include <iostream>
-
-#include "Object.h"
 
 class Core;
+class Object;
 
-class Entity : public Object
+class Entity
 {
 public:
 	Entity();
@@ -18,6 +16,7 @@ public:
 	std::shared_ptr<T> addObject()
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>();
+		m_objects.push_back(rtn);
 		return rtn;
 	}
 
@@ -25,12 +24,13 @@ public:
 	template <typename T, typename V>
 	std::shared_ptr<T> addObject()
 	{
-		std::shared_ptr<T> rtn = std::make_shared<T>(U);
+		std::shared_ptr<T> rtn = std::make_shared<T>(V);
+		m_objects.push_back(rtn);
 		return rtn;
 	}
 
 	void update();
-
+	void ticks();
 	void display();
 
 private:

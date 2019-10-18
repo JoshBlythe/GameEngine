@@ -1,4 +1,6 @@
 #include "Entity.h"
+#include "Object.h"
+
 
 Entity::Entity()
 {
@@ -19,7 +21,16 @@ Entity::~Entity()
 
 void Entity::update()
 {
-	std::cout << "Updating Entity!!" << std::endl;
+	for (std::list<std::shared_ptr<Object>>::iterator it = 
+		m_objects.begin(); it != m_objects.end(); it++)
+	{
+		(*it)->update();
+	}
+}
+
+void Entity::ticks()
+{
+	std::cout << "ticking through! " << std::endl;
 }
 
 void Entity::display()
