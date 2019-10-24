@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include "Object.h"
+#include "Component.h"
 
 
 Entity::Entity()
@@ -19,25 +19,28 @@ Entity::~Entity()
 //	return obj;
 //}
 
+void Entity::ticks()
+{
+	//std::cout << "ticking through! " << std::endl;
+		for (tick = 0; tick < 5; tick++)
+		{
+			update();
+		}	
+}
+
 void Entity::update()
 {
-	for (std::list<std::shared_ptr<Object>>::iterator it = 
-		m_objects.begin(); it != m_objects.end(); it++)
+	for (std::list<std::shared_ptr<Component>>::iterator it =
+		m_component.begin(); it != m_component.end(); it++)
 	{
 		(*it)->update();
 	}
 }
 
-void Entity::ticks()
-{
-	//std::cout << "ticking through! " << std::endl;
-	for (tick = 0; tick < 5; tick++)
-	{
-		std::cout << tick << std::endl;
-	}
-}
 
 void Entity::display()
 {
 	//interate though the list and draw each Object
+
+	std::cout << "displaying" << std::endl;
 }

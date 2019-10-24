@@ -1,8 +1,8 @@
-#include <GameEngine/GameEngine.h>
-
+//#include <GameEngine/GameEngine.h>
 #include <memory>
 #include <iostream>
 
+#include "TestScene.h"
 
 int main()
 {
@@ -12,7 +12,7 @@ int main()
 	std::shared_ptr<Entity> entity = core->addEntity();
 	
 	//adding simple conent to engine
-	std::shared_ptr<Object> testingObj = entity->addObject<Object>();
+	std::shared_ptr<Component> testing = entity->addComponent<TestScene>();
 
 	//start the engine's main loop
 	core->runCore();

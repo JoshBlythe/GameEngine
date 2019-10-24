@@ -3,7 +3,7 @@
 #include <memory>
 
 class Core;
-class Object;
+class Component;
 
 class Entity
 {
@@ -13,30 +13,30 @@ public:
 
 	//create object template without value
 	template<typename T> 
-	std::shared_ptr<T> addObject()
+	std::shared_ptr<T> addComponent()
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>();
-		m_objects.push_back(rtn);
+		m_component.push_back(rtn);
 		return rtn;
 	}
 
 	//create object template with value
 	template <typename T, typename V>
-	std::shared_ptr<T> addObject()
+	std::shared_ptr<T> addComponent()
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>(V);
-		m_objects.push_back(rtn);
+		m_component.push_back(rtn);
 		return rtn;
 	}
 
-	void update();
 	void ticks();
+	void update();
 	void display();
 
 private:
 
 	int tick;
 
-	std::list < std::shared_ptr<Object>> m_objects;
+	std::list < std::shared_ptr<Component>> m_component;
 	std::weak_ptr<Core> m_core;
 };

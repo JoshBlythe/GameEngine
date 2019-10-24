@@ -1,15 +1,26 @@
-#include <iostream>
+#pragma once
 
-#include "GameEngine/Object.h"
+#include <GameEngine/GameEngine.h>
 
-class TestScene : public Object
+//#include <iostream>
+#include <SDL2/SDL.h>
+#include <GL/glew.h>
+
+class TestScene : public Component
 {
 public:
 	TestScene();
-	~TestScene();
+	virtual ~TestScene();
 
 	void onDisplay();
 
 private:
 
+	SDL_Window * m_Window;
+	GLuint positionVboId;
+	GLuint vaoID;
+
+	GLuint vertexShaderID;
+	GLuint fragmentShaderID;
+	GLuint prgramId;
 };

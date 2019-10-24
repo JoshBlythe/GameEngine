@@ -1,39 +1,43 @@
+#pragma once
+//#include <SDL2/SDL.h>
+//#include <GL/glew.h>
 #include <iostream>
 #include <memory>
 
-#include "Mesh.h"
-#include "Material.h"
+//#include "Transform.h"
+//#include "Mesh.h"
+//#include "Material.h"
 
-class Object
+class Entity;
+
+class Component 
+
 {
 public:
-	Object();
-	~Object();
-
-	void setMesh(std::shared_ptr<Mesh> mesh) { m_mesh = mesh; }
-	void setMaterial(std::shared_ptr<Material> mat) { m_material = mat; }
+	Component();
+	~Component();
 
 
-	//initalise Values
-	void setObjPosition(float m_posX, float m_posY, float m_posZ) { m_objectPosition.x = m_posX, m_objectPosition.y = m_posY, m_objectPosition.z = m_posZ; }
-	void setObjRotation(float m_rotX, float m_rotY, float m_rotZ) { m_objectRotation.x = m_rotX, m_objectRotation.y = m_rotY, m_objectRotation.z = m_rotZ; }
-	void setObjScale(float m_scaX, float m_scaY, float m_scaZ) { m_objectScale.x = m_scaX, m_objectScale.y = m_scaY, m_objectScale.z = m_scaZ; }
+	//void setMesh(std::shared_ptr<Mesh> mesh) { m_mesh = mesh; }
+	//void setMaterial(std::shared_ptr<Material> mat) { m_material = mat; }
 
-	glm::vec3 getPosition() { return glm::vec3(m_objectPosition.x, m_objectPosition.y, m_objectPosition.z); }
+	//float getPos() { return m_objectPosition.x, m_objectPosition.y, m_objectPosition.z; }
 
+	std::shared_ptr<Entity> getEntity();
+	//void getEntity();  //shared_ptr of entity
 
 	void Draw();
+	//virtual void onInitalise();
+	//virtual void begin();
+	virtual void onTicks();
+	//virtual void onDisplay();
 
+	virtual void update();
 protected:
+	
+	std::weak_ptr<Entity> entity;
 
-	//position
-	glm::vec3 m_objectPosition;
-	//rotation
-	glm::vec3 m_objectRotation;
-	//scale
-	glm::vec3 m_objectScale;
-
-	std::shared_ptr<Mesh> m_mesh;
-	std::shared_ptr<Material> m_material;
+	//std::shared_ptr<Mesh> m_mesh;
+	//std::shared_ptr<Material> m_material;
 
 };

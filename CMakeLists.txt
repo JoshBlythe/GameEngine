@@ -8,12 +8,12 @@ include_directories(
 add_library(gameengine
 	src/gameengine/core.cpp
 	src/gameengine/core.h
-	src/gameengine/object.cpp
-	src/gameengine/object.h
+	src/gameengine/component.cpp
+	src/gameengine/component.h
 	src/gameengine/entity.cpp
 	src/gameengine/entity.h
-	src/gameengine/transform.cpp
-	src/gameengine/transform.h
+	src/gameengine/exception.cpp
+	src/gameengine/exception.h
 )
 
 add_executable(sandbox

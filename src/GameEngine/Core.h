@@ -1,7 +1,7 @@
 //#include <iostream>
-#include <Windows.h>
-#include <SDL2/SDL.h>
-#include <GL/glew.h>
+//#include <Windows.h>
+//#include <SDL2/SDL.h>
+//#include <GL/glew.h>
 
 #include <list>
 #include <memory>
