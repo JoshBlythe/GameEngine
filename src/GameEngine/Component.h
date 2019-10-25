@@ -26,13 +26,13 @@ public:
 	std::shared_ptr<Entity> getEntity();
 	//void getEntity();  //shared_ptr of entity
 
-	void Draw();
+	virtual void OnDraw();
 	//virtual void onInitalise();
 	//virtual void begin();
-	virtual void onTicks();
+	virtual void onTick();
 	//virtual void onDisplay();
 
-	virtual void update();
+	virtual void OnUpdate();
 protected:
 	
 	std::weak_ptr<Entity> entity;

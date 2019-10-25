@@ -131,34 +131,33 @@ TestScene::TestScene()
 		throw Exception("Program, Success Error! ");
 	}
 
+}
+
+TestScene::~TestScene()
+{
+	//clean up shaders
 	glDetachShader(prgramId, vertexShaderID);
 	glDeleteShader(vertexShaderID);
 	glDetachShader(prgramId, fragmentShaderID);
 	glDeleteShader(fragmentShaderID);
-
-}
-
-
-TestScene::~TestScene()
-{
-	//clean up;
+	//clean up SDL
 	SDL_DestroyWindow(m_Window);
 	SDL_Quit();
 }
 
-void TestScene::onDisplay()
+void TestScene::OnDraw()
 {
-	bool m_systemLoop = false;
+	//bool m_systemLoop = true;
 
-	while (!m_systemLoop)
-	{
+	//while (m_systemLoop)
+	//{
 		SDL_Event m_event = { 0 };
 
 		while (SDL_PollEvent(&m_event))
 		{
 			if (m_event.type == SDL_QUIT)
 			{
-				m_systemLoop = true;
+				//m_systemLoop = false;
 			}
 		}
 
@@ -174,7 +173,7 @@ void TestScene::onDisplay()
 
 		SDL_GL_SwapWindow(m_Window);
 
-	}
+	//}
 
 	//onTicks();
 }

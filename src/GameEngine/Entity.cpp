@@ -19,28 +19,32 @@ Entity::~Entity()
 //	return obj;
 //}
 
-void Entity::ticks()
+void Entity::Ticks()
 {
 	//std::cout << "ticking through! " << std::endl;
-		for (tick = 0; tick < 5; tick++)
+		for (m_tick = 0; m_tick < 5; m_tick++)
 		{
-			update();
+			Update();
 		}	
 }
 
-void Entity::update()
+void Entity::Update()
 {
-	for (std::list<std::shared_ptr<Component>>::iterator it =
-		m_component.begin(); it != m_component.end(); it++)
+	for (std::list<std::shared_ptr<Component>>::iterator m_it =
+		m_component.begin(); m_it != m_component.end(); m_it++)
 	{
-		(*it)->update();
+		(*m_it)->onTick();
 	}
 }
 
 
-void Entity::display()
+void Entity::OnDisplay()
 {
 	//interate though the list and draw each Object
 
-	std::cout << "displaying" << std::endl;
+	for (std::list<std::shared_ptr<Component>>::iterator m_it =
+		m_component.begin(); m_it != m_component.end(); m_it++)
+	{
+		(*m_it)->OnDraw();
+	}
 }

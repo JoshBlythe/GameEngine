@@ -11,6 +11,6 @@ public:
 
 private:
 
-	std::string exp;
+	std::string m_exp;
 
 };

@@ -1,4 +1,4 @@
-#include "Object.h"
+#include "Component.h"
 
 Component::Component()
 {
@@ -11,9 +11,9 @@ Component::~Component()
 	//smart pointers used so no need to clean up pointers
 }
 
-void Component::Draw()
+void Component::OnDraw()
 {
-
+	std::cout << "This will be override! " << std::endl;
 }
 
 std::shared_ptr<Entity> Component::getEntity()
@@ -26,10 +26,10 @@ std::shared_ptr<Entity> Component::getEntity()
 //	//initalise SDL.
 //}
 
-void Component::onTicks()
+void Component::onTick()
 {
 	std::cout << "ticking through object! " << std::endl;
-	update();
+	OnUpdate();
 }
 
 //void Object::begin()
@@ -43,7 +43,7 @@ void Component::onTicks()
 //	std::cout << "Display!" << std::endl;
 //}
 
-void Component::update()
+void Component::OnUpdate()
 {
 	std::cout << "This is Object Update! " << std::endl;
 }

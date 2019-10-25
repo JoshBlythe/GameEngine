@@ -2,10 +2,6 @@
 
 #include "Entity.h"
 
-//Core::Core()
-//{
-//}
-
 std::shared_ptr<Core> Core::initalize()
 {
 	std::shared_ptr<Core> c = std::make_shared<Core>();
@@ -28,14 +24,25 @@ std::shared_ptr<Entity> Core::addEntity()
 
 void Core::runCore()
 {
-	while (true)
+	//loop variable
+	bool m_looper = true;
+	//loop condition
+	while (m_looper)
 	{
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)
 		{
 			//unasign pointer allowing use to access Entity functions
-			(*iter)->ticks();
+			(*iter)->Ticks();
+		}
+		
+		//onDisplay loop
+		for (std::list<std::shared_ptr<Entity>>::iterator
+			iter = m_entities.begin(); iter != m_entities.end(); iter++)
+		{
+			//unasign pointer allowing use to access Entity functions
+			(*iter)->OnDisplay();
 		}
 
 	}

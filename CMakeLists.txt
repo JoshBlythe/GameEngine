@@ -16,10 +16,14 @@ add_library(gameengine
 	src/gameengine/exception.h
 )
 
+target_link_libraries(gameengine glew32 SDL2 opengl32)
+
 add_executable(sandbox
 	src/sandbox/main.cpp
 	src/sandbox/testscene.cpp
 	src/sandbox/testscene.h
+	src/sandbox/shader.cpp
+	src/sandbox/shader.h
 )
 
 

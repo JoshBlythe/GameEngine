@@ -29,13 +29,13 @@ public:
 		return rtn;
 	}
 
-	void ticks();
-	void update();
-	void display();
+	void Ticks();
+	void Update();
+	virtual void OnDisplay();
 
 private:
 
-	int tick;
+	int m_Tick;
 
 	std::list < std::shared_ptr<Component>> m_component;
 	std::weak_ptr<Core> m_core;

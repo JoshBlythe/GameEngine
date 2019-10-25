@@ -4,7 +4,7 @@
 
 Exception::Exception(const std::string & exp)
 {
-	this->exp = exp;
+	this->m_exp = exp;
 }
 
 Exception::~Exception() throw()
