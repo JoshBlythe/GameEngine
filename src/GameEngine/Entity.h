@@ -35,7 +35,7 @@ public:
 
 private:
 
-	int m_Tick;
+	int m_tick;
 
 	std::list < std::shared_ptr<Component>> m_component;
 	std::weak_ptr<Core> m_core;

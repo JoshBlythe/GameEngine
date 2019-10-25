@@ -16,6 +16,8 @@ public:
 
 private:
 
+	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+
 	SDL_Window * m_Window;
 	GLuint positionVboId;
 	GLuint vaoID;

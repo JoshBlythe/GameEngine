@@ -1,17 +1,8 @@
-#include "TestScene.h"
+#include "Shader.h"
 
-//#include <GameEngine/Exception.h>
-
-TestScene::TestScene()
+Shader::Shader()
 {
-	const GLfloat positions[] =
-	{
-		0.0f, 0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f
-	};
-
-	const GLchar *vertexShaderSrc =
+	vertexShaderSrc =
 		"attribute vec3 in_Position;"\
 		""\
 		"void main()"\
@@ -20,39 +11,28 @@ TestScene::TestScene()
 		"}"\
 		"";
 
-	const GLchar *fragmentShaderSrc =
+	fragmentShaderSrc =
 		"void main()"\
 		"{"\
 		"	gl_FragColor = vec4(0, 0, 1, 1);"\
 		"}"\
 		"";
+}
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		throw Exception("SDL_Init Error: ");
-	}
+Shader::~Shader()
+{
+	//clean up shaders
+	/*glDetachShader(prgramId, vertexShaderID);
+	glDeleteShader(vertexShaderID);
+	glDetachShader(prgramId, fragmentShaderID);
+	glDeleteShader(fragmentShaderID);*/
+}
 
-	//create window
-	m_Window = SDL_CreateWindow("Game Engine",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		600, 400, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-
-	if (!SDL_GL_CreateContext(m_Window))
-	{
-		throw std::exception();
-	}
-
-	if (glewInit() != GLEW_OK)
-	{
-		throw Exception("Glew Init Error: ");
-	}
-
-	//below stuff will adventually need to me 
-		//for now get the shader working ignore the VAOID
-
+GLuint Shader::PositionID()
+{
 	//set position of VBO
 	positionVboId = 0;
-	
+
 	//Creates a VBO on the GPU and binds it to position 1
 	glGenBuffers(1, &positionVboId);
 
@@ -70,6 +50,11 @@ TestScene::TestScene()
 	//reset the state
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+	return positionVboId;
+}
+
+GLuint Shader::VaoID()
+{
 	//initalising the vao
 	vaoID = 0;
 	//create new VAO on GPU and bind it
@@ -86,16 +71,20 @@ TestScene::TestScene()
 	glBindBuffer(GL_ARRAY_BUFFER, positionVboId);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
 	glEnableVertexAttribArray(0);
-	
+
 	//reset the state
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glEnableVertexAttribArray(0);
+	
+	return vaoID;
+}
 
+GLuint Shader::VertShader()
+{
 	//vertex shader
 	vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShaderID, 1, &vertexShaderSrc, NULL);
 	glCompileShader(vertexShaderID);
-	
 	GLint success = 0;
 	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
 
@@ -105,6 +94,11 @@ TestScene::TestScene()
 		throw Exception("Reset State Vertex shader, Success Error! ");
 	}
 
+	return vertexShaderID;
+}
+
+GLuint Shader::FragShader()
+{
 	//fragment shader
 	fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShaderID, 1, &fragmentShaderSrc, NULL);
@@ -116,6 +110,11 @@ TestScene::TestScene()
 		throw Exception("Reset State Fragment shader, Success Error! ");
 	}
 
+	return fragmentShaderID;
+}
+
+GLuint Shader::ProgramID()
+{
 	//program
 	prgramId = glCreateProgram();
 	glAttachShader(prgramId, vertexShaderID);
@@ -134,50 +133,6 @@ TestScene::TestScene()
 	{
 		throw Exception("Program, Success Error! ");
 	}
-
+	return prgramId;
 }
 
-TestScene::~TestScene()
-{
-	//clean up shaders
-	glDetachShader(prgramId, vertexShaderID);
-	glDeleteShader(vertexShaderID);
-	glDetachShader(prgramId, fragmentShaderID);
-	glDeleteShader(fragmentShaderID);
-	//clean up SDL
-	SDL_DestroyWindow(m_Window);
-	SDL_Quit();
-}
-
-void TestScene::OnDraw()
-{
-	//bool m_systemLoop = true;
-
-	//while (m_systemLoop)
-	//{
-		SDL_Event m_event = { 0 };
-
-		while (SDL_PollEvent(&m_event))
-		{
-			if (m_event.type == SDL_QUIT)
-			{
-				//m_systemLoop = false;
-			}
-		}
-
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(_shader->ProgramID());
-		glBindVertexArray(_shader->VaoID());
-
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		glBindVertexArray(0);
-		glUseProgram(0);
-
-		SDL_GL_SwapWindow(m_Window);
-
-	//}
-
-	//onTicks();
-}
