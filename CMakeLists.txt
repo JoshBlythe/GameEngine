@@ -16,6 +16,10 @@ add_library(gameengine
 	src/gameengine/exception.h
 	src/gameengine/shader.cpp
 	src/gameengine/shader.h
+	src/gameengine/transform.cpp
+	src/gameengine/transform.h
+	src/gameengine/camera.cpp
+	src/gameengine/camera.h
 )
 
 target_link_libraries(gameengine glew32 SDL2 opengl32)

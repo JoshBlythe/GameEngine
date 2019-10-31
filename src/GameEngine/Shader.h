@@ -1,41 +1,23 @@
 
 //#include <SDL2/SDL.h>
 #include <GL/glew.h>
-
-#include "Exception.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 class Shader
 {
 public:
-	Shader();
+	Shader() {}
+	Shader(std::string _vert, std::string _frag);
 	~Shader();
-	
-	GLuint PositionID();
-	GLuint VaoID();
 
-	GLuint VertShader();
-	GLuint FragShader();
+	//void Draw();
+	void SetUniform(glm::vec4 _position);
+	void SetUniform(float _setUniform);
 
-	GLuint ProgramID();
+	GLuint GetID() { return m_shaderID; }
+
 private:
+	GLuint m_shaderID;
 
-	const GLfloat positions[9] =
-	{
-		0.0f, 0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f
-	};
-
-	const GLchar *vertexShaderSrc;
-	const GLchar *fragmentShaderSrc;
-
-	GLuint positionVboId;
-	GLuint vaoID;
-
-	GLint success = 0;
-
-	GLuint vertexShaderID;
-	GLuint fragmentShaderID;
-	
-	GLuint prgramId;
 };

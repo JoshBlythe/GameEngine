@@ -16,9 +16,9 @@ void Component::OnDraw()
 	std::cout << "This will be override! " << std::endl;
 }
 
-std::shared_ptr<Entity> Component::getEntity()
+std::weak_ptr<Entity> Component::getEntity()
 {
-	return std::shared_ptr<Entity>();
+	return entity.lock();
 }
 
 //void Object::onInitalise()
@@ -47,6 +47,7 @@ void Component::OnUpdate()
 {
 	std::cout << "This is Object Update! " << std::endl;
 }
+
 
 
 

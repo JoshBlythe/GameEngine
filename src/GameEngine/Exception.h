@@ -8,7 +8,7 @@ public:
 	Exception(const std::string &exp);
 	virtual ~Exception() throw();
 
-	void Error();
+	virtual const char* Error() const throw();
 
 private:
 

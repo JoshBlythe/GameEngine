@@ -12,7 +12,7 @@ int main()
 	std::shared_ptr<Entity> entity = core->addEntity();
 	
 	//adding simple conent to engine
-	std::shared_ptr<Component> testing = entity->addComponent<TestScene>();
+	std::shared_ptr<TestScene> testing = entity->addComponent<TestScene>();
 
 	//start the engine's main loop
 	core->runCore();

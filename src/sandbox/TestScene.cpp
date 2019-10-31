@@ -151,6 +151,9 @@ TestScene::~TestScene()
 
 void TestScene::OnDraw()
 {
+	//might need to check this
+	std::shared_ptr<Entity> ent;
+	ent->getCore();
 	//bool m_systemLoop = true;
 
 	//while (m_systemLoop)
@@ -167,8 +170,8 @@ void TestScene::OnDraw()
 
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(_shader->ProgramID());
-		glBindVertexArray(_shader->VaoID());
+		glUseProgram(prgramId);
+		glBindVertexArray(vaoID);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 

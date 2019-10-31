@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "GL/glew.h"
+//#include "GL/glew.h"
 
 class Transform
 {
@@ -18,6 +18,10 @@ public:
 	
 	void setObjScale(float m_scaX, float m_scaY, float m_scaZ) 
 	{ m_objectScale.x = m_scaX, m_objectScale.y = m_scaY, m_objectScale.z = m_scaZ; }
+
+	glm::vec3 GetPosition() { return m_objectPosition; }
+	glm::vec3 GetRotation() { return m_objectRotation; }
+	glm::vec3 GetScale() { return m_objectScale; }
 
 
 protected:

@@ -2,6 +2,8 @@
 #include <list>
 #include <memory>
 
+#include "Exception.h"
+
 class Core;
 class Component;
 
@@ -16,6 +18,8 @@ public:
 	std::shared_ptr<T> addComponent()
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>();
+		
+		rtn->entity = m_self;
 		m_component.push_back(rtn);
 		return rtn;
 	}
@@ -25,9 +29,12 @@ public:
 	std::shared_ptr<T> addComponent()
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>(V);
+		
+		rtn->entity = m_self;
 		m_component.push_back(rtn);
 		return rtn;
 	}
+	std::weak_ptr<Core> getCore();
 
 	void Ticks();
 	void Update();
@@ -35,8 +42,12 @@ public:
 
 private:
 
+	friend class core;
+
+
 	int m_tick;
 
 	std::list < std::shared_ptr<Component>> m_component;
 	std::weak_ptr<Core> m_core;
+	std::weak_ptr<Entity> m_self;
 };

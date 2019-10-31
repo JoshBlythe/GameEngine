@@ -13,6 +13,7 @@ class Core
 {
 public:
 
+
 	static std::shared_ptr<Core> initalize();
 
 	std::shared_ptr<Entity> addEntity();
@@ -26,6 +27,8 @@ public:
 
 private:
 	//Core();
+
+	std::weak_ptr <Core> m_self;
 
 	bool m_systemLoop;
 

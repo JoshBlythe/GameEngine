@@ -45,6 +45,22 @@ void Entity::OnDisplay()
 	for (std::list<std::shared_ptr<Component>>::iterator m_it =
 		m_component.begin(); m_it != m_component.end(); m_it++)
 	{
-		(*m_it)->OnDraw();
+		try
+		{
+			(*m_it)->OnDraw();
+
+		}
+		catch (Exception& e)
+		{
+			//catch the broken entity
+			std::cout << "Exception: " << e.Error() << std::endl;
+			//then delete it
+		}
+
 	}
+}
+
+std::weak_ptr<Core> Entity::getCore()
+{
+	return m_core.lock();
 }
