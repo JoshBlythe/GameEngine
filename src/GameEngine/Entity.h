@@ -34,6 +34,25 @@ public:
 		m_component.push_back(rtn);
 		return rtn;
 	}
+
+	template<typename T>
+	std::shared_ptr<T> getComponent()
+	{
+		std::shared_ptr<T> rtn = std::make_shared<T>();
+
+		for (auto it = m_component.begin(); 
+			it != m_component.end(); it++)
+		{
+			rtn = std::dynamic_pointer_cast<T>(*it);
+			if (*it)
+			{
+				return (*it);
+			}
+		}
+		
+		throw Exception("Specified Type was not found");
+	}
+
 	std::weak_ptr<Core> getCore();
 
 	void Ticks();

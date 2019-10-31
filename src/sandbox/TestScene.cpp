@@ -16,7 +16,8 @@ TestScene::TestScene()
 		""\
 		"void main()"\
 		"{"\
-		"	gl_Position = vec4(in_Position, 1.0);"\
+		"	uniform mat4 in_model;"\
+		"	gl_Position = vec4(in_Position *in_model, 1.0);"\
 		"}"\
 		"";
 
