@@ -3,7 +3,9 @@
 #include <glm/glm.hpp>
 //#include "GL/glew.h"
 
-class Transform
+#include "Component.h"
+
+class Transform : public Component
 {
 public:
 	Transform();
@@ -22,6 +24,8 @@ public:
 	glm::vec3 GetPosition() { return m_objectPosition; }
 	glm::vec3 GetRotation() { return m_objectRotation; }
 	glm::vec3 GetScale() { return m_objectScale; }
+
+	glm::mat4 GetModel() {  }
 
 
 protected:

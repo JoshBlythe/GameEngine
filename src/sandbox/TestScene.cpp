@@ -153,8 +153,7 @@ TestScene::~TestScene()
 void TestScene::OnDraw()
 {
 	//might need to check this
-	std::shared_ptr<Entity> ent;
-	ent->getCore();
+	std::shared_ptr<Entity> ent = getEntity()->getCore()->addEntity();
 	//bool m_systemLoop = true;
 
 	//while (m_systemLoop)

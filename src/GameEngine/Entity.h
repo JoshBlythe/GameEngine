@@ -44,16 +44,16 @@ public:
 			it != m_component.end(); it++)
 		{
 			rtn = std::dynamic_pointer_cast<T>(*it);
-			if (*it)
+			if (rtn)
 			{
-				return (*it);
+				return rtn;
 			}
 		}
 		
 		throw Exception("Specified Type was not found");
 	}
 
-	std::weak_ptr<Core> getCore();
+	std::shared_ptr<Core> getCore();
 
 	void Ticks();
 	void Update();
@@ -61,8 +61,7 @@ public:
 
 private:
 
-	friend class core;
-
+	friend class Core;
 
 	int m_tick;
 

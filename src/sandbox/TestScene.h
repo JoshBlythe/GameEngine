@@ -4,8 +4,6 @@
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 
-
-
 class TestScene : public Component
 {
 public:

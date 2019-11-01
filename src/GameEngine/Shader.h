@@ -1,23 +1,34 @@
-
 //#include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
+class VertexShader;
+class FragmentShader;
+#include "Exception.h"
+
 class Shader
 {
 public:
-	Shader() {}
-	Shader(std::string _vert, std::string _frag);
+	Shader();
 	~Shader();
 
 	//void Draw();
-	void SetUniform(glm::vec4 _position);
-	void SetUniform(float _setUniform);
+
+	void CheckFragInit();
+	void CheckVertxInit();
+
+	GLuint ProgramID();
 
 	GLuint GetID() { return m_shaderID; }
 
 private:
+
+	std::shared_ptr<FragmentShader> _fragmentShader;
+	std::shared_ptr<VertexShader> _vertShader;
+
 	GLuint m_shaderID;
+
+	GLint success;
 
 };

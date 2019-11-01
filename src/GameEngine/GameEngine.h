@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Component.h"
+#include "Transform.h"
 #include "Exception.h"
 #include "Shader.h"

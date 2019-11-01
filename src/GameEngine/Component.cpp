@@ -16,7 +16,7 @@ void Component::OnDraw()
 	std::cout << "This will be override! " << std::endl;
 }
 
-std::weak_ptr<Entity> Component::getEntity()
+std::shared_ptr<Entity> Component::getEntity()
 {
 	return entity.lock();
 }

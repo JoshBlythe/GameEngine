@@ -60,7 +60,7 @@ void Entity::OnDisplay()
 	}
 }
 
-std::weak_ptr<Core> Entity::getCore()
+std::shared_ptr<Core> Entity::getCore()
 {
 	return m_core.lock();
 }

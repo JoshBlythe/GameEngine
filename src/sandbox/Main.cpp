@@ -13,7 +13,9 @@ int main()
 	
 	//adding simple conent to engine
 	std::shared_ptr<TestScene> testing = entity->addComponent<TestScene>();
+	
 	std::shared_ptr<Transform> tran = entity->getComponent<Transform>();
+	//tran->getEntity()->getComponent<Transform>();
 	//start the engine's main loop
 	core->runCore();
 

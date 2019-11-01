@@ -4,13 +4,12 @@
 #include <iostream>
 #include <memory>
 
-#include "Transform.h"
 //#include "Mesh.h"
 //#include "Material.h"
 //class Core;
 class Entity;
 
-class Component : public Transform 
+class Component
 {
 public:
 	Component();
@@ -22,7 +21,7 @@ public:
 
 	//float getPos() { return m_objectPosition.x, m_objectPosition.y, m_objectPosition.z; }
 
-	std::weak_ptr<Entity> getEntity();
+	std::shared_ptr<Entity> getEntity();
 	//std::weak_ptr<Entity> getCore();
 	//void getEntity();  //shared_ptr of entity
 
