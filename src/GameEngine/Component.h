@@ -6,7 +6,7 @@
 
 //#include "Mesh.h"
 //#include "Material.h"
-//class Core;
+class Core;
 class Entity;
 
 class Component
@@ -22,13 +22,13 @@ public:
 	//float getPos() { return m_objectPosition.x, m_objectPosition.y, m_objectPosition.z; }
 
 	std::shared_ptr<Entity> getEntity();
-	//std::weak_ptr<Entity> getCore();
+	std::shared_ptr<Core> getCore();
 	//void getEntity();  //shared_ptr of entity
 
 	virtual void OnDraw();
 	//virtual void onInitalise();
 	//virtual void begin();
-	virtual void onTick();
+	virtual void OnTick();
 	//virtual void onDisplay();
 
 	virtual void OnUpdate();

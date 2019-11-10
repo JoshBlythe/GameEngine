@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include <memory>
 
 class VertexShader;
 class FragmentShader;

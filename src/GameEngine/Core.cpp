@@ -21,7 +21,7 @@ std::shared_ptr<Entity> Core::addEntity()
 {
 	std::shared_ptr <Entity> e = std::make_shared<Entity>();
 	
-	e->m_core = m_self;
+	e->entity = m_self;
 	
 	m_entities.push_back(e);
 

@@ -21,12 +21,17 @@ std::shared_ptr<Entity> Component::getEntity()
 	return entity.lock();
 }
 
+std::shared_ptr<Core> Component::getCore()
+{
+	return getEntity()->getCore();
+}
+
 //void Object::onInitalise()
 //{
 //	//initalise SDL.
 //}
 
-void Component::onTick()
+void Component::OnTick()
 {
 	std::cout << "ticking through object! " << std::endl;
 	OnUpdate();
