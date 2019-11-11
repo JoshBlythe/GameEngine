@@ -16,10 +16,16 @@ add_library(GameEngine
 	src/GameEngine/Exception.h
 	src/GameEngine/Shader.cpp
 	src/GameEngine/Shader.h
+	src/GameEngine/FragmentShader.cpp
+	src/GameEngine/FragmentShader.h
+	src/GameEngine/VertexShader.cpp
+	src/GameEngine/VertexShader.h
 	src/GameEngine/Transform.cpp
 	src/GameEngine/Transform.h
 	src/GameEngine/Camera.cpp
 	src/GameEngine/Camera.h
+	src/GameEngine/Screen.cpp
+	src/GameEngine/Screen.h
 	src/GameEngine/GameEngine.h
 )
 

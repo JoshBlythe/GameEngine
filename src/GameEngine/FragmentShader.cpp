@@ -2,7 +2,7 @@
 
 FragmentShader::FragmentShader()
 {
-	fragmentShaderSrc = 
+	m_fragmentShaderSrc =
 		"void main()"\
 		"{"\
 		"	gl_FragColor = vec4(0, 0, 1, 1);"\
@@ -12,23 +12,22 @@ FragmentShader::FragmentShader()
 
 FragmentShader::~FragmentShader()
 {
-	glDeleteShader(fragmentShaderID);
+	glDeleteShader(m_fragmentShaderID);
 }
 
 GLuint FragmentShader::FragmentShaderInit()
 {	
 	//fragment shader
-	fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShaderID, 1, &fragmentShaderSrc, NULL);
-	glCompileShader(fragmentShaderID);
-	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &_success);
+	m_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(m_fragmentShaderID, 1, &fragmentShaderSrc, NULL);
+	glCompileShader(m_fragmentShaderID);
 
-	if (!_success)
+	/*if (!_success)
 	{
 		throw Exception("Reset State Fragment shader, Success Error! ");
-	}
+	}*/
 
-	return fragmentShaderID;
+	return m_fragmentShaderID;
 
 }
 

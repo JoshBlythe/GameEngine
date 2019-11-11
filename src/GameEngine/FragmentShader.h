@@ -15,9 +15,9 @@ public:
 
 private:
 	//stores the fragment shader for now, will need to move into a file.
-	const GLchar *fragmentShaderSrc;
+	const GLchar *m_fragmentShaderSrc;
 	//fragment shader ID
-	GLuint fragmentShaderID;
+	GLuint m_fragmentShaderID;
 
-	GLint _success = GetSuccess();
+	//GLint _success = GetSuccess();
 };

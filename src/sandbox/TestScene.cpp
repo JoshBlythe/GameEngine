@@ -28,25 +28,27 @@ TestScene::TestScene()
 		"}"\
 		"";
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		throw Exception("SDL_Init Error: ");
-	}
+	//below moved to core
 
-	//create window
-	m_Window = SDL_CreateWindow("Game Engine",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		600, 400, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+	//if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	//{
+	//	throw Exception("SDL_Init Error: ");
+	//}
 
-	if (!SDL_GL_CreateContext(m_Window))
-	{
-		throw std::exception();
-	}
+	////create window
+	//m_Window = SDL_CreateWindow("Game Engine",
+	//	SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	//	600, 400, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
-	if (glewInit() != GLEW_OK)
-	{
-		throw Exception("Glew Init Error: ");
-	}
+	//if (!SDL_GL_CreateContext(m_Window))
+	//{
+	//	throw std::exception();
+	//}
+
+	//if (glewInit() != GLEW_OK)
+	//{
+	//	throw Exception("Glew Init Error: ");
+	//}
 
 	//below stuff will adventually need to me 
 		//for now get the shader working ignore the VAOID
@@ -92,62 +94,62 @@ TestScene::TestScene()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glEnableVertexAttribArray(0);
 
-	//vertex shader
-	vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShaderID, 1, &vertexShaderSrc, NULL);
-	glCompileShader(vertexShaderID);
-	
-	GLint success = 0;
-	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
+	////vertex shader
+	//vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+	//glShaderSource(vertexShaderID, 1, &vertexShaderSrc, NULL);
+	//glCompileShader(vertexShaderID);
+	//
+	//GLint success = 0;
+	//glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
 
-	//check for success if not throw exeption
-	if (!success)
-	{
-		throw Exception("Reset State Vertex shader, Success Error! ");
-	}
+	////check for success if not throw exeption
+	//if (!success)
+	//{
+	//	throw Exception("Reset State Vertex shader, Success Error! ");
+	//}
 
-	//fragment shader
-	fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShaderID, 1, &fragmentShaderSrc, NULL);
-	glCompileShader(fragmentShaderID);
-	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);
+	////fragment shader
+	//fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	//glShaderSource(fragmentShaderID, 1, &fragmentShaderSrc, NULL);
+	//glCompileShader(fragmentShaderID);
+	//glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);
 
-	if (!success)
-	{
-		throw Exception("Reset State Fragment shader, Success Error! ");
-	}
+	//if (!success)
+	//{
+	//	throw Exception("Reset State Fragment shader, Success Error! ");
+	//}
 
-	//program
-	prgramId = glCreateProgram();
-	glAttachShader(prgramId, vertexShaderID);
-	glAttachShader(prgramId, fragmentShaderID);
-	glBindAttribLocation(prgramId, 0, "in_Position");
+	////program
+	//prgramId = glCreateProgram();
+	//glAttachShader(prgramId, vertexShaderID);
+	//glAttachShader(prgramId, fragmentShaderID);
+	//glBindAttribLocation(prgramId, 0, "in_Position");
 
-	if (glGetError() != GL_NO_ERROR)
-	{
-		throw Exception("Program Error: glGetError is not Equal to No Error. ");
-	}
+	//if (glGetError() != GL_NO_ERROR)
+	//{
+	//	throw Exception("Program Error: glGetError is not Equal to No Error. ");
+	//}
 
-	glLinkProgram(prgramId);
-	glGetProgramiv(prgramId, GL_LINK_STATUS, &success);
+	//glLinkProgram(prgramId);
+	//glGetProgramiv(prgramId, GL_LINK_STATUS, &success);
 
-	if (!success)
-	{
-		throw Exception("Program, Success Error! ");
-	}
+	//if (!success)
+	//{
+	//	throw Exception("Program, Success Error! ");
+	//}
 
 }
 
 TestScene::~TestScene()
 {
 	//clean up shaders
-	glDetachShader(prgramId, vertexShaderID);
-	glDeleteShader(vertexShaderID);
-	glDetachShader(prgramId, fragmentShaderID);
-	glDeleteShader(fragmentShaderID);
+	//glDetachShader(prgramId, vertexShaderID);
+	//glDeleteShader(vertexShaderID);
+	//glDetachShader(prgramId, fragmentShaderID);
+	//glDeleteShader(fragmentShaderID);
 	//clean up SDL
-	SDL_DestroyWindow(m_Window);
-	SDL_Quit();
+	/*SDL_DestroyWindow(m_Window);
+	SDL_Quit();*/
 }
 
 void TestScene::OnDraw()
@@ -170,7 +172,8 @@ void TestScene::OnDraw()
 
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(prgramId);
+		//glUseProgram(prgramId);
+		glUseProgram(_shader->ProgramID());
 		glBindVertexArray(vaoID);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);

@@ -11,9 +11,11 @@ public:
 	VertexShader();
 	~VertexShader();
 
+	void LoadFile(std::string _verShader);
+
 	GLuint InitVertShader();
 
-	GLint GetSuccess() { return success; }
+	GLchar VertSrc() { return *vertexShaderSrc; }
 
 private:
 	const GLfloat positions[9] =
@@ -27,5 +29,4 @@ private:
 	const GLchar *vertexShaderSrc;
 
 	GLuint vertexShaderID;
-	GLint success;
 };

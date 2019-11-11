@@ -34,7 +34,7 @@ void Entity::Update()
 	for (std::list<std::shared_ptr<Component>>::iterator m_it =
 		m_component.begin(); m_it != m_component.end(); m_it++)
 	{
-		(*m_it)->onTick();
+		(*m_it)->OnTick();
 	}
 }
 

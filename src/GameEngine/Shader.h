@@ -16,9 +16,6 @@ public:
 
 	//void Draw();
 
-	void CheckFragInit();
-	void CheckVertxInit();
-
 	GLuint ProgramID();
 
 	GLuint GetID() { return m_shaderID; }
@@ -28,8 +25,10 @@ private:
 	std::shared_ptr<FragmentShader> _fragmentShader;
 	std::shared_ptr<VertexShader> _vertShader;
 
+	GLuint m_vertexShaderID;
+	GLuint m_fragmentShaderID;
 	GLuint m_shaderID;
 
-	GLint success;
+	GLint m_success;
 
 };

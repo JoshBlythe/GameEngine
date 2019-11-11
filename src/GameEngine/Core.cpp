@@ -1,6 +1,6 @@
 #include "Core.h"
-
 #include "Entity.h"
+#include "Screen.h"
 
 std::shared_ptr<Core> Core::initalize()
 {
@@ -14,6 +14,9 @@ std::shared_ptr<Core> Core::initalize()
 
 Core::~Core()
 {
+	//clean up SDL
+	SDL_DestroyWindow(m_window);
+	SDL_Quit();
 }
 
 
@@ -27,6 +30,35 @@ std::shared_ptr<Entity> Core::addEntity()
 
 	return e;
 }
+
+void Core::CreateWindow()
+{
+	m_windowW = m_screen->GetScreen().x;
+	m_windowH = m_screen->GetScreen().y;
+
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		throw Exception("SDL_Init Error: ");
+	}
+
+	//create window
+	m_window = SDL_CreateWindow("Game Engine",
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+		m_windowW, m_windowH, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+
+	if (!SDL_GL_CreateContext(m_window))
+	{
+		throw std::exception();
+	}
+
+	if (glewInit() != GLEW_OK)
+	{
+		throw Exception("Glew Init Error: ");
+	}
+
+
+}
+
 
 void Core::runCore()
 {
