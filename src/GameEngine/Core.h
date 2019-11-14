@@ -11,7 +11,7 @@ class Screen;
 class Core
 {
 public:
-	static std::shared_ptr<Core> initalize();
+	static std::shared_ptr<Core> OnInitalise();
 
 	std::shared_ptr<Entity> addEntity();
 

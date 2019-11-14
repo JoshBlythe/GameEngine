@@ -173,7 +173,7 @@ void TestScene::OnDraw()
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		//glUseProgram(prgramId);
-		glUseProgram(_shader->ProgramID());
+		//glUseProgram(_shader->ProgramID());
 		glBindVertexArray(vaoID);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);

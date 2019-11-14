@@ -10,6 +10,8 @@ public:
 
 	virtual const char* Error() const throw();
 
+	void pollForError();
+
 private:
 
 	std::string m_exp;

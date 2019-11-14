@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 2.6)
 project(GAMEENGINE)
 
 include_directories(
-	src
+	${PROJECT_SOURCE_DIR}/src
 )
+
+add_definitions(-DSTD_SR1_DEBUG)
 
 add_library(GameEngine
 	src/GameEngine/Core.cpp
@@ -14,12 +16,6 @@ add_library(GameEngine
 	src/GameEngine/Entity.h
 	src/GameEngine/Exception.cpp
 	src/GameEngine/Exception.h
-	src/GameEngine/Shader.cpp
-	src/GameEngine/Shader.h
-	src/GameEngine/FragmentShader.cpp
-	src/GameEngine/FragmentShader.h
-	src/GameEngine/VertexShader.cpp
-	src/GameEngine/VertexShader.h
 	src/GameEngine/Transform.cpp
 	src/GameEngine/Transform.h
 	src/GameEngine/Camera.cpp
@@ -27,6 +23,24 @@ add_library(GameEngine
 	src/GameEngine/Screen.cpp
 	src/GameEngine/Screen.h
 	src/GameEngine/GameEngine.h
+	src/GameEngine/RendInc.h
+)
+
+add_library(rend
+  	src/rend/Exception.cpp
+  	src/rend/Exception.h
+  	src/rend/Context.cpp	
+	src/rend/Context.h
+  	src/rend/Texture.cpp
+  	src/rend/Texture.h
+  	src/rend/RenderTexture.cpp
+  	src/rend/RenderTexture.h
+  	src/rend/Shader.cpp
+  	src/rend/Shader.h
+  	src/rend/Buffer.cpp
+  	src/rend/Buffer.h
+	src/rend/rend.h
+	src/rend/mathutil.h
 )
 
 if(MSVC)
@@ -42,4 +56,4 @@ add_executable(sandbox
 )
 
 
-target_link_libraries(sandbox gameengine)
+target_link_libraries(sandbox GameEngine)

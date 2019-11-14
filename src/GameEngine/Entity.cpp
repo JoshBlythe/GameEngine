@@ -10,15 +10,6 @@ Entity::~Entity()
 {
 }
 
-//std::shared_ptr<Object> Entity::addObject()
-//{
-//	std::shared_ptr<Object> obj = std::make_shared<Object>();
-//
-//	m_objects.push_back(obj);
-//
-//	return obj;
-//}
-
 void Entity::Ticks()
 {
 	//std::cout << "ticking through! " << std::endl;
@@ -36,6 +27,21 @@ void Entity::Update()
 	{
 		(*m_it)->OnTick();
 	}
+
+	//deleted a component if flagged to be deleted
+	for (auto it = m_component.begin(); it != m_component.end();)
+	{
+		if ((*it)->m_isAlive == false)
+		{
+			it = m_component.erase(it);
+		}
+		else
+		{
+
+			it++;
+		}
+	}
+
 }
 
 
@@ -61,7 +67,14 @@ void Entity::OnDisplay()
 	}
 }
 
-std::shared_ptr<Core> Entity::getCore()
+void Entity::KillEntity()
 {
+	//flagging a entity to be deleted
+	m_isAlive = false;
+}
+
+std::shared_ptr<Core> Entity::GetCore()
+{
+	//lock weak pointer to return shared pointer to core.
 	return m_core.lock();
 }

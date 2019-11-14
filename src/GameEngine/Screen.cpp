@@ -3,7 +3,7 @@
 Screen::Screen() 
 {
 	m_screenSize.x = 1400;
-	m_screensize.y = 900;
+	m_screenSize.y = 900;
 }
 Screen::~Screen()
 {
