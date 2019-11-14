@@ -63,14 +63,12 @@ public:
 private:
 	//friedn class core to enable access to functions
 	friend class Core;
-	
-
-	int m_tick;
-
-	//list of componets
-	std::list < std::shared_ptr<Component>> m_component;
 	//ptr to core
 	std::weak_ptr<Core> m_core;
 	//ptr to self
 	std::weak_ptr<Entity> m_self;
+	
+	int m_tick;
+	//list of componets
+	std::list < std::shared_ptr<Component>> m_component;
 };

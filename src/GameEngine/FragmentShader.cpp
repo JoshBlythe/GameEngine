@@ -19,7 +19,7 @@ GLuint FragmentShader::FragmentShaderInit()
 {	
 	//fragment shader
 	m_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(m_fragmentShaderID, 1, &fragmentShaderSrc, NULL);
+	glShaderSource(m_fragmentShaderID, 1, &m_fragmentShaderSrc, NULL);
 	glCompileShader(m_fragmentShaderID);
 
 	/*if (!_success)

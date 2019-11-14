@@ -30,7 +30,7 @@ add_library(GameEngine
 )
 
 if(MSVC)
-target_link_libraries(gameengine glew32 SDL2 opengl32)
+target_link_libraries(GameEngine glew32 SDL2 opengl32)
 else()
 target_link_libraries(GameEngine GLEW SDL2 GL)
 endif()

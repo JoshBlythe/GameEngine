@@ -11,7 +11,7 @@ public:
 	VertexShader();
 	~VertexShader();
 
-	void LoadFile(std::string _verShader);
+	bool LoadFile(std::string _verShader);
 
 	GLuint InitVertShader();
 
