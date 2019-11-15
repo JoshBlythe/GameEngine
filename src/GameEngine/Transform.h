@@ -1,7 +1,5 @@
 #pragma once
-
 #include <glm/glm.hpp>
-//#include "GL/glew.h"
 
 #include "Component.h"
 
@@ -12,20 +10,26 @@ public:
 	~Transform();
 
 	//initalise Values
-	void setObjPosition(float m_posX, float m_posY, float m_posZ) 
+	void setPosition(float m_posX, float m_posY, float m_posZ) 
 	{ m_objectPosition.x = m_posX, m_objectPosition.y = m_posY, m_objectPosition.z = m_posZ; }
 	
-	void setObjRotation(float m_rotX, float m_rotY, float m_rotZ) 
+	void setRotation(float m_rotX, float m_rotY, float m_rotZ) 
 	{ m_objectRotation.x = m_rotX, m_objectRotation.y = m_rotY, m_objectRotation.z = m_rotZ; }
 	
-	void setObjScale(float m_scaX, float m_scaY, float m_scaZ) 
+	void setScale(float m_scaX, float m_scaY, float m_scaZ) 
 	{ m_objectScale.x = m_scaX, m_objectScale.y = m_scaY, m_objectScale.z = m_scaZ; }
 
 	glm::vec3 GetPosition() { return m_objectPosition; }
 	glm::vec3 GetRotation() { return m_objectRotation; }
 	glm::vec3 GetScale() { return m_objectScale; }
 
-	glm::mat4 GetModel() {  }
+	glm::mat4 GetModel() { 
+		// create ident mat4, then do the following
+		// trans pos, 
+		// rotate x, rot y, rot z, 
+		// then scale sca, 
+		//return ident
+	}
 
 
 protected:

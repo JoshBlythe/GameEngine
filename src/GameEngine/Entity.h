@@ -6,6 +6,7 @@
 #include "Exception.h"
 
 class Core;
+class Transform;
 //class Component;
 
 class Entity : public Component
@@ -21,7 +22,7 @@ public:
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 		
 		t_rtn->entity = m_entSelf;
-		//t_rtn->m_entSelf = m_entSelf;
+		
 		m_component.push_back(t_rtn);
 
 		t_rtn->OnInitalise();
@@ -72,6 +73,8 @@ public:
 	//flag to be deleted
 	void KillEntity();
 
+	std::shared_ptr<Transform> GetTransform();
+
 	//return pointer to core
 	std::shared_ptr<Core> GetCore();
 
@@ -85,6 +88,8 @@ private:
 	
 	//int m_tick;
 	
+	std::weak_ptr<Transform> _trans;
+
 	//list of componets
 	std::list < std::shared_ptr<Component>> m_component;
 };

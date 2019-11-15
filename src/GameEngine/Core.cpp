@@ -64,17 +64,6 @@ void Core::CreateWindow()
 	{
 		throw Exception("Error during SDL_GL_CreatContext!");
 	}
-
-	/*if (glewInit() != GLEW_OK)
-	{
-		throw Exception("Glew Init Error: ");
-	}*/
-
-	//calls glewInit, and checks if it was successful
-	//if not will through a exeption.
-	//std::sr1::shared_ptr<GameEngine::Context> _context = GameEngine::Context::initialize(m_window);
-	//std::sr1::shared_ptr<GameEngine::Shader> _shader = _context->createShader();
-
 }
 
 

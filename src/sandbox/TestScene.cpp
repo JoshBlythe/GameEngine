@@ -63,7 +63,9 @@ void TestScene::OnInitalise()
 void TestScene::OnDraw()
 {
 	//might need to check this
-	//std::shared_ptr<Entity> ent = getEntity()->getCore()->addEntity();
+	std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();
+
+	//_trans->GetPosition();
 	//bool m_systemLoop = true;
 
 	//while (m_systemLoop)
@@ -85,7 +87,8 @@ void TestScene::OnDraw()
 		//glBindVertexArray(vaoID);
 
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		_shader->setUniform("in_Model", rend::mat4(1.0f));
+		//_shader->setUniform("in_Model", rend::mat4(1.0f));
+		_shader->setUniform("in_Model", _trans->GetModel());
 		_shader->setAttribute("in_Position", _buffer);
 		_shader->render();
 

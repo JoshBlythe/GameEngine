@@ -262,7 +262,7 @@ std::sr1::shared_ptr<VariableInfo> Shader::getVariableInfo(const std::string& na
   return rtn;
 }
 
-void Shader::setSource(const std::string& source, const std::string& _source)
+void Shader::setSource(const std::string& _vertsource, const std::string& _fragsource)
 {
   GLuint vertId = 0;
   GLuint fragId = 0;
@@ -274,7 +274,7 @@ void Shader::setSource(const std::string& source, const std::string& _source)
   std::string vertSrc = "";
   vertSrc += "#version 120\n";
   vertSrc += "#define VERTEX\n";
-  vertSrc += source;
+  vertSrc += _vertsource;
 
   std::cout << vertSrc << std::endl; 
   src = vertSrc.c_str();
@@ -311,7 +311,7 @@ void Shader::setSource(const std::string& source, const std::string& _source)
   std::string fragSrc = "";
   fragSrc += "#version 120\n";
   fragSrc += "#define FRAGMENT\n";
-  fragSrc += _source;
+  fragSrc += _fragsource;
   src = fragSrc.c_str();
 
   fragId = glCreateShader(GL_FRAGMENT_SHADER);

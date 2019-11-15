@@ -73,6 +73,11 @@ void Entity::KillEntity()
 	m_isAlive = false;
 }
 
+std::shared_ptr<Transform> Entity::GetTransform()
+{
+	return _trans.lock();
+}
+
 std::shared_ptr<Core> Entity::GetCore()
 {
 	//lock weak pointer to return shared pointer to core.
