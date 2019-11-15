@@ -10,9 +10,17 @@ public:
 	TestScene();
 	virtual ~TestScene();
 
+	void OnInitalise();
 	void OnDraw();
 
 private:
+
+	std::sr1::shared_ptr<GameEngine::Context> _context;
+	std::sr1::shared_ptr<GameEngine::Shader> _shader;
+	std::sr1::shared_ptr<GameEngine::Buffer> _buffer;
+
+	const GLchar *vertexShaderSrc;
+	const GLchar *fragmentShaderSrc;
 
 	//std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
 

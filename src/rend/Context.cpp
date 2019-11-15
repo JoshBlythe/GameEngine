@@ -10,7 +10,7 @@
 namespace rend
 {
 
-	std::sr1::shared_ptr<Context> Context::initialize(SDL_Window *_window)
+	std::sr1::shared_ptr<Context> Context::initialize()
 	{
 	  std::sr1::shared_ptr<Context> rtn = std::sr1::make_shared<Context>();
 

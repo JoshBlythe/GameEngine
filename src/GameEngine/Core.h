@@ -23,6 +23,9 @@ public:
 	//stop running main loop
 	void stopCore();
 
+protected:
+	SDL_Window* m_window;
+
 
 private:
 	//Core();
@@ -34,8 +37,7 @@ private:
 	int m_windowW;
 	int m_windowH;
 
-	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;
+	//SDL_Renderer* m_renderer;
 
 	bool m_systemLoop;
 

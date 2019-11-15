@@ -20,24 +20,25 @@ public:
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 		
-		//t_rtn->entity = m_entSelf;
+		t_rtn->entity = m_entSelf;
+		//t_rtn->m_entSelf = m_entSelf;
 		m_component.push_back(t_rtn);
 
-		t_rtn->OnInitalise(T);
+		t_rtn->OnInitalise();
 
 		return t_rtn;
 	}
 
 	//create object template with value
 	template <typename T, typename V>
-	std::shared_ptr<T> addComponent()
+	std::shared_ptr<T> addComponent(V v)
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>(V);
 		
-		//t_rtn->entity = m_entSelf;
+		t_rtn->entity = m_entSelf;
 		m_component.push_back(t_rtn);
 
-		t_rtn->OnInitalise(T V);
+		t_rtn->OnInitalise(v);
 
 		return t_rtn;
 	}
@@ -82,7 +83,7 @@ private:
 	//ptr to self
 	std::weak_ptr<Entity> m_entSelf;
 	
-	int m_tick;
+	//int m_tick;
 	
 	//list of componets
 	std::list < std::shared_ptr<Component>> m_component;

@@ -79,7 +79,8 @@ void Shader::render(const std::sr1::shared_ptr<RenderTexture>& target)
 
 void Shader::render()
 {
-  glUseProgram(id); pollForError();
+  glUseProgram(id); 
+  pollForError();
 
   int activeTexture = 0;
   int vertices = -1;
@@ -261,7 +262,7 @@ std::sr1::shared_ptr<VariableInfo> Shader::getVariableInfo(const std::string& na
   return rtn;
 }
 
-void Shader::setSource(const std::string& source)
+void Shader::setSource(const std::string& source, const std::string& _source)
 {
   GLuint vertId = 0;
   GLuint fragId = 0;
@@ -274,6 +275,8 @@ void Shader::setSource(const std::string& source)
   vertSrc += "#version 120\n";
   vertSrc += "#define VERTEX\n";
   vertSrc += source;
+
+  std::cout << vertSrc << std::endl; 
   src = vertSrc.c_str();
 
   vertId = glCreateShader(GL_VERTEX_SHADER);
@@ -308,7 +311,7 @@ void Shader::setSource(const std::string& source)
   std::string fragSrc = "";
   fragSrc += "#version 120\n";
   fragSrc += "#define FRAGMENT\n";
-  fragSrc += source;
+  fragSrc += _source;
   src = fragSrc.c_str();
 
   fragId = glCreateShader(GL_FRAGMENT_SHADER);

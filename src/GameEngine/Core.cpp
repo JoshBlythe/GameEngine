@@ -1,10 +1,8 @@
 #include <sr1/memory>
-#include "RendInc.h"
-
 #include "Core.h"
 #include "Entity.h"
 #include "Screen.h"
-
+#include "Transform.h"
 
 std::shared_ptr<Core> Core::OnInitalise()
 {
@@ -12,6 +10,8 @@ std::shared_ptr<Core> Core::OnInitalise()
 	//referencing c to weak_ptr of care
 	//this will be used to moving up through the hierearchy
 	c_rtn->m_self = c_rtn;
+
+	c_rtn->CreateWindow();
 	//return core
 	return c_rtn;
 }
@@ -28,15 +28,20 @@ std::shared_ptr<Entity> Core::addEntity()
 {
 	std::shared_ptr <Entity> e_rtn = std::make_shared<Entity>();
 	
-	e_rtn->entity = m_self;
-	
-	m_entities.push_back(e_rtn);
+	e_rtn->m_entSelf = e_rtn;
+	e_rtn->m_core = m_self;
+
+	m_entities.push_back(e_rtn); 
+
+	e_rtn->addComponent<Transform>();
 
 	return e_rtn;
 }
 
 void Core::CreateWindow()
 {
+	m_screen = std::make_shared<Screen>();
+
 	m_windowW = m_screen->GetScreen().x;
 	m_windowH = m_screen->GetScreen().y;
 
@@ -67,10 +72,8 @@ void Core::CreateWindow()
 
 	//calls glewInit, and checks if it was successful
 	//if not will through a exeption.
-	std::sr1::shared_ptr<GameEngine::Context> _context = GameEngine::Context::initialize(m_window);
-	std::sr1::shared_ptr<GameEngine::Shader> _shader = _context->createShader();
-
-
+	//std::sr1::shared_ptr<GameEngine::Context> _context = GameEngine::Context::initialize(m_window);
+	//std::sr1::shared_ptr<GameEngine::Shader> _shader = _context->createShader();
 
 }
 
@@ -116,7 +119,9 @@ void Core::runCore()
 			(*iter)->OnDisplay();
 		}
 
+		SDL_GL_SwapWindow(m_window);
 	}
+
 }
 
 

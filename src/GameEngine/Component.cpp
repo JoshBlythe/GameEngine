@@ -23,15 +23,15 @@ std::shared_ptr<Entity> Component::getEntity()
 	return entity.lock();
 }
 
-//std::shared_ptr<Core> Component::getCore()
-//{
-//	return getEntity()->getCore();
-//}
+std::shared_ptr<Core> Component::getCore()
+{
+	return getEntity()->GetCore();
+}
 
-//void Object::onInitalise()
-//{
-//	//initalise SDL.
-//}
+void Component::OnInitalise()
+{
+	//initalise SDL.
+}
 
 void Component::OnTick()
 {

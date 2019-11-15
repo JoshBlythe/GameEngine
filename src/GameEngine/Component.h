@@ -25,7 +25,7 @@ public:
 	//void getEntity();  //shared_ptr of entity
 
 	virtual void OnDraw();
-	//virtual void onInitalise();
+	virtual void OnInitalise();
 	//virtual void begin();
 	virtual void OnTick();
 	//virtual void onDisplay();

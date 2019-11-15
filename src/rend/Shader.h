@@ -26,7 +26,7 @@ struct Shader : public std::sr1::noncopyable
   void render(const std::sr1::shared_ptr<RenderTexture>& target);
 
   GLuint getId();
-  void setSource(const std::string& source);
+  void setSource(const std::string& source, const std::string& _source);
 
   void setUniform(const std::string& variable, float value);
   void setUniform(const std::string& variable, mat4 value);

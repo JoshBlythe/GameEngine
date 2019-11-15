@@ -5,7 +5,31 @@ include_directories(
 	${PROJECT_SOURCE_DIR}/src
 )
 
-add_definitions(-DSTD_SR1_DEBUG)
+#add_definitions(-DSTD_SR1_DEBUG)
+
+add_library(rend
+  	src/rend/Exception.cpp
+  	src/rend/Exception.h
+  	src/rend/Context.cpp	
+	src/rend/Context.h
+  	src/rend/Texture.cpp
+  	src/rend/Texture.h
+  	src/rend/RenderTexture.cpp
+  	src/rend/RenderTexture.h
+  	src/rend/Shader.cpp
+  	src/rend/Shader.h
+  	src/rend/Buffer.cpp
+  	src/rend/Buffer.h
+	src/rend/rend.h
+	src/rend/mathutil.h
+)
+
+if(MSVC)
+target_link_libraries(rend glew32 SDL2 opengl32)
+else()
+target_link_libraries(rend GLEW SDL2 GL)
+endif()
+
 
 add_library(GameEngine
 	src/GameEngine/Core.cpp
@@ -26,28 +50,9 @@ add_library(GameEngine
 	src/GameEngine/RendInc.h
 )
 
-add_library(rend
-  	src/rend/Exception.cpp
-  	src/rend/Exception.h
-  	src/rend/Context.cpp	
-	src/rend/Context.h
-  	src/rend/Texture.cpp
-  	src/rend/Texture.h
-  	src/rend/RenderTexture.cpp
-  	src/rend/RenderTexture.h
-  	src/rend/Shader.cpp
-  	src/rend/Shader.h
-  	src/rend/Buffer.cpp
-  	src/rend/Buffer.h
-	src/rend/rend.h
-	src/rend/mathutil.h
-)
+target_link_libraries(GameEngine rend)
 
-if(MSVC)
-target_link_libraries(GameEngine glew32 SDL2 opengl32)
-else()
-target_link_libraries(GameEngine GLEW SDL2 GL)
-endif()
+
 
 add_executable(sandbox
 	src/sandbox/Main.cpp
