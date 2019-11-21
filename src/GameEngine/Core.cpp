@@ -1,4 +1,3 @@
-#include <sr1/memory>
 #include "Core.h"
 #include "Entity.h"
 #include "Screen.h"

@@ -49,10 +49,18 @@ void TestScene::OnInitalise()
 	//calls glewInit, and checks if it was successful
 	//if not will through a exeption.
 	_context = GameEngine::Context::initialize();
+	//create shader
 	_shader = _context->createShader();
+	//create buffer
 	_buffer = _context->createBuffer();
+	//create mesh
+	//_mesh = _context->createMesh();
 
-	_shader->setSource(vertexShaderSrc, fragmentShaderSrc);
+	//set shaders
+	//_shader->setSource(vertexShaderSrc, fragmentShaderSrc);
+	_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
+
+	//_mesh->loadMesh("resources/rend/samples/graveyard/graveyard.obj");
 
 	_buffer->add(rend::vec3(positions[0],positions[1], positions[2]));
 	_buffer->add(rend::vec3(positions[3], positions[4], positions[5]));
@@ -87,9 +95,11 @@ void TestScene::OnDraw()
 		//glBindVertexArray(vaoID);
 
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		//_shader->setUniform("in_Model", rend::mat4(1.0f));
-		_shader->setUniform("in_Model", _trans->GetModel());
+		_shader->setUniform("in_Model", rend::mat4(1.0f));
+		//_shader->setUniform("in_Model", _trans->GetModel());
 		_shader->setAttribute("in_Position", _buffer);
+
+		//_shader->setMesh(_mesh);
 		_shader->render();
 
 		//glBindVertexArray(0);

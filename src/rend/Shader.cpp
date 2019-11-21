@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "RenderTexture.h"
 #include "TextureAdapter.h"
+#include "Mesh.h"
 
 #include <sr1/vector>
 
@@ -79,8 +80,12 @@ void Shader::render(const std::sr1::shared_ptr<RenderTexture>& target)
 
 void Shader::render()
 {
-  glUseProgram(id); 
-  pollForError();
+  glEnable(GL_DEPTH_TEST); pollForError();
+  glEnable(GL_CULL_FACE); pollForError();
+  glEnable(GL_BLEND); pollForError();
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); pollForError();
+
+  glUseProgram(id); pollForError();
 
   int activeTexture = 0;
   int vertices = -1;
@@ -124,6 +129,7 @@ void Shader::render()
       if((*it)->type == GL_FLOAT) size = 1;
       else if((*it)->type == GL_FLOAT_VEC2) size = 2;
       else if((*it)->type == GL_FLOAT_VEC3) size = 3;
+      else if((*it)->type == GL_FLOAT_VEC4) size = 4;
       else throw Exception("Invalid buffer type");
 
       glBindBuffer(GL_ARRAY_BUFFER, (*it)->bufferVal->getId()); pollForError();
@@ -145,9 +151,18 @@ void Shader::render()
     }
   }
 
+  if(vertices == -1)
+  {
+    throw Exception("No vertices were submitted for drawing");
+  }
+
   glDrawArrays(GL_TRIANGLES, 0, vertices); pollForError();
 
   glUseProgram(0); pollForError();
+
+  glDisable(GL_BLEND); pollForError();
+  glDisable(GL_CULL_FACE); pollForError();
+  glDisable(GL_DEPTH_TEST); pollForError();
 }
 
 void Shader::setSampler(const std::string& variable, const std::sr1::shared_ptr<TextureAdapter>& value)
@@ -190,6 +205,123 @@ void Shader::setAttribute(const std::string& variable, const std::sr1::shared_pt
 {
   std::sr1::shared_ptr<VariableInfo> vi = getVariableInfo(variable, value->type, true);
   vi->bufferVal = value;
+}
+
+void Shader::setMesh(const std::sr1::shared_ptr<Mesh>& value)
+{
+  for(std::sr1::vector<std::sr1::shared_ptr<BufferData> >::iterator it =
+    value->buffers.begin(); it != value->buffers.end(); it++)
+  {
+    setAttribute((*it)->name, (*it)->buffer);
+  }
+
+  for(std::sr1::vector<std::sr1::shared_ptr<TextureData> >::iterator it =
+    value->textures.begin(); it != value->textures.end(); it++)
+  {
+    setSampler((*it)->name, (*it)->texture);
+  }
+}
+
+std::shared_ptr<Shader> Shader::loadShaderFile(std::string _vertFile, std::string _fragFile)
+{
+	//functions return value
+	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+	//file location where the shader will be located
+	const std::string _shadersLoc = "resources/shader";
+	//create a string and store the strings location
+	std::string _vertexShader = _shadersLoc + "/" + _vertFile;
+
+	//convert location in string above to fstream format to be then used
+	std::fstream _vertReadIn(_vertexShader.c_str());
+
+	//create fstream from string
+	//std::fstream _vertLoc(_vertFile);
+
+	//if file didn't open
+	if (!_vertReadIn.is_open())
+	{
+		//throw below exception message 
+		throw Exception("Error during opening of vertex shader file");
+	}
+
+	//file data
+	std::string _vertfileData;
+	//file line
+	std::string _vertfileLine;
+
+	//while file hasn't closed
+	while (!_vertReadIn.eof())
+	{
+		//get the current line
+		std::getline(_vertReadIn, _vertfileLine);
+		//store data.
+		_vertfileData += _vertfileLine + "\n";
+	}
+
+
+	//above vertex shader
+	/////////////////////////////////////////////////////////
+	//below fragment shader
+	std::string _fragmentShader = _shadersLoc + "/" + _fragFile;
+
+	std::fstream _fragReadIn(_fragmentShader.c_str());
+	//create fstream from string
+	//std::fstream _fragLoc(_fragFile);
+
+	//if file didn't open
+	if (!_fragReadIn.is_open())
+	{
+		throw Exception("Error during opening of fragment shader file");
+	}
+
+	//file data
+	std::string _fragfileData;
+	//file line
+	std::string _fragfileLine;
+
+	//while file hasn't closed
+	while (!_fragReadIn.eof())
+	{
+		std::getline(_fragReadIn, _fragfileLine);
+		_fragfileData += _fragfileLine + "\n";
+	}
+
+	//pass the read in file data to setSource function
+	setSource(_vertfileData, _fragfileData);
+
+	return _shader;
+	//std::string vertFilename("vertShader.txt");
+	//std::string fragFilename("fragShader.txt");
+	//std::ifstream vertFile(vertFilename);
+	//char *vShaderText = NULL;
+	//if (vertFile.is_open())
+	//{
+	//	// Find out how many characters are in the file
+	//	vertFile.seekg(0, vertFile.end);
+	//	int length = (int)vertFile.tellg();
+	//	vertFile.seekg(0, vertFile.beg);
+	//	// Create our buffer
+	//	vShaderText = new char[length];
+	//	// Transfer data from file to buffer
+	//	vertFile.read(vShaderText, length);
+	//	// Check it reached the end of the file
+	//	if (!vertFile.eof())
+	//	{
+	//		vertFile.close();
+	//		std::cerr << "WARNING: could not read vertex shader from file: " << vertFilename << std::endl;
+	//		return;
+	//	}
+	//	// Find out how many characters were actually read
+	//	length = (int)vertFile.gcount();
+	//	// Needs to be NULL-terminated
+	//	vShaderText[length - 1] = 0;
+	//	vertFile.close();
+	//}
+	//else
+	//{
+	//	std::cerr << "WARNING: could not open vertex shader from file: " << vertFilename << std::endl;
+	//	return;
+	//}
 }
 
 std::sr1::shared_ptr<VariableInfo> Shader::getVariableInfo(const std::string& name, GLenum type, bool attrib)
@@ -261,125 +393,124 @@ std::sr1::shared_ptr<VariableInfo> Shader::getVariableInfo(const std::string& na
 
   return rtn;
 }
-
 void Shader::setSource(const std::string& _vertsource, const std::string& _fragsource)
 {
-  GLuint vertId = 0;
-  GLuint fragId = 0;
-  int success = 0;
-  const GLchar* src = NULL;
+	GLuint vertId = 0;
+	GLuint fragId = 0;
+	int success = 0;
+	const GLchar* src = NULL;
 
-  cache.clear();
+	cache.clear();
 
-  std::string vertSrc = "";
-  vertSrc += "#version 120\n";
-  vertSrc += "#define VERTEX\n";
-  vertSrc += _vertsource;
+	std::string vertSrc = "";
+	vertSrc += "#version 120\n";
+	vertSrc += "#define VERTEX\n";
+	vertSrc += _vertsource;
 
-  std::cout << vertSrc << std::endl; 
-  src = vertSrc.c_str();
+	std::cout << vertSrc << std::endl;
+	src = vertSrc.c_str();
 
-  vertId = glCreateShader(GL_VERTEX_SHADER);
-  pollForError();
+	vertId = glCreateShader(GL_VERTEX_SHADER);
+	pollForError();
 
-  glShaderSource(vertId, 1, &src, NULL);
-  pollForError();
+	glShaderSource(vertId, 1, &src, NULL);
+	pollForError();
 
-  glCompileShader(vertId);
-  pollForError();
+	glCompileShader(vertId);
+	pollForError();
 
-  glGetShaderiv(vertId, GL_COMPILE_STATUS, &success);
-  pollForError();
+	glGetShaderiv(vertId, GL_COMPILE_STATUS, &success);
+	pollForError();
 
-  if(!success)
-  {
-    int length = 0;
-    glGetShaderiv(vertId, GL_INFO_LOG_LENGTH, &length);
-    pollForError();
+	if (!success)
+	{
+		int length = 0;
+		glGetShaderiv(vertId, GL_INFO_LOG_LENGTH, &length);
+		pollForError();
 
-    std::sr1::vector<char> infoLog(length);
-    glGetShaderInfoLog(vertId, length, NULL, &infoLog.at(0));
-    pollForError();
+		std::sr1::vector<char> infoLog(length);
+		glGetShaderInfoLog(vertId, length, NULL, &infoLog.at(0));
+		pollForError();
 
-    glDeleteShader(vertId);
-    pollForError();
+		glDeleteShader(vertId);
+		pollForError();
 
-    std::string msg = &infoLog.at(0);
-    throw Exception(msg);
-  }
+		std::string msg = &infoLog.at(0);
+		throw Exception(msg);
+	}
 
-  std::string fragSrc = "";
-  fragSrc += "#version 120\n";
-  fragSrc += "#define FRAGMENT\n";
-  fragSrc += _fragsource;
-  src = fragSrc.c_str();
+	std::string fragSrc = "";
+	fragSrc += "#version 120\n";
+	fragSrc += "#define FRAGMENT\n";
+	fragSrc += _fragsource;
+	src = fragSrc.c_str();
 
-  fragId = glCreateShader(GL_FRAGMENT_SHADER);
-  pollForError();
+	fragId = glCreateShader(GL_FRAGMENT_SHADER);
+	pollForError();
 
-  glShaderSource(fragId, 1, &src, NULL);
-  pollForError();
+	glShaderSource(fragId, 1, &src, NULL);
+	pollForError();
 
-  glCompileShader(fragId);
-  pollForError();
+	glCompileShader(fragId);
+	pollForError();
 
-  glGetShaderiv(fragId, GL_COMPILE_STATUS, &success);
-  pollForError();
+	glGetShaderiv(fragId, GL_COMPILE_STATUS, &success);
+	pollForError();
 
-  if(!success)
-  {
-    int length = 0;
-    glGetShaderiv(fragId, GL_INFO_LOG_LENGTH, &length);
-    pollForError();
+	if (!success)
+	{
+		int length = 0;
+		glGetShaderiv(fragId, GL_INFO_LOG_LENGTH, &length);
+		pollForError();
 
-    std::sr1::vector<char> infoLog(length);
-    glGetShaderInfoLog(fragId, length, NULL, &infoLog.at(0));
-    pollForError();
+		std::sr1::vector<char> infoLog(length);
+		glGetShaderInfoLog(fragId, length, NULL, &infoLog.at(0));
+		pollForError();
 
-    glDeleteShader(fragId);
-    pollForError();
+		glDeleteShader(fragId);
+		pollForError();
 
-    std::string msg = &infoLog.at(0);
-    throw Exception(msg);
-  }
+		std::string msg = &infoLog.at(0);
+		throw Exception(msg);
+	}
 
-  glAttachShader(id, vertId);
-  pollForError();
+	glAttachShader(id, vertId);
+	pollForError();
 
-  glAttachShader(id, fragId);
-  pollForError();
+	glAttachShader(id, fragId);
+	pollForError();
 
-  glLinkProgram(id);
-  pollForError();
+	glLinkProgram(id);
+	pollForError();
 
-  glGetProgramiv(id, GL_LINK_STATUS, &success);
-  pollForError();
+	glGetProgramiv(id, GL_LINK_STATUS, &success);
+	pollForError();
 
-  if(!success)
-  {
-    int length = 0;
-    glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
-    pollForError();
+	if (!success)
+	{
+		int length = 0;
+		glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
+		pollForError();
 
-    std::sr1::vector<char> infoLog(length);
-    glGetProgramInfoLog(id, length, NULL, &infoLog.at(0));
-    pollForError();
+		std::sr1::vector<char> infoLog(length);
+		glGetProgramInfoLog(id, length, NULL, &infoLog.at(0));
+		pollForError();
 
-    std::string msg = &infoLog.at(0);
-    throw Exception(msg);
-  }
+		std::string msg = &infoLog.at(0);
+		throw Exception(msg);
+	}
 
-  glDetachShader(id, vertId);
-  pollForError();
+	glDetachShader(id, vertId);
+	pollForError();
 
-  glDetachShader(id, fragId);
-  pollForError();
+	glDetachShader(id, fragId);
+	pollForError();
 
-  glDeleteShader(vertId);
-  pollForError();
+	glDeleteShader(vertId);
+	pollForError();
 
-  glDeleteShader(fragId);
-  pollForError();
+	glDeleteShader(fragId);
+	pollForError();
 }
 
 }

@@ -7,6 +7,7 @@
 //#include "Entity.h"
 class Entity;
 class Screen;
+class Resources;
 
 class Core
 {
@@ -33,6 +34,7 @@ private:
 	std::weak_ptr <Core> m_self;
 
 	std::shared_ptr<Screen> m_screen;
+	std::shared_ptr<Resources> m_resources;
 
 	int m_windowW;
 	int m_windowH;

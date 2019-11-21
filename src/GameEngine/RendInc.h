@@ -7,4 +7,5 @@ namespace GameEngine
 	using rend::Shader;
 	using rend::Buffer;
 	using rend::RenderTexture;
+	using rend::Mesh;
 }

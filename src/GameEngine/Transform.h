@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "Component.h"
 
@@ -23,14 +24,7 @@ public:
 	glm::vec3 GetRotation() { return m_objectRotation; }
 	glm::vec3 GetScale() { return m_objectScale; }
 
-	glm::mat4 GetModel() { 
-		// create ident mat4, then do the following
-		// trans pos, 
-		// rotate x, rot y, rot z, 
-		// then scale sca, 
-		//return ident
-	}
-
+	glm::mat4 GetModel(); 
 
 protected:
 	//position

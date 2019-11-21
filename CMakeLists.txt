@@ -12,6 +12,8 @@ add_library(rend
   	src/rend/Exception.h
   	src/rend/Context.cpp	
 	src/rend/Context.h
+	src/rend/TextureAdapter.h
+	src/rend/Resource.h
   	src/rend/Texture.cpp
   	src/rend/Texture.h
   	src/rend/RenderTexture.cpp
@@ -20,8 +22,12 @@ add_library(rend
   	src/rend/Shader.h
   	src/rend/Buffer.cpp
   	src/rend/Buffer.h
+	src/rend/Mesh.cpp
+	src/rend/Mesh.h
 	src/rend/rend.h
 	src/rend/mathutil.h
+	src/rend/Util.cpp
+	src/rend/Util.h
 )
 
 if(MSVC)
@@ -46,6 +52,7 @@ add_library(GameEngine
 	src/GameEngine/Camera.h
 	src/GameEngine/Screen.cpp
 	src/GameEngine/Screen.h
+	src/GameEngine/Resources.h
 	src/GameEngine/GameEngine.h
 	src/GameEngine/RendInc.h
 )
