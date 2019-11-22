@@ -54,11 +54,11 @@ void TestScene::OnInitalise()
 	//create buffer
 	_buffer = _context->createBuffer();
 	//create mesh
-	//_mesh = _context->createMesh();
+	_mesh = _context->createMesh();
 
 	//set shaders
 	//_shader->setSource(vertexShaderSrc, fragmentShaderSrc);
-	_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
+	//_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
 
 	//_mesh->loadMesh("resources/rend/samples/graveyard/graveyard.obj");
 
@@ -66,6 +66,12 @@ void TestScene::OnInitalise()
 	_buffer->add(rend::vec3(positions[3], positions[4], positions[5]));
 	_buffer->add(rend::vec3(positions[6], positions[7], positions[8]));
 
+}
+
+void TestScene::SetMesh(std::shared_ptr<Mesh> _mesh)
+{
+	this->_mesh = _mesh;
+	//_shader->setMesh(_mesh);
 }
 
 void TestScene::OnDraw()
@@ -99,7 +105,7 @@ void TestScene::OnDraw()
 		//_shader->setUniform("in_Model", _trans->GetModel());
 		_shader->setAttribute("in_Position", _buffer);
 
-		//_shader->setMesh(_mesh);
+		_shader->setMesh(_mesh->internal);
 		_shader->render();
 
 		//glBindVertexArray(0);
@@ -111,3 +117,5 @@ void TestScene::OnDraw()
 
 	//onTicks();
 }
+
+

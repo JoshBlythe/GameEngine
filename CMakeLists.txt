@@ -13,7 +13,6 @@ add_library(rend
   	src/rend/Context.cpp	
 	src/rend/Context.h
 	src/rend/TextureAdapter.h
-	src/rend/Resource.h
   	src/rend/Texture.cpp
   	src/rend/Texture.h
   	src/rend/RenderTexture.cpp
@@ -31,9 +30,9 @@ add_library(rend
 )
 
 if(MSVC)
-target_link_libraries(rend glew32 SDL2 opengl32)
+target_link_libraries(rend glew32 SDL2 opengl32 openal32)
 else()
-target_link_libraries(rend GLEW SDL2 GL)
+target_link_libraries(rend GLEW SDL2 GL AL)
 endif()
 
 
@@ -52,6 +51,13 @@ add_library(GameEngine
 	src/GameEngine/Camera.h
 	src/GameEngine/Screen.cpp
 	src/GameEngine/Screen.h
+	src/GameEngine/Mesh.cpp
+	src/GameEngine/Mesh.h
+	src/GameEngine/Texture.cpp
+	src/GameEngine/Texture.h
+	src/GameEngine/Shader.cpp
+	src/GameEngine/Shader.h
+	src/GameEngine/Resource.h
 	src/GameEngine/Resources.h
 	src/GameEngine/GameEngine.h
 	src/GameEngine/RendInc.h

@@ -5,8 +5,6 @@
 #include <fstream>
 #include <string>
 
-#include "Resource.h"
-
 namespace rend
 {
 
@@ -33,7 +31,6 @@ struct Mesh
   void setTexture(const std::string& name, const std::sr1::shared_ptr<TextureAdapter>& texture);
   void parse(const std::string& data);
 
-  std::shared_ptr<Mesh> loadMesh(std::string _filePath);
 
 private:
   friend struct Context;

@@ -11,9 +11,12 @@ public:
 	virtual ~TestScene();
 
 	void OnInitalise();
+	void SetMesh(std::shared_ptr<Mesh> _mesh);
 	void OnDraw();
 
 private:
+
+	//std::shared_ptr<Mesh> _mesh;
 
 	std::sr1::shared_ptr<GameEngine::Context> _context;
 	std::sr1::shared_ptr<GameEngine::Shader> _shader;

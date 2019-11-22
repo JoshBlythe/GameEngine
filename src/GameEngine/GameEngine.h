@@ -7,6 +7,10 @@
 #include "Transform.h"
 #include "Scene.h"
 #include "Camera.h"
+#include "Resources.h"
+#include "Mesh.h"
+#include "Texture.h"
+#include "Shader.h"
 #include "RendInc.h"
 
 #endif // !GAMEENGINE_GAMEENGINE_H

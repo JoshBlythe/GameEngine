@@ -2,6 +2,8 @@
 #include "Entity.h"
 #include "Screen.h"
 #include "Transform.h"
+#include "Resources.h"
+//#include "stb_vorbis.h"
 
 std::shared_ptr<Core> Core::OnInitalise()
 {
@@ -9,6 +11,10 @@ std::shared_ptr<Core> Core::OnInitalise()
 	//referencing c to weak_ptr of care
 	//this will be used to moving up through the hierearchy
 	c_rtn->m_self = c_rtn;
+
+	c_rtn->m_resources = std::make_shared<Resources>();
+
+	c_rtn->getResources()->m_core = c_rtn;
 
 	c_rtn->CreateWindow();
 	//return core
@@ -20,6 +26,10 @@ Core::~Core()
 	//clean up SDL
 	SDL_DestroyWindow(m_window);
 	SDL_Quit();
+
+	alcMakeContextCurrent(NULL);
+	alcDestroyContext(_context);
+	alcCloseDevice(_device);
 }
 
 
@@ -35,6 +45,11 @@ std::shared_ptr<Entity> Core::addEntity()
 	e_rtn->addComponent<Transform>();
 
 	return e_rtn;
+}
+
+std::shared_ptr<Resources> Core::getResources()
+{
+	return m_resources;
 }
 
 void Core::CreateWindow()
@@ -62,6 +77,31 @@ void Core::CreateWindow()
 	if (!SDL_GL_CreateContext(m_window))
 	{
 		throw Exception("Error during SDL_GL_CreatContext!");
+	}
+
+	// open up OpenAL and the device
+	_device = alcOpenDevice(NULL);
+	
+	if (_device == NULL)
+	{
+		throw Exception("Failed to open audio device!");
+	}
+
+	//create audio OpenAL context
+	_context = alcCreateContext(_device, NULL);
+
+	if (_context == NULL)
+	{
+		alcCloseDevice(_device);
+		throw Exception("Audio Device Context failed to initalise!");
+	}
+
+	//set current context
+	if (!alcMakeContextCurrent)
+	{
+		alcDestroyContext(_context);
+		alcCloseDevice(_device);
+		throw Exception("Failed to set current context of Audio Device!");
 	}
 }
 

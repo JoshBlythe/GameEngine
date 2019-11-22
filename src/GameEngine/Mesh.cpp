@@ -1,17 +1,24 @@
 #include "Mesh.h"
 
-Mesh::Mesh()
+std::shared_ptr<Mesh> load(std::string _filePath)
 {
-}
+	std::shared_ptr<Mesh> _mesh = std::make_shared<Mesh>();
 
-Mesh::~Mesh()
-{
-}
+	std::fstream file(_filePath);
 
-void Mesh::LoadObject(std::string ObjectFile)
-{
-}
+	if (!file.is_open())
+	{
+		throw Exception("Error Loading Objects File Data");
+	}
 
-void Mesh::Draw()
-{
+	std::string _obj;
+	std::string _fileLine;
+
+	while (!file.eof())
+	{
+		std::getline(file, _fileLine);
+		_obj += _fileLine + "\n";
+	}
+
+	return _mesh;
 }

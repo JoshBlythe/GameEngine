@@ -1,5 +1,6 @@
 #include "Component.h"
 #include "Entity.h"
+#include "Core.h"
 
 Component::Component()
 {
@@ -26,6 +27,11 @@ std::shared_ptr<Entity> Component::getEntity()
 std::shared_ptr<Core> Component::getCore()
 {
 	return getEntity()->GetCore();
+}
+
+std::shared_ptr<Resources> Component::getResources()
+{
+	return getCore()->getResources();
 }
 
 void Component::OnInitalise()

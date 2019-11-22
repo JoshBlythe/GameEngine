@@ -14,11 +14,13 @@ int main()
 	//adding simple conent to engine
 	std::shared_ptr<TestScene> testing = entity->addComponent<TestScene>();
 	
-	//std::shared_ptr<GameEngine::Mesh> mesh = core->getResources()->loadResource<Mesh>("")
+	std::shared_ptr <Mesh> mesh = core->getResources()->load<Mesh>("samples\curuthers");
+	testing->SetMesh(mesh);
 
 	
 	std::shared_ptr<Transform> tran = entity->getComponent<Transform>();
-	//tran->getEntity()->getComponent<Transform>();
+//	entity->GetTransform()->setPosition(glm::vec3(10.0f, 0.0f, 0.0f));
+	tran->getEntity()->getComponent<Transform>();
 	//start the engine's main loop
 	core->runCore();
 

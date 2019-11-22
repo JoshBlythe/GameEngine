@@ -7,6 +7,7 @@
 //#include "Material.h"
 class Core;
 class Entity;
+class Resources;
 
 class Component
 {
@@ -22,6 +23,8 @@ public:
 
 	std::shared_ptr<Entity> getEntity();
 	std::shared_ptr<Core> getCore();
+	std::shared_ptr<Resources> getResources();
+
 	//void getEntity();  //shared_ptr of entity
 
 	virtual void OnDraw();

@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
+#include <AL/al.h>
+#include <AL/alc.h>
 
 #include <list>
 #include <memory>
@@ -15,6 +17,7 @@ public:
 	static std::shared_ptr<Core> OnInitalise();
 
 	std::shared_ptr<Entity> addEntity();
+	std::shared_ptr<Resources> getResources();
 
 	void CreateWindow();
 
@@ -25,8 +28,12 @@ public:
 	void stopCore();
 
 protected:
+	//initalise SDL window;
 	SDL_Window* m_window;
 
+	//initalie OpenAL varibales
+	ALCdevice* _device;
+	ALCcontext* _context;
 
 private:
 	//Core();
