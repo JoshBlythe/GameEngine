@@ -70,7 +70,8 @@ void TestScene::OnInitalise()
 
 void TestScene::SetMesh(std::shared_ptr<Mesh> _mesh)
 {
-	this->_mesh = _mesh;
+
+	this->_mesh = _mesh->_internal;
 	//_shader->setMesh(_mesh);
 }
 
@@ -105,7 +106,7 @@ void TestScene::OnDraw()
 		//_shader->setUniform("in_Model", _trans->GetModel());
 		_shader->setAttribute("in_Position", _buffer);
 
-		_shader->setMesh(_mesh->internal);
+		_shader->setMesh(_mesh);
 		_shader->render();
 
 		//glBindVertexArray(0);

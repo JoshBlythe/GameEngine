@@ -1,10 +1,16 @@
 #include "Mesh.h"
 
-std::shared_ptr<Mesh> load(std::string _filePath)
+Mesh::Mesh()
 {
-	std::shared_ptr<Mesh> _mesh = std::make_shared<Mesh>();
+}
 
-	std::fstream file(_filePath);
+Mesh::~Mesh()
+{
+}
+
+void Mesh::onLoad(const std::string& _fileName)
+{
+	std::fstream file(_fileName);
 
 	if (!file.is_open())
 	{
@@ -20,5 +26,4 @@ std::shared_ptr<Mesh> load(std::string _filePath)
 		_obj += _fileLine + "\n";
 	}
 
-	return _mesh;
 }

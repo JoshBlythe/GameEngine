@@ -5,11 +5,13 @@
 
 #include <list>
 #include <memory>
+#include "RendInc.h"
 
 //#include "Entity.h"
 class Entity;
 class Screen;
 class Resources;
+class Enviroment;
 
 class Core
 {
@@ -37,11 +39,12 @@ protected:
 
 private:
 	//Core();
-
 	std::weak_ptr <Core> m_self;
 
 	std::shared_ptr<Screen> m_screen;
 	std::shared_ptr<Resources> m_resources;
+	std::shared_ptr<Enviroment> m_enviroment;
+	std::shared_ptr <rend::Context> m_graphicalContext;
 
 	int m_windowW;
 	int m_windowH;
@@ -50,5 +53,5 @@ private:
 
 	bool m_systemLoop;
 
-	std::list < std::shared_ptr<Entity>> m_entities;
+	std::list <std::shared_ptr<Entity>> m_entities;
 };

@@ -36,6 +36,7 @@ private:
   friend struct Context;
   friend struct Shader;
 
+
   std::sr1::shared_ptr<Context> context;
   std::sr1::vector<std::sr1::shared_ptr<BufferData> > buffers;
   std::sr1::vector<std::sr1::shared_ptr<TextureData> > textures;

@@ -3,6 +3,7 @@
 #include "Screen.h"
 #include "Transform.h"
 #include "Resources.h"
+//#include "Enviroment.h"
 //#include "stb_vorbis.h"
 
 std::shared_ptr<Core> Core::OnInitalise()
@@ -16,6 +17,8 @@ std::shared_ptr<Core> Core::OnInitalise()
 
 	c_rtn->getResources()->m_core = c_rtn;
 
+	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
+
 	c_rtn->CreateWindow();
 	//return core
 	return c_rtn;
@@ -27,9 +30,9 @@ Core::~Core()
 	SDL_DestroyWindow(m_window);
 	SDL_Quit();
 
-	alcMakeContextCurrent(NULL);
+	/*alcMakeContextCurrent(NULL);
 	alcDestroyContext(_context);
-	alcCloseDevice(_device);
+	alcCloseDevice(_device);*/
 }
 
 
@@ -80,39 +83,46 @@ void Core::CreateWindow()
 	}
 
 	// open up OpenAL and the device
-	_device = alcOpenDevice(NULL);
-	
-	if (_device == NULL)
-	{
-		throw Exception("Failed to open audio device!");
-	}
+	//_device = alcOpenDevice(NULL);
+	//
+	//if (_device == NULL)
+	//{
+	//	throw Exception("Failed to open audio device!");
+	//}
 
-	//create audio OpenAL context
-	_context = alcCreateContext(_device, NULL);
+	////create audio OpenAL context
+	//_context = alcCreateContext(_device, NULL);
 
-	if (_context == NULL)
-	{
-		alcCloseDevice(_device);
-		throw Exception("Audio Device Context failed to initalise!");
-	}
+	//if (_context == NULL)
+	//{
+	//	alcCloseDevice(_device);
+	//	throw Exception("Audio Device Context failed to initalise!");
+	//}
 
-	//set current context
-	if (!alcMakeContextCurrent)
-	{
-		alcDestroyContext(_context);
-		alcCloseDevice(_device);
-		throw Exception("Failed to set current context of Audio Device!");
-	}
+	////set current context
+	//if (!alcMakeContextCurrent)
+	//{
+	//	alcDestroyContext(_context);
+	//	alcCloseDevice(_device);
+	//	throw Exception("Failed to set current context of Audio Device!");
+	//}
 }
 
 
 void Core::runCore()
 {
+	//m_enviroment = std::make_shared<Enviroment>();
+
 	//loop variable
 	bool m_looper = true;
 	//loop condition
 	while (m_looper)
 	{
+		//float _time = SDL_GetTicks();
+		//float _difference = _time - m_enviroment->getDelts();
+		//m_enviroment->getDelts() = _
+
+
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)

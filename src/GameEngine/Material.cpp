@@ -1,18 +1,17 @@
 #include "Material.h"
+#include "Shader.h"
 
-Material::Material()
+void Material::setShader(std::weak_ptr<Shader> _shader)
 {
+	_shader.lock()->_shaderIntern;
 }
 
-Material::~Material()
-{
-}
 
-int Material::LoadTexture(std::string TextureFile)
+std::shared_ptr<Shader> Material::getShader()
 {
-	return 0;
-}
+	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
 
-void Material::apply()
-{
+	//m_shader.lock();
+
+	return _shader;
 }

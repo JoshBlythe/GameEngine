@@ -1,11 +1,12 @@
 #include "Resource.h"
 
-class Mesh :public Resource
+class Mesh : public Resource
 {
 public:
-
+	Mesh();
+	~Mesh();
 
 	std::shared_ptr<rend::Mesh> _internal;
-	std::shared_ptr<Mesh> load(std::string _filePath);
 
+	void onLoad(const std::string& _fileName);
 };

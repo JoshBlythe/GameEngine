@@ -57,8 +57,14 @@ add_library(GameEngine
 	src/GameEngine/Texture.h
 	src/GameEngine/Shader.cpp
 	src/GameEngine/Shader.h
+	src/GameEngine/Resource.cpp
 	src/GameEngine/Resource.h
 	src/GameEngine/Resources.h
+	src/GameEngine/Material.cpp
+	src/GameEngine/Material.h
+	src/GameEngine/MaterialAttribute.h
+	src/GameEngine/Enviroment.cpp
+	src/GameEngine/Enviroment.h
 	src/GameEngine/GameEngine.h
 	src/GameEngine/RendInc.h
 )

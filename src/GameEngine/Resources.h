@@ -16,13 +16,13 @@ public:
 	~Resources() {};
 
 	template<typename T>
-	std::shared_ptr<T> load(std::string _path)
+	std::shared_ptr<T> load(const std::string& _path)
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 
-		t_rtn->core = m_core;
+		t_rtn->_core = m_core;
 
-		t_rtn->load(_path);
+		t_rtn->onLoad(_path);
 
 		/*for (auto it = _resources.begin(); it != _resources.end(); it++)
 		{
@@ -47,6 +47,7 @@ public:
 
 	}
 
+	std::shared_ptr<Core> getCore();
 
 private:
 	friend class Core;
