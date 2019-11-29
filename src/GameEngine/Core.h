@@ -11,6 +11,8 @@
 class Entity;
 class Screen;
 class Resources;
+class Mesh;
+class Camera;
 class Enviroment;
 
 class Core
@@ -20,6 +22,8 @@ public:
 
 	std::shared_ptr<Entity> addEntity();
 	std::shared_ptr<Resources> getResources();
+	std::shared_ptr<Camera> getCamera();
+	std::shared_ptr<Screen> getScreen();
 
 	void CreateWindow();
 
@@ -29,15 +33,16 @@ public:
 	//stop running main loop
 	void stopCore();
 
-protected:
+private:
+
 	//initalise SDL window;
 	SDL_Window* m_window;
 
 	//initalie OpenAL varibales
 	ALCdevice* _device;
 	ALCcontext* _context;
+	friend class Mesh;
 
-private:
 	//Core();
 	std::weak_ptr <Core> m_self;
 
@@ -45,6 +50,8 @@ private:
 	std::shared_ptr<Resources> m_resources;
 	std::shared_ptr<Enviroment> m_enviroment;
 	std::shared_ptr <rend::Context> m_graphicalContext;
+
+	std::weak_ptr<Camera> m_camera;
 
 	int m_windowW;
 	int m_windowH;

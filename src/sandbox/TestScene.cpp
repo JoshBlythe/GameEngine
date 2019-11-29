@@ -30,12 +30,12 @@ void TestScene::OnInitalise()
 	};
 
 	vertexShaderSrc =
-		"attribute vec3 in_Position;"\
-		"uniform mat4 in_Model; "\
+		"attribute vec3 a_Position;"\
+		"uniform mat4 u_Model; "\
 		""\
 		"void main()"\
 		"{"\
-		"	gl_Position = in_Model * vec4(in_Position, 1.0);"\
+		"	gl_Position = u_Model * vec4(a_Position, 1.0);"\
 		"}"\
 		"";
 
@@ -52,19 +52,14 @@ void TestScene::OnInitalise()
 	//create shader
 	_shader = _context->createShader();
 	//create buffer
-	_buffer = _context->createBuffer();
+	//_buffer = _context->createBuffer();
 	//create mesh
-	_mesh = _context->createMesh();
+	//_mesh = _context->createMesh();
 
 	//set shaders
-	//_shader->setSource(vertexShaderSrc, fragmentShaderSrc);
+	_shader->setSource(vertexShaderSrc, fragmentShaderSrc);
 	//_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
 
-	//_mesh->loadMesh("resources/rend/samples/graveyard/graveyard.obj");
-
-	_buffer->add(rend::vec3(positions[0],positions[1], positions[2]));
-	_buffer->add(rend::vec3(positions[3], positions[4], positions[5]));
-	_buffer->add(rend::vec3(positions[6], positions[7], positions[8]));
 
 }
 
@@ -102,21 +97,13 @@ void TestScene::OnDraw()
 		//glBindVertexArray(vaoID);
 
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		_shader->setUniform("in_Model", rend::mat4(1.0f));
-		//_shader->setUniform("in_Model", _trans->GetModel());
-		_shader->setAttribute("in_Position", _buffer);
+		//_shader->setUniform("u_Model", rend::mat4(1.0f));
+		_shader->setUniform("u_Model", _trans->GetModel());
+		//_shader->setAttribute("in_Position", _buffer);
 
 		_shader->setMesh(_mesh);
 		_shader->render();
 
-		//glBindVertexArray(0);
-		//glUseProgram(0);
-
-		
-
-	//}
-
-	//onTicks();
 }
 
 

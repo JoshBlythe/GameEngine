@@ -11,8 +11,10 @@ public:
 	~Transform();
 
 	//initalise Values
-	void setPosition(float m_posX, float m_posY, float m_posZ) 
-	{ m_objectPosition.x = m_posX, m_objectPosition.y = m_posY, m_objectPosition.z = m_posZ; }
+	void setPosition(glm::vec3 _posVec)
+	{
+		m_objectPosition.x = _posVec.x, m_objectPosition.y = _posVec.y, m_objectPosition.z = _posVec.z;
+	}
 	
 	void setRotation(float m_rotX, float m_rotY, float m_rotZ) 
 	{ m_objectRotation.x = m_rotX, m_objectRotation.y = m_rotY, m_objectRotation.z = m_rotZ; }

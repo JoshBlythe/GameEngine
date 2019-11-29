@@ -22,8 +22,8 @@ void Enviroment::fileLocations()
 	GetModuleFileName(NULL, strExePath, MAX_PATH);
 	fullpath = strExePath;
 	
-	basename = dirName.substr(fullpath.find_last_of("\\"));
-	basename = basename.substr(0, basename.length() - 4);
+	baseName = dirName.substr(fullpath.find_last_of("\\"));
+	baseName = baseName.substr(0, baseName.length() - 4);
 
 	//share / {basename} is found;
 

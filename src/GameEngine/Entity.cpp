@@ -12,6 +12,8 @@ Entity::~Entity()
 
 void Entity::Ticks()
 {
+	//do the delta time here.
+
 	//std::cout << "ticking through! " << std::endl;
 	//will change to be delta time to run on system loop.
 		for (int m_tick = 0; m_tick < 5; m_tick++)

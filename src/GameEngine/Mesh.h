@@ -1,4 +1,5 @@
 #include "Resource.h"
+#include "RendInc.h"
 
 class Mesh : public Resource
 {

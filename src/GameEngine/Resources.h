@@ -32,8 +32,8 @@ public:
 				return t_rtn;
 			}
 		}*/
-
-		throw Exception("Specified Type was not found");
+		return t_rtn;
+//		throw Exception("Specified Type was not found");
 	}
 
 	template<typename T>

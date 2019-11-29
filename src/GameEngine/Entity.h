@@ -2,14 +2,14 @@
 #include <list>
 #include <memory>
 
-#include "Component.h"
+//#include "Component.h"
 #include "Exception.h"
 
 class Core;
 class Transform;
-//class Component;
+class Component;
 
-class Entity : public Component
+class Entity
 {
 public:
 	Entity();
@@ -85,7 +85,7 @@ private:
 	std::weak_ptr<Core> m_core;
 	//ptr to self
 	std::weak_ptr<Entity> m_entSelf;
-	
+	bool m_isAlive;
 	//int m_tick;
 	
 	std::weak_ptr<Transform> _trans;

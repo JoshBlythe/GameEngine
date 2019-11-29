@@ -3,6 +3,7 @@
 #include "Screen.h"
 #include "Transform.h"
 #include "Resources.h"
+#include "Camera.h"
 //#include "Enviroment.h"
 //#include "stb_vorbis.h"
 
@@ -20,6 +21,11 @@ std::shared_ptr<Core> Core::OnInitalise()
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
 
 	c_rtn->CreateWindow();
+
+	c_rtn->m_graphicalContext = rend::Context::initialize();
+
+	//c_rtn->m_enviroment
+
 	//return core
 	return c_rtn;
 }
@@ -55,6 +61,17 @@ std::shared_ptr<Resources> Core::getResources()
 	return m_resources;
 }
 
+std::shared_ptr<Camera> Core::getCamera()
+{
+	return m_camera.lock();
+}
+
+std::shared_ptr<Screen> Core::getScreen()
+{
+	return m_screen;
+}
+
+
 void Core::CreateWindow()
 {
 	m_screen = std::make_shared<Screen>();
@@ -81,6 +98,7 @@ void Core::CreateWindow()
 	{
 		throw Exception("Error during SDL_GL_CreatContext!");
 	}
+
 
 	// open up OpenAL and the device
 	//_device = alcOpenDevice(NULL);
@@ -118,11 +136,6 @@ void Core::runCore()
 	//loop condition
 	while (m_looper)
 	{
-		//float _time = SDL_GetTicks();
-		//float _difference = _time - m_enviroment->getDelts();
-		//m_enviroment->getDelts() = _
-
-
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)
