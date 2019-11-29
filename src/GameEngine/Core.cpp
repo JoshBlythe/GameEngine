@@ -51,7 +51,8 @@ std::shared_ptr<Entity> Core::addEntity()
 
 	m_entities.push_back(e_rtn); 
 
-	e_rtn->addComponent<Transform>();
+
+	e_rtn->_trans = e_rtn->addComponent<Transform>();
 
 	return e_rtn;
 }

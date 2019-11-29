@@ -19,7 +19,7 @@ int main()
 	testing->SetMesh(mesh);
 	
 	std::shared_ptr<Transform> tran = entity->getComponent<Transform>();
-	//entity->GetTransform()->setPosition(glm::vec3(0, 0, 15));
+	entity->GetTransform()->setPosition(glm::vec3(0, 0, -15));
 	//tran->getEntity()->getComponent<Transform>();
 
 	std::shared_ptr<Entity> cam = core->addEntity();

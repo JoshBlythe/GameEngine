@@ -32,10 +32,11 @@ void TestScene::OnInitalise()
 	vertexShaderSrc =
 		"attribute vec3 a_Position;"\
 		"uniform mat4 u_Model; "\
+		"uniform mat4 u_Projection; "\
 		""\
 		"void main()"\
 		"{"\
-		"	gl_Position = u_Model * vec4(a_Position, 1.0);"\
+		"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1.0);"\
 		"}"\
 		"";
 
@@ -99,6 +100,8 @@ void TestScene::OnDraw()
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 		//_shader->setUniform("u_Model", rend::mat4(1.0f));
 		_shader->setUniform("u_Model", _trans->GetModel());
+		//instead of hard coding get cureent cam from core this will be the getProj
+		_shader->setUniform("u_Projection", glm::perspective(glm::radians(45.0f),1.0f / 1.0f, 0.1f, 100.0f));
 		//_shader->setAttribute("in_Position", _buffer);
 
 		_shader->setMesh(_mesh);

@@ -2,6 +2,7 @@
 
 Transform::Transform()
 {
+	m_objectScale = { 1,1,1 };
 }
 
 Transform::~Transform()
