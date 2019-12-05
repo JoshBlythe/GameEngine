@@ -65,6 +65,10 @@ add_library(GameEngine
 	src/GameEngine/MaterialAttribute.h
 	src/GameEngine/Enviroment.cpp
 	src/GameEngine/Enviroment.h
+	src/GameEngine/Sound.cpp	
+	src/GameEngine/Sound.h
+	src/GameEngine/SoundSource.cpp	
+	src/GameEngine/SoundSource.h
 	src/GameEngine/GameEngine.h
 	src/GameEngine/RendInc.h
 )

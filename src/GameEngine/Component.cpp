@@ -43,7 +43,7 @@ void Component::OnTick()
 {
 	for (int i = 0; i < m_ticks; i++)
 	{
-		std::cout << "ticking through object! " << std::endl;
+		//std::cout << "ticking through object! " << std::endl;
 		OnUpdate();
 
 	}

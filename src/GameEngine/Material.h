@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <iostream>
 
 #include "Resource.h"
 
@@ -9,10 +10,10 @@ class Shader;
 class Material : public Resource
 {
 public:
+	void onLoad(const std::string& _fileName);
+
 	void setShader(std::weak_ptr<Shader> _shader);
 	std::shared_ptr<Shader> getShader();
-
-private:
 
 	std::shared_ptr<rend::Shader> _rnShader;
 	std::shared_ptr<rend::Texture> _rnTexture;

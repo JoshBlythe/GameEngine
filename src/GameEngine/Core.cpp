@@ -18,12 +18,17 @@ std::shared_ptr<Core> Core::OnInitalise()
 
 	c_rtn->getResources()->m_core = c_rtn;
 
+	//c_rtn->getCamera()->m_camSelf = c_rtn;
+	//c_rtn->m_camera = std::make_shared<Camera>();
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
 
 	c_rtn->CreateWindow();
 
 	c_rtn->m_graphicalContext = rend::Context::initialize();
-
+	
+	/*c_rtn->m_camera = std::make_shared<Camera>();
+	c_rtn->getCamera()->InitCamera() = c_rtn;*/
+	
 	//c_rtn->m_enviroment
 
 	//return core
@@ -53,6 +58,7 @@ std::shared_ptr<Entity> Core::addEntity()
 
 
 	e_rtn->_trans = e_rtn->addComponent<Transform>();
+	e_rtn->GetCore()->m_camera = e_rtn->addComponent<Camera>();
 
 	return e_rtn;
 }

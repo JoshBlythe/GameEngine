@@ -12,6 +12,7 @@ class Entity;
 class Screen;
 class Resources;
 class Mesh;
+class Material;
 class Camera;
 class Enviroment;
 
@@ -42,6 +43,7 @@ private:
 	ALCdevice* _device;
 	ALCcontext* _context;
 	friend class Mesh;
+	friend class Material;
 
 	//Core();
 	std::weak_ptr <Core> m_self;
