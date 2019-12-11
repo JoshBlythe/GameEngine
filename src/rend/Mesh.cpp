@@ -198,8 +198,8 @@ void Mesh::safeParse(const std::string& data, std::string& currentLine)
       b->add(fit->tcb);
       b->add(fit->tcc);
     }
-	//add these as the engine adds textures. 
-    //setBuffer("a_TexCoord", b);
+
+    setBuffer("a_TexCoord", b);
   }
 
   if(normals.size() > 0)
@@ -214,7 +214,7 @@ void Mesh::safeParse(const std::string& data, std::string& currentLine)
       b->add(fit->nc);
     }
 
-    //setBuffer("a_Normal", b);
+    setBuffer("a_Normal", b);
   }
 
   if(lmcs.size() > 0)
@@ -229,7 +229,7 @@ void Mesh::safeParse(const std::string& data, std::string& currentLine)
       b->add(fit->lmcc);
     }
 
-    //setBuffer("a_LightMapCoord", b);
+    setBuffer("a_LightMapCoord", b);
   }
 }
 

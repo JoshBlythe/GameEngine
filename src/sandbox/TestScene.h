@@ -23,7 +23,7 @@ private:
 	std::sr1::shared_ptr<GameEngine::Context> _context;
 	std::sr1::shared_ptr<GameEngine::Shader> _shader;
 	std::sr1::shared_ptr<GameEngine::Buffer> _buffer;
-	std::sr1::shared_ptr<GameEngine::Texture> _text;
+	//std::sr1::shared_ptr<GameEngine::Texture> _text;
 	std::sr1::shared_ptr<GameEngine::Mesh> _mesh;
 
 	const GLchar *vertexShaderSrc;

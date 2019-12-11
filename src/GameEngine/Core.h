@@ -40,8 +40,8 @@ private:
 	SDL_Window* m_window;
 
 	//initalie OpenAL varibales
-	ALCdevice* _device;
-	ALCcontext* _context;
+	/*ALCdevice* _device;
+	ALCcontext* _context;*/
 	friend class Mesh;
 	friend class Material;
 

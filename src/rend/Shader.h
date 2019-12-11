@@ -8,7 +8,6 @@
 #include <sr1/vector>
 
 #include <string>
-#include <fstream>
 
 namespace rend
 {
@@ -28,8 +27,8 @@ struct Shader : public std::sr1::noncopyable
   void render(const std::sr1::shared_ptr<RenderTexture>& target);
 
   GLuint getId();
-  void setSource(const std::string& _vertsource, const std::string& _fragsource);
-  //void parse(const std::string& source);
+  void setSource(const std::string& source);
+  void parse(const std::string& source);
 
   void setUniform(const std::string& variable, float value);
   void setUniform(const std::string& variable, mat4 value);
@@ -39,8 +38,6 @@ struct Shader : public std::sr1::noncopyable
   void setAttribute(const std::string& variable, const std::sr1::shared_ptr<Buffer>& value);
   void setSampler(const std::string& variable, const std::sr1::shared_ptr<TextureAdapter>& value);
   void setMesh(const std::sr1::shared_ptr<Mesh>& value);
-
-  std::shared_ptr<Shader> loadShaderFile(std::string _shaderFile, std::string _fragFile);
 
 private:
   friend struct Context;

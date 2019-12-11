@@ -1,8 +1,6 @@
 #include <sr1/vector>
 #include <sr1/memory>
 
-#include <iostream>
-#include <fstream>
 #include <string>
 
 namespace rend
@@ -31,11 +29,9 @@ struct Mesh
   void setTexture(const std::string& name, const std::sr1::shared_ptr<TextureAdapter>& texture);
   void parse(const std::string& data);
 
-
 private:
   friend struct Context;
   friend struct Shader;
-
 
   std::sr1::shared_ptr<Context> context;
   std::sr1::vector<std::sr1::shared_ptr<BufferData> > buffers;
