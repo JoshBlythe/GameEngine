@@ -29,23 +29,23 @@ void TestScene::OnInitalise()
 		0.5f, -0.5f, 0.0f
 	};
 
-	vertexShaderSrc =
-		"attribute vec3 a_Position;"\
-		"uniform mat4 u_Model; "\
-		"uniform mat4 u_Projection; "\
-		""\
-		"void main()"\
-		"{"\
-		"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1.0);"\
-		"}"\
-		"";
+	//vertexShaderSrc =
+	//	"attribute vec3 a_Position;"\
+	//	"uniform mat4 u_Model; "\
+	//	"uniform mat4 u_Projection; "\
+	//	""\
+	//	"void main()"\
+	//	"{"\
+	//	"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1.0);"\
+	//	"}"\
+	//	"";
 
-	fragmentShaderSrc =
-		"void main()"\
-		"{"\
-		"	gl_FragColor = vec4(0, 0, 1, 1);"\
-		"}"\
-		"";
+	//fragmentShaderSrc =
+	//	"void main()"\
+	//	"{"\
+	//	"	gl_FragColor = vec4(0, 0, 1, 1);"\
+	//	"}"\
+	//	"";
 
 	vertexShaderSrc =
 		"attribute vec3 a_Position;"\
@@ -57,10 +57,13 @@ void TestScene::OnInitalise()
 		""\
 		"varying vec3 v_Normal;"\
 		"varying vec2 v_Model;"\
+		"" \
+		"varying vec3 v_Normal; " \
+		"varying vec2 v_TexCoord; " \
 		""\
 		"void main()"\
 		"{"\
-		"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1.0);"\
+		"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1);"\
 		"	v_Normal = a_Normal; " \
 		"	v_TexCoord = a_TexCoord; " \
 		"}"\
@@ -90,7 +93,8 @@ void TestScene::OnInitalise()
 	//_mesh = _context->createMesh();
 
 	//set shaders
-	_shader->setSource(vertexShaderSrc, fragmentShaderSrc);
+	_shader->setSource(vertexShaderSrc);
+	_shader->setSource(fragmentShaderSrc);
 	//_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
 
 
@@ -104,8 +108,8 @@ void TestScene::SetMesh(std::shared_ptr<Mesh> _mesh)
 
 void TestScene::SetMaterial(std::shared_ptr<Material> _material)
 {
-	//this->_shader = _material->_rnShader;
-	//this->_text = _material->_rnTexture;
+	this->_shader = _material->_rnShader;
+	this->_text = _material->_rnTexture;
 }
 
 void TestScene::OnDraw()
@@ -114,7 +118,7 @@ void TestScene::OnDraw()
 	std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();
 
 
-	//_mesh->setTexture("u_Texture", _text);
+	_mesh->setTexture("u_Texture", _text);
 	//getCore()->getCamera()->GetProj();
 	//_trans->GetPosition();
 	//bool m_systemLoop = true;

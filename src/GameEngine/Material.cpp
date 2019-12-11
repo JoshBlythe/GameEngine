@@ -6,11 +6,11 @@
 
 void Material::onLoad(const std::string& _fileName)
 {
-	/*std::string fn = _fileName + ".png";
+	const std::string fn = _fileName + ".png";
 	
-	const int _stringLength = fn.size();
+	//const int _stringLength = fn.size();
 
-	char _fileLocation[30];
+	char _fileLocation[fn.size() + 1 ];
 	
 	strcpy(_fileLocation, fn.c_str());
 
@@ -44,21 +44,21 @@ void Material::onLoad(const std::string& _fileName)
 		}
 	}
 
-	stbi_image_free(_data);*/
+	stbi_image_free(_data);
 
 }
 
-//void Material::setShader(std::weak_ptr<Shader> _shader)
-//{
-//	//_shader.lock()->_shaderIntern;
-//}
+void Material::setShader(std::weak_ptr<Shader> _shader)
+{
+	_shader.lock()->_shaderIntern;
+}
 
 
-//std::shared_ptr<Shader> Material::getShader()
-//{
-//	//std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
-//
-//	////m_shader.lock();
-//
-//	//return _shader;
-//}
+std::shared_ptr<Shader> Material::getShader()
+{
+	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+
+	//m_shader.lock();
+
+	return _shader;
+}
