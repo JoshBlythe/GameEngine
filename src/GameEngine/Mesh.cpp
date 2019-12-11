@@ -1,6 +1,9 @@
 #include "Mesh.h"
 #include "Core.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 Mesh::Mesh()
 {
 }
@@ -14,7 +17,8 @@ void Mesh::onLoad(const std::string& _fileName)
 	std::string fn = _fileName + ".obj";
 	_internal = getCore()->m_graphicalContext->createMesh();
 
-	std::fstream file(fn);
+	std::cout << fn << std::endl;
+	std::ifstream file(fn.c_str());
 
 	if (!file.is_open())
 	{

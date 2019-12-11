@@ -10,9 +10,9 @@ void Material::onLoad(const std::string& _fileName)
 	
 	//const int _stringLength = fn.size();
 
-	char _fileLocation[fn.size() + 1 ];
+	//char _fileLocation[fn.size() + 1 ];
 	
-	strcpy(_fileLocation, fn.c_str());
+	//strcpy(_fileLocation, fn.c_str());
 
 	_rnShader = getCore()->m_graphicalContext->createShader();
 	_rnTexture = getCore()->m_graphicalContext->createTexture();
@@ -21,7 +21,7 @@ void Material::onLoad(const std::string& _fileName)
 	int _h = 0;
 	int _bpp = 0;
 
-	unsigned char *_data = stbi_load(_fileLocation, &_w, &_h, &_bpp, 3);
+	unsigned char *_data = stbi_load(fn.c_str(), &_w, &_h, &_bpp, 3);
 
 	if (!_data)
 	{

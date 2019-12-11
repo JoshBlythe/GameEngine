@@ -143,6 +143,18 @@ void Core::runCore()
 	//loop condition
 	while (m_looper)
 	{
+		SDL_Event m_event = { 0 };
+
+		while (SDL_PollEvent(&m_event))
+		{
+			if (m_event.type == SDL_QUIT)
+			{
+				m_looper = false;
+				//throw Exception("Close temp");
+			}
+		}
+
+
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)
@@ -150,6 +162,7 @@ void Core::runCore()
 			//unasign pointer allowing use to access Entity functions
 			(*iter)->Ticks();
 		}
+
 		
 		//check if a items within the list has been flagged to be deleted
 		for (std::list<std::shared_ptr<Entity>>::iterator
@@ -168,6 +181,9 @@ void Core::runCore()
 				iter++;
 			}
 		}
+
+		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//onDisplay loop
 		for (std::list<std::shared_ptr<Entity>>::iterator

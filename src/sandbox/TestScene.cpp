@@ -48,6 +48,7 @@ void TestScene::OnInitalise()
 	//	"";
 
 	vertexShaderSrc =
+		"#ifdef VERTEX\n" \
 		"attribute vec3 a_Position;"\
 		"attribute vec2 a_TexCoord;"\
 		"attribute vec3 a_Normal;"\
@@ -57,8 +58,6 @@ void TestScene::OnInitalise()
 		""\
 		"varying vec3 v_Normal;"\
 		"varying vec2 v_Model;"\
-		"" \
-		"varying vec3 v_Normal; " \
 		"varying vec2 v_TexCoord; " \
 		""\
 		"void main()"\
@@ -67,9 +66,9 @@ void TestScene::OnInitalise()
 		"	v_Normal = a_Normal; " \
 		"	v_TexCoord = a_TexCoord; " \
 		"}"\
-		"";
-
-	fragmentShaderSrc =
+		"" \
+		"\n #endif\n" \
+		"#ifdef FRAGMENT\n" \
 		"uniform sampler2D u_Texture;" \
 		"" \
 		"varying vec3 v_Normal; " \
@@ -80,6 +79,7 @@ void TestScene::OnInitalise()
 		"	gl_FragColor = texture2D(u_Texture, v_TexCoord); "\
 		"  if(gl_FragColor.x == 9) gl_FragColor.x = v_Normal.x; " \
 		"}"\
+		"\n #endif \n" \
 		"";
 
 	//calls glewInit, and checks if it was successful
@@ -94,7 +94,7 @@ void TestScene::OnInitalise()
 
 	//set shaders
 	_shader->setSource(vertexShaderSrc);
-	_shader->setSource(fragmentShaderSrc);
+	//_shader->setSource(fragmentShaderSrc);
 	//_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
 
 
@@ -125,18 +125,8 @@ void TestScene::OnDraw()
 
 	//while (m_systemLoop)
 	//{
-		SDL_Event m_event = { 0 };
 
-		while (SDL_PollEvent(&m_event))
-		{
-			if (m_event.type == SDL_QUIT)
-			{
-				//m_systemLoop = false;
-			}
-		}
 
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glUseProgram(prgramId);
 		//glUseProgram(_shader->ProgramID());
 		//glBindVertexArray(vaoID);

@@ -32,7 +32,7 @@ add_library(rend
 if(MSVC)
 target_link_libraries(rend glew32 SDL2 opengl32 openal32)
 else()
-target_link_libraries(rend GLEW SDL2 GL AL)
+target_link_libraries(rend GLEW SDL2 GL openal)
 endif()
 
 

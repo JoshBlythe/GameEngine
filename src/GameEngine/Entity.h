@@ -34,7 +34,7 @@ public:
 	template <typename T, typename V>
 	std::shared_ptr<T> addComponent(V v)
 	{
-		std::shared_ptr<T> t_rtn = std::make_shared<T>(V);
+		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 		
 		t_rtn->entity = m_entSelf;
 		m_component.push_back(t_rtn);
