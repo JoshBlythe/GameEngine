@@ -10,11 +10,26 @@ public:
 	TestScene();
 	virtual ~TestScene();
 
+	void OnInitalise();
+	void SetMesh(std::shared_ptr<Mesh> _mesh);
+	void SetMaterial(std::shared_ptr<Material> _material);
 	void OnDraw();
 
 private:
 
-	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+	std::shared_ptr<Mesh> m_geMesh;
+	std::shared_ptr<Material> m_geMaterial;
+
+	std::sr1::shared_ptr<GameEngine::Context> _context;
+	std::sr1::shared_ptr<GameEngine::Shader> _shader;
+	std::sr1::shared_ptr<GameEngine::Buffer> _buffer;
+	std::sr1::shared_ptr<GameEngine::Texture> _text;
+	std::sr1::shared_ptr<GameEngine::Mesh> _mesh;
+
+	const GLchar *vertexShaderSrc;
+	const GLchar *fragmentShaderSrc;
+
+	//std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
 
 	SDL_Window * m_Window;
 	GLuint positionVboId;

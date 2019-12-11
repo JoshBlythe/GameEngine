@@ -1,13 +1,13 @@
 #pragma once
-//#include <SDL2/SDL.h>
-//#include <GL/glew.h>
+
 #include <iostream>
 #include <memory>
 
 //#include "Mesh.h"
 //#include "Material.h"
-//class Core;
+class Core;
 class Entity;
+class Resources;
 
 class Component
 {
@@ -22,21 +22,23 @@ public:
 	//float getPos() { return m_objectPosition.x, m_objectPosition.y, m_objectPosition.z; }
 
 	std::shared_ptr<Entity> getEntity();
-	//std::weak_ptr<Entity> getCore();
+	std::shared_ptr<Core> getCore();
+	std::shared_ptr<Resources> getResources();
+
 	//void getEntity();  //shared_ptr of entity
 
 	virtual void OnDraw();
-	//virtual void onInitalise();
+	virtual void OnInitalise();
 	//virtual void begin();
-	virtual void onTick();
+	virtual void OnTick();
 	//virtual void onDisplay();
 
 	virtual void OnUpdate();
 protected:
 	
 	std::weak_ptr<Entity> entity;
-
-
+	int m_ticks;
+	bool m_isAlive;
 	//std::shared_ptr<Mesh> m_mesh;
 	//std::shared_ptr<Material> m_material;
 

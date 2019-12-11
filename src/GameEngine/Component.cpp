@@ -1,7 +1,10 @@
 #include "Component.h"
+#include "Entity.h"
+#include "Core.h"
 
 Component::Component()
 {
+	m_ticks = 5;
 	//m_mesh = NULL;
 	//m_material = NULL;
 }
@@ -21,15 +24,29 @@ std::shared_ptr<Entity> Component::getEntity()
 	return entity.lock();
 }
 
-//void Object::onInitalise()
-//{
-//	//initalise SDL.
-//}
-
-void Component::onTick()
+std::shared_ptr<Core> Component::getCore()
 {
-	std::cout << "ticking through object! " << std::endl;
-	OnUpdate();
+	return getEntity()->GetCore();
+}
+
+std::shared_ptr<Resources> Component::getResources()
+{
+	return getCore()->getResources();
+}
+
+void Component::OnInitalise()
+{
+	//initalise SDL.
+}
+
+void Component::OnTick()
+{
+	for (int i = 0; i < m_ticks; i++)
+	{
+		//std::cout << "ticking through object! " << std::endl;
+		OnUpdate();
+
+	}
 }
 
 //void Object::begin()
@@ -37,11 +54,6 @@ void Component::onTick()
 //	std::cout << "Begin function!" << std::endl;
 //}
 
-//void Object::onDisplay()
-//{
-//	//OpenGL renderer section.
-//	std::cout << "Display!" << std::endl;
-//}
 
 void Component::OnUpdate()
 {

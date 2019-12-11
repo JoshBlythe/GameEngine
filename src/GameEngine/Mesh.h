@@ -1,17 +1,13 @@
-#pragma once
+#include "Resource.h"
+#include "RendInc.h"
 
-#include <string>
-#include <vector>
-
-class Mesh
+class Mesh : public Resource
 {
 public:
 	Mesh();
 	~Mesh();
 
-	void LoadObject(std::string ObjectFile);
-	void Draw();
+	std::shared_ptr<rend::Mesh> _internal;
 
-private:
-
+	void onLoad(const std::string& _fileName);
 };

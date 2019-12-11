@@ -1,22 +1,32 @@
-//#include <iostream>
-//#include <Windows.h>
-//#include <SDL2/SDL.h>
-//#include <GL/glew.h>
+#include <SDL2/SDL.h>
+#include <GL/glew.h>
+#include <AL/al.h>
+#include <AL/alc.h>
 
 #include <list>
 #include <memory>
+#include "RendInc.h"
 
 //#include "Entity.h"
 class Entity;
+class Screen;
+class Resources;
+class Mesh;
+class Material;
+class Camera;
+class Enviroment;
 
 class Core
 {
 public:
-
-
-	static std::shared_ptr<Core> initalize();
+	static std::shared_ptr<Core> OnInitalise();
 
 	std::shared_ptr<Entity> addEntity();
+	std::shared_ptr<Resources> getResources();
+	std::shared_ptr<Camera> getCamera();
+	std::shared_ptr<Screen> getScreen();
+
+	void CreateWindow();
 
 	~Core();
 	//main loop
@@ -24,21 +34,33 @@ public:
 	//stop running main loop
 	void stopCore();
 
-
 private:
-	//Core();
 
+	//initalise SDL window;
+	SDL_Window* m_window;
+
+	//initalie OpenAL varibales
+	/*ALCdevice* _device;
+	ALCcontext* _context;*/
+	friend class Mesh;
+	friend class Material;
+
+	//Core();
 	std::weak_ptr <Core> m_self;
 
-	bool m_systemLoop;
+	std::shared_ptr<Screen> m_screen;
+	std::shared_ptr<Resources> m_resources;
+	std::shared_ptr<Enviroment> m_enviroment;
+	std::shared_ptr <rend::Context> m_graphicalContext;
 
-	/*int m_windowX;
-	int m_windowY;
+	std::weak_ptr<Camera> m_camera;
+
 	int m_windowW;
 	int m_windowH;
 
-	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;*/
+	//SDL_Renderer* m_renderer;
 
-	std::list < std::shared_ptr<Entity>> m_entities;
+	bool m_systemLoop;
+
+	std::list <std::shared_ptr<Entity>> m_entities;
 };

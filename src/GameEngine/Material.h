@@ -1,23 +1,24 @@
 #pragma once
-//includes
-#include <string>
+#include <vector>
+#include <iostream>
 
-//include libraries
-#include <glm/glm.hpp>
-#include "GL/glew.h"
+#include "Resource.h"
 
-class Material
+class Shader;
+//class MaterialAttribute;
+
+class Material : public Resource
 {
 public:
-	Material();
-	~Material();
+	void onLoad(const std::string& _fileName);
 
-	int LoadTexture(std::string TextureFile);
+	void setShader(std::weak_ptr<Shader> _shader);
+	std::shared_ptr<Shader> getShader();
 
-	void apply();
-
-private:
-
+	std::shared_ptr<rend::Shader> _rnShader;
+	std::shared_ptr<rend::Texture> _rnTexture;
+	//std::weak_ptr<Shader> m_shader;
+	//std::vector <std::shared_ptr<MaterialAttribute>> m_attributes;
 };
 
 

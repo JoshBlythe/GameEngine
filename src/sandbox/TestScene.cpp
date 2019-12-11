@@ -4,6 +4,24 @@
 
 TestScene::TestScene()
 {
+	
+
+}
+
+TestScene::~TestScene()
+{
+	//clean up shaders
+	//glDetachShader(prgramId, vertexShaderID);
+	//glDeleteShader(vertexShaderID);
+	//glDetachShader(prgramId, fragmentShaderID);
+	//glDeleteShader(fragmentShaderID);
+	//clean up SDL
+	/*SDL_DestroyWindow(m_Window);
+	SDL_Quit();*/
+}
+
+void TestScene::OnInitalise()
+{
 	const GLfloat positions[] =
 	{
 		0.0f, 0.5f, 0.0f,
@@ -11,149 +29,98 @@ TestScene::TestScene()
 		0.5f, -0.5f, 0.0f
 	};
 
-	const GLchar *vertexShaderSrc =
-		"attribute vec3 in_Position;"\
+	//vertexShaderSrc =
+	//	"attribute vec3 a_Position;"\
+	//	"uniform mat4 u_Model; "\
+	//	"uniform mat4 u_Projection; "\
+	//	""\
+	//	"void main()"\
+	//	"{"\
+	//	"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1.0);"\
+	//	"}"\
+	//	"";
+
+	//fragmentShaderSrc =
+	//	"void main()"\
+	//	"{"\
+	//	"	gl_FragColor = vec4(0, 0, 1, 1);"\
+	//	"}"\
+	//	"";
+
+	vertexShaderSrc =
+		"attribute vec3 a_Position;"\
+		"attribute vec2 a_TexCoord;"\
+		"attribute vec3 a_Normal;"\
+		""\
+		"uniform mat4 u_Model; "\
+		"uniform mat4 u_Projection; "\
+		""\
+		"varying vec3 v_Normal;"\
+		"varying vec2 v_Model;"\
+		"" \
+		"varying vec3 v_Normal; " \
+		"varying vec2 v_TexCoord; " \
 		""\
 		"void main()"\
 		"{"\
-		"	uniform mat4 in_model;"\
-		"	gl_Position = vec4(in_Position *in_model, 1.0);"\
+		"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1);"\
+		"	v_Normal = a_Normal; " \
+		"	v_TexCoord = a_TexCoord; " \
 		"}"\
 		"";
 
-	const GLchar *fragmentShaderSrc =
+	fragmentShaderSrc =
+		"uniform sampler2D u_Texture;" \
+		"" \
+		"varying vec3 v_Normal; " \
+		"varying vec2 v_TexCoord; " \
+		"" \
 		"void main()"\
 		"{"\
-		"	gl_FragColor = vec4(0, 0, 1, 1);"\
+		"	gl_FragColor = texture2D(u_Texture, v_TexCoord); "\
+		"  if(gl_FragColor.x == 9) gl_FragColor.x = v_Normal.x; " \
 		"}"\
 		"";
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		throw Exception("SDL_Init Error: ");
-	}
+	//calls glewInit, and checks if it was successful
+	//if not will through a exeption.
+	_context = GameEngine::Context::initialize();
+	//create shader
+	_shader = _context->createShader();
+	//create buffer
+	//_buffer = _context->createBuffer();
+	//create mesh
+	//_mesh = _context->createMesh();
 
-	//create window
-	m_Window = SDL_CreateWindow("Game Engine",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		600, 400, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+	//set shaders
+	_shader->setSource(vertexShaderSrc);
+	_shader->setSource(fragmentShaderSrc);
+	//_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
 
-	if (!SDL_GL_CreateContext(m_Window))
-	{
-		throw std::exception();
-	}
-
-	if (glewInit() != GLEW_OK)
-	{
-		throw Exception("Glew Init Error: ");
-	}
-
-	//below stuff will adventually need to me 
-		//for now get the shader working ignore the VAOID
-
-	//set position of VBO
-	positionVboId = 0;
-	
-	//Creates a VBO on the GPU and binds it to position 1
-	glGenBuffers(1, &positionVboId);
-
-	if (!positionVboId)
-	{
-		throw Exception("position VBO ID Genbuffer Error: Cannot bind to CPU. ");
-	}
-
-	glBindBuffer(GL_ARRAY_BUFFER, positionVboId);
-
-	//upload a copy of data from memory to the created VBO 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(positions),
-		positions, GL_STATIC_DRAW);
-
-	//reset the state
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	//initalising the vao
-	vaoID = 0;
-	//create new VAO on GPU and bind it
-	glGenVertexArrays(1, &vaoID);
-
-	if (!vaoID)
-	{
-		throw Exception("VAO ID Genbuffer Error: Cannot bind to CPU. ");
-	}
-
-	glBindVertexArray(vaoID);
-
-	//bind the position VBO, then assign it to a position 0 on the bound VAO and flag it for use
-	glBindBuffer(GL_ARRAY_BUFFER, positionVboId);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
-	glEnableVertexAttribArray(0);
-	
-	//reset the state
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glEnableVertexAttribArray(0);
-
-	//vertex shader
-	vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShaderID, 1, &vertexShaderSrc, NULL);
-	glCompileShader(vertexShaderID);
-	
-	GLint success = 0;
-	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
-
-	//check for success if not throw exeption
-	if (!success)
-	{
-		throw Exception("Reset State Vertex shader, Success Error! ");
-	}
-
-	//fragment shader
-	fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShaderID, 1, &fragmentShaderSrc, NULL);
-	glCompileShader(fragmentShaderID);
-	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);
-
-	if (!success)
-	{
-		throw Exception("Reset State Fragment shader, Success Error! ");
-	}
-
-	//program
-	prgramId = glCreateProgram();
-	glAttachShader(prgramId, vertexShaderID);
-	glAttachShader(prgramId, fragmentShaderID);
-	glBindAttribLocation(prgramId, 0, "in_Position");
-
-	if (glGetError() != GL_NO_ERROR)
-	{
-		throw Exception("Program Error: glGetError is not Equal to No Error. ");
-	}
-
-	glLinkProgram(prgramId);
-	glGetProgramiv(prgramId, GL_LINK_STATUS, &success);
-
-	if (!success)
-	{
-		throw Exception("Program, Success Error! ");
-	}
 
 }
 
-TestScene::~TestScene()
+void TestScene::SetMesh(std::shared_ptr<Mesh> _mesh)
 {
-	//clean up shaders
-	glDetachShader(prgramId, vertexShaderID);
-	glDeleteShader(vertexShaderID);
-	glDetachShader(prgramId, fragmentShaderID);
-	glDeleteShader(fragmentShaderID);
-	//clean up SDL
-	SDL_DestroyWindow(m_Window);
-	SDL_Quit();
+	this->_mesh = _mesh->_internal;
+	//_shader->setMesh(_mesh);
+}
+
+void TestScene::SetMaterial(std::shared_ptr<Material> _material)
+{
+	this->_shader = _material->_rnShader;
+	this->_text = _material->_rnTexture;
 }
 
 void TestScene::OnDraw()
 {
 	//might need to check this
-	std::shared_ptr<Entity> ent = getEntity()->getCore()->addEntity();
+	std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();
+
+
+	_mesh->setTexture("u_Texture", _text);
+	//getCore()->getCamera()->GetProj();
+	//_trans->GetPosition();
 	//bool m_systemLoop = true;
 
 	//while (m_systemLoop)
@@ -169,18 +136,23 @@ void TestScene::OnDraw()
 		}
 
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(prgramId);
-		glBindVertexArray(vaoID);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//glUseProgram(prgramId);
+		//glUseProgram(_shader->ProgramID());
+		//glBindVertexArray(vaoID);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
+		//_shader->setUniform("u_Model", rend::mat4(1.0f));
+		_shader->setUniform("u_Model", _trans->GetModel());
+		//instead of hard coding get cureent cam from core this will be the getProj getCore()->getCamera()->GetProj()
+		//glm::perspective(glm::radians(45.0f),1.0f / 1.0f, 0.1f, 100.0f)
+		_shader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
+		
+		//_shader->setAttribute("in_Position", _buffer);
 
-		glBindVertexArray(0);
-		glUseProgram(0);
+		_shader->setMesh(_mesh);
+		_shader->render();
 
-		SDL_GL_SwapWindow(m_Window);
-
-	//}
-
-	//onTicks();
 }
+
+

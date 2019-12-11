@@ -1,49 +1,35 @@
 #include "Shader.h"
-#include "FragmentShader.h"
-#include "VertexShader.h"
 
-Shader::Shader()
+std::shared_ptr<Shader> Shader::load(std::string path)
 {
-	success = 0;
-}
+	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
 
-Shader::~Shader()
-{
-	//clean up shaders
-	glDetachShader(m_shaderID, _vertShader->InitVertShader());
+	//convert location in string above to fstream format to be then used
+	std::fstream _vertReadIn(path);
 
-	glDetachShader(m_shaderID, _fragmentShader->FragmentShaderInit());
-}
+	//create fstream from string
+	//std::fstream _vertLoc(_vertFile);
 
-void Shader::CheckFragInit()
-{
-}
-
-void Shader::CheckVertxInit()
-{
-}
-
-GLuint Shader::ProgramID()
-{
-	//program
-	m_shaderID = glCreateProgram();
-	glAttachShader(m_shaderID, _vertShader->InitVertShader());
-	glAttachShader(m_shaderID, _fragmentShader->FragmentShaderInit());
-	glBindAttribLocation(m_shaderID, 0, "in_Position");
-
-	
-
-	if (glGetError() != GL_NO_ERROR)
+	//if file didn't open
+	if (!_vertReadIn.is_open())
 	{
-		throw Exception("Program Error: glGetError is not Equal to No Error. ");
+		//throw below exception message 
+		throw Exception("Error during opening of vertex shader file");
 	}
 
-	glLinkProgram(m_shaderID);
-	glGetProgramiv(m_shaderID, GL_LINK_STATUS, &success);
+	//file data
+	std::string _vertfileData;
+	//file line
+	std::string _vertfileLine;
 
-	if (!success)
+	//while file hasn't closed
+	while (!_vertReadIn.eof())
 	{
-		throw Exception("Program, Success Error! ");
+		//get the current line
+		std::getline(_vertReadIn, _vertfileLine);
+		//store data.
+		_vertfileData += _vertfileLine + "\n";
 	}
-	return m_shaderID;
+
+	return _shader;
 }
