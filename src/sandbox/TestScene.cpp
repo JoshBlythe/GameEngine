@@ -4,7 +4,7 @@
 
 TestScene::TestScene()
 {
-	
+	m_geMaterial = std::make_shared<Material>();
 
 }
 
@@ -108,7 +108,7 @@ void TestScene::SetMesh(std::shared_ptr<Mesh> _mesh)
 
 void TestScene::SetMaterial(std::shared_ptr<Material> _material)
 {
-	//this->_shader = _material->_rnShader;
+	this->m_geMaterial = _material;
 	this->_text = _material->_rnTexture;
 	//m_geMaterial = _text;
 }
@@ -139,7 +139,7 @@ void TestScene::OnDraw()
 
 	m_geMaterial->_rnShader->setUniform("u_Model", _trans->GetModel());
 	m_geMaterial->_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
-	
+	//m_geMaterial->_rnShader->setAttribute("in_Position", _buffer);
 		//_shader->setUniform("u_Model", _trans->GetModel());
 		//instead of hard coding get cureent cam from core this will be the getProj getCore()->getCamera()->GetProj()
 		//glm::perspective(glm::radians(45.0f),1.0f / 1.0f, 0.1f, 100.0f)
@@ -150,8 +150,8 @@ void TestScene::OnDraw()
 	m_geMaterial->_rnShader->setMesh(_mesh);
 	m_geMaterial->_rnShader->render();
 
-		//_shader->setMesh(_mesh);
-		//_shader->render();
+		_shader->setMesh(_mesh);
+		_shader->render();
 
 }
 
