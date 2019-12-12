@@ -18,6 +18,7 @@ public:
 private:
 
 	std::shared_ptr<Mesh> m_geMesh;
+	std::shared_ptr<Shader> m_geShader;
 	std::shared_ptr<Material> m_geMaterial;
 
 	std::sr1::shared_ptr<GameEngine::Context> _context;

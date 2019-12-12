@@ -48,17 +48,17 @@ void Material::onLoad(const std::string& _fileName)
 
 }
 
-void Material::setShader(std::weak_ptr<Shader> _shader)
+void Material::setShader(std::shared_ptr<Shader> _shader)
 {
-	_shader.lock()->_shaderIntern;
+	this->_rnShader = _shader->_shaderIntern;
 }
 
 
-std::shared_ptr<Shader> Material::getShader()
-{
-	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
-
-	//m_shader.lock();
-
-	return _shader;
-}
+//std::shared_ptr<Shader> Material::getShader()
+//{
+//	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+//
+//	//m_shader.lock();
+//
+//	return _shader;
+//}

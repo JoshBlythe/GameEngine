@@ -1,11 +1,13 @@
 #include "Shader.h"
+#include "Core.h"
 
-std::shared_ptr<Shader> Shader::load(std::string path)
+void Shader::load(std::string& _fileName)
 {
-	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
-
+	std::string fn = _fileName + ".txt";
+	_shaderIntern = getCore()->m_graphicalContext->createShader();
+	
 	//convert location in string above to fstream format to be then used
-	std::fstream _vertReadIn(path);
+	std::fstream _vertReadIn(fn.c_str());
 
 	//create fstream from string
 	//std::fstream _vertLoc(_vertFile);
@@ -31,5 +33,6 @@ std::shared_ptr<Shader> Shader::load(std::string path)
 		_vertfileData += _vertfileLine + "\n";
 	}
 
-	return _shader;
+	_shaderIntern->parse(_vertfileData);
+	//_shader
 }

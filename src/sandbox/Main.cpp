@@ -17,10 +17,13 @@ int main()
 	
 	//uni path before having file location
 	//C:/Users/s4908021/gep_sdk-20191121/GameEngine/resources/rend/samples/curuthers/curuthers
-	std::shared_ptr <Mesh> mesh = core->getResources()->load<Mesh>("resources/rend/samples/curuthers/curuthers");
+	std::shared_ptr <Mesh> mesh = core->getResources()->load<Mesh>("C:/Users/s4908021/gep_sdk-20191121/GameEngine/resources/rend/samples/curuthers/curuthers");
 	testing->SetMesh(mesh);
 
-	std::shared_ptr<Material> _material = core->getResources()->load<Material>("resources/rend/samples/curuthers/Whiskers_diffuse");
+	std::shared_ptr<Shader> _meshTexShader = core->getResources()->load<Shader>("C:/Users/s4908021/gep_sdk-20191121/GameEngine/resources/shader/meshTexShader");
+
+	std::shared_ptr<Material> _material = core->getResources()->load<Material>("C:/Users/s4908021/gep_sdk-20191121/GameEngine/resources/rend/samples/curuthers/Whiskers_diffuse");
+	_material->setShader(_meshTexShader);
 	testing->SetMaterial(_material);
 
 	std::shared_ptr<Transform> tran = entity->getComponent<Transform>();

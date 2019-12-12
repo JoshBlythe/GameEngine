@@ -43,6 +43,7 @@ private:
 	/*ALCdevice* _device;
 	ALCcontext* _context;*/
 	friend class Mesh;
+	friend class Shader;
 	friend class Material;
 
 	//Core();

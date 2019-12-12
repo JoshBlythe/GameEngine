@@ -15,9 +15,10 @@ Mesh::~Mesh()
 void Mesh::onLoad(const std::string& _fileName)
 {
 	std::string fn = _fileName + ".obj";
+	//create mesh from graphical context in core
 	_internal = getCore()->m_graphicalContext->createMesh();
 
-	std::cout << fn << std::endl;
+	//std::cout << fn << std::endl;
 	std::ifstream file(fn.c_str());
 
 	if (!file.is_open())
