@@ -11,9 +11,12 @@
 namespace rend
 {
 
-std::sr1::shared_ptr<Context> Context::initialize()
+std::sr1::shared_ptr<Context> Context::initialize(SDL_Window* _windowRef)
 {
   std::sr1::shared_ptr<Context> rtn = std::sr1::make_shared<Context>();
+
+  //m_windowCon = nullptr;
+  rtn->m_windowCon = _windowRef;
 
   if(glewInit() != GLEW_OK)
   {
@@ -83,6 +86,12 @@ std::sr1::shared_ptr<RenderTexture> Context::createRenderTexture()
   rtn->setSize(256, 256);
 
   return rtn;
+}
+
+Context::~Context()
+{
+	SDL_DestroyWindow(m_windowCon);
+	SDL_Quit();
 }
 
 std::sr1::shared_ptr<Buffer> Context::createBuffer()

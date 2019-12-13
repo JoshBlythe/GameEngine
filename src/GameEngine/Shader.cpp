@@ -3,7 +3,7 @@
 
 void Shader::load(std::string& _fileName)
 {
-	std::string fn = _fileName + ".txt";
+	std::string fn = _fileName + ".glsl";
 	_shaderIntern = getCore()->m_graphicalContext->createShader();
 	
 	//convert location in string above to fstream format to be then used

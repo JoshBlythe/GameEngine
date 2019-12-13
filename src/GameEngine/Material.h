@@ -4,6 +4,7 @@
 
 #include "Resource.h"
 
+
 class Shader;
 //class MaterialAttribute;
 
@@ -13,7 +14,7 @@ public:
 	void onLoad(const std::string& _fileName);
 
 	void setShader(std::shared_ptr<Shader> _shader);
-	//std::shared_ptr<Shader> getShader();
+	std::shared_ptr<Shader> getShader();
 
 	std::shared_ptr<rend::Shader> _rnShader;
 	std::shared_ptr<rend::Texture> _rnTexture;

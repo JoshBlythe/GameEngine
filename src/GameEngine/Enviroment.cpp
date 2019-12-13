@@ -16,17 +16,25 @@ void Enviroment::initDelts()
 	m_lastTime = SDL_GetTicks();
 };
 
-void Enviroment::fileLocations()
+std::string Enviroment::fileLocations()
 {
 #ifdef _WIN32
 	char strExePath[MAX_PATH];
 	GetModuleFileName(NULL, strExePath, MAX_PATH);
 	fullpath = strExePath;
 	
-	baseName = dirName.substr(fullpath.find_last_of("\\"));
+	baseName = fullpath.substr(fullpath.find_last_of("\\"));
 	baseName = baseName.substr(0, baseName.length() - 4);
+	std::string dirname = fullpath.substr(0, fullpath.find_last_of("\\"));
 
 	//share / {basename} is found;
-#endif
+	return dirname + "/../../resources";
+#else 
+	std::string _command = "cd `dirname \\ `which" + std::string(argv[0]) + "\\``; cd ..; pwd | tr -d '\n'";
 
+	FILE popen;
+	std::string _process = popen(_command.c_str(), "r");
+
+#endif
+	
 }

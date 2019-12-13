@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <memory>
+#include <SDL2/SDL.h>
 
 //#include "Component.h"
 #include "Exception.h"

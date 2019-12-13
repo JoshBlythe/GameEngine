@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include <string>
+#include <stdio.h>
 
 #ifdef _WIN32
 	#include <Windows.h>
 #endif // _WIN32
 
-
+class Core;
 
 class Enviroment
 {
@@ -16,7 +17,7 @@ public:
 	~Enviroment();
 
 	void initDelts();
-	void fileLocations();
+	std::string fileLocations();
 	float getDelts() { return m_lastTime; }
 
 private:
@@ -25,4 +26,9 @@ private:
 	std::string fullpath;
 	std::string baseName;
 	std::string dirName;
+
+	//char* argv[0];
+
+	friend class Core;
+	std::weak_ptr<Core> m_eCore;
 };

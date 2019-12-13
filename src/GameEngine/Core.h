@@ -25,8 +25,10 @@ public:
 	std::shared_ptr<Resources> getResources();
 	std::shared_ptr<Camera> getCamera();
 	std::shared_ptr<Screen> getScreen();
+	std::shared_ptr<Enviroment> getEnviroment();
 
-	void CreateWindow();
+	void Window();
+	void SoundInit();
 
 	~Core();
 	//main loop
@@ -40,11 +42,16 @@ private:
 	SDL_Window* m_window;
 
 	//initalie OpenAL varibales
-	/*ALCdevice* _device;
-	ALCcontext* _context;*/
+	ALCdevice* m_device;
+	ALCcontext* m_context;
+
+	//ALCdevice* _device;
+	//ALCcontext* _context;
+
 	friend class Mesh;
 	friend class Shader;
 	friend class Material;
+	friend class Sound;
 
 	//Core();
 	std::weak_ptr <Core> m_self;

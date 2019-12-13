@@ -18,9 +18,6 @@ public:
 	void setSound(std::shared_ptr<Sound> _sound);
 
 private:
-	
-	ALCdevice* m_device;
-	ALCcontext* m_context;
 
 	ALuint m_sourceId;
 	bool m_autoRemove;

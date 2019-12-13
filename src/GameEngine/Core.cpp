@@ -3,8 +3,12 @@
 #include "Screen.h"
 #include "Transform.h"
 #include "Resources.h"
+#include "Enviroment.h"
 #include "Camera.h"
-//#include "Enviroment.h"
+
+#include <AL/al.h>
+#include <AL/alc.h>
+
 //#include "stb_vorbis.h"
 
 std::shared_ptr<Core> Core::OnInitalise()
@@ -18,18 +22,25 @@ std::shared_ptr<Core> Core::OnInitalise()
 
 	c_rtn->getResources()->m_core = c_rtn;
 
+	c_rtn->m_enviroment = std::make_shared<Enviroment>();
+	c_rtn->getEnviroment()->m_eCore = c_rtn;
+
 	//c_rtn->getCamera()->m_camSelf = c_rtn;
 	//c_rtn->m_camera = std::make_shared<Camera>();
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
 
-	c_rtn->CreateWindow();
+	c_rtn->Window();
 
-	c_rtn->m_graphicalContext = rend::Context::initialize();
+	//pass sdl window into context to ensure rend doesn't hold onto sdl once the engine has
+	//closed
+	c_rtn->m_graphicalContext = rend::Context::initialize(c_rtn->m_window);
 	
+	c_rtn->SoundInit();
 	/*c_rtn->m_camera = std::make_shared<Camera>();
 	c_rtn->getCamera()->InitCamera() = c_rtn;*/
 	
 	//c_rtn->m_enviroment
+	
 
 	//return core
 	return c_rtn;
@@ -38,12 +49,12 @@ std::shared_ptr<Core> Core::OnInitalise()
 Core::~Core()
 {
 	//clean up SDL
-	SDL_DestroyWindow(m_window);
-	SDL_Quit();
+	//SDL_DestroyWindow(m_window);
+	//SDL_Quit();
 
-	/*alcMakeContextCurrent(NULL);
-	alcDestroyContext(_context);
-	alcCloseDevice(_device);*/
+	alcMakeContextCurrent(NULL);
+	alcDestroyContext(m_context);
+	alcCloseDevice(m_device);
 }
 
 
@@ -78,8 +89,13 @@ std::shared_ptr<Screen> Core::getScreen()
 	return m_screen;
 }
 
+std::shared_ptr<Enviroment> Core::getEnviroment()
+{
+	return m_enviroment;
+}
 
-void Core::CreateWindow()
+
+void Core::Window()
 {
 	m_screen = std::make_shared<Screen>();
 
@@ -133,6 +149,36 @@ void Core::CreateWindow()
 	//}
 }
 
+void Core::SoundInit()
+{
+	// open up OpenAL and the device
+	m_device = alcOpenDevice(NULL);
+
+	if (m_device == NULL)
+	{
+		throw Exception("Failed to open audio device!");
+	}
+
+	//create audio OpenAL context
+	m_context = alcCreateContext(m_device, NULL);
+
+	if (m_context == NULL)
+	{
+		alcCloseDevice(m_device);
+		throw Exception("Audio Device Context failed to initalise!");
+	}
+
+	//set current context
+	if (!alcMakeContextCurrent(m_context))
+	{
+		alcDestroyContext(m_context);
+		alcCloseDevice(m_device);
+		throw Exception("Failed to set current context of Audio Device!");
+	}
+
+	alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
+}
+
 
 void Core::runCore()
 {
@@ -154,7 +200,13 @@ void Core::runCore()
 			}
 		}
 
+		float _lastTime = getEnviroment()->getDelts();
 
+		float time = SDL_GetTicks();
+		float _differ = time - _lastTime;
+		_lastTime = _differ / 1000.0f;
+		_lastTime = time;
+		
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)

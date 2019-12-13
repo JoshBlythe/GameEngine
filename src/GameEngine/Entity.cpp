@@ -1,6 +1,7 @@
 #include "Entity.h"
 #include "Component.h"
-
+#include "Core.h"
+#include "Enviroment.h"
 
 Entity::Entity()
 {
@@ -13,10 +14,12 @@ Entity::~Entity()
 void Entity::Ticks()
 {
 	//do the delta time here.
+	//float time = SDL_GetTicks();
+	//float _differ = time - GetCore()->getEnviroment()->getDelts();
 
 	//std::cout << "ticking through! " << std::endl;
 	//will change to be delta time to run on system loop.
-		for (int m_tick = 0; m_tick < 5; m_tick++)
+		//for (int m_tick = 0; m_tick < 5; m_tick++)
 		{
 			Update();
 		}	

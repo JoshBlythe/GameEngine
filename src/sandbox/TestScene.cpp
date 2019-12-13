@@ -4,7 +4,7 @@
 
 TestScene::TestScene()
 {
-	m_geMaterial = std::make_shared<Material>();
+	//m_geMaterial = getCore()->getResources()->load<Material>("resources/shader/meshTexShader.glsl");
 
 }
 
@@ -22,13 +22,13 @@ TestScene::~TestScene()
 
 void TestScene::OnInitalise()
 {
+	m_geMaterial = getCore()->getResources()->load<Material>("../resources/rend/samples/curuthers/meshTexShader");
 	//const GLfloat positions[] =
 	//{
 	//	0.0f, 0.5f, 0.0f,
 	//	-0.5f, -0.5f, 0.0f,
 	//	0.5f, -0.5f, 0.0f
 	//};
-
 	//vertexShaderSrc =
 	//	"attribute vec3 a_Position;"\
 	//	"uniform mat4 u_Model; "\
@@ -39,14 +39,12 @@ void TestScene::OnInitalise()
 	//	"	gl_Position = u_Projection * u_Model * vec4(a_Position, 1.0);"\
 	//	"}"\
 	//	"";
-
 	//fragmentShaderSrc =
 	//	"void main()"\
 	//	"{"\
 	//	"	gl_FragColor = vec4(0, 0, 1, 1);"\
 	//	"}"\
 	//	"";
-
 	//vertexShaderSrc =
 	//	"#ifdef VERTEX\n" \
 	//	"attribute vec3 a_Position;"\
@@ -81,7 +79,6 @@ void TestScene::OnInitalise()
 	//	"}"\
 	//	"\n #endif \n" \
 	//	"";
-
 	////calls glewInit, and checks if it was successful
 	////if not will through a exeption.
 	//_context = GameEngine::Context::initialize();
@@ -91,13 +88,10 @@ void TestScene::OnInitalise()
 	////_buffer = _context->createBuffer();
 	////create mesh
 	////_mesh = _context->createMesh();
-
 	////set shaders
 	//_shader->setSource(vertexShaderSrc);
 	//_shader->setSource(fragmentShaderSrc);
 	//_shader->loadShaderFile("vertexShader.txt", "fragmentShader.txt");
-
-
 }
 
 void TestScene::SetMesh(std::shared_ptr<Mesh> _mesh)
@@ -108,7 +102,7 @@ void TestScene::SetMesh(std::shared_ptr<Mesh> _mesh)
 
 void TestScene::SetMaterial(std::shared_ptr<Material> _material)
 {
-	this->m_geMaterial = _material;
+	//this->m_geMaterial = _material;
 	this->_text = _material->_rnTexture;
 	//m_geMaterial = _text;
 }
@@ -119,7 +113,14 @@ void TestScene::OnDraw()
 	std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();
 
 
-	_mesh->setTexture("u_Texture", _text);
+	if (_text)
+	{
+		_mesh->setTexture("u_Texture", _text);
+	}
+	else
+	{
+		throw Exception("Texture not Initalised!");
+	}
 	//getCore()->getCamera()->GetProj();
 	//_trans->GetPosition();
 	//bool m_systemLoop = true;
@@ -137,8 +138,19 @@ void TestScene::OnDraw()
 		//m_geShader->_shaderIntern->setUniform("u_Model", _trans->GetModel());
 		//m_geShader->_shaderIntern->
 
-	m_geMaterial->_rnShader->setUniform("u_Model", _trans->GetModel());
-	m_geMaterial->_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
+	//rend::pollForError();
+
+	if (m_geMaterial->_rnShader)
+	{
+		m_geMaterial->_rnShader->setUniform("u_Model", _trans->GetModel());
+		m_geMaterial->_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
+
+	}
+	else
+	{
+		throw Exception("Texture is incorrect! Fix the Texture.");
+		//m_geMaterial->getShader()->load<Shader>("../resources/shader/meshTexShader");
+	}
 	//m_geMaterial->_rnShader->setAttribute("in_Position", _buffer);
 		//_shader->setUniform("u_Model", _trans->GetModel());
 		//instead of hard coding get cureent cam from core this will be the getProj getCore()->getCamera()->GetProj()
@@ -150,8 +162,8 @@ void TestScene::OnDraw()
 	m_geMaterial->_rnShader->setMesh(_mesh);
 	m_geMaterial->_rnShader->render();
 
-		_shader->setMesh(_mesh);
-		_shader->render();
+		//_shader->setMesh(_mesh);
+		//_shader->render();
 
 }
 

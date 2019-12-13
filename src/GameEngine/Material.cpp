@@ -1,12 +1,16 @@
 #include "Material.h"
 #include "Shader.h"
 #include "Core.h"
+#include "Enviroment.h"
+
+
 #include "stb_image.h"
 
 
 void Material::onLoad(const std::string& _fileName)
 {
-	const std::string fn = _fileName + ".png";
+	std::string _fileloc = getCore()->getEnviroment()->fileLocations();
+	std::string fn = _fileloc + "/" + _fileName + ".png";
 	
 	//const int _stringLength = fn.size();
 
@@ -14,8 +18,6 @@ void Material::onLoad(const std::string& _fileName)
 	
 	//strcpy(_fileLocation, fn.c_str());
 
-	_rnShader = getCore()->m_graphicalContext->createShader();
-	_rnTexture = getCore()->m_graphicalContext->createTexture();
 
 	int _w = 0;
 	int _h = 0;
@@ -23,28 +25,66 @@ void Material::onLoad(const std::string& _fileName)
 
 	unsigned char *_data = stbi_load(fn.c_str(), &_w, &_h, &_bpp, 3);
 
-	if (!_data)
+	if (_data)
 	{
-		throw Exception("Unable to load texture file!");
-	}
+		_rnTexture = getCore()->m_graphicalContext->createTexture();
+		//throw Exception("Unable to load texture file!");
+		_rnTexture->setSize(_w, _h);
 
-	_rnTexture->setSize(_w, _h);
-
-	for (int y = 0; y <_h; y++)
-	{
-		for (int x = 0; x < _w; x++)
+		for (int y = 0; y <_h; y++)
 		{
-			int _r = y * _w * 3 + x * 3;
+			for (int x = 0; x < _w; x++)
+			{
+				int _r = y * _w * 3 + x * 3;
 
-			_rnTexture->setPixel(x, y, glm::vec3(
-				_data[_r] / 255.0f,
-				_data[_r + 1] / 255.0f,
-				_data[_r + 2] / 255.0f
-			));
+				_rnTexture->setPixel(x, y, glm::vec3(
+					_data[_r] / 255.0f,
+					_data[_r + 1] / 255.0f,
+					_data[_r + 2] / 255.0f
+				));
+			}
 		}
+
+		stbi_image_free(_data);
 	}
 
-	stbi_image_free(_data);
+	fn = _fileloc + "/" + _fileName + ".glsl";
+	
+	//std::string fn = _fileName + ".txt";
+
+
+	//convert location in string above to fstream format to be then used
+	std::fstream _vertReadIn(fn.c_str());
+
+	//create fstream from string
+	//std::fstream _vertLoc(_vertFile);
+
+	//if file didn't open
+	if (!_vertReadIn.is_open())
+	{
+		//throw below exception message 
+		//throw Exception("Error during opening of vertex shader file");
+		getShader();
+		return;
+	}
+
+	_rnShader = getCore()->m_graphicalContext->createShader();
+
+	//file data
+	std::string _vertfileData;
+	//file line
+	std::string _vertfileLine;
+
+	//while file hasn't closed
+	while (!_vertReadIn.eof())
+	{
+		//get the current line
+		std::getline(_vertReadIn, _vertfileLine);
+		//store data.
+		_vertfileData += _vertfileLine + "\n";
+	}
+
+	_rnShader->parse(_vertfileData);
 
 }
 
@@ -54,11 +94,11 @@ void Material::setShader(std::shared_ptr<Shader> _shader)
 }
 
 
-//std::shared_ptr<Shader> Material::getShader()
-//{
-//	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
-//
-//	//m_shader.lock();
-//
-//	return _shader;
-//}
+std::shared_ptr<Shader> Material::getShader()
+{
+	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+
+	//_shader->load(_filename);
+
+	return _shader;
+}

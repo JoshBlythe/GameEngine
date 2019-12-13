@@ -12,6 +12,8 @@
 #include "Texture.h"
 #include "Material.h"
 #include "Shader.h"
+#include "Sound.h"
+#include "SoundSource.h"
 #include "RendInc.h"
 
 #endif // !GAMEENGINE_GAMEENGINE_H

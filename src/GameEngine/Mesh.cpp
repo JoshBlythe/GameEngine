@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "Core.h"
+#include "Enviroment.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -14,7 +15,8 @@ Mesh::~Mesh()
 
 void Mesh::onLoad(const std::string& _fileName)
 {
-	std::string fn = _fileName + ".obj";
+	std::string _fileloc = getCore()->getEnviroment()->fileLocations();
+	std::string fn = _fileloc + "/" +  _fileName + ".obj";
 	//create mesh from graphical context in core
 	_internal = getCore()->m_graphicalContext->createMesh();
 

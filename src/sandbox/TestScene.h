@@ -27,16 +27,16 @@ private:
 	std::sr1::shared_ptr<GameEngine::Texture> _text;
 	std::sr1::shared_ptr<GameEngine::Mesh> _mesh;
 
-	const GLchar *vertexShaderSrc;
-	const GLchar *fragmentShaderSrc;
+	//const GLchar *vertexShaderSrc;
+	//const GLchar *fragmentShaderSrc;
 
 	//std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
 
-	SDL_Window * m_Window;
-	GLuint positionVboId;
-	GLuint vaoID;
+	//SDL_Window * m_Window;
+	//GLuint positionVboId;
+	/*GLuint vaoID;
 
 	GLuint vertexShaderID;
 	GLuint fragmentShaderID;
-	GLuint prgramId;
+	GLuint prgramId;*/
 };

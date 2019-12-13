@@ -11,6 +11,8 @@ public:
 
 private:
 	ALuint m_bufferID;
+	ALenum _format;
+	ALsizei _frequ;
 
 	void load_ogg(const std::string& _fileName, 
 		std::vector<char>& _buffer, ALenum& _format, ALsizei& _freq);
