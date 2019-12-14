@@ -35,7 +35,11 @@ std::shared_ptr<Core> Core::OnInitalise()
 	//closed
 	c_rtn->m_graphicalContext = rend::Context::initialize(c_rtn->m_window);
 	
-	c_rtn->SoundInit();
+
+	//here needs to be included for sound to run
+	//c_rtn->SoundInit();
+
+
 	/*c_rtn->m_camera = std::make_shared<Camera>();
 	c_rtn->getCamera()->InitCamera() = c_rtn;*/
 	
@@ -97,11 +101,13 @@ std::shared_ptr<Enviroment> Core::getEnviroment()
 
 void Core::Window()
 {
+	//get screen coordinates
 	m_screen = std::make_shared<Screen>();
 
 	m_windowW = m_screen->GetScreen().x;
 	m_windowH = m_screen->GetScreen().y;
 
+	//initalise SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		throw Exception("SDL_Init Error: ");
@@ -112,41 +118,17 @@ void Core::Window()
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		m_windowW, m_windowH, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
+	//check if window initalised
 	if (!m_window)
 	{
 		throw Exception("Error Creating SDL_Window!");
 	}
 
+	//check if create context in null
 	if (!SDL_GL_CreateContext(m_window))
 	{
 		throw Exception("Error during SDL_GL_CreatContext!");
 	}
-
-
-	// open up OpenAL and the device
-	//_device = alcOpenDevice(NULL);
-	//
-	//if (_device == NULL)
-	//{
-	//	throw Exception("Failed to open audio device!");
-	//}
-
-	////create audio OpenAL context
-	//_context = alcCreateContext(_device, NULL);
-
-	//if (_context == NULL)
-	//{
-	//	alcCloseDevice(_device);
-	//	throw Exception("Audio Device Context failed to initalise!");
-	//}
-
-	////set current context
-	//if (!alcMakeContextCurrent)
-	//{
-	//	alcDestroyContext(_context);
-	//	alcCloseDevice(_device);
-	//	throw Exception("Failed to set current context of Audio Device!");
-	//}
 }
 
 void Core::SoundInit()
@@ -154,6 +136,7 @@ void Core::SoundInit()
 	// open up OpenAL and the device
 	m_device = alcOpenDevice(NULL);
 
+	
 	if (m_device == NULL)
 	{
 		throw Exception("Failed to open audio device!");

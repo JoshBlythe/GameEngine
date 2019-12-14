@@ -13,6 +13,7 @@
 #include "Material.h"
 #include "Shader.h"
 #include "Sound.h"
+#include "MeshRender.h"
 #include "SoundSource.h"
 #include "RendInc.h"
 

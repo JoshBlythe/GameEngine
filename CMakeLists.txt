@@ -69,6 +69,8 @@ add_library(GameEngine
 	src/GameEngine/Sound.h
 	src/GameEngine/SoundSource.cpp	
 	src/GameEngine/SoundSource.h
+	src/GameEngine/MeshRender.cpp
+	src/GameEngine/MeshRender.h
 	src/GameEngine/GameEngine.h
 	src/GameEngine/RendInc.h
 )
@@ -78,8 +80,9 @@ target_link_libraries(GameEngine rend)
 
 add_executable(sandbox
 	src/sandbox/Main.cpp
-	src/sandbox/TestScene.cpp
-	src/sandbox/TestScene.h
+	src/sandbox/Player.cpp
+	src/sandbox/Player.h
+
 )
 
 
