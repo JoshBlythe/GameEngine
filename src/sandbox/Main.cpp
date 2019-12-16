@@ -44,6 +44,11 @@ int main()
 	std::shared_ptr<Camera> camera = cam->addComponent<Camera>();
 	cam->GetTransform()->setPosition(glm::vec3(0, 0, 10));
 
+	//add collision
+	entity->addComponent<CollisionDetection>();
+	entity->getCollision()->setSize(glm::vec3(1, 1, 1));
+
+
 	//start the engine's main loop
 	core->runCore();
 

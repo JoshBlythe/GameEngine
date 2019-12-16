@@ -71,6 +71,12 @@ add_library(GameEngine
 	src/GameEngine/SoundSource.h
 	src/GameEngine/MeshRender.cpp
 	src/GameEngine/MeshRender.h
+	src/GameEngine/CollisionDetection.cpp
+	src/GameEngine/CollisionDetection.h
+	src/GameEngine/ModelCollider.cpp
+	src/GameEngine/ModelCollider.h
+	src/GameEngine/tribox.cpp
+	src/GameEngine/tribox.h
 	src/GameEngine/GameEngine.h
 	src/GameEngine/RendInc.h
 )

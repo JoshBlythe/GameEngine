@@ -6,6 +6,8 @@
 class Sound : public Resource
 {
 public:
+	~Sound();
+
 	void onLoad(const std::string &_path);
 	ALuint getBufferID() { return m_bufferID; }
 

@@ -9,6 +9,7 @@
 class Core;
 class Transform;
 class Component;
+class CollisionDetection;
 
 class Entity
 {
@@ -74,7 +75,9 @@ public:
 	//flag to be deleted
 	void KillEntity();
 
+	//return pointers to classes
 	std::shared_ptr<Transform> GetTransform();
+	std::shared_ptr<CollisionDetection> getCollision();
 
 	//return pointer to core
 	std::shared_ptr<Core> GetCore();
@@ -89,8 +92,9 @@ private:
 	bool m_isAlive;
 	//int m_tick;
 	
+	//pointer to transform
 	std::weak_ptr<Transform> _trans;
-
+	std::weak_ptr<CollisionDetection> m_checkCol;
 	//list of componets
 	std::list < std::shared_ptr<Component>> m_component;
 };

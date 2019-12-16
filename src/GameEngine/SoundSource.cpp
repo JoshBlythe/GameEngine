@@ -25,7 +25,7 @@ void SoundSource::onTick()
 		
 		if (_state == AL_STOPPED)
 		{
-			//m_isAlive == false;
+			m_isAlive == false;
 			break;
 		}
 

@@ -4,7 +4,7 @@
 
 Component::Component()
 {
-	m_ticks = 5;
+	//m_ticks = 5;
 	m_isAlive = true;
 	//m_mesh = NULL;
 	//m_material = NULL;
@@ -42,12 +42,12 @@ void Component::OnInitalise()
 
 void Component::OnTick()
 {
-	for (int i = 0; i < m_ticks; i++)
-	{
+	//for (int i = 0; i < m_ticks; i++)
+	//{
 		//std::cout << "ticking through object! " << std::endl;
 		OnUpdate();
 
-	}
+	//}
 }
 
 //void Object::begin()

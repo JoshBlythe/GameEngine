@@ -15,6 +15,7 @@
 #include "Sound.h"
 #include "MeshRender.h"
 #include "SoundSource.h"
+#include "CollisionDetection.h"
 #include "RendInc.h"
 
 #endif // !GAMEENGINE_GAMEENGINE_H

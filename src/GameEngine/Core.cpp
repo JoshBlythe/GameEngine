@@ -5,6 +5,7 @@
 #include "Resources.h"
 #include "Enviroment.h"
 #include "Camera.h"
+#include "CollisionDetection.h"
 
 #include <AL/al.h>
 #include <AL/alc.h>
@@ -39,11 +40,6 @@ std::shared_ptr<Core> Core::OnInitalise()
 	//here needs to be included for sound to run
 	//c_rtn->SoundInit();
 
-
-	/*c_rtn->m_camera = std::make_shared<Camera>();
-	c_rtn->getCamera()->InitCamera() = c_rtn;*/
-	
-	//c_rtn->m_enviroment
 	
 
 	//return core
@@ -52,10 +48,6 @@ std::shared_ptr<Core> Core::OnInitalise()
 
 Core::~Core()
 {
-	//clean up SDL
-	//SDL_DestroyWindow(m_window);
-	//SDL_Quit();
-
 	alcMakeContextCurrent(NULL);
 	alcDestroyContext(m_context);
 	alcCloseDevice(m_device);
@@ -96,6 +88,11 @@ std::shared_ptr<Screen> Core::getScreen()
 std::shared_ptr<Enviroment> Core::getEnviroment()
 {
 	return m_enviroment;
+}
+
+std::shared_ptr<rend::Context> Core::getGraphicalContext()
+{
+	return m_graphicalContext;
 }
 
 
@@ -183,6 +180,8 @@ void Core::runCore()
 			}
 		}
 
+		//initalise delta time
+		//do this in envirmoent then return time
 		float _lastTime = getEnviroment()->getDelts();
 
 		float time = SDL_GetTicks();
@@ -217,6 +216,7 @@ void Core::runCore()
 			}
 		}
 
+		//clear screen before render
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -228,6 +228,7 @@ void Core::runCore()
 			(*iter)->OnDisplay();
 		}
 
+		//tell the engine which window to use
 		SDL_GL_SwapWindow(m_window);
 	}
 

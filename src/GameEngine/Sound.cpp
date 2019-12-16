@@ -6,6 +6,11 @@
 //#define STB_VORBIS_INCLUDE_STB_VORBIS_H
 #include "stb_vorbis.h"
 
+Sound::~Sound()
+{
+	alDeleteBuffers(1, &m_bufferID);
+}
+
 void Sound::onLoad(const std::string &_path)
 {
 	m_bufferID = 0;

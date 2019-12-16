@@ -22,6 +22,7 @@ void Entity::Ticks()
 		//for (int m_tick = 0; m_tick < 5; m_tick++)
 		{
 			Update();
+			
 		}	
 }
 
@@ -32,6 +33,8 @@ void Entity::Update()
 	{
 		(*m_it)->OnTick();
 	}
+
+
 
 	//deleted a component if flagged to be deleted
 	for (auto it = m_component.begin(); it != m_component.end();)
@@ -81,6 +84,11 @@ void Entity::KillEntity()
 std::shared_ptr<Transform> Entity::GetTransform()
 {
 	return _trans.lock();
+}
+
+std::shared_ptr<CollisionDetection> Entity::getCollision()
+{
+	return m_checkCol.lock();
 }
 
 std::shared_ptr<Core> Entity::GetCore()

@@ -8,7 +8,8 @@ Player::~Player()
 {
 }
 
-void Player::InitPlayer(std::shared_ptr<Mesh> _obj)
+void Player::InitPlayer(std::shared_ptr<Mesh> _obj, glm::vec3 _position)
 {
 	m_playerUnits.push_back(_obj);
+	m_unitPosition = _position;
 }
