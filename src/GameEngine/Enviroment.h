@@ -5,6 +5,8 @@
 #include <memory>
 #include <stdio.h>
 
+#include "Exception.h"
+
 #ifdef _WIN32
 	#include <Windows.h>
 #endif // _WIN32
@@ -18,7 +20,7 @@ public:
 	~Enviroment();
 
 	void initDelts();
-	std::string fileLocations();
+    std::string fileLocations(char* argv[]);
 	float getDelts() { return m_lastTime; }
 
 private:
@@ -28,7 +30,7 @@ private:
 	std::string baseName;
 	std::string dirName;
 
-	//char* argv[0];
+    //char* argv[];
 
 	friend class Core;
 	std::weak_ptr<Core> m_eCore;
