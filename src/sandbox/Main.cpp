@@ -1,6 +1,6 @@
 //#include <GameEngine/GameEngine.h>
 #include <memory>
-#include <iostream>
+//#include <iostream>
 
 #include <GameEngine/GameEngine.h>
 //#include "TestScene.h"
@@ -8,49 +8,69 @@
 int main()
 {
 	//initalise the engine
-	std::shared_ptr<Core> core = Core::OnInitalise();
+	std::shared_ptr<Core> _core = Core::OnInitalise();
+	
+	//add entities to core
 	//create a single in-game object
-	std::shared_ptr<Entity> entity = core->addEntity();
+	//adding Camera
+	std::shared_ptr<Entity> _cam = _core->addEntity();
+	std::shared_ptr<Entity> _catUnit = _core->addEntity();
+	std::shared_ptr<Entity> _map = _core->addEntity();
+
+	//adding simple content to engine
+	std::shared_ptr<Camera> _camera = _cam->addComponent<Camera>();
+	//std::shared_ptr<Transform> tran = _cam->addComponent<Transform>();
+	std::shared_ptr<MeshRender> _renderMesh = _catUnit->addComponent<MeshRender>();
+	std::shared_ptr<MeshRender> _renderMap = _map->addComponent<MeshRender>();
+
+	//add collision component to mesh
+	//std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
+	//std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
+	//load mesh from file
+	std::shared_ptr <Mesh> _unitMesh = _core->getResources()->load<Mesh>("curuthers/curuthers");
+	std::shared_ptr<Mesh> _mapMesh = _core->getResources()->load<Mesh>("graveyard/graveyard");
+
+	//set mesh
+	_renderMesh->SetMesh(_unitMesh);
+	_renderMap->SetMesh(_mapMesh);
+
+	//load texture from file
+	std::shared_ptr<Material> _material = _core->getResources()->load<Material>("curuthers/Whiskers_diffuse");
+	std::shared_ptr<Material> _mapMat = _core->getResources()->load<Material>("graveyard/graveyard");
 	
-	//adding simple conent to engine
-	std::shared_ptr<MeshRender> renderMesh = entity->addComponent<MeshRender>();
+	//set texture
+	_renderMesh->SetMaterial(_material);
+	_renderMap->SetMaterial(_mapMat);
+
 	
-	//uni path before having file location
-	//C:/Users/s4908021/gep_sdk-20191121/GameEngine/resources/rend/samples/curuthers/curuthers
-	//D:/Users/JoshComputer/Documents/GEP/GameEngine/
-	//../resources/rend/samples/
-	std::shared_ptr <Mesh> mesh = core->getResources()->load<Mesh>("curuthers/curuthers");
-	renderMesh->SetMesh(mesh);
+	//set scale
+	_catUnit->GetTransform()->setScale(glm::vec3(0.2, 0.2, 0.2));
 
-	std::shared_ptr<Shader> _meshTexShader = core->getResources()->load<Shader>("shader/meshTexShader");
+	//set the position of the camera
+	//set position of models
+	_catUnit->GetTransform()->setPosition(glm::vec3(0, 0, -4));
+	_map->GetTransform()->setPosition(glm::vec3(0, -2, -8));
+	_cam->GetTransform()->setPosition(glm::vec3(20, 0, 10));
 
-	std::shared_ptr<Material> _material = core->getResources()->load<Material>("curuthers/Whiskers_diffuse");
-	//_material->setShader(_meshTexShader);
-	renderMesh->SetMaterial(_material);
+	//set collision box size
+	//catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
+	//map->getCollision()->setSize(glm::vec3(1, 1, 1));
 
-	std::shared_ptr<Transform> tran = entity->getComponent<Transform>();
-	entity->GetTransform()->setPosition(glm::vec3(0, 0, -15));
-	//tran->getEntity()->getComponent<Transform>();
+	//add collision
+	//catUnit->addComponent<CollisionDetection>();
+	//catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
+
+	//sound loading
 
 	//need for sound to load, loading of the sound file
 	//std::shared_ptr<Sound> _hornSound = core->getResources()->load<Sound>("sound/dixie_horn");
 	//_hornSound = core->getResources()->load<Sound>("sound/dixie_horn");
 
-	std::shared_ptr<Entity> cam = core->addEntity();
 	//playing sound from camera
 	//cam->addComponent<SoundSource>()->setSound(_hornSound);
 
-	//std::make_shared<Camera>();
-	std::shared_ptr<Camera> camera = cam->addComponent<Camera>();
-	cam->GetTransform()->setPosition(glm::vec3(0, 0, 10));
-
-	//add collision
-	entity->addComponent<CollisionDetection>();
-	entity->getCollision()->setSize(glm::vec3(1, 1, 1));
-
-
 	//start the engine's main loop
-	core->runCore();
+	_core->runCore();
 
 	//system("PAUSE");
 

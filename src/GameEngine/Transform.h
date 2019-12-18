@@ -16,11 +16,15 @@ public:
 		m_objectPosition.x = _posVec.x, m_objectPosition.y = _posVec.y, m_objectPosition.z = _posVec.z;
 	}
 	
-	void setRotation(float m_rotX, float m_rotY, float m_rotZ) 
-	{ m_objectRotation.x = m_rotX, m_objectRotation.y = m_rotY, m_objectRotation.z = m_rotZ; }
+	void setRotation(glm::vec3 _posVec)
+	{
+		m_objectRotation.x = _posVec.x, m_objectRotation.y = _posVec.y, m_objectRotation.z = _posVec.z;
+	}
 	
-	void setScale(float m_scaX, float m_scaY, float m_scaZ) 
-	{ m_objectScale.x = m_scaX, m_objectScale.y = m_scaY, m_objectScale.z = m_scaZ; }
+	void setScale(glm::vec3 _posVec)
+	{
+		m_objectScale.x = _posVec.x, m_objectScale.y = _posVec.y, m_objectScale.z = _posVec.z;
+	}
 
 	glm::vec3 GetPosition() { return m_objectPosition; }
 	glm::vec3 GetRotation() { return m_objectRotation; }

@@ -20,7 +20,7 @@ public:
 	~Enviroment();
 
 	void initDelts();
-    std::string fileLocations(char* argv[]);
+    std::string fileLocations();
 	float getDelts() { return m_lastTime; }
 
 private:

@@ -19,7 +19,8 @@ void CollisionDetection::onInit()
 
 void CollisionDetection::setSize(glm::vec3 _size)
 {
-	m_boxSize = _size;
+	//m_boxSize = _size;
+	m_boxSize.x = _size.x, m_boxSize.y = _size.y, m_boxSize.z = _size.z;
 }
 
 void CollisionDetection::setOffSet(glm::vec3 _offSet)

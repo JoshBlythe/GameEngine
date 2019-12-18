@@ -18,7 +18,7 @@ void Enviroment::initDelts()
 };
 
 
-std::string Enviroment::fileLocations(char* argv[])
+std::string Enviroment::fileLocations()
 {
 #ifdef _WIN32
 	char strExePath[MAX_PATH];

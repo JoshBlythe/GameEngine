@@ -18,6 +18,7 @@ public:
 
 	std::shared_ptr<rend::Shader> _rnShader;
 	std::shared_ptr<rend::Texture> _rnTexture;
+	//std::shared_ptr<rend::Material
 	//std::weak_ptr<Shader> m_shader;
 	//std::vector <std::shared_ptr<MaterialAttribute>> m_attributes;
 };

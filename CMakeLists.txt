@@ -75,6 +75,10 @@ add_library(GameEngine
 	src/GameEngine/CollisionDetection.h
 	src/GameEngine/ModelCollider.cpp
 	src/GameEngine/ModelCollider.h
+	src/GameEngine/UserInput.cpp
+	src/GameEngine/UserInput.h
+	src/GameEngine/Ray.cpp	
+	src/GameEngine/Ray.h
 	src/GameEngine/tribox.cpp
 	src/GameEngine/tribox.h
 	src/GameEngine/GameEngine.h

@@ -8,7 +8,7 @@
 
 Camera::Camera()
 {
-
+	//std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();
 }
 
 Camera::~Camera()
