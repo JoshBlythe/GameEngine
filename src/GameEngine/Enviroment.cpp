@@ -1,6 +1,8 @@
 #include "Enviroment.h"
 #include "stdio.h"
 
+#include <filesystem>
+
 Enviroment::Enviroment()
 {
 	
@@ -18,7 +20,7 @@ void Enviroment::initDelts()
 };
 
 
-std::string Enviroment::fileLocations(char* argv[])
+std::string Enviroment::fileLocations()
 {
 #ifdef _WIN32
 	char strExePath[MAX_PATH];
@@ -35,16 +37,17 @@ std::string Enviroment::fileLocations(char* argv[])
     //char *argv[];
 
 
-    std::string _command = "cd `dirname \\ `which" + std::string(argv[0]) + "\\``; cd ..; pwd | tr -d '\n'";
+    //std::string _command = "cd `dirname \\ `which" + std::string(argv[0]) + "\\``; cd ..; pwd | tr -d '\n'";
 
    // FILE *popen;
 
-   FILE *_process = popen(_command.c_str(), "r");
+   //FILE *_process = popen(_command.c_str(), "r");
 
-   if(!_process)
-   {
-       throw Exception("Issue Loading File Source, on Linux!");
-   }
+   //if(!_process)
+   //{
+     //  throw Exception("Issue Loading File Source, on Linux!");
+   //}
+
+   //return _command;
 #endif
-	
 }
