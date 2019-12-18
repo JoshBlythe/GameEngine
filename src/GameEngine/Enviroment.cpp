@@ -17,6 +17,16 @@ void Enviroment::initDelts()
 {
 	//storing this variable
 	m_lastTime = SDL_GetTicks();
+
+	//initalise delta time
+	//do this in envirmoent then return time
+	//float _lastTime = getEnviroment()->getDelts();
+
+	float time = SDL_GetTicks();
+	float _differ = time - m_lastTime;
+	m_lastTime = _differ / 1000.0f;
+	m_lastTime = time;
+
 };
 
 

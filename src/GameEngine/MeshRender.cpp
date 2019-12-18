@@ -11,22 +11,9 @@ MeshRender::~MeshRender()
 
 void MeshRender::OnInitalise()
 {
+	//std::string _fileloc = getCore()->getEnviroment()->fileLocations();
 	m_geMaterial = getCore()->getResources()->load<Material>("../resources/rend/samples/curuthers/meshTexShader");
 
-	glm::vec3 a1 = glm::vec3(0, 0.4f, 0);
-	glm::vec3 b1 = glm::vec3(-0.5f, -0.5f, 0);
-	glm::vec3 c1 = glm::vec3(0.5f, -0.5f, 0);
-
-	/*glm::vec3 a2 = glm::vec3(0, 1.5f, 0);
-	glm::vec3 b2 = glm::vec3(-0.5f, 0.5f, 0);
-	glm::vec3 c2 = glm::vec3(0.5f, 0.5f, 0);*/
-	
-	////create buffer for collision
-	//_buffer = getCore()->getGraphicalContext()->createBuffer();
-	////push the trinagles into it to be used later
-	//_buffer->add(glm::vec2(a1.x, a1.y));
-	//_buffer->add(glm::vec2(b1.x, b1.y));
-	//_buffer->add(glm::vec2(c1.x, c1.y));
 }
 
 void MeshRender::SetMesh(std::shared_ptr<Mesh> _mesh)
@@ -37,6 +24,7 @@ void MeshRender::SetMesh(std::shared_ptr<Mesh> _mesh)
 void MeshRender::SetMaterial(std::shared_ptr<Material> _material)
 {
 	this->_text = _material->_rnTexture;
+	//this->m_geMaterial = _material->_rnShader;
 }
 
 void MeshRender::OnDraw()

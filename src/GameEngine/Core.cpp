@@ -26,6 +26,8 @@ std::shared_ptr<Core> Core::OnInitalise()
 	c_rtn->m_enviroment = std::make_shared<Enviroment>();
 	c_rtn->getEnviroment()->m_eCore = c_rtn;
 
+	c_rtn->m_collision = std::make_shared<CollisionDetection>();
+	c_rtn->getCollision()->m_cldCore = c_rtn;
 	//c_rtn->getCamera()->m_camSelf = c_rtn;
 	//c_rtn->m_camera = std::make_shared<Camera>();
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
@@ -63,7 +65,7 @@ std::shared_ptr<Entity> Core::addEntity()
 
 	m_entities.push_back(e_rtn); 
 
-
+	//add a transform to each entity
 	e_rtn->_trans = e_rtn->addComponent<Transform>();
 	e_rtn->GetCore()->m_camera = e_rtn->addComponent<Camera>();
 
@@ -88,6 +90,11 @@ std::shared_ptr<Screen> Core::getScreen()
 std::shared_ptr<Enviroment> Core::getEnviroment()
 {
 	return m_enviroment;
+}
+
+std::shared_ptr<CollisionDetection> Core::getCollision()
+{
+	return m_collision;
 }
 
 std::shared_ptr<rend::Context> Core::getGraphicalContext()
@@ -163,7 +170,7 @@ void Core::SoundInit()
 void Core::runCore()
 {
 	//m_enviroment = std::make_shared<Enviroment>();
-
+	getEnviroment()->initDelts();
 	//loop variable
 	bool m_looper = true;
 	//loop condition
@@ -180,15 +187,6 @@ void Core::runCore()
 			}
 		}
 
-		//initalise delta time
-		//do this in envirmoent then return time
-		float _lastTime = getEnviroment()->getDelts();
-
-		float time = SDL_GetTicks();
-		float _differ = time - _lastTime;
-		_lastTime = _differ / 1000.0f;
-		_lastTime = time;
-		
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)

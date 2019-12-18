@@ -47,6 +47,7 @@ public:
 	std::shared_ptr<Camera> getCamera();
 	std::shared_ptr<Screen> getScreen();
 	std::shared_ptr<Enviroment> getEnviroment();
+	std::shared_ptr<CollisionDetection> getCollision();
 	std::shared_ptr<rend::Context> getGraphicalContext();
 
 	void Window();
@@ -75,6 +76,7 @@ private:
 	friend class Shader;
 	friend class Material;
 	friend class Sound;
+	//friend class CollsionDetection;
 
 	//Core();
 	//pointer to self
@@ -88,6 +90,7 @@ private:
 
 	//camera pointer
 	std::weak_ptr<Camera> m_camera;
+	std::shared_ptr<CollisionDetection> m_collision;
 
 	int m_windowW;
 	int m_windowH;
