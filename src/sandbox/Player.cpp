@@ -1,4 +1,7 @@
 #include "Player.h"
+#include "GameEngine/UserInput.h"
+#include "GameEngine/Camera.h"
+
 
 Player::Player()
 {
@@ -14,11 +17,21 @@ void Player::InitPlayer(std::shared_ptr<Mesh> _obj, glm::vec3 _position)
 	m_unitPosition = _position;
 }
 
-glm::vec3 Player::movePosition()
+void Player::movePosition()
 {
-	if (true)
+	if (m_inputMang.lock()->isMouseClicked())
 	{
 
 	}
-	return glm::vec3();
+	//return glm::vec3();
+}
+
+void Player::moveCamera(float _deltaTime)
+{
+	float _speed = 1.0f * _deltaTime;
+
+	/*if ()
+	{
+
+	}*/
 }

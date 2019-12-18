@@ -16,7 +16,7 @@ public:
 	void isKeyPressed(int _key);
 	void isKeyReleased(int _key);
 
-	void getMousePos();
+	void currMousePos();
 
 	//glm::vec3 rayPosition(Ray _ray, int  _xPos, int _yPos);
 

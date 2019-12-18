@@ -1,6 +1,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+class Core;
 class Entity;
 class Mesh;
 
@@ -27,7 +28,11 @@ private:
 	//bool triangle_intersect(glm::vec3 a1, glm::vec3 b1, glm::vec3 c1,
 		//glm::vec3 a2, glm::vec3 b2, glm::vec3 c2);
 
+	friend class Core;
+
 	glm::vec3 m_boxSize;
 	glm::vec3 m_offSet;
 	glm::vec3 m_lastPos;
+
+	std::weak_ptr<Core> m_cldCore;
 };

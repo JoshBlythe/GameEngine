@@ -24,8 +24,8 @@ int main()
 	std::shared_ptr<MeshRender> _renderMap = _map->addComponent<MeshRender>();
 
 	//add collision component to mesh
-	//std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
-	//std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
+	std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
+	std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
 	//load mesh from file
 	std::shared_ptr <Mesh> _unitMesh = _core->getResources()->load<Mesh>("curuthers/curuthers");
 	std::shared_ptr<Mesh> _mapMesh = _core->getResources()->load<Mesh>("graveyard/graveyard");
@@ -53,8 +53,8 @@ int main()
 	_cam->GetTransform()->setPosition(glm::vec3(20, 0, 10));
 
 	//set collision box size
-	//catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
-	//map->getCollision()->setSize(glm::vec3(1, 1, 1));
+	_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
+	_map->getCollision()->setSize(glm::vec3(1, 1, 1));
 
 	//add collision
 	//catUnit->addComponent<CollisionDetection>();
