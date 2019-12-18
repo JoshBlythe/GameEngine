@@ -1,6 +1,6 @@
 #include "Enviroment.h"
-#include "stdio.h"
 
+//#include <stdio.h>
 #include <filesystem>
 
 Enviroment::Enviroment()
@@ -44,20 +44,19 @@ std::string Enviroment::fileLocations()
 	//share / {basename} is found;
 	return dirname + "/../../resources";
 #else 
-    //char *argv[];
+    char *argv[FILENAME_MAX];
 
 
-    //std::string _command = "cd `dirname \\ `which" + std::string(argv[0]) + "\\``; cd ..; pwd | tr -d '\n'";
+   std::string _command = "cd `dirname \\ `which" + std::string(argv[0]) + "\\``; cd ..; pwd | tr -d '\n'";
 
-   // FILE *popen;
+   std::FILE *_process = popen(_command.c_str(), "r");
 
-   //FILE *_process = popen(_command.c_str(), "r");
+   if(!_process)
+   {
+        throw Exception("Issue Loading File Source, on Linux!");
+   }
 
-   //if(!_process)
-   //{
-     //  throw Exception("Issue Loading File Source, on Linux!");
-   //}
+   return _command;
 
-   //return _command;
 #endif
 }
