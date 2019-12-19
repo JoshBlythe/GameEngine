@@ -62,10 +62,10 @@ void Material::onLoad(const std::string& _fileName)
 	//if file didn't open
 	if (!_vertReadIn.is_open())
 	{
+		//TODO: If not open, try to load default one instead.
+		std::cout << fn << std::endl;
 		//throw below exception message 
-		//throw Exception("Error during opening of vertex shader file");
-		getShader();
-		return;
+		throw Exception("Error during opening of vertex shader file");
 	}
 
 	_rnShader = getCore()->m_graphicalContext->createShader();
@@ -85,7 +85,6 @@ void Material::onLoad(const std::string& _fileName)
 	}
 
 	_rnShader->parse(_vertfileData);
-
 }
 
 void Material::setShader(std::shared_ptr<Shader> _shader)

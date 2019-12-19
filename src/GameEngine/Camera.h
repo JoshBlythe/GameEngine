@@ -10,6 +10,8 @@ public:
 	Camera();
 	~Camera();
 
+	void OnInitalise();
+
 	glm::mat4 GetView();
 	glm::mat4 GetProj();
 

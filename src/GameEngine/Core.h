@@ -22,7 +22,7 @@ class CollisionDetection;
 class Core
 {
 public:
-	static std::shared_ptr<Core> OnInitalise();
+    static std::shared_ptr<Core> OnInitalise(int argc, char** argv);
 
 	std::shared_ptr<Entity> addEntity();
 
@@ -62,6 +62,7 @@ public:
 	void stopCore();
 
 private:
+	friend class Camera;
 
 	//initalise SDL window;
 	SDL_Window* m_window;
@@ -92,6 +93,8 @@ private:
 
 	//camera pointer
 	std::weak_ptr<Camera> m_camera;
+
+	// TODO: Remove?
 	std::shared_ptr<CollisionDetection> m_collision;
 
 	int m_windowW;

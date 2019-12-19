@@ -16,6 +16,12 @@ Camera::~Camera()
 {
 }
 
+void Camera::OnInitalise()
+{
+	std::cout << "Hello" << std::endl;
+	getCore()->m_camera = getEntity()->getComponent<Camera>();
+}
+
 glm::mat4 Camera::GetView()
 {
 	glm::mat4 m_viewMat = glm::inverse(getEntity()->getComponent<Transform>()->GetModel());
@@ -25,8 +31,12 @@ glm::mat4 Camera::GetView()
 
 glm::mat4 Camera::GetProj()
 {
-	int _windowW = getCore()->getScreen()->GetScreen().x;
-	int _windowY = getCore()->getScreen()->GetScreen().y;
+	//std::cout << "[]" << getCore()->getScreen()->GetScreen().x << std::endl;
+	//int _windowW = getCore()->getScreen()->GetScreen().x;
+	//int _windowY = getCore()->getScreen()->GetScreen().y;
+
+	int _windowW = 800;
+	int _windowY = 600;
 	
 	glm::mat4 m_projMatbsc = glm::perspective(45.0f, (float)_windowW / (float)_windowY, 0.1f, 100.0f);
 
@@ -68,7 +78,9 @@ Ray Camera::createRay(glm::ivec2 _mouseCoords, int _windowW, int _windowH)
 
 std::shared_ptr<Camera> Camera::InitCamera()
 {
+/*
 	m_camSelf.lock() = getCore()->getCamera();
 
 	return m_camSelf.lock();
+*/
 }
