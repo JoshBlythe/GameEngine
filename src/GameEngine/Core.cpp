@@ -12,7 +12,7 @@
 
 //#include "stb_vorbis.h"
 
-std::shared_ptr<Core> Core::OnInitalise()
+std::shared_ptr<Core> Core::OnInitalise(int argc, char** argv)
 {
 	std::shared_ptr<Core> c_rtn = std::make_shared<Core>();
 	//referencing c to weak_ptr of care
@@ -23,7 +23,7 @@ std::shared_ptr<Core> Core::OnInitalise()
 
 	c_rtn->getResources()->m_core = c_rtn;
 
-	c_rtn->m_enviroment = std::make_shared<Enviroment>();
+    c_rtn->m_enviroment = std::make_shared<Enviroment>(argc, argv);
 	c_rtn->getEnviroment()->m_eCore = c_rtn;
 
 	//c_rtn->m_collision = std::make_shared<CollisionDetection>();
@@ -40,7 +40,7 @@ std::shared_ptr<Core> Core::OnInitalise()
 	
 
 	//here needs to be included for sound to run
-	//c_rtn->SoundInit();
+	c_rtn->SoundInit();
 
 	
 
@@ -67,7 +67,7 @@ std::shared_ptr<Entity> Core::addEntity()
 
 	//add a transform to each entity
 	e_rtn->_trans = e_rtn->addComponent<Transform>();
-	e_rtn->GetCore()->m_camera = e_rtn->addComponent<Camera>();
+	//e_rtn->GetCore()->m_camera = e_rtn->addComponent<Camera>();
 
 	return e_rtn;
 }
@@ -79,6 +79,7 @@ std::shared_ptr<Resources> Core::getResources()
 
 std::shared_ptr<Camera> Core::getCamera()
 {
+	std::cout << m_camera.lock().get() << std::endl;
 	return m_camera.lock();
 }
 
@@ -194,8 +195,8 @@ void Core::runCore()
 			//unasign pointer allowing use to access Entity functions
 			(*iter)->Ticks();
 		}
-
-		
+//TODO: isAlive initialized?
+/*
 		//check if a items within the list has been flagged to be deleted
 		for (std::list<std::shared_ptr<Entity>>::iterator
 			iter = m_entities.begin(); iter != m_entities.end();)
@@ -213,6 +214,7 @@ void Core::runCore()
 				iter++;
 			}
 		}
+*/
 
 		//clear screen before render
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
@@ -223,6 +225,7 @@ void Core::runCore()
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)
 		{
 			//unasign pointer allowing use to access Entity functions
+			std::cout << "?" << std::endl;
 			(*iter)->OnDisplay();
 		}
 

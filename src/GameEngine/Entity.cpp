@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Core.h"
 #include "Enviroment.h"
+#include "CollisionDetection.h"
 
 Entity::Entity()
 {
@@ -88,7 +89,8 @@ std::shared_ptr<Transform> Entity::GetTransform()
 
 std::shared_ptr<CollisionDetection> Entity::getCollision()
 {
-	return m_checkCol.lock();
+	//return m_checkCol.lock();
+	return getComponent<CollisionDetection>();
 }
 
 std::shared_ptr<Core> Entity::GetCore()

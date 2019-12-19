@@ -17,7 +17,7 @@ class Core;
 class Enviroment
 {
 public:
-	Enviroment();
+    Enviroment(int argc, char** argv);
 	~Enviroment();
 
 	void initDelts();
@@ -30,6 +30,7 @@ private:
 	std::string fullpath;
 	std::string baseName;
 	std::string dirName;
+
 
     //char* argv[];
 

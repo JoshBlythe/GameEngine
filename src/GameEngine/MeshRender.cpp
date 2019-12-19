@@ -12,7 +12,7 @@ MeshRender::~MeshRender()
 void MeshRender::OnInitalise()
 {
 	//std::string _fileloc = getCore()->getEnviroment()->fileLocations();
-	m_geMaterial = getCore()->getResources()->load<Material>("../resources/rend/samples/curuthers/meshTexShader");
+    m_geMaterial = getCore()->getResources()->load<Material>("../resources/shader/meshTexShader");
 
 }
 
@@ -48,6 +48,7 @@ void MeshRender::OnDraw()
 	if (m_geMaterial->_rnShader)
 	{
 		m_geMaterial->_rnShader->setUniform("u_Model", _trans->GetModel());
+		m_geMaterial->_rnShader->setUniform("u_View", getCore()->getCamera()->GetView());
 		m_geMaterial->_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
 
 	}
