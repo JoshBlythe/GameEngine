@@ -40,7 +40,7 @@ std::shared_ptr<Core> Core::OnInitalise()
 	
 
 	//here needs to be included for sound to run
-	//c_rtn->SoundInit();
+	c_rtn->SoundInit();
 
 	
 

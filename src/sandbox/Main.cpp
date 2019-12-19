@@ -53,8 +53,8 @@ int main()
 	_cam->GetTransform()->setPosition(glm::vec3(20, 0, 10));
 
 	//set collision box size
-	_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
-	_map->getCollision()->setSize(glm::vec3(1, 1, 1));
+	//_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
+	//_map->getCollision()->setSize(glm::vec3(1, 1, 1));
 
 	//add collision
 	//catUnit->addComponent<CollisionDetection>();
@@ -63,11 +63,11 @@ int main()
 	//sound loading
 
 	//need for sound to load, loading of the sound file
-	//std::shared_ptr<Sound> _hornSound = core->getResources()->load<Sound>("sound/dixie_horn");
-	//_hornSound = core->getResources()->load<Sound>("sound/dixie_horn");
+	std::shared_ptr<Sound> _hornSound = _core->getResources()->load<Sound>("sound/dixie_horn");
+	_hornSound = _core->getResources()->load<Sound>("sound/dixie_horn");
 
 	//playing sound from camera
-	//cam->addComponent<SoundSource>()->setSound(_hornSound);
+	_cam->addComponent<SoundSource>()->setSound(_hornSound);
 
 	//start the engine's main loop
 	_core->runCore();
