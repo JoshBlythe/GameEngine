@@ -26,8 +26,8 @@ std::shared_ptr<Core> Core::OnInitalise()
 	c_rtn->m_enviroment = std::make_shared<Enviroment>();
 	c_rtn->getEnviroment()->m_eCore = c_rtn;
 
-	c_rtn->m_collision = std::make_shared<CollisionDetection>();
-	c_rtn->getCollision()->m_cldCore = c_rtn;
+	//c_rtn->m_collision = std::make_shared<CollisionDetection>();
+	//c_rtn->getCollision()->m_cldCore = c_rtn;
 	//c_rtn->getCamera()->m_camSelf = c_rtn;
 	//c_rtn->m_camera = std::make_shared<Camera>();
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
