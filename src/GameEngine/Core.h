@@ -7,6 +7,8 @@
 #include <memory>
 #include "RendInc.h"
 
+#include "Exception.h"
+
 //#include "Entity.h"
 class Entity;
 class Screen;
