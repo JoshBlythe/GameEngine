@@ -11,21 +11,43 @@ SoundSource::~SoundSource()
 	//alcCloseDevice(m_device);
 }
 
-void SoundSource::onInitialise()
-{
-
-}
+//void SoundSource::onInitialise()
+//{
+//
+//}
 
 void SoundSource::onTick()
 {
+	//while (true)
+	//{
+	//	m_state = 0;
+	//	alGetSourcei(m_sourceId, AL_SOURCE_STATE, &m_state);
+	//	
+	//	if (m_state == AL_STOPPED)
+	//	{
+	//		//std::cout << "Sound Stopped!" << std::endl;
+	//		//alDeleteSources(1, &m_sourceId);
+	//		//m_compIsAlive == false;
+	//		break;
+	//	}
+
+	//}
+
+	//setAutoRemove(m_compIsAlive);
+}
+
+void SoundSource::setAutoRemove(bool _autoRemove)
+{
 	while (true)
 	{
-		ALint _state = 0;
-		alGetSourcei(m_sourceId, AL_SOURCE_STATE, &_state);
-		
-		if (_state == AL_STOPPED)
+		m_state = 0;
+		alGetSourcei(m_sourceId, AL_SOURCE_STATE, &m_state);
+
+		//std::cout << "Sound Stopped!" << std::endl;
+		if (m_state == AL_STOPPED)
 		{
-			m_isAlive == false;
+			alDeleteSources(1, &m_sourceId);
+			_autoRemove == false;
 			break;
 		}
 

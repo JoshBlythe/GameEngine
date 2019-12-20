@@ -10,14 +10,14 @@ public:
 	Camera();
 	~Camera();
 
-	void OnInitalise();
+	void onInitalise();
 
 	glm::mat4 GetView();
 	glm::mat4 GetProj();
 
 	Ray createRay(glm::ivec2 _mouseCoords, int _windowW, int _windowH);
 
-	std::shared_ptr<Camera> InitCamera();
+	//std::shared_ptr<Camera> InitCamera();
 
 private:
 	std::weak_ptr<Camera> m_camSelf;

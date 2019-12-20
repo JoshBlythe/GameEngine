@@ -15,7 +15,7 @@ public:
 	CollisionDetection();
 	~CollisionDetection();
 
-	void onInit();
+	void onInitalise();
 	void setSize(glm::vec3 _size);
 	void setOffSet(glm::vec3 _offSet);
 

@@ -11,12 +11,12 @@ struct Rotator : public Component
 {
   float rot;
 
-  void OnInitalise()
+  void onInitalise()
   {
     rot = 0;
   }
 
-  void OnTick()
+  void onTick()
   {
     rot+= 0.001f;
     getEntity()->GetTransform()->setRotation(glm::vec3(0, rot, 0));
@@ -29,7 +29,7 @@ struct Rotator : public Component
 int main(int argc, char* argv[])
 {
 	//initalise the engine
-    std::shared_ptr<Core> _core = Core::OnInitalise(argc, argv);
+    std::shared_ptr<Core> _core = Core::onInitalise(argc, argv);
 	
 	//add entities to core
 	//create a single in-game object
@@ -51,6 +51,7 @@ int main(int argc, char* argv[])
 	//load mesh from file
 	std::shared_ptr <Mesh> _unitMesh = _core->getResources()->load<Mesh>("curuthers/curuthers");
 	std::shared_ptr<Mesh> _mapMesh = _core->getResources()->load<Mesh>("graveyard/graveyard");
+	
 
 	//set mesh
 	_renderMesh->SetMesh(_unitMesh);
@@ -74,6 +75,18 @@ int main(int argc, char* argv[])
 	_map->GetTransform()->setPosition(glm::vec3(0, -2, -8));
 	_cam->GetTransform()->setPosition(glm::vec3(0, 0, 0));
 
+	//sound loading
+	//load sound source from file
+	std::shared_ptr<Sound> _hornSound = _core->getResources()->load<Sound>("sound/dixie_horn");
+	
+	//get sound source
+	_hornSound = _core->getResources()->load<Sound>("sound/dixie_horn");
+	//need for sound to load, loading of the sound file
+	//playing sound from camera
+	_cam->addComponent<SoundSource>()->setSound(_hornSound);
+	
+	
+	
 	//set collision box size
 	//_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
 	//_map->getCollision()->setSize(glm::vec3(1, 1, 1));
@@ -82,14 +95,8 @@ int main(int argc, char* argv[])
 	//catUnit->addComponent<CollisionDetection>();
 	//catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
 
-	//sound loading
 
-	//need for sound to load, loading of the sound file
-	std::shared_ptr<Sound> _hornSound = _core->getResources()->load<Sound>("sound/dixie_horn");
-	_hornSound = _core->getResources()->load<Sound>("sound/dixie_horn");
 
-	//playing sound from camera
-	_cam->addComponent<SoundSource>()->setSound(_hornSound);
 
 	//start the engine's main loop
 	_core->runCore();

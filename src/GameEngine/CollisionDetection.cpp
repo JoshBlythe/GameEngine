@@ -12,7 +12,7 @@ CollisionDetection::~CollisionDetection()
 }
 
 
-void CollisionDetection::onInit()
+void CollisionDetection::onInitalise()
 {
 	m_lastPos = getEntity()->GetTransform()->GetPosition();
 }
@@ -30,7 +30,7 @@ void CollisionDetection::setOffSet(glm::vec3 _offSet)
 
 void CollisionDetection::onTick()
 {
-	collisionLoop();
+	//collisionLoop();
 }
 
 void CollisionDetection::collisionLoop()

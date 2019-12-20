@@ -17,12 +17,12 @@ class Mesh;
 class Material;
 class Camera;
 class Enviroment;
-class CollisionDetection;
+//class CollisionDetection;
 
 class Core
 {
 public:
-    static std::shared_ptr<Core> OnInitalise(int argc, char** argv);
+    static std::shared_ptr<Core> onInitalise(int argc, char** argv);
 
 	std::shared_ptr<Entity> addEntity();
 
@@ -49,7 +49,7 @@ public:
 	std::shared_ptr<Camera> getCamera();
 	std::shared_ptr<Screen> getScreen();
 	std::shared_ptr<Enviroment> getEnviroment();
-	std::shared_ptr<CollisionDetection> getCollision();
+	//std::shared_ptr<CollisionDetection> getCollision();
 	std::shared_ptr<rend::Context> getGraphicalContext();
 
 	void Window();
@@ -62,7 +62,6 @@ public:
 	void stopCore();
 
 private:
-	friend class Camera;
 
 	//initalise SDL window;
 	SDL_Window* m_window;
@@ -75,10 +74,11 @@ private:
 	//ALCcontext* _context;
 
 	//friend classes, allows the class to access private variaibles of core
+	friend class Camera;
 	friend class Mesh;
 	friend class Shader;
 	friend class Material;
-	friend class Sound;
+	//friend class Sound;
 	//friend class CollsionDetection;
 
 	//Core();
@@ -95,13 +95,12 @@ private:
 	std::weak_ptr<Camera> m_camera;
 
 	// TODO: Remove?
-	std::shared_ptr<CollisionDetection> m_collision;
+	//std::shared_ptr<CollisionDetection> m_collision;
 
 	int m_windowW;
 	int m_windowH;
 
-	//SDL_Renderer* m_renderer;
-
+	//system loop variable
 	bool m_systemLoop;
 
 	std::list <std::shared_ptr<Entity>> m_entities;

@@ -5,7 +5,7 @@
 Component::Component()
 {
 	//m_ticks = 5;
-	m_isAlive = true;
+	//m_compIsAlive = true;
 	//m_mesh = NULL;
 	//m_material = NULL;
 }
@@ -15,9 +15,9 @@ Component::~Component()
 	//smart pointers used so no need to clean up pointers
 }
 
-void Component::OnDraw()
+void Component::onDraw()
 {
-	std::cout << "This will be override! " << std::endl;
+	//std::cout << "This will be override! " << std::endl;
 }
 
 std::shared_ptr<Entity> Component::getEntity()
@@ -35,12 +35,12 @@ std::shared_ptr<Resources> Component::getResources()
 	return getCore()->getResources();
 }
 
-void Component::OnInitalise()
+void Component::onInitalise()
 {
-	//initalise SDL.
+	
 }
 
-void Component::OnTick()
+void Component::onTick()
 {
 	//for (int i = 0; i < m_ticks; i++)
 	//{
@@ -58,7 +58,7 @@ void Component::OnTick()
 
 void Component::OnUpdate()
 {
-	std::cout << "This is Object Update! " << std::endl;
+	//std::cout << "This is Object Update! " << std::endl;
 }
 
 

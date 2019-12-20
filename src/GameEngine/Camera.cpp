@@ -16,9 +16,8 @@ Camera::~Camera()
 {
 }
 
-void Camera::OnInitalise()
+void Camera::onInitalise()
 {
-	std::cout << "Hello" << std::endl;
 	getCore()->m_camera = getEntity()->getComponent<Camera>();
 }
 
@@ -48,7 +47,7 @@ Ray Camera::createRay(glm::ivec2 _mouseCoords, int _windowW, int _windowH)
 	Ray _ray;
 
 	//m_viewMat = glm::mat4(1);
-	GetView();
+	//GetView();
 
 	float _xPlane = ((float)_mouseCoords.x / (float)_windowW) * 2.0f - 1.0f;
 	float _yPlane = ((float)_mouseCoords.y / (float)_windowH) * 2.0f - 1.0f;
@@ -74,13 +73,4 @@ Ray Camera::createRay(glm::ivec2 _mouseCoords, int _windowW, int _windowH)
 	_ray.m_rayDir = glm::normalize(m_farView - m_nearView);
 
 	return _ray;
-}
-
-std::shared_ptr<Camera> Camera::InitCamera()
-{
-/*
-	m_camSelf.lock() = getCore()->getCamera();
-
-	return m_camSelf.lock();
-*/
 }

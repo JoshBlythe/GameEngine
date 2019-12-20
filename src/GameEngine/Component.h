@@ -27,10 +27,10 @@ public:
 
 	//void getEntity();  //shared_ptr of entity
 
-	virtual void OnDraw();
-	virtual void OnInitalise();
+	virtual void onDraw();
+	virtual void onInitalise();
 	//virtual void begin();
-	virtual void OnTick();
+	virtual void onTick();
 	//virtual void onDisplay();
 
 	virtual void OnUpdate();
@@ -38,7 +38,7 @@ protected:
 	
 	std::weak_ptr<Entity> entity;
 	int m_ticks;
-	bool m_isAlive;
+	bool m_compIsAlive;
 	//std::shared_ptr<Mesh> m_mesh;
 	//std::shared_ptr<Material> m_material;
 

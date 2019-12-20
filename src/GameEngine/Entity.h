@@ -24,10 +24,12 @@ public:
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 		
 		t_rtn->entity = m_entSelf;
-		
+		//t_rtn->m_compIsAlive = true;
+
+
 		m_component.push_back(t_rtn);
 
-		t_rtn->OnInitalise();
+		t_rtn->onInitalise();
 
 		return t_rtn;
 	}
@@ -39,9 +41,10 @@ public:
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 		
 		t_rtn->entity = m_entSelf;
+
 		m_component.push_back(t_rtn);
 
-		t_rtn->OnInitalise(v);
+		t_rtn->onInitalise(v);
 
 		return t_rtn;
 	}
@@ -89,11 +92,11 @@ private:
 	std::weak_ptr<Core> m_core;
 	//ptr to self
 	std::weak_ptr<Entity> m_entSelf;
-	bool m_isAlive;
+	bool m_entIsAlive;
 	//int m_tick;
 	
 	//pointer to transform
-	std::weak_ptr<Transform> _trans;
+	std::weak_ptr<Transform> m_trans;
 	std::weak_ptr<CollisionDetection> m_checkCol;
 	//list of componets
 	std::list < std::shared_ptr<Component>> m_component;

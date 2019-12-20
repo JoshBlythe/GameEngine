@@ -14,42 +14,30 @@ Entity::~Entity()
 
 void Entity::Ticks()
 {
-	//do the delta time here.
-	//float time = SDL_GetTicks();
-	//float _differ = time - GetCore()->getEnviroment()->getDelts();
-
-	//std::cout << "ticking through! " << std::endl;
-	//will change to be delta time to run on system loop.
-		//for (int m_tick = 0; m_tick < 5; m_tick++)
-		{
-			Update();
-			
-		}	
+	Update();
 }
 
 void Entity::Update()
 {
+
 	for (std::list<std::shared_ptr<Component>>::iterator m_it =
 		m_component.begin(); m_it != m_component.end(); m_it++)
 	{
-		(*m_it)->OnTick();
+		(*m_it)->onTick();
 	}
-
-
 
 	//deleted a component if flagged to be deleted
-	for (auto it = m_component.begin(); it != m_component.end();)
-	{
-		if ((*it)->m_isAlive == false)
-		{
-			it = m_component.erase(it);
-		}
-		else
-		{
-
-			it++;
-		}
-	}
+	//for (auto it = m_component.begin(); it != m_component.end();)
+	//{
+	//	if ((*it)->m_compIsAlive == false)
+	//	{
+	//		it = m_component.erase(it);
+	//	}
+	//	else
+	//	{
+	//		it++;
+	//	}
+	//}
 
 }
 
@@ -63,7 +51,7 @@ void Entity::OnDisplay()
 	{
 		try
 		{
-			(*m_it)->OnDraw();
+			(*m_it)->onDraw();
 
 		}
 		catch (Exception& e)
@@ -79,12 +67,12 @@ void Entity::OnDisplay()
 void Entity::KillEntity()
 {
 	//flagging a entity to be deleted
-	m_isAlive = false;
+	m_entIsAlive = false;
 }
 
 std::shared_ptr<Transform> Entity::GetTransform()
 {
-	return _trans.lock();
+	return m_trans.lock();
 }
 
 std::shared_ptr<CollisionDetection> Entity::getCollision()

@@ -9,10 +9,10 @@ MeshRender::~MeshRender()
 {
 }
 
-void MeshRender::OnInitalise()
+void MeshRender::onInitalise()
 {
 	//std::string _fileloc = getCore()->getEnviroment()->fileLocations();
-    m_geMaterial = getCore()->getResources()->load<Material>("../resources/shader/meshTexShader");
+    m_geMaterial = getCore()->getResources()->load<Material>("/shader/meshTexShader");
 
 }
 
@@ -27,7 +27,7 @@ void MeshRender::SetMaterial(std::shared_ptr<Material> _material)
 	//this->m_geMaterial = _material->_rnShader;
 }
 
-void MeshRender::OnDraw()
+void MeshRender::onDraw()
 {
 	//might need to check this
 	std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();

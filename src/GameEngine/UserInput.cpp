@@ -7,7 +7,19 @@ void UserInput::onTick()
 
 void UserInput::isKey(int _key)
 {
+	m_keys.push_back(_key);
+}
 
+void UserInput::isKeyPressed(int _key)
+{
+	if (true)
+	{
+
+	}
+}
+
+void UserInput::isKeyReleased(int _key)
+{
 }
 
 

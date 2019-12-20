@@ -11,7 +11,7 @@ public:
 
 	~SoundSource();
 
-	void onInitialise();
+	//void onInitialise();
 	void onInitialise(std::shared_ptr<Sound> _sound);
 	void onTick();
 	void setAutoRemove(bool _autoRemove);
@@ -19,6 +19,7 @@ public:
 
 private:
 
+	ALint m_state;
 	ALuint m_sourceId;
 	bool m_autoRemove;
 
