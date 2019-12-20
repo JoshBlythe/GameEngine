@@ -2,6 +2,7 @@
 #include "Shader.h"
 #include "Core.h"
 #include "Enviroment.h"
+#include "Resources.h"
 
 
 #include "stb_image.h"
@@ -63,9 +64,16 @@ void Material::onLoad(const std::string& _fileName)
 	if (!_vertReadIn.is_open())
 	{
 		//TODO: If not open, try to load default one instead.
-		std::cout << fn << std::endl;
+		//std::cout << fn << std::endl;
 		//throw below exception message 
-		throw Exception("Error during opening of vertex shader file");
+		//throw Exception("Error during opening of vertex shader file");
+		//_rnShader = getCore()->getResources()->load<Shader>("/shader/meshTexShader");
+
+		setShader(m_shader);
+		
+
+		_rnShader = getCore()->getResources()->load<Shader>("/shader/meshTexShader");
+
 	}
 
 	_rnShader = getCore()->m_graphicalContext->createShader();

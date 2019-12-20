@@ -4,7 +4,7 @@
 void Shader::load(std::string& _fileName)
 {
 	std::string fn = _fileName + ".glsl";
-	_shaderIntern = getCore()->m_graphicalContext->createShader();
+	//_shaderIntern = getCore()->m_graphicalContext->createShader();
 	
 	//convert location in string above to fstream format to be then used
 	std::fstream _vertReadIn(fn.c_str());

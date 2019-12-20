@@ -77,7 +77,7 @@ std::shared_ptr<Resources> Core::getResources()
 
 std::shared_ptr<Camera> Core::getCamera()
 {
-	std::cout << m_camera.lock().get() << std::endl;
+	//std::cout << m_camera.lock().get() << std::endl;
 	return m_camera.lock();
 }
 

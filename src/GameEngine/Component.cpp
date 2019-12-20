@@ -5,7 +5,7 @@
 Component::Component()
 {
 	//m_ticks = 5;
-	//m_compIsAlive = true;
+	m_compIsAlive = true;
 	//m_mesh = NULL;
 	//m_material = NULL;
 }

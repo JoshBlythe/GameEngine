@@ -2,6 +2,7 @@
 #include <AL/alc.h>
 
 class Sound;
+class Entity;
 
 #include "Component.h"
 
