@@ -33,7 +33,7 @@ public:
 	virtual void onTick();
 	//virtual void onDisplay();
 
-	virtual void OnUpdate();
+    virtual void onUpdate();
 protected:
 	
 	std::weak_ptr<Entity> entity;

@@ -26,11 +26,11 @@ public:
 		m_objectScale.x = _posVec.x, m_objectScale.y = _posVec.y, m_objectScale.z = _posVec.z;
 	}
 
-	glm::vec3 GetPosition() { return m_objectPosition; }
-	glm::vec3 GetRotation() { return m_objectRotation; }
-	glm::vec3 GetScale() { return m_objectScale; }
+    glm::vec3 getPosition() { return m_objectPosition; }
+    glm::vec3 getRotation() { return m_objectRotation; }
+    glm::vec3 getScale() { return m_objectScale; }
 
-	glm::mat4 GetModel(); 
+    glm::mat4 getModel();
 
 protected:
 	//position

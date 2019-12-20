@@ -47,7 +47,7 @@ void MeshRender::onDraw()
 	//check if there is a shader
 	if (m_geMaterial->_rnShader)
 	{
-		m_geMaterial->_rnShader->setUniform("u_Model", _trans->GetModel());
+        m_geMaterial->_rnShader->setUniform("u_Model", _trans->getModel());
 		m_geMaterial->_rnShader->setUniform("u_View", getCore()->getCamera()->GetView());
 		m_geMaterial->_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
 

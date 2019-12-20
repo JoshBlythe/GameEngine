@@ -27,7 +27,7 @@ std::shared_ptr<Entity> Component::getEntity()
 
 std::shared_ptr<Core> Component::getCore()
 {
-	return getEntity()->GetCore();
+    return getEntity()->getCore();
 }
 
 std::shared_ptr<Resources> Component::getResources()
@@ -45,7 +45,7 @@ void Component::onTick()
 	//for (int i = 0; i < m_ticks; i++)
 	//{
 		//std::cout << "ticking through object! " << std::endl;
-		OnUpdate();
+        onUpdate();
 
 	//}
 }
@@ -56,7 +56,7 @@ void Component::onTick()
 //}
 
 
-void Component::OnUpdate()
+void Component::onUpdate()
 {
 	//std::cout << "This is Object Update! " << std::endl;
 }

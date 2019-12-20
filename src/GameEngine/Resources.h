@@ -20,7 +20,7 @@ public:
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 
-		t_rtn->_core = m_core;
+        t_rtn->m_core = m_core;
 
 		t_rtn->onLoad(_path);
 
@@ -41,7 +41,7 @@ public:
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 
-		_resources.push_back(t_rtn);
+        m_resources.push_back(t_rtn);
 
 		return t_rtn;
 
@@ -52,7 +52,7 @@ public:
 private:
 	friend class Core;
 
-	std::list<std::shared_ptr<Resource>> _resources;
+    std::list<std::shared_ptr<Resource>> m_resources;
 	std::weak_ptr<Core> m_core;
 
 };

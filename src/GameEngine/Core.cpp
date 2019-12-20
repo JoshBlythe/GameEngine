@@ -19,10 +19,15 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 	//this will be used to moving up through the hierearchy
 	c_rtn->m_self = c_rtn;
 
-	c_rtn->m_resources = std::make_shared<Resources>();
+    //initalise screen
+    c_rtn->m_screen = std::make_shared<Screen>();
+    c_rtn->getScreen()->m_core = c_rtn;
 
+    //initalise Resources
+	c_rtn->m_resources = std::make_shared<Resources>();
 	c_rtn->getResources()->m_core = c_rtn;
 
+    //initalise Enviroment
     c_rtn->m_enviroment = std::make_shared<Enviroment>(argc, argv);
 	c_rtn->getEnviroment()->m_eCore = c_rtn;
 
@@ -32,14 +37,14 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 	//c_rtn->m_camera = std::make_shared<Camera>();
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
 
-	c_rtn->Window();
+    c_rtn->windowInit();
 
 	//pass sdl window into context to ensure rend doesn't hold onto sdl once the engine has
 	//closed
 	c_rtn->m_graphicalContext = rend::Context::initialize(c_rtn->m_window);
 	
 	//here needs to be included for sound to run
-	c_rtn->SoundInit();
+    c_rtn->soundInit();
 
 	//return core
 	return c_rtn;
@@ -97,13 +102,13 @@ std::shared_ptr<rend::Context> Core::getGraphicalContext()
 }
 
 
-void Core::Window()
+void Core::windowInit()
 {
 	//get screen coordinates
-	m_screen = std::make_shared<Screen>();
+    //m_screen = std::make_shared<Screen>();
 
-	m_windowW = m_screen->GetScreen().x;
-	m_windowH = m_screen->GetScreen().y;
+    m_windowW = m_screen->getScreen().x;
+    m_windowH = m_screen->getScreen().y;
 
 	//initalise SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -129,7 +134,7 @@ void Core::Window()
 	}
 }
 
-void Core::SoundInit()
+void Core::soundInit()
 {
 	// open up OpenAL and the device
 	m_device = alcOpenDevice(NULL);
@@ -222,7 +227,7 @@ void Core::runCore()
 		{
 			//unasign pointer allowing use to access Entity functions
 			//std::cout << "?" << std::endl;
-			(*iter)->OnDisplay();
+            (*iter)->onDisplay();
 		}
 
 		//tell the engine which window to use

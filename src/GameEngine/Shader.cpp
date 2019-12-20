@@ -33,6 +33,6 @@ void Shader::load(std::string& _fileName)
 		_vertfileData += _vertfileLine + "\n";
 	}
 
-	_shaderIntern->parse(_vertfileData);
+    m_shaderIntern->parse(_vertfileData);
 	//_shader
 }

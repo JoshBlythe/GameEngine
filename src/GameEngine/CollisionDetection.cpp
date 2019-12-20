@@ -14,7 +14,7 @@ CollisionDetection::~CollisionDetection()
 
 void CollisionDetection::onInitalise()
 {
-	m_lastPos = getEntity()->GetTransform()->GetPosition();
+    m_lastPos = getEntity()->getTransform()->getPosition();
 }
 
 void CollisionDetection::setSize(glm::vec3 _size)
@@ -38,7 +38,7 @@ void CollisionDetection::collisionLoop()
 	std::vector<std::shared_ptr<Entity>> _aabb;
 
 	getCore()->getEntity<CollisionDetection>(_aabb);
-	glm::vec3 _currPos = getEntity()->GetTransform()->GetPosition();
+    glm::vec3 _currPos = getEntity()->getTransform()->getPosition();
 
 	for (std::vector<std::shared_ptr<Entity>>::iterator it = _aabb.begin();
 		it != _aabb.end(); it++)
@@ -55,7 +55,7 @@ void CollisionDetection::collisionLoop()
 		
 		_currPos = _sp;
 		_currPos = _currPos - m_offSet;
-		getEntity()->GetTransform()->setPosition(_currPos);
+        getEntity()->getTransform()->setPosition(_currPos);
 		m_lastPos = _currPos;
 
 	}
@@ -63,7 +63,7 @@ void CollisionDetection::collisionLoop()
 
 bool CollisionDetection::isColliding(glm::vec3 _pos, glm::vec3 _size)
 {
-	glm::vec3 a = getEntity()->GetTransform()->GetPosition() + m_offSet;
+    glm::vec3 a = getEntity()->getTransform()->getPosition() + m_offSet;
 	glm::vec3& as = this->m_boxSize;
 	glm::vec3& b = _pos;
 	glm::vec3& bs = _size;

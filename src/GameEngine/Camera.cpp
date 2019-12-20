@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Transform.h"
 #include "Ray.h"
+#include "Screen.h"
 
 #include <glm/glm.hpp>
 
@@ -23,19 +24,21 @@ void Camera::onInitalise()
 
 glm::mat4 Camera::GetView()
 {
-	glm::mat4 m_viewMat = glm::inverse(getEntity()->getComponent<Transform>()->GetModel());
+    glm::mat4 m_viewMat = glm::inverse(getEntity()->getComponent<Transform>()->getModel());
 
 	return m_viewMat;
 }
 
 glm::mat4 Camera::GetProj()
 {
-	//std::cout << "[]" << getCore()->getScreen()->GetScreen().x << std::endl;
-	//int _windowW = getCore()->getScreen()->GetScreen().x;
-	//int _windowY = getCore()->getScreen()->GetScreen().y;
+    //std::cout<< getCore()->getWindowW() << std::endl;
+    //std::cout << "[]" << getCore()->getScreen()->getScreen().x << std::endl;
+    //int _windowW = getCore()->getScreen()->getScreen().x;
+    //int _windowY = getCore()->getScreen()->getScreen().y;
 
-	int _windowW = 800;
-	int _windowY = 600;
+    //TODO:CHECK IF PASSING THE VALUE THEN USING IS COURSING THE ODD POSITIONING OF CAMERA AND MODEL
+    int _windowW = getCore()->getWindowH();
+    int _windowY = getCore()->getWindowH();
 	
 	glm::mat4 m_projMatbsc = glm::perspective(45.0f, (float)_windowW / (float)_windowY, 0.1f, 100.0f);
 

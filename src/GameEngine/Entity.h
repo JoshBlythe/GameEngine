@@ -73,17 +73,17 @@ public:
 	//update
 	void Update();
 	//display function to be overide
-	virtual void OnDisplay();
+    virtual void onDisplay();
 
 	//flag to be deleted
-	void KillEntity();
+    void killEntity();
 
 	//return pointers to classes
-	std::shared_ptr<Transform> GetTransform();
+    std::shared_ptr<Transform> getTransform();
 	std::shared_ptr<CollisionDetection> getCollision();
 
 	//return pointer to core
-	std::shared_ptr<Core> GetCore();
+    std::shared_ptr<Core> getCore();
 
 private:
 	//friend class core to enable access to functions

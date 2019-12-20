@@ -52,8 +52,11 @@ public:
 	//std::shared_ptr<CollisionDetection> getCollision();
 	std::shared_ptr<rend::Context> getGraphicalContext();
 
-	void Window();
-	void SoundInit();
+    void windowInit();
+    void soundInit();
+
+    int getWindowW() {return m_windowW;}
+    int getWindowH() {return m_windowH;}
 
 	~Core();
 	//main loop
@@ -78,6 +81,7 @@ private:
 	friend class Mesh;
 	friend class Shader;
 	friend class Material;
+    //friend class Screen;
 	//friend class Sound;
 	//friend class CollsionDetection;
 

@@ -16,9 +16,9 @@ public:
 	Player();
 	~Player();
 	 
-	void InitPlayer(std::shared_ptr<Mesh> _obj, glm::vec3 _position);
+    void initPlayer(std::shared_ptr<Mesh> _obj, glm::vec3 _position);
 	void Update();
-	void IsSelected();
+    void isSelected();
 	void movePosition();
 
 	void moveCamera(float _deltaTime);

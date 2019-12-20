@@ -1,6 +1,7 @@
 #include <glm/glm.hpp>
 
 class Ray;
+class Screen;
 
 #include "Component.h"
 

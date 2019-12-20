@@ -42,7 +42,7 @@ void Entity::Update()
 }
 
 
-void Entity::OnDisplay()
+void Entity::onDisplay()
 {
 	//interate though the list and draw each Object
 
@@ -64,13 +64,13 @@ void Entity::OnDisplay()
 	}
 }
 
-void Entity::KillEntity()
+void Entity::killEntity()
 {
 	//flagging a entity to be deleted
 	m_entIsAlive = false;
 }
 
-std::shared_ptr<Transform> Entity::GetTransform()
+std::shared_ptr<Transform> Entity::getTransform()
 {
 	return m_trans.lock();
 }
@@ -81,7 +81,7 @@ std::shared_ptr<CollisionDetection> Entity::getCollision()
 	return getComponent<CollisionDetection>();
 }
 
-std::shared_ptr<Core> Entity::GetCore()
+std::shared_ptr<Core> Entity::getCore()
 {
 	//lock weak pointer to return shared pointer to core.
 	return m_core.lock();

@@ -10,7 +10,7 @@ Transform::~Transform()
 {
 }
 
-glm::mat4 Transform::GetModel()
+glm::mat4 Transform::getModel()
 {
 	// create ident mat4
 	glm::mat4 _m(1.0f);

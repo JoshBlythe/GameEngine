@@ -15,8 +15,8 @@ void Sound::onLoad(const std::string &_path)
 {
 	m_bufferID = 0;
 
-	_format = 0;
-	_frequ = 0;
+    m_format = 0;
+    m_frequ = 0;
 	std::vector<char> _bufferData;
 
 	alGenBuffers(1, &m_bufferID);
@@ -25,10 +25,10 @@ void Sound::onLoad(const std::string &_path)
 	std::string fn = _fileloc + "/" + _path + ".ogg";
 
 	//load_ogg not found
-	load_ogg(fn, _bufferData, _format, _frequ);
+    load_ogg(fn, _bufferData, m_format, m_frequ);
 
-	alBufferData(m_bufferID, _format, &_bufferData[0],
-		static_cast<ALsizei>(_bufferData.size()), _frequ);
+    alBufferData(m_bufferID, m_format, &_bufferData[0],
+        static_cast<ALsizei>(_bufferData.size()), m_frequ);
 
 }
 

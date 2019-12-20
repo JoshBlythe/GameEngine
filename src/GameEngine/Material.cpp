@@ -66,38 +66,34 @@ void Material::onLoad(const std::string& _fileName)
 		//TODO: If not open, try to load default one instead.
 		//std::cout << fn << std::endl;
 		//throw below exception message 
-		//throw Exception("Error during opening of vertex shader file");
-		//_rnShader = getCore()->getResources()->load<Shader>("/shader/meshTexShader");
+        //throw Exception("Error during opening of vertex shader file");
+        m_shader = getCore()->getResources()->load<Shader>("/shader/meshTexShader");
+        _rnShader = m_shader->m_shaderIntern;
 
-		setShader(m_shader);
-		
+    }
 
-		_rnShader = getCore()->getResources()->load<Shader>("/shader/meshTexShader");
+    _rnShader = getCore()->m_graphicalContext->createShader();
 
-	}
+    //file data
+    std::string _vertfileData;
+    //file line
+    std::string _vertfileLine;
 
-	_rnShader = getCore()->m_graphicalContext->createShader();
-
-	//file data
-	std::string _vertfileData;
-	//file line
-	std::string _vertfileLine;
-
-	//while file hasn't closed
-	while (!_vertReadIn.eof())
-	{
-		//get the current line
-		std::getline(_vertReadIn, _vertfileLine);
-		//store data.
-		_vertfileData += _vertfileLine + "\n";
-	}
+    //while file hasn't closed
+    while (!_vertReadIn.eof())
+    {
+        //get the current line
+        std::getline(_vertReadIn, _vertfileLine);
+        //store data.
+        _vertfileData += _vertfileLine + "\n";
+    }
 
 	_rnShader->parse(_vertfileData);
 }
 
 void Material::setShader(std::shared_ptr<Shader> _shader)
 {
-	this->_rnShader = _shader->_shaderIntern;
+    this->_rnShader = _shader->m_shaderIntern;
 }
 
 

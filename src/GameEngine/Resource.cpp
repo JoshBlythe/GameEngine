@@ -16,10 +16,10 @@ void Resource::onLoad(const std::string& _fileName)
 
 std::shared_ptr<Resources> Resource::getResources()
 {
-	return _resources.lock();
+    return m_resources.lock();
 }
 
 std::shared_ptr<Core> Resource::getCore()
 {
-	return _core.lock();
+    return m_core.lock();
 }

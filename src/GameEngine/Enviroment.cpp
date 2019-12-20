@@ -48,7 +48,7 @@ Enviroment::Enviroment(int argc, char** argv)
       dirName += "/resources";
     }
 
-    std::cout<< dirName << std::endl;
+    //std::cout<< dirName << std::endl;
 
    //return _command;
 

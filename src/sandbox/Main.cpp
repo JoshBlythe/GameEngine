@@ -19,7 +19,7 @@ struct Rotator : public Component
   void onTick()
   {
     rot+= 0.001f;
-    getEntity()->GetTransform()->setRotation(glm::vec3(0, rot, 0));
+    getEntity()->getTransform()->setRotation(glm::vec3(0, rot, 0));
 
     // if(getCore()->getKeyboard()->getKey(KEY_UP))
     // // move forward
@@ -67,13 +67,13 @@ int main(int argc, char* argv[])
 
 	
 	//set scale
-	_catUnit->GetTransform()->setScale(glm::vec3(0.2, 0.2, 0.2));
+    _catUnit->getTransform()->setScale(glm::vec3(0.2, 0.2, 0.2));
 
 	//set the position of the camera
 	//set position of models
-	_catUnit->GetTransform()->setPosition(glm::vec3(0, 0, -4));
-	_map->GetTransform()->setPosition(glm::vec3(0, -2, -8));
-	_cam->GetTransform()->setPosition(glm::vec3(0, 0, 0));
+    _catUnit->getTransform()->setPosition(glm::vec3(0, 0, -4));
+    _map->getTransform()->setPosition(glm::vec3(0, -2, -8));
+    _cam->getTransform()->setPosition(glm::vec3(0, 0, 0));
 
 	//sound loading
 	//load sound source from file
