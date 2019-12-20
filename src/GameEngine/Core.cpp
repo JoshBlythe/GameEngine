@@ -188,7 +188,10 @@ void Core::runCore()
 			(*iter)->Ticks();
 		}
 //TODO: isAlive initialized?
-		//TODO, check removeal of soundSource
+		//TODO, check removal of soundSource
+		//syntax correction
+		//add componet removal
+		//add camera movement (keyboard class)
 
 		//check if a items within the list has been flagged to be deleted
 		//for (std::list<std::shared_ptr<Entity>>::iterator
