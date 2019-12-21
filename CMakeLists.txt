@@ -77,6 +77,8 @@ add_library(GameEngine
 	src/GameEngine/ModelCollider.h
 	src/GameEngine/UserInput.cpp
 	src/GameEngine/UserInput.h
+	src/GameEngine/Keyboard.cpp
+	src/GameEngine/Keyboard.h
 	src/GameEngine/Ray.cpp	
 	src/GameEngine/Ray.h
 	src/GameEngine/tribox.cpp

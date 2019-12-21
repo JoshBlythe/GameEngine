@@ -199,22 +199,22 @@ void Core::runCore()
 		//add camera movement (keyboard class)
 
 		//check if a items within the list has been flagged to be deleted
-		//for (std::list<std::shared_ptr<Entity>>::iterator
-		//	iter = m_entities.begin(); iter != m_entities.end();)
-		//{
-		//	//unasign pointer allowing use to access Entity functions
-		//	//check if the item is still alive
-		//	if ((*iter)->m_entIsAlive == false)
-		//	{
-		//		//if so delete it and set iter to equal new list size
-		//		iter = m_entities.erase(iter);
-		//	}
-		//	else
-		//	{
-		//		//else contiune interating through the list
-		//		iter++;
-		//	}
-		//}
+        for (std::list<std::shared_ptr<Entity>>::iterator
+            iter = m_entities.begin(); iter != m_entities.end();)
+        {
+            //unasign pointer allowing use to access Entity functions
+            //check if the item is still alive
+            if ((*iter)->m_entIsAlive == false)
+            {
+                //if so delete it and set iter to equal new list size
+                iter = m_entities.erase(iter);
+            }
+            else
+            {
+                //else contiune interating through the list
+                iter++;
+            }
+        }
 
 
 		//clear screen before render

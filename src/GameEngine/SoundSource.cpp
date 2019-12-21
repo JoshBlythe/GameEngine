@@ -31,8 +31,8 @@ void SoundSource::onTick()
 			//std::cout << "Sound Stopped!" << std::endl;
 			//setAutoRemove(m_compIsAlive);
 			//getEntity()->getComponent<SoundSource>()->m_compIsAlive = false;
-			//alDeleteSources(1, &m_sourceId);
-			//m_compIsAlive == false;
+            m_compIsAlive == false;
+            //alDeleteSources(1, &m_sourceId);
 			break;
 		}
 

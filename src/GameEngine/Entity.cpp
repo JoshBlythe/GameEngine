@@ -6,6 +6,7 @@
 
 Entity::Entity()
 {
+    m_entIsAlive = true;
 }
 
 Entity::~Entity()
