@@ -88,8 +88,8 @@ int main(int argc, char* argv[])
 	
 	
 	//set collision box size
-	//_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
-	//_map->getCollision()->setSize(glm::vec3(1, 1, 1));
+	_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
+	_map->getCollision()->setSize(glm::vec3(1, 1, 1));
 
 	//add collision
 	//catUnit->addComponent<CollisionDetection>();

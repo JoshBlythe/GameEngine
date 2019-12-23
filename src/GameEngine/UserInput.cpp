@@ -2,24 +2,76 @@
 
 void UserInput::onTick()
 {
+	//update current mouse position.
 	currMousePos();
+
+	//erase pressed and releases each frame
+	m_keysPressed.clear();
+	m_keysReleased.clear();
+
 }
 
 void UserInput::isKey(int _key)
 {
-	m_keys.push_back(_key);
+	//loop through 
+	for (size_t i = 0; i < m_keys.size(); i++)
+	{
+		//if key is in the vector
+		if (_key = m_keys[i])
+		{
+			//to next item in the list
+			continue;
+		}
+		else
+		{
+			//if not in the vector then add it
+			m_keys.push_back(_key);
+		}
+		 
+	}
+
 }
 
 void UserInput::isKeyPressed(int _key)
 {
-	if (true)
+	//check is key is pressed.
+	if (_key == SDL_KEYDOWN)
 	{
+		isKey(_key);
 
+		for (size_t i = 0; i < m_keysPressed.size(); i++)
+		{
+			if (_key = m_keysPressed[i])
+			{
+				continue;
+			}
+			else
+			{
+				m_keysPressed.push_back(_key);
+			}
+		}
 	}
+
+	isKeyReleased(_key);
 }
 
 void UserInput::isKeyReleased(int _key)
 {
+	if (_key == SDL_KEYUP)
+	{
+		for (size_t i = 0; i < m_keysReleased.size(); i++)
+		{
+			if (_key = m_keysReleased[i])
+			{
+				continue;
+			}
+			else
+			{
+				m_keysReleased.push_back(_key);
+			}
+		}
+
+	}
 }
 
 

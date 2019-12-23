@@ -12,6 +12,8 @@ public:
 
 	void onTick();
 
+
+	bool keyPressed(int _key);
 	void isKey(int _key);
 	void isKeyPressed(int _key);
 	void isKeyReleased(int _key);

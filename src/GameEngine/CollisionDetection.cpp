@@ -37,7 +37,7 @@ void CollisionDetection::collisionLoop()
 {
 	std::vector<std::shared_ptr<Entity>> _aabb;
 
-	getCore()->getEntity<CollisionDetection>(_aabb);
+	//getCore()->getEntity<CollisionDetection>(_aabb);
     glm::vec3 _currPos = getEntity()->getTransform()->getPosition();
 
 	for (std::vector<std::shared_ptr<Entity>>::iterator it = _aabb.begin();
