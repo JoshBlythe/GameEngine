@@ -10,19 +10,28 @@
 struct Rotator : public Component
 {
   float rot;
+  float _camMove;
 
   void onInitalise()
   {
     rot = 0;
+	_camMove = 0.0f;
   }
 
   void onTick()
   {
-    rot+= 0.001f;
-    getEntity()->getTransform()->setRotation(glm::vec3(0, rot, 0));
+    /*rot+= 0.001f;
+    getEntity()->getTransform()->setRotation(glm::vec3(0, rot, 0));*/
+
+	  _camMove *= getCore()->getEnviroment()->getDelts();
 
     // if(getCore()->getKeyboard()->getKey(KEY_UP))
     // // move forward
+	  if (getCore()->getKeyboard()->keyPressed(SDL_SCANCODE_W))
+	  {
+		  getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
+	  }
+
   }
 };
 
@@ -38,6 +47,7 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Entity> _catUnit = _core->addEntity();
 	std::shared_ptr<Entity> _map = _core->addEntity();
 
+	//_cam->addComponent<UserInput>();
 	_cam->addComponent<Rotator>();
 
 	//adding simple content to engine

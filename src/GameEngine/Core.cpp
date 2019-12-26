@@ -5,6 +5,7 @@
 #include "Resources.h"
 #include "Enviroment.h"
 #include "Camera.h"
+#include "Keyboard.h"
 #include "CollisionDetection.h"
 
 #include <AL/al.h>
@@ -26,6 +27,10 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
     //initalise Resources
 	c_rtn->m_resources = std::make_shared<Resources>();
 	c_rtn->getResources()->m_core = c_rtn;
+
+	//initalise keyboard
+	//c_rtn->m_keyboard = std::make_shared<Keyboard>();
+	//c_rtn->getKeyboard()->m_kCore = c_rtn;
 
     //initalise Enviroment
     c_rtn->m_enviroment = std::make_shared<Enviroment>(argc, argv);
@@ -94,6 +99,11 @@ std::shared_ptr<Screen> Core::getScreen()
 std::shared_ptr<Enviroment> Core::getEnviroment()
 {
 	return m_enviroment;
+}
+
+std::shared_ptr<Keyboard> Core::getKeyboard()
+{
+	return m_keyboard;
 }
 
 std::shared_ptr<rend::Context> Core::getGraphicalContext()

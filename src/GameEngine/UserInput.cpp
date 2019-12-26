@@ -11,6 +11,13 @@ void UserInput::onTick()
 
 }
 
+bool UserInput::keyPressed(int _key)
+{
+	isKeyPressed(_key);
+	
+	return true;
+}
+
 void UserInput::isKey(int _key)
 {
 	//loop through 

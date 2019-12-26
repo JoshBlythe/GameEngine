@@ -5,8 +5,8 @@
 
 #include <list>
 #include <memory>
-#include "RendInc.h"
 
+#include "RendInc.h"
 #include "Exception.h"
 
 //#include "Entity.h"
@@ -16,6 +16,7 @@ class Resources;
 class Mesh;
 class Material;
 class Camera;
+class Keyboard;
 class Enviroment;
 //class CollisionDetection;
 
@@ -49,6 +50,7 @@ public:
 	std::shared_ptr<Camera> getCamera();
 	std::shared_ptr<Screen> getScreen();
 	std::shared_ptr<Enviroment> getEnviroment();
+	std::shared_ptr<Keyboard> getKeyboard();
 	//std::shared_ptr<CollisionDetection> getCollision();
 	std::shared_ptr<rend::Context> getGraphicalContext();
 
@@ -93,6 +95,7 @@ private:
 	std::shared_ptr<Screen> m_screen;
 	std::shared_ptr<Resources> m_resources;
 	std::shared_ptr<Enviroment> m_enviroment;
+	std::shared_ptr<Keyboard> m_keyboard;
 	std::shared_ptr <rend::Context> m_graphicalContext;
 
 	//camera pointer

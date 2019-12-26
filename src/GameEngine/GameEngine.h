@@ -15,6 +15,8 @@
 #include "Sound.h"
 #include "MeshRender.h"
 #include "SoundSource.h"
+#include "Keyboard.h"
+#include "Enviroment.h"
 #include "CollisionDetection.h"
 #include "RendInc.h"
 
