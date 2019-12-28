@@ -9,28 +9,61 @@
 
 struct Rotator : public Component
 {
+  SDL_Event _event;
   float rot;
   float _camMove;
 
   void onInitalise()
   {
     rot = 0;
-	_camMove = 0.0f;
+    _camMove = 0;
   }
 
   void onTick()
   {
+
     /*rot+= 0.001f;
     getEntity()->getTransform()->setRotation(glm::vec3(0, rot, 0));*/
 
-	  _camMove *= getCore()->getEnviroment()->getDelts();
+        //TODO: CHECK INITIALISE VARIABLES OF CAMERA AND MODEL
+      _camMove *= 1.0f;
+
 
     // if(getCore()->getKeyboard()->getKey(KEY_UP))
     // // move forward
-	  if (getCore()->getKeyboard()->keyPressed(SDL_SCANCODE_W))
-	  {
-		  getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
-	  }
+      //if (getCore()->getKeyboard()->keyPressed(SDL_SCANCODE_W))
+      //{
+        //  getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
+      //}
+
+      //std::cout << _camMove << std::endl;
+      while (SDL_PollEvent(&_event))
+      {
+          std::cout <<"checking for event" << std::endl;
+          switch (_event.type)
+          {
+               case SDL_KEYDOWN:
+                switch(_event.key.keysym.sym)
+                {
+
+                    case SDLK_UP:
+                    {
+                        std::cout <<"checking for button" << std::endl;
+                        getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
+                        break;
+                    }
+                default:
+                    break;
+                }
+
+
+
+          }
+      }
+      //if(SDL_SCANCODE_W == SDL_KEYDOWN)
+      //{
+        //    getEntity()->getTransform()->setPosition(glm::vec3(0,_camMove, 0));
+      //}
 
   }
 };
