@@ -27,9 +27,14 @@ struct Rotator : public Component
 
     // if(getCore()->getKeyboard()->getKey(KEY_UP))
     // // move forward
-	  if (getCore()->getKeyboard()->keyPressed(SDL_SCANCODE_W))
+	  //if (getCore()->getKeyboard()->keyPressed(SDL_SCANCODE_W))
+	  //{
+		 // getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
+	  //}
+
+	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_W))
 	  {
-		  getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
+		  std::cout << "key pressed!" << std::endl;
 	  }
 
   }
