@@ -27,6 +27,8 @@ public:
 	bool isMouseClicked();
 
 private:
+	const Uint8* _keys;
+
 	std::vector<int> m_keys;
 	std::vector<int> m_keysPressed;
 	std::vector<int> m_keysReleased;

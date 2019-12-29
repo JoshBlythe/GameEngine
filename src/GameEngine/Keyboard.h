@@ -20,6 +20,7 @@ public:
 
 private:
 	friend class Core;
+	const Uint8* _keys;
 
     std::shared_ptr<UserInput> m_inputManger;
 

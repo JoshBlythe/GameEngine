@@ -8,7 +8,7 @@ Keyboard::Keyboard()
 {
 	m_inputManger = std::make_shared<UserInput>();
 
-    const Uint8* _keys = SDL_GetKeyboardState(NULL);
+    _keys = SDL_GetKeyboardState(NULL);
 }
 
 Keyboard::~Keyboard()
@@ -17,22 +17,22 @@ Keyboard::~Keyboard()
 
 bool Keyboard::getKey(SDL_Scancode _key)
 {
-	//if (SDL_KEYUP)
-	//{
-	//	if (_key == SDL_SCANCODE_W)
-	//	{
-	//		return true;
-	//	}
-	//}
+	//works
+		if (_keys[_key] && _keys[SDL_KEYDOWN])
+		{
+			return true;
+		}
 
-	if (m_inputManger->isKeyPressed(_key))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+
+
+	//if (m_inputManger->isKey(_key))
+	//{
+	//	return true;
+	//}
+	//else
+	//{
+	//	return false;
+	//}
 
 }
 
