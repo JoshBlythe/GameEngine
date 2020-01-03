@@ -1,5 +1,13 @@
 #include "UserInput.h"
 
+UserInput::UserInput()
+{
+}
+
+UserInput::~UserInput()
+{
+}
+
 void UserInput::onTick()
 {
 	//update current mouse position.
@@ -39,27 +47,34 @@ void UserInput::isKey(int _key)
 
 }
 
-void UserInput::isKeyPressed(int _key)
+bool UserInput::isKeyPressed(int _key)
 {
 	//check is key is pressed.
 	if (_key == SDL_KEYDOWN)
 	{
-		isKey(_key);
+		//isKey(_key);
 
 		for (size_t i = 0; i < m_keysPressed.size(); i++)
 		{
 			if (_key = m_keysPressed[i])
 			{
-				continue;
+
+				return true;
+				//continue;
 			}
 			else
 			{
+				//add key to vector
 				m_keysPressed.push_back(_key);
+				//return
+				return true;
 			}
 		}
 	}
 
-	isKeyReleased(_key);
+	return false;
+
+	//isKeyReleased(_key);
 }
 
 void UserInput::isKeyReleased(int _key)

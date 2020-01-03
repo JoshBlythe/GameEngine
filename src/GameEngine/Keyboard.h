@@ -14,22 +14,14 @@ public:
 
     //void CameraMovement(float _deltatime);
 
-	bool keyPressed(int _key);
-	void isKey(int _key);
-	void isKeyPressed(int _key);
-	void isKeyReleased(int _key);
+//#define SDL_KEYDOWN
 
+	bool getKey(SDL_Scancode _key);
 
 private:
-	std::vector<int> m_keys;
-	std::vector<int> m_keysPressed;
-	std::vector<int> m_keysReleased;
-	
 	friend class Core;
 
-    std::weak_ptr<UserInput> m_inputManger;
-    std::weak_ptr<Camera> m_camera;
-
+    std::shared_ptr<UserInput> m_inputManger;
 
 	std::weak_ptr<Core> m_kCore;
 
