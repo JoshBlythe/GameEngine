@@ -16,7 +16,7 @@
 std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 {
 	std::shared_ptr<Core> c_rtn = std::make_shared<Core>();
-	//referencing c to weak_ptr of care
+	//referencing c_rtn to weak_ptr of core
 	//this will be used to moving up through the hierearchy
 	c_rtn->m_self = c_rtn;
 
