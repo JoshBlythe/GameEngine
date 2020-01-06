@@ -1,48 +1,60 @@
-//#include <GameEngine/GameEngine.h>
-#include <memory>
-//#include <iostream>
-
-#define KEY_UP SDL_VKUP
-
 #include <GameEngine/GameEngine.h>
-//#include "TestScene.h"
 
-struct Rotator : public Component
+#include <memory>
+//#define KEY_UP SDL_VKUP
+
+
+struct cameraMovement : public Component
 {
-  SDL_Event _event;
-  float rot;
+
+  float _camrot;
   float _camMove;
+  float _delta;
+  glm::vec3 _currPos;
+  glm::vec3 _moveZ;
 
   void onInitalise()
   {
-    rot = 0;
-    _camMove = 0;
+	_delta = getCore()->getEnviroment()->getDelts();
+	_currPos = getEntity()->getTransform()->getPosition();
+	_moveZ = { 0, 0, -1 };
+    _camrot = 0;
+	_camMove = 0;
   }
 
-  void onTick()
+  void onUpdate()
   {
 
     /*rot+= 0.001f;
     getEntity()->getTransform()->setRotation(glm::vec3(0, rot, 0));*/
-
-        //TODO: CHECK INITIALISE VARIABLES OF CAMERA AND MODEL
-      _camMove *= 1.0f;
-
-
-    // if(getCore()->getKeyboard()->getKey(KEY_UP))
-    // // move forward
-
-	  //if (getCore()->getKeyboard()->keyPressed(SDL_SCANCODE_W))
-	  //{
-		 // getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
-	  //}
+	  _camMove = 2.0f;
+	  _currPos = getEntity()->getTransform()->getPosition();
 
 	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_W))
 	  {
-		  std::cout << "key pressed!" << std::endl;
-          getEntity()->getTransform()->setPosition(glm::vec3(0, _camMove, 0));
+		  //update Camera Position - Move Forward 
+		  std::cout << _currPos.x << _currPos.z << std::endl;
+		  getEntity()->getTransform()->setPosition(glm::vec3(0, 0, -_camMove));
+		  //_currPos.z -= _camMove;
+	  }
+	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_S))
+	  {
+		  //update Camera Position - Move Backwards
+		  std::cout << _currPos.x << _currPos.z << std::endl;
+		  getEntity()->getTransform()->setPosition(glm::vec3(0, 0, _camMove));
+	  }
+	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_A))
+	  {
+		  //update Camera Position - Move Backwards
+		  getEntity()->getTransform()->setPosition(glm::vec3(-_camMove, 0, 0));
+	  }
+	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_D))
+	  {
+		  //update Camera Position - Move Backwards
+		  getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
 	  }
 
+	  
   }
 };
 
@@ -59,7 +71,7 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Entity> _map = _core->addEntity();
 
 	//_cam->addComponent<UserInput>();
-	_cam->addComponent<Rotator>();
+	_cam->addComponent<cameraMovement>();
 
 	//adding simple content to engine
 	std::shared_ptr<Camera> _camera = _cam->addComponent<Camera>();
@@ -94,7 +106,7 @@ int main(int argc, char* argv[])
 	//set position of models
     _catUnit->getTransform()->setPosition(glm::vec3(0, 0, -4));
     _map->getTransform()->setPosition(glm::vec3(0, -2, -8));
-    _cam->getTransform()->setPosition(glm::vec3(0, 0, 0));
+    //_cam->getTransform()->setPosition(glm::vec3(0, 0, 0));
 
 	//sound loading
 	//load sound source from file

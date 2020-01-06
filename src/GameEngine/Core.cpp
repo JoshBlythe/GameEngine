@@ -29,8 +29,8 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 	c_rtn->getResources()->m_core = c_rtn;
 
 	//initalise keyboard
-	c_rtn->m_keyboard = std::make_shared<Keyboard>();
-	c_rtn->getKeyboard()->m_kCore = c_rtn;
+    //c_rtn->m_keyboard = std::make_shared<Keyboard>();
+    //c_rtn->getKeyboard()->m_kCore = c_rtn;
 
     //initalise Enviroment
     c_rtn->m_enviroment = std::make_shared<Enviroment>(argc, argv);
