@@ -28,17 +28,17 @@ void Entity::Update()
 	}
 
 	//deleted a component if flagged to be deleted
-	for (auto it = m_component.begin(); it != m_component.end();)
-	{
-		if ((*it)->m_compIsAlive == false)
-		{
-			it = m_component.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
+    for (auto it = m_component.begin(); it != m_component.end();)
+    {
+        if ((*it)->m_compIsAlive == false)
+        {
+            it = m_component.erase(it);
+        }
+        else
+        {
+            it++;
+        }
+    }
 
 }
 

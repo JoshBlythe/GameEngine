@@ -16,7 +16,7 @@
 std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 {
 	std::shared_ptr<Core> c_rtn = std::make_shared<Core>();
-	//referencing c to weak_ptr of care
+	//referencing c_rtn to weak_ptr of core
 	//this will be used to moving up through the hierearchy
 	c_rtn->m_self = c_rtn;
 
@@ -29,8 +29,8 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 	c_rtn->getResources()->m_core = c_rtn;
 
 	//initalise keyboard
-    //c_rtn->m_keyboard = std::make_shared<Keyboard>();
-    //c_rtn->getKeyboard()->m_kCore = c_rtn;
+    c_rtn->m_keyboard = std::make_shared<Keyboard>();
+    c_rtn->getKeyboard()->m_kCore = c_rtn;
 
     //initalise Enviroment
     c_rtn->m_enviroment = std::make_shared<Enviroment>(argc, argv);
@@ -42,14 +42,16 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 	//c_rtn->m_camera = std::make_shared<Camera>();
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
 
+    //initalise SDL window
     c_rtn->windowInit();
+    //here needs to be included for sound to run
+    c_rtn->soundInit();
 
 	//pass sdl window into context to ensure rend doesn't hold onto sdl once the engine has
 	//closed
 	c_rtn->m_graphicalContext = rend::Context::initialize(c_rtn->m_window);
 	
-	//here needs to be included for sound to run
-    c_rtn->soundInit();
+
 
 	//return core
 	return c_rtn;
@@ -74,8 +76,7 @@ std::shared_ptr<Entity> Core::addEntity()
 
 	//add a transform to each entity
 	e_rtn->m_trans = e_rtn->addComponent<Transform>();
-	//e_rtn->m_entIsAlive = true;
-	//e_rtn->GetCore()->m_camera = e_rtn->addComponent<Camera>();
+    //e_rtn->m_entIsAlive = true;
 
 	return e_rtn;
 }
@@ -204,7 +205,6 @@ void Core::runCore()
 		}
 //TODO: isAlive initialized?
 		//TODO, check removal of soundSource
-		//syntax correction
 		//add componet removal
 		//add camera movement (keyboard class)
 
@@ -222,7 +222,7 @@ void Core::runCore()
             else
             {
                 //else contiune interating through the list
-                iter++;
+               iter++;
             }
         }
 

@@ -22,16 +22,20 @@ void Component::onDraw()
 
 std::shared_ptr<Entity> Component::getEntity()
 {
+    //return a smart point to entity
 	return entity.lock();
 }
 
 std::shared_ptr<Core> Component::getCore()
 {
+    //get a pointer to entity from there use it get core function to get
+    //a smart pointer to core
     return getEntity()->getCore();
 }
 
 std::shared_ptr<Resources> Component::getResources()
 {
+    //use the get core class to quick access resources
 	return getCore()->getResources();
 }
 
