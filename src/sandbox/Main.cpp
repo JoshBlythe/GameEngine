@@ -35,7 +35,7 @@ struct cameraMovement : public Component
 	_camMove = 0;
   }
 
-  void onUpdate()
+  void onTick()
   {
 
     /*rot+= 0.001f;
@@ -47,7 +47,7 @@ struct cameraMovement : public Component
 	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_W))
 	  {
 		  //update Camera Position - Move Forward 
-		  std::cout << _currPos.x << _currPos.z << std::endl;
+		  //std::cout << _currPos.x << _currPos.z << std::endl;
 		  //getEntity()->getTransform()->setPosition(glm::vec3(0, 0, -_camMove));
 		  _currPos += _camMove * _moveZ;
 		  getEntity()->getTransform()->setPosition(_currPos);
@@ -55,7 +55,7 @@ struct cameraMovement : public Component
 	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_S))
 	  {
 		  //update Camera Position - Move Backwards
-		  std::cout << _currPos.x << _currPos.z << std::endl;
+		 // std::cout << _currPos.x << _currPos.z << std::endl;
 		  //getEntity()->getTransform()->setPosition(glm::vec3(0, 0, _camMove));
 		  _currPos -= _camMove * _moveZ;
 		  getEntity()->getTransform()->setPosition(_currPos);
@@ -95,6 +95,90 @@ struct cameraMovement : public Component
   }
 };
 
+struct movePlayer : public Component
+{
+	//amounts and delta store
+	float _camMove;
+	float _camRot;
+	float _delta;
+
+	//store current data
+	glm::vec3 _currPos;
+	glm::vec3 _currRot;
+
+	//update values
+	glm::vec3 _moveZ;
+	glm::vec3 _moveX;
+	glm::vec3 _rotator;
+
+	void onInitalise()
+	{
+		_delta = getCore()->getEnviroment()->getDelts();
+		_currPos = getEntity()->getTransform()->getPosition();
+		_currRot = getEntity()->getTransform()->getRotation();
+
+		_moveZ = { 0, 0, -1 };
+		_moveX = { -1, 0, 0 };
+		_rotator = { 0, -1, 0 };
+
+		_camRot = 0;
+		_camMove = 0;
+	}
+
+	void onTick()
+	{
+		_camMove = 0.01f;
+		_camRot = 0.01f;
+
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_UP))
+		{
+			//update Camera Position - Move Forward 
+			//std::cout << _currPos.x << _currPos.z << std::endl;
+			//getEntity()->getTransform()->setPosition(glm::vec3(0, 0, -_camMove));
+			_currPos += _camMove * _moveZ;
+			getEntity()->getTransform()->setPosition(_currPos);
+		}
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_DOWN))
+		{
+			//update Camera Position - Move Backwards
+			// std::cout << _currPos.x << _currPos.z << std::endl;
+			//getEntity()->getTransform()->setPosition(glm::vec3(0, 0, _camMove));
+			_currPos -= _camMove * _moveZ;
+			getEntity()->getTransform()->setPosition(_currPos);
+		}
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_LEFT))
+		{
+			//update Camera Position - Move Backwards
+			//getEntity()->getTransform()->setPosition(glm::vec3(-_camMove, 0, 0));
+			_currPos += _camMove * _moveX;
+			getEntity()->getTransform()->setPosition(_currPos);
+		}
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_RIGHT))
+		{
+			//update Camera Position - Move Backwards
+			//getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
+			_currPos -= _camMove * _moveX;
+			getEntity()->getTransform()->setPosition(_currPos);
+		}
+
+		//rotate Camara
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_Z))
+		{
+			//update Camera Position - Move Backwards
+			//getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
+			_currRot -= _camRot * _rotator;
+			getEntity()->getTransform()->setRotation(_currRot);
+		}
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_X))
+		{
+			//update Camera Position - Move Backwards
+			//getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
+			_currRot += _camRot * _rotator;
+			getEntity()->getTransform()->setRotation(_currRot);
+		}
+	}
+};
+
 int main(int argc, char* argv[])
 {
 	//initalise the engine
@@ -107,18 +191,14 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Entity> _catUnit = _core->addEntity();
 	std::shared_ptr<Entity> _map = _core->addEntity();
 
-	//_cam->addComponent<UserInput>();
-	//add movement to camera.
-	_cam->addComponent<cameraMovement>();
-
 	//adding simple content to engine
 	std::shared_ptr<Camera> _camera = _cam->addComponent<Camera>();
 	std::shared_ptr<MeshRender> _renderMesh = _catUnit->addComponent<MeshRender>();
 	std::shared_ptr<MeshRender> _renderMap = _map->addComponent<MeshRender>();
 
 	//add collision component to mesh
-    //std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
-    //std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
+    std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
+    std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
 	//load mesh from file
 	std::shared_ptr <Mesh> _unitMesh = _core->getResources()->load<Mesh>("curuthers/curuthers");
 	std::shared_ptr<Mesh> _mapMesh = _core->getResources()->load<Mesh>("graveyard/graveyard");
@@ -156,11 +236,15 @@ int main(int argc, char* argv[])
 	//playing sound from camera
 	_cam->addComponent<SoundSource>()->setSound(_hornSound);
 	
+    _catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
+    _map->getCollision()->setSize(glm::vec3(1, 1, 1));
+
 	
+	//add movement to camera.
+	_cam->addComponent<cameraMovement>();
+	_catUnit->addComponent<movePlayer>();
 	
 	//set collision box size
-    //_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
-    //_map->getCollision()->setSize(glm::vec3(1, 1, 1));
 
 	//add collision
 	//catUnit->addComponent<CollisionDetection>();

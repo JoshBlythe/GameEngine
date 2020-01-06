@@ -5,6 +5,7 @@
 
 CollisionDetection::CollisionDetection()
 {
+	m_offSet = { 2, 2, 2 };
 }
 
 CollisionDetection::~CollisionDetection()
@@ -30,19 +31,22 @@ void CollisionDetection::setOffSet(glm::vec3 _offSet)
 
 void CollisionDetection::onTick()
 {
-	//collisionLoop();
+	collisionLoop();
 }
 
 void CollisionDetection::collisionLoop()
 {
+	//vector of entities
 	std::vector<std::shared_ptr<Entity>> _aabb;
 
-	//getCore()->getEntity<CollisionDetection>(_aabb);
-    glm::vec3 _currPos = getEntity()->getTransform()->getPosition();
+	//get entity based on its component
+	getCore()->getEntities<CollisionDetection>(_aabb);
+	glm::vec3 _currPos = getEntity()->getTransform()->getPosition() + m_offSet;
 
 	for (std::vector<std::shared_ptr<Entity>>::iterator it = _aabb.begin();
 		it != _aabb.end(); it++)
 	{
+		//stop is colliding with itself
 		if (*it == getEntity())
 		{
 			continue;
@@ -51,6 +55,7 @@ void CollisionDetection::collisionLoop()
 		std::shared_ptr<CollisionDetection> _cd =
 			(*it)->getComponent<CollisionDetection>();
 
+		//call functions to check for collision
 		glm::vec3 _sp = _cd->getCollisionRes(_currPos, m_boxSize);
 		
 		_currPos = _sp;
@@ -147,17 +152,3 @@ glm::vec3 CollisionDetection::getCollisionRes(glm::vec3 _pos, glm::vec3 _size)
 
 	return _pos;
 }
-
-//bool CollisionDetection::triangle_intersect(glm::vec3 a1, glm::vec3 b1, glm::vec3 c1, glm::vec3 a2, glm::vec3 b2, glm::vec3 c2)
-//{
-//	int NoDivTriTriIsect(float V0[3], float V1[3], float V2[3],
-//		float U0[3], float U1[3], float U2[3]);
-//
-//	if (NoDivTriTriIsect((float*)&a1, (float*)&b1, (float*)&c1,
-//		(float*)&a2, (float*)&b2, (float*)&c2) == 1)
-//	{
-//		return true;
-//	}
-//
-//	return false;
-//}

@@ -28,7 +28,7 @@ void Material::onLoad(const std::string& _fileName)
 
 	if (_data)
 	{
-		_rnTexture = getCore()->m_graphicalContext->createTexture();
+		_rnTexture = getCore()->getGraphicalContext()->createTexture();
 		//throw Exception("Unable to load texture file!");
 		_rnTexture->setSize(_w, _h);
 
@@ -72,7 +72,7 @@ void Material::onLoad(const std::string& _fileName)
 
     }
 
-    _rnShader = getCore()->m_graphicalContext->createShader();
+    _rnShader = getCore()->getGraphicalContext()->createShader();
 
     //file data
     std::string _vertfileData;

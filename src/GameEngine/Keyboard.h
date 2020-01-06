@@ -16,7 +16,7 @@ public:
 
 //#define SDL_KEYDOWN
 
-    bool getKey(SDL_Scancode _key);
+    bool getKey(int _key);
 
     void isKey(int _key);
 	bool isKeyPressed(int _key);

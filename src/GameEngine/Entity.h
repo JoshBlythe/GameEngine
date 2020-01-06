@@ -67,7 +67,6 @@ public:
 		throw Exception("Specified Type was not found");
 	}
 
-
 	//tick through
 	void Ticks();
 	//update
