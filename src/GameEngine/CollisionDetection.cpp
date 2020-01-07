@@ -36,15 +36,15 @@ void CollisionDetection::onTick()
 
 void CollisionDetection::collisionLoop()
 {
-	//vector of entities
-	std::vector<std::shared_ptr<Entity>> _aabb;
+	//vector of entities which have collision attached to them
+	std::vector<std::shared_ptr<Entity>> _allCollisionTag;
 
 	//get entity based on its component
-	getCore()->getEntities<CollisionDetection>(_aabb);
+	getCore()->getEntities<CollisionDetection>(_allCollisionTag);
 	glm::vec3 _currPos = getEntity()->getTransform()->getPosition() + m_offSet;
 
-	for (std::vector<std::shared_ptr<Entity>>::iterator it = _aabb.begin();
-		it != _aabb.end(); it++)
+	for (std::vector<std::shared_ptr<Entity>>::iterator it = _allCollisionTag.begin();
+		it != _allCollisionTag.end(); it++)
 	{
 		//stop is colliding with itself
 		if (*it == getEntity())

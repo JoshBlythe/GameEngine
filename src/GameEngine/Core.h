@@ -27,20 +27,23 @@ public:
 
 	std::shared_ptr<Entity> addEntity();
 
-	template<typename T, typename V>
-	std::shared_ptr<T> getEntities(V v)
+	template<typename T>
+	void getEntities(std::vector<std::shared_ptr<Entity>> _vect)
 	{
-		std::shared_ptr<T> t_rtn = std::make_shared<T>();
+		//std::shared_ptr<T> t_rtn = std::make_shared<T>();
+		bool _isComponentFound;
+
 
 		for (auto it = m_entities.begin();
 			it != m_entities.end(); it++)
 		{
-
+			_isComponentFound = (*it)->getTheComponent<T>();
 			//t_rtn->getEntity()->getComponent();
-			t_rtn = std::dynamic_pointer_cast<T>(*it);
-			if (t_rtn)
+			if (_isComponentFound)
 			{
-				return t_rtn;
+				//might need to pushback into v instead.
+				_vect.push_back(*it);
+				
 			}
 		}
 
