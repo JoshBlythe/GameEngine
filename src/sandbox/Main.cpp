@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
 
 	//_cam->addComponent<UserInput>();
 	//add movement to camera.
-    //_cam->addComponent<cameraMovement>();
+    _cam->addComponent<cameraMovement>();
 
 	//adding simple content to engine
 	std::shared_ptr<Camera> _camera = _cam->addComponent<Camera>();
