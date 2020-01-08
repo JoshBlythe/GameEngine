@@ -31,43 +31,44 @@ struct cameraMovement : public Component
 	_moveX = { -1, 0, 0 };
 	_rotator = { 0, -1, 0 };
 
-    _camRot = 0;
-	_camMove = 0;
+    //_camRot = 0;
+    //_camMove = 0;
+    _camMove = 0.01f;
+    _camRot = 0.01f;
   }
 
-  void onUpdate()
+  void onTick()
   {
 
     /*rot+= 0.001f;
     getEntity()->getTransform()->setRotation(glm::vec3(0, rot, 0));*/
-	  _camMove = 0.01f;
-	  _camRot = 0.01f;
-	  //_currPos = getEntity()->getTransform()->getPosition();
 
-	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_W))
+
+      std::cout << getCore()->getEnviroment()->getDelts() << std::endl;
+
+      if (getCore()->getKeyboard()->getKey(GE_UP))
 	  {
 		  //update Camera Position - Move Forward 
-		  std::cout << _currPos.x << _currPos.z << std::endl;
-		  //getEntity()->getTransform()->setPosition(glm::vec3(0, 0, -_camMove));
-		  _currPos += _camMove * _moveZ;
+          //std::cout << _currPos.x << _currPos.z << std::endl;
+          _currPos += _camMove * _moveZ;
 		  getEntity()->getTransform()->setPosition(_currPos);
 	  }
-	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_S))
+      if (getCore()->getKeyboard()->getKey(GE_DOWN))
 	  {
 		  //update Camera Position - Move Backwards
-		  std::cout << _currPos.x << _currPos.z << std::endl;
+          //std::cout << _currPos.x << _currPos.z << std::endl;
 		  //getEntity()->getTransform()->setPosition(glm::vec3(0, 0, _camMove));
 		  _currPos -= _camMove * _moveZ;
 		  getEntity()->getTransform()->setPosition(_currPos);
 	  }
-	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_A))
+      if (getCore()->getKeyboard()->getKey(GE_LEFT))
 	  {
 		  //update Camera Position - Move Backwards
 		  //getEntity()->getTransform()->setPosition(glm::vec3(-_camMove, 0, 0));
 		  _currPos += _camMove * _moveX;
 		  getEntity()->getTransform()->setPosition(_currPos);
 	  }
-	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_D))
+      if (getCore()->getKeyboard()->getKey(GE_RIGHT))
 	  {
 		  //update Camera Position - Move Backwards
 		  //getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
@@ -109,7 +110,7 @@ int main(int argc, char* argv[])
 
 	//_cam->addComponent<UserInput>();
 	//add movement to camera.
-	_cam->addComponent<cameraMovement>();
+    //_cam->addComponent<cameraMovement>();
 
 	//adding simple content to engine
 	std::shared_ptr<Camera> _camera = _cam->addComponent<Camera>();

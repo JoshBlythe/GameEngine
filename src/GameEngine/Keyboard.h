@@ -2,6 +2,20 @@
 #include <memory>
 #include <vector>
 
+//define the key // this is needed for all keys in game
+#define GE_UP SDLK_UP
+#define GE_DOWN SDLK_DOWN
+#define GE_LEFT SDLK_LEFT
+#define GE_RIGHT SDLK_RIGHT
+//Player Movement
+#define GE_W SDLK_W
+#define GE_S SDLK_S
+#define GE_A SDLK_A
+#define GE_D SDLK_D
+//Player Rotate
+#define GE_Q SDLK_Q
+#define GE_E SDLK_E
+
 class Core;
 class UserInput;
 class Camera;
@@ -16,10 +30,7 @@ public:
 
 //#define SDL_KEYDOWN
 
-    bool getKey(SDL_Scancode _key);
-
-    void isKey(int _key);
-	bool isKeyPressed(int _key);
+    bool getKey(int _key);
 
 private:
 	friend class Core;

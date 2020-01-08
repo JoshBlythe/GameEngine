@@ -4,6 +4,8 @@ Transform::Transform()
 {
 	//set default scale
 	m_objectScale = { 1,1,1 };
+    m_objectPosition = {0,0,0};
+    m_objectRotation = {0,0,0};
 	//set position
 	//m_objectPosition = { 0,0,0 };
 }

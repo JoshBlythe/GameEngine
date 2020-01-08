@@ -178,8 +178,8 @@ void Core::soundInit()
 
 void Core::runCore()
 {
-	//m_enviroment = std::make_shared<Enviroment>();
-	getEnviroment()->initDelts();
+    //call the enviroment initalise function
+     getEnviroment()->initDelts();
 	//loop variable
 	bool m_looper = true;
 	//loop condition
@@ -194,7 +194,32 @@ void Core::runCore()
 				m_looper = false;
 				//throw Exception("Close temp");
 			}
+
+            //TODO have keys just hold all the keys pressed,
+            //have keys down the keys that are currently down, and key is up remove them from the
+            // vector and add them up the up
+            else if(m_event.type == SDL_KEYDOWN)
+            {
+                //add key to vector
+                m_keyboard->m_keysPressed.push_back(m_event.key.keysym.sym);
+            }
+            else if (m_event.type == SDL_KEYUP)
+            {
+                for (size_t i = 0; i < m_keyboard->m_keysPressed.size(); i++ )
+                {
+                    if(m_keyboard->m_keysPressed.at(i) == m_event.key.keysym.sym)
+                    {
+                        //remove key from vector
+                        m_keyboard->m_keysPressed.erase(m_keyboard->m_keysPressed.begin()+ i);
+                        //ensure the next value isn't missed
+                        i--;
+                    }
+                }
+                //m_keyboard->m_keysReleased.push_back(m_event.key.keysym.sym);
+            }
 		}
+
+
 
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
@@ -203,7 +228,8 @@ void Core::runCore()
 			//unasign pointer allowing use to access Entity functions
 			(*iter)->Ticks();
 		}
-//TODO: isAlive initialized?
+
+       //TODO: isAlive initialized?
 		//TODO, check removal of soundSource
 		//add componet removal
 		//add camera movement (keyboard class)
@@ -216,6 +242,9 @@ void Core::runCore()
             //check if the item is still alive
             if ((*iter)->m_entIsAlive == false)
             {
+                //TODO:
+                //should before deleting the entity delete all the components attached to it
+
                 //if so delete it and set iter to equal new list size
                 iter = m_entities.erase(iter);
             }

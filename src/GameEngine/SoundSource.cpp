@@ -21,7 +21,7 @@ void SoundSource::onTick()
 {
 
 	//abort();
-	while (true)
+    //while (true)
 	{
 		m_state = 0;
 		alGetSourcei(m_sourceId, AL_SOURCE_STATE, &m_state);
@@ -33,7 +33,6 @@ void SoundSource::onTick()
 			//getEntity()->getComponent<SoundSource>()->m_compIsAlive = false;
             m_compIsAlive = false;
             //alDeleteSources(1, &m_sourceId);
-			break;
 		}
 
 	}
