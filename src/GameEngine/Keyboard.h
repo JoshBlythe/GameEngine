@@ -8,13 +8,13 @@
 #define GE_LEFT SDLK_LEFT
 #define GE_RIGHT SDLK_RIGHT
 //Player Movement
-#define GE_W SDLK_W
-#define GE_S SDLK_S
-#define GE_A SDLK_A
-#define GE_D SDLK_D
+#define GE_W SDLK_w
+#define GE_S SDLK_s
+#define GE_A SDLK_a
+#define GE_D SDLK_d
 //Player Rotate
-#define GE_Q SDLK_Q
-#define GE_E SDLK_E
+#define GE_Q SDLK_q
+#define GE_E SDLK_e
 
 class Core;
 class UserInput;
@@ -31,6 +31,10 @@ public:
 //#define SDL_KEYDOWN
 
     bool getKey(int _key);
+
+
+    void isKey(int _key);
+	bool isKeyPressed(int _key);
 
 private:
 	friend class Core;

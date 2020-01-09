@@ -17,6 +17,9 @@ public:
 	Entity();
 	~Entity();
 
+    //friend class core to enable access to private varibales of Entity
+    friend class Core;
+
 	//create object template without value
 	template<typename T> 
 	std::shared_ptr<T> addComponent()
@@ -67,6 +70,24 @@ public:
 		throw Exception("Specified Type was not found");
 	}
 
+	template<typename T>
+	bool getTheComponent()
+	{
+		std::shared_ptr<T> t_rtn = std::make_shared<T>();
+
+		for (auto it = m_component.begin();
+			it != m_component.end(); it++)
+		{
+			t_rtn = std::dynamic_pointer_cast<T>(*it);
+			if (t_rtn)
+			{
+				return true;
+			}
+        }
+        return  false;
+
+        //throw Exception("Specified Type was not found");
+	}
 
 	//tick through
 	void Ticks();
@@ -86,8 +107,7 @@ public:
     std::shared_ptr<Core> getCore();
 
 private:
-	//friend class core to enable access to functions
-	friend class Core;
+
 	//ptr to core
 	std::weak_ptr<Core> m_core;
 	//ptr to self

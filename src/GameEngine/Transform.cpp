@@ -4,10 +4,10 @@ Transform::Transform()
 {
 	//set default scale
 	m_objectScale = { 1,1,1 };
+    //initalise varaibles ensuring that they aren't set to random memory
+    //as my laptop doesn't have the patched version of OpenGL
     m_objectPosition = {0,0,0};
     m_objectRotation = {0,0,0};
-	//set position
-	//m_objectPosition = { 0,0,0 };
 }
 
 Transform::~Transform()

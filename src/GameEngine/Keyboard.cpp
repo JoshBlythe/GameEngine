@@ -6,7 +6,6 @@
 
 Keyboard::Keyboard()
 {
-    //initalise keyboard state.
     _keys = SDL_GetKeyboardState(NULL);
 }
 
@@ -25,12 +24,8 @@ bool Keyboard::getKey(int _key)
                 //return true if it is
                 return true;
             }
-
-
         }
         //if not in the vector then return false.
         return false;
 
 }
-
-

@@ -1,16 +1,19 @@
 #include "Shader.h"
 #include "Core.h"
+#include "Enviroment.h"
+#include "Material.h"
 
-void Shader::load(std::string& _fileName)
+std::string Shader::load(std::string& _fileName)
 {
-	std::string fn = _fileName + ".glsl";
+    //m_shaderIntern = std::make_shared<rend::Shader>();
+    //get enviroment
+    std::string _fileloc = getCore()->getEnviroment()->fileLocations();
+
+    std::string fn = _fileName + _fileName + ".glsl";
 	//_shaderIntern = getCore()->m_graphicalContext->createShader();
 	
 	//convert location in string above to fstream format to be then used
 	std::fstream _vertReadIn(fn.c_str());
-
-	//create fstream from string
-	//std::fstream _vertLoc(_vertFile);
 
 	//if file didn't open
 	if (!_vertReadIn.is_open())
@@ -20,19 +23,27 @@ void Shader::load(std::string& _fileName)
 	}
 
 	//file data
-	std::string _vertfileData;
+    std::string _fileData;
 	//file line
-	std::string _vertfileLine;
+    std::string _fileLine;
 
 	//while file hasn't closed
 	while (!_vertReadIn.eof())
 	{
 		//get the current line
-		std::getline(_vertReadIn, _vertfileLine);
+        std::getline(_vertReadIn, _fileLine);
 		//store data.
-		_vertfileData += _vertfileLine + "\n";
+        _fileData += _fileLine + "\n";
 	}
 
-    m_shaderIntern->parse(_vertfileData);
-	//_shader
+    //m_shaderIntern->parse(_vertfileData);
+
+    //return pointer
+    //return m_shaderIntern;
+    return _fileData;
+}
+
+void Shader::setShader(std::shared_ptr<Shader> _shader)
+{
+    m_mat.lock()->_rnShader = _shader->m_shaderIntern;
 }

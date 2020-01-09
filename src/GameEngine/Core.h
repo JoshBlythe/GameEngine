@@ -27,18 +27,23 @@ public:
 
 	std::shared_ptr<Entity> addEntity();
 
-	template<typename T, typename V>
-	std::shared_ptr<T> getEntity(V v)
+	template<typename T>
+    void getEntities(std::list<std::shared_ptr<Entity>>& _list)
 	{
-		std::shared_ptr<T> t_rtn = std::make_shared<T>();
+		//std::shared_ptr<T> t_rtn = std::make_shared<T>();
+        bool _isComponentFound;
 
-		for (auto it = m_entities.begin();
-			it != m_entities.end(); it++)
-		{
-			t_rtn = std::dynamic_pointer_cast<T>(*it);
-			if (t_rtn)
+        for (auto it = m_entities.begin();
+            it != m_entities.end();)
+        {
+            //_isComponentFound = (*it)->getTheComponent();
+
+            //_isComponentFound = m_entities.at(it)
+            if (_isComponentFound)
 			{
-				return t_rtn;
+				//might need to pushback into v instead.
+                _list.push_back(*it);
+				
 			}
 		}
 
@@ -61,7 +66,8 @@ public:
     int getWindowH() {return m_windowH;}
 
 	~Core();
-	//main loop
+
+    //main loop
 	void runCore();
 	//stop running main loop
 	void stopCore();
@@ -80,35 +86,28 @@ private:
 
 	//friend classes, allows the class to access private variaibles of core
 	friend class Camera;
-	friend class Mesh;
-	friend class Shader;
-	friend class Material;
-    //friend class Screen;
-	//friend class Sound;
-	//friend class CollsionDetection;
 
-	//Core();
 	//pointer to self
 	std::weak_ptr <Core> m_self;
 
-	//pointer to screen
+	//smart pointer to classes
 	std::shared_ptr<Screen> m_screen;
 	std::shared_ptr<Resources> m_resources;
 	std::shared_ptr<Enviroment> m_enviroment;
 	std::shared_ptr<Keyboard> m_keyboard;
+	//smart pointer to rend context class
 	std::shared_ptr <rend::Context> m_graphicalContext;
 
 	//camera pointer
 	std::weak_ptr<Camera> m_camera;
 
-	// TODO: Remove?
-	//std::shared_ptr<CollisionDetection> m_collision;
-
+	//store width and height of screen to use
 	int m_windowW;
 	int m_windowH;
 
 	//system loop variable
 	bool m_systemLoop;
 
+	//list of all entities added to the engine.
 	std::list <std::shared_ptr<Entity>> m_entities;
 };

@@ -4,32 +4,29 @@
 #include "Enviroment.h"
 #include "Resources.h"
 
-
 #include "stb_image.h"
-
 
 void Material::onLoad(const std::string& _fileName)
 {
+    //get the file location from the Enviroment getEnviroment function
 	std::string _fileloc = getCore()->getEnviroment()->fileLocations();
+    //create a string which holds the full file path
 	std::string fn = _fileloc + "/" + _fileName + ".png";
-	
-	//const int _stringLength = fn.size();
 
-	//char _fileLocation[fn.size() + 1 ];
-	
-	//strcpy(_fileLocation, fn.c_str());
-
-
+    //initalise variables
 	int _w = 0;
 	int _h = 0;
 	int _bpp = 0;
 
 	unsigned char *_data = stbi_load(fn.c_str(), &_w, &_h, &_bpp, 3);
 
+    //check for data
 	if (_data)
 	{
-		_rnTexture = getCore()->m_graphicalContext->createTexture();
+        //create a texture
+		_rnTexture = getCore()->getGraphicalContext()->createTexture();
 		//throw Exception("Unable to load texture file!");
+        //set the size of the texture
 		_rnTexture->setSize(_w, _h);
 
 		for (int y = 0; y <_h; y++)
@@ -49,7 +46,8 @@ void Material::onLoad(const std::string& _fileName)
 		stbi_image_free(_data);
 	}
 
-	fn = _fileloc + "/" + _fileName + ".glsl";
+    //load the shader related to the texture.
+    fn = _fileloc + "/" + _fileName + ".glsl";
 	
 	//std::string fn = _fileName + ".txt";
 
@@ -63,16 +61,19 @@ void Material::onLoad(const std::string& _fileName)
 	//if file didn't open
 	if (!_vertReadIn.is_open())
 	{
-		//TODO: If not open, try to load default one instead.
-		//std::cout << fn << std::endl;
-		//throw below exception message 
+        //TODO: If not open, try to load default one instead.
+        //this could work by passing the data string from shader.
         //throw Exception("Error during opening of vertex shader file");
-        m_shader = getCore()->getResources()->load<Shader>("/shader/meshTexShader");
-        _rnShader = m_shader->m_shaderIntern;
 
+        //create new shader for defualt shader
+        std::shared_ptr<Shader> _defualtShader = getResources()->load<Shader>("/shader/meshTexShader");
+        //_defualtShader->setShader(_defualtShader);
+        //set rend context in material to be the rend context of the defualt shader.
+        _rnShader = _defualtShader->m_shaderIntern;
     }
 
-    _rnShader = getCore()->m_graphicalContext->createShader();
+    //create a shader.
+    _rnShader = getCore()->getGraphicalContext()->createShader();
 
     //file data
     std::string _vertfileData;
@@ -91,17 +92,9 @@ void Material::onLoad(const std::string& _fileName)
 	_rnShader->parse(_vertfileData);
 }
 
-void Material::setShader(std::shared_ptr<Shader> _shader)
-{
-    this->_rnShader = _shader->m_shaderIntern;
-}
+//void Material::setShader(std::shared_ptr<Shader> _shader)
+//{
+//    this->_rnShader = _shader->m_shaderIntern;
+//}
 
 
-std::shared_ptr<Shader> Material::getShader()
-{
-	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
-
-	//_shader->load(_filename);
-
-	return _shader;
-}
