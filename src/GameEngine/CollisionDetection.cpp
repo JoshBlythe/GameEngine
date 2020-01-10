@@ -44,7 +44,6 @@ void CollisionDetection::collisionLoop()
 	//get entity based on its component
     getCore()->getEntities<CollisionDetection>(_allCollisionTag);
 
-
 	glm::vec3 _currPos = getEntity()->getTransform()->getPosition() + m_offSet;
 	//std::cout << _currPos.x << _currPos.y << _currPos.z << std::endl;
 

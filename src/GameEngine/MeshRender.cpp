@@ -18,12 +18,12 @@ void MeshRender::onInitalise()
 
 std::shared_ptr<Mesh> MeshRender::getMesh()
 {
-	return m_geMesh;
+	return _mesh;
 }
 
 void MeshRender::SetMesh(std::shared_ptr<Mesh> _mesh)
 {
-	this->_mesh = _mesh->_internal;
+	this->_mesh = _mesh;
 }
 
 void MeshRender::SetMaterial(std::shared_ptr<Material> _material)
@@ -41,7 +41,7 @@ void MeshRender::onDraw()
 	if (_text)
 	{
 		//if there is use
-		_mesh->setTexture("u_Texture", _text);
+		_mesh->_internal->setTexture("u_Texture", _text);
 	}
 	else
 	{
@@ -63,7 +63,7 @@ void MeshRender::onDraw()
 	}
 	
 	//set mesh
-	m_geMaterial->_rnShader->setMesh(_mesh);
+	m_geMaterial->_rnShader->setMesh(_mesh->_internal);
 	//render
 	m_geMaterial->_rnShader->render();
 

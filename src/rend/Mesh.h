@@ -53,6 +53,7 @@ struct Mesh
   void parse(const std::string& data);
 
   std::sr1::vector<Face> faces;
+
 private:
   friend struct Context;
   friend struct Shader;

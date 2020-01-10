@@ -39,7 +39,7 @@ struct ColliderColumn
 
 class ModelCollider : public Component
 {
-	std::vector<CollisionTrig> faces;
+	std::vector<CollisionTrig> allFaces;
 	glm::vec3 position;
 
   std::vector<std::sr1::shared_ptr<ColliderColumn> > cols;
@@ -50,6 +50,9 @@ class ModelCollider : public Component
   std::sr1::zero_initialized<float> tryInc;
   std::sr1::zero_initialized<float> maxInc;
   std::vector<CollisionTrig> collisions;
+
+	void getColliding(glm::vec3 position, glm::vec3 size,
+	  std::vector<CollisionTrig>& collisions);
 
   void generateExtent();
   void addFace(CollisionTrig face);

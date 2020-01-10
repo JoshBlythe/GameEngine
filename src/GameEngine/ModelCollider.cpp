@@ -47,6 +47,37 @@ bool ColliderColumn::isColliding(glm::vec3 position, glm::vec3 size)
 
 	return false;
 }
+void ModelCollider::getColliding(glm::vec3 position, glm::vec3 size,
+	std::vector<CollisionTrig>& collisions)
+{
+	for (std::vector<CollisionTrig>::iterator i = allFaces.begin(); i != allFaces.end(); i++)
+	{
+		float f[3][3] = { 0 };
+		f[0][0] = i->a.x;
+		f[0][1] = i->a.y;
+		f[0][2] = i->a.z;
+		f[1][0] = i->b.x;
+		f[1][1] = i->b.y;
+		f[1][2] = i->b.z;
+		f[2][0] = i->c.x;
+		f[2][1] = i->c.y;
+		f[2][2] = i->c.z;
+
+		float bc[3] = { 0 };
+		bc[0] = position.x;
+		bc[1] = position.y;
+		bc[2] = position.z;
+		float bhs[3] = { 0 };
+		bhs[0] = size.x / 2.0f;
+		bhs[1] = size.y / 2.0f;
+		bhs[2] = size.z / 2.0f;
+
+		if (triBoxOverlap(bc, bhs, f))
+		{
+			collisions.push_back(*i);
+		}
+	}
+}
 
 void ColliderColumn::getColliding(glm::vec3 position, glm::vec3 size,
 	std::vector<CollisionTrig>& collisions)
@@ -156,7 +187,9 @@ void ModelCollider::getColliding(glm::vec3 position,
 
 	if (idx >= cols.size()) return;
 
-	cols.at(idx)->getColliding(position, size, collisions);
+	//cols.at(idx)->getColliding(position, size, collisions);
+	getColliding(position, size, collisions);
+	//std::cout << idx << std::endl;
 }
 
 glm::vec3 ModelCollider::faceNormal(CollisionTrig& face)
@@ -285,11 +318,11 @@ void ModelCollider::generateExtent()
 	std::sr1::shared_ptr<MeshRender> mr = getEntity()->getComponent<MeshRender>();
 	std::sr1::shared_ptr<Mesh> model = mr->getMesh();
 
-	model->getFaces(faces);
+	model->getFaces(allFaces);
 
-	for (size_t f = 0; f < faces.size(); f++)
+	for (size_t f = 0; f < allFaces.size(); f++)
 	{
-		CollisionTrig face = faces.at(f);
+		CollisionTrig face = allFaces.at(f);
 		positions.push_back(face.a);
 		positions.push_back(face.b);
 		positions.push_back(face.c);
@@ -337,7 +370,7 @@ void ModelCollider::onInitalise()
 	std::sr1::shared_ptr<MeshRender> mr = getEntity()->getComponent<MeshRender>();
 	std::sr1::shared_ptr<Mesh> model = mr->getMesh(); 
 	
-	model->getFaces(faces);
+	model->getFaces(allFaces);
 	
 	generateExtent();
 
@@ -368,10 +401,12 @@ void ModelCollider::onInitalise()
 		}
 	}
 
-	for (size_t f = 0; f < faces.size(); f++)
+	for (size_t f = 0; f < allFaces.size(); f++)
 	{
-		CollisionTrig face = faces.at(f);
+		CollisionTrig face = allFaces.at(f);
+		
 		addFace(face);
+		//allFaces.push_back(face);
 	}
 }
 
@@ -422,18 +457,20 @@ void ModelCollider::addFace(CollisionTrig face)
 
 	if (!found)
 	{
-		throw Exception("Face not assigned spatial partition");
+		//throw Exception("Face not assigned spatial partition");
 	}
 
-	/*
-	  if(!found)
-	  {
-		std::cout << "Assertion failed: Face not in spacial partition" << std::endl;
-		std::cout << f[0][0] << ", " << f[0][1] << ", " << f[0][2] << std::endl;
-		std::cout << f[1][0] << ", " << f[1][1] << ", " << f[1][2] << std::endl;
-		std::cout << f[2][0] << ", " << f[2][1] << ", " << f[2][2] << std::endl;
-		std::cout << "Expect collision errors" << std::endl;
-		//abort();
-	  }
-	*/
+	
+	 // if(!found)
+	 // {
+		//std::cout << "Assertion failed: Face not in spacial partition" << std::endl;
+		//std::cout << f[0][0] << ", " << f[0][1] << ", " << f[0][2] << std::endl;
+		//std::cout << f[1][0] << ", " << f[1][1] << ", " << f[1][2] << std::endl;
+		//std::cout << f[2][0] << ", " << f[2][1] << ", " << f[2][2] << std::endl;
+		//std::cout << "Expect collision errors" << std::endl;
+
+		////throw Exception("Face not assigned spatial partition");
+		////abort();
+	 // }
+	
 }
