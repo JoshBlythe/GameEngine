@@ -43,7 +43,7 @@ public:
 			{
 				//might need to pushback into v instead.
                 _list.push_back(*it);
-				// std::cout << (*it) << std::endl;
+				//std::cout << (*it) << std::endl;
 				
 			}
 		}

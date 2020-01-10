@@ -200,7 +200,7 @@ int main(int argc, char* argv[])
 	//add collision component to mesh
 	std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
 	std::shared_ptr<CollisionDetection> _catCollsionTest = _catUnitTest->addComponent<CollisionDetection>();
-    std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
+    std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
 
     //load mesh from file
 	std::shared_ptr <Mesh> _unitMesh = _core->getResources()->load<Mesh>("curuthers/curuthers");

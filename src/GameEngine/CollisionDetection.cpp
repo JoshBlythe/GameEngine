@@ -1,4 +1,5 @@
 #include "CollisionDetection.h"
+#include "ModelCollider.h"
 #include "Core.h"
 #include "Entity.h"
 #include "Transform.h"
@@ -31,6 +32,7 @@ void CollisionDetection::setOffSet(glm::vec3 _offSet)
 
 void CollisionDetection::onTick()
 {
+	collideStaticMesh();
 	collisionLoop();
 }
 
@@ -64,6 +66,38 @@ void CollisionDetection::collisionLoop()
 		_currPos = _sp;
 		_currPos = _currPos - m_offSet;
         getEntity()->getTransform()->setPosition(_currPos);
+		m_lastPos = _currPos;
+
+	}
+}
+
+void CollisionDetection::collideStaticMesh()
+{
+	std::list<std::shared_ptr<Entity>> _staticTag;
+
+	getCore()->getEntities<ModelCollider>(_staticTag);
+
+	glm::vec3 _currPos = getEntity()->getTransform()->getPosition(); +m_offSet;
+
+	for (std::list<std::shared_ptr<Entity>>::iterator it = _staticTag.begin(); 
+		it != _staticTag.end(); it++)
+	{
+		std::shared_ptr<ModelCollider> _staticMesh = (*it)->getComponent<ModelCollider>();
+
+		bool _solved = false;
+		glm::vec3 _sp = _staticMesh->getCollisionResponse(_currPos, m_boxSize, _solved);
+		
+		if (_solved)
+		{
+			_currPos = _sp;
+		}
+		else
+		{
+			_sp = m_lastPos + m_offSet;
+		}
+
+		_currPos = _currPos - m_offSet;
+		getEntity()->getTransform()->setPosition(_currPos);
 		m_lastPos = _currPos;
 
 	}

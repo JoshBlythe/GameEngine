@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Enviroment.h"
 #include "CollisionDetection.h"
+#include "ModelCollider.h"
 
 Entity::Entity()
 {
@@ -80,6 +81,11 @@ std::shared_ptr<CollisionDetection> Entity::getCollision()
 {
 	//return m_checkCol.lock();
 	return getComponent<CollisionDetection>();
+}
+
+std::shared_ptr<ModelCollider> Entity::getModelCollision()
+{
+	return getComponent<ModelCollider>();
 }
 
 std::shared_ptr<Core> Entity::getCore()

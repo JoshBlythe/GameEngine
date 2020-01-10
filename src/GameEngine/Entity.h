@@ -15,6 +15,7 @@ class Core;
 class Transform;
 class Component;
 class CollisionDetection;
+class ModelCollider;
 
 class Entity
 {
@@ -33,7 +34,6 @@ public:
 		
 		t_rtn->entity = m_entSelf;
 		//t_rtn->m_compIsAlive = true;
-
 
 		m_component.push_back(t_rtn);
 
@@ -107,6 +107,7 @@ public:
 	//return pointers to classes
     std::shared_ptr<Transform> getTransform();
 	std::shared_ptr<CollisionDetection> getCollision();
+	std::shared_ptr<ModelCollider> getModelCollision();
 
 	//return pointer to core
     std::shared_ptr<Core> getCore();
@@ -123,6 +124,7 @@ private:
 	//pointer to transform
 	std::weak_ptr<Transform> m_trans;
 	std::weak_ptr<CollisionDetection> m_checkCol;
+	std::weak_ptr<ModelCollider> m_checkModelCol;
 	//list of componets
 	std::list < std::shared_ptr<Component>> m_component;
 };

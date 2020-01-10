@@ -17,10 +17,17 @@ Mesh::~Mesh()
 void Mesh::getFaces(std::vector<CollisionTrig>& _out)
 {
 	//need to loop through the models faces and push there position into the vector
-	for (auto it = )
+	for (auto it = _internal->faces.begin(); it != _internal->faces.end(); it++)
 	{
+		CollisionTrig ct;
 
+		ct.a = it->pa;
+		ct.b = it->pb;
+		ct.c = it->pc;
+
+		_out.push_back(ct);
 	}
+
 }
 
 void Mesh::onLoad(const std::string& _fileName)

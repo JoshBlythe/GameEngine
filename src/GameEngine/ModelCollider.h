@@ -1,3 +1,8 @@
+#pragma once
+
+#ifndef _ModelCollider_
+#define _ModelCollider_
+
 #include "Component.h"
 //#include <qsoft/qsoft.h>
 
@@ -51,7 +56,7 @@ class ModelCollider : public Component
   glm::vec3 faceNormal(CollisionTrig& face);
 
 public:
-  void onInit();
+  void onInitalise();
   Extent getExtent();
 
 
@@ -65,3 +70,5 @@ public:
     glm::vec3 size, bool& solved);
 
 };
+
+#endif // !_ModelCollider_

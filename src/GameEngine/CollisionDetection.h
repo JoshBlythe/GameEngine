@@ -23,6 +23,7 @@ private:
 	void onTick();
 
 	void collisionLoop();
+	void collideStaticMesh();
 	bool isColliding(glm::vec3 _pos, glm::vec3 _size);
 	glm::vec3 getCollisionRes(glm::vec3 _pos, glm::vec3 _size);
 	//bool triangle_intersect(glm::vec3 a1, glm::vec3 b1, glm::vec3 c1,
