@@ -5,7 +5,7 @@
 
 CollisionDetection::CollisionDetection()
 {
-	m_offSet = { 2, 2, 2 };
+	m_offSet = { 0, 0, 0 };
 }
 
 CollisionDetection::~CollisionDetection()
@@ -40,8 +40,11 @@ void CollisionDetection::collisionLoop()
     std::list<std::shared_ptr<Entity>> _allCollisionTag;
 
 	//get entity based on its component
-    //getCore()->getEntities<CollisionDetection>(_allCollisionTag);
+    getCore()->getEntities<CollisionDetection>(_allCollisionTag);
+
+
 	glm::vec3 _currPos = getEntity()->getTransform()->getPosition() + m_offSet;
+	//std::cout << _currPos.x << _currPos.y << _currPos.z << std::endl;
 
     for (std::list<std::shared_ptr<Entity>>::iterator it = _allCollisionTag.begin();
 		it != _allCollisionTag.end(); it++)

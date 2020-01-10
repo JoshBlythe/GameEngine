@@ -188,39 +188,48 @@ int main(int argc, char* argv[])
 	//adding Camera
 	std::shared_ptr<Entity> _cam = _core->addEntity();
 	std::shared_ptr<Entity> _catUnit = _core->addEntity();
+	std::shared_ptr<Entity> _catUnitTest = _core->addEntity();
 	std::shared_ptr<Entity> _map = _core->addEntity();
 
 	//adding simple content to engine
 	std::shared_ptr<Camera> _camera = _cam->addComponent<Camera>();
 	std::shared_ptr<MeshRender> _renderMesh = _catUnit->addComponent<MeshRender>();
+	std::shared_ptr<MeshRender> _renderMeshTest = _catUnitTest->addComponent<MeshRender>();
 	std::shared_ptr<MeshRender> _renderMap = _map->addComponent<MeshRender>();
 
 	//add collision component to mesh
-   //std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
-    //std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
+	std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
+	std::shared_ptr<CollisionDetection> _catCollsionTest = _catUnitTest->addComponent<CollisionDetection>();
+    std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
 
     //load mesh from file
 	std::shared_ptr <Mesh> _unitMesh = _core->getResources()->load<Mesh>("curuthers/curuthers");
+	std::shared_ptr <Mesh> _unitMeshTest = _core->getResources()->load<Mesh>("curuthers/curuthers");
 	std::shared_ptr<Mesh> _mapMesh = _core->getResources()->load<Mesh>("graveyard/graveyard");
 	
 	//set mesh
 	_renderMesh->SetMesh(_unitMesh);
+	_renderMeshTest->SetMesh(_unitMeshTest);
 	_renderMap->SetMesh(_mapMesh);
 
 	//load texture from file
 	std::shared_ptr<Material> _material = _core->getResources()->load<Material>("curuthers/Whiskers_diffuse");
+	std::shared_ptr<Material> _materialTest = _core->getResources()->load<Material>("curuthers/Whiskers_diffuse");
 	std::shared_ptr<Material> _mapMat = _core->getResources()->load<Material>("graveyard/graveyard");
 	
 	//set texture
 	_renderMesh->SetMaterial(_material);
+	_renderMeshTest->SetMaterial(_materialTest);
 	_renderMap->SetMaterial(_mapMat);
 
 	//set scale
     _catUnit->getTransform()->setScale(glm::vec3(0.2, 0.2, 0.2));
+	_catUnitTest->getTransform()->setScale(glm::vec3(0.2, 0.2, 0.2));
 
 	//set the position of the camera
 	//set position of models
     _catUnit->getTransform()->setPosition(glm::vec3(0, 0, -4));
+	_catUnitTest->getTransform()->setPosition(glm::vec3(2, 0, -4));
     _map->getTransform()->setPosition(glm::vec3(0, -2, -8));
     //_cam->getTransform()->setPosition(glm::vec3(0, 0, 0));
 
@@ -235,23 +244,15 @@ int main(int argc, char* argv[])
 	_cam->addComponent<SoundSource>()->setSound(_hornSound);
 	
     //set collision box size
-    //_catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
-    //_map->getCollision()->setSize(glm::vec3(1, 1, 1));
+    _catUnit->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
+	_catUnitTest->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
+    _map->getCollision()->setSize(glm::vec3(1, 1, 1));
 
 	
 	//add movement to camera.
 	_cam->addComponent<cameraMovement>();
 	_catUnit->addComponent<movePlayer>();
 	
-	//set collision box size
-
-	//add collision
-	//catUnit->addComponent<CollisionDetection>();
-	//catUnit->getCollision()->setSize(glm::vec3(1, 1, 1));
-
-
-
-
 	//start the engine's main loop
 	_core->runCore();
 

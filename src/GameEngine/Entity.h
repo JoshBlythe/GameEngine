@@ -1,3 +1,8 @@
+#pragma once
+
+#ifndef _Entity_
+#define _Entity_
+
 #include <iostream>
 #include <list>
 #include <memory>
@@ -121,3 +126,5 @@ private:
 	//list of componets
 	std::list < std::shared_ptr<Component>> m_component;
 };
+
+#endif // !_Entity_

@@ -1,6 +1,7 @@
 #include "Mesh.h"
 #include "Core.h"
 #include "Enviroment.h"
+#include "ModelCollider.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -11,6 +12,15 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
+}
+
+void Mesh::getFaces(std::vector<CollisionTrig>& _out)
+{
+	//need to loop through the models faces and push there position into the vector
+	for (auto it = )
+	{
+
+	}
 }
 
 void Mesh::onLoad(const std::string& _fileName)

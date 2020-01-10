@@ -9,8 +9,8 @@
 #include "RendInc.h"
 #include "Exception.h"
 
-//#include "Entity.h"
-class Entity;
+#include "Entity.h"
+//class Entity;
 class Screen;
 class Resources;
 class Mesh;
@@ -34,21 +34,19 @@ public:
         bool _isComponentFound;
 
         for (auto it = m_entities.begin();
-            it != m_entities.end();)
+            it != m_entities.end(); it++)
         {
-            //_isComponentFound = (*it)->getTheComponent();
+            _isComponentFound = (*it)->getTheComponent<T>();
 
             //_isComponentFound = m_entities.at(it)
             if (_isComponentFound)
 			{
 				//might need to pushback into v instead.
                 _list.push_back(*it);
+				// std::cout << (*it) << std::endl;
 				
 			}
 		}
-
-		throw Exception("Specified Entity Type was not found");
-
 	}
 
 	std::shared_ptr<Resources> getResources();

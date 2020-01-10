@@ -15,6 +15,8 @@ public:
 	void SetMaterial(std::shared_ptr<Material> _material);
 	void onDraw();
 
+	std::shared_ptr<Mesh> getMesh();
+
 private:
 
 	std::shared_ptr<Mesh> m_geMesh;

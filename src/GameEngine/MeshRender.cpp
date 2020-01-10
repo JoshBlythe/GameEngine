@@ -16,6 +16,11 @@ void MeshRender::onInitalise()
 
 }
 
+std::shared_ptr<Mesh> MeshRender::getMesh()
+{
+	return m_geMesh;
+}
+
 void MeshRender::SetMesh(std::shared_ptr<Mesh> _mesh)
 {
 	this->_mesh = _mesh->_internal;
