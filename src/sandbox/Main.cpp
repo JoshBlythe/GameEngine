@@ -203,9 +203,9 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Mesh> _mapMesh = _core->getResources()->load<Mesh>("graveyard/graveyard");
 	
 	//set mesh
-	_renderMesh->SetMesh(_unitMesh);
-	_renderMeshTest->SetMesh(_unitMeshTest);
-	_renderMap->SetMesh(_mapMesh);
+	_renderMesh->setMesh(_unitMesh);
+	_renderMeshTest->setMesh(_unitMeshTest);
+	_renderMap->setMesh(_mapMesh);
 
 	//load texture from file
 	std::shared_ptr<Material> _material = _core->getResources()->load<Material>("curuthers/Whiskers_diffuse");
@@ -213,9 +213,9 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Material> _mapMat = _core->getResources()->load<Material>("graveyard/graveyard");
 	
 	//set texture
-	_renderMesh->SetMaterial(_material);
-	_renderMeshTest->SetMaterial(_materialTest);
-	_renderMap->SetMaterial(_mapMat);
+	_renderMesh->setMaterial(_material);
+	_renderMeshTest->setMaterial(_materialTest);
+	_renderMap->setMaterial(_mapMat);
 
 	//set scale
     _catUnit->getTransform()->setScale(glm::vec3(0.2, 0.2, 0.2));
@@ -244,7 +244,9 @@ int main(int argc, char* argv[])
 	//add collision component to mesh
 	std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
 	std::shared_ptr<CollisionDetection> _catCollsionTest = _catUnitTest->addComponent<CollisionDetection>();
-	std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
+	
+	//TODO: ADD BACK AND FIX STATIC COLLISION
+	//std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
 
 
 	_catUnit->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));

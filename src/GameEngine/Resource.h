@@ -1,14 +1,30 @@
+/**
+* Include guard, as the class is Inherited from other classes,
+* therefore the header is called within other function.
+*/
 #pragma once
 
+#ifndef _Resource_
+#define _Resource_
+
+/**
+* Included Libraries.
+*/
 #include <string>
 #include <memory>
 #include <fstream>
 
-#include "Exception.h"
-#include "RendInc.h"
-
+/**
+* Forward declaration Class's used within the Class
+*/
 class Core;
 class Resources;
+
+/**
+* Class includes.
+*/
+#include "Exception.h"
+#include "RendInc.h"
 
 class Resource
 {
@@ -29,3 +45,5 @@ private:
     std::weak_ptr<Resources> m_resources;
     std::weak_ptr<Core> m_core;
 };
+
+#endif // !_Resource_

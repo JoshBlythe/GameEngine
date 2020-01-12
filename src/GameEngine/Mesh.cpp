@@ -19,13 +19,14 @@ void Mesh::getFaces(std::vector<CollisionTrig>& _out)
 	//need to loop through the models faces and push there position into the vector
 	for (auto it = _internal->faces.begin(); it != _internal->faces.end(); it++)
 	{
-		CollisionTrig ct;
+		CollisionTrig _ct;
 
-		ct.a = it->pa;
-		ct.b = it->pb;
-		ct.c = it->pc;
+		_ct.a = it->pa;
+		_ct.b = it->pb;
+		_ct.c = it->pc;
 
-		_out.push_back(ct);
+		//m_modelFaces.push_back(_ct);
+		_out.push_back(_ct);
 	}
 
 }

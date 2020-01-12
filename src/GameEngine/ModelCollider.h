@@ -1,23 +1,39 @@
+/**
+* Include guard, as the class is Inherited from other classes,
+* therefore the header is called within other function.
+*/
 #pragma once
 
 #ifndef _ModelCollider_
 #define _ModelCollider_
 
-#include "Component.h"
-//#include <qsoft/qsoft.h>
-
+/**
+* Included Libraries.
+*/
 #include <glm\glm.hpp>
 #include <sr1/zero_initialized>
 #include <sr1/memory>
 
 #include <vector>
 
+/**
+* Class includes.
+*/
+#include "Component.h"
+
+
+/**
+* Extent Store the Extent min and max values.
+*/
 struct Extent
 {
   glm::vec3 max;
   glm::vec3 min;
 };
 
+/**
+* CollisionTrig Stores the triangle positions (this is for each face).
+*/
 struct CollisionTrig
 {
 	glm::vec3 a;
@@ -25,6 +41,10 @@ struct CollisionTrig
 	glm::vec3 c;
 };
 
+/**
+* This is the Column Collider, used to split the Model it different Column's to test for collision,
+* is more optimual then testing against the whole model each time.
+*/
 struct ColliderColumn
 {
 	glm::vec3 position;
@@ -37,38 +57,67 @@ struct ColliderColumn
     std::vector<CollisionTrig>& collisions);
 };
 
+/**
+* Initalisation of the class, it inherits from Component.
+*/
 class ModelCollider : public Component
 {
-	std::vector<CollisionTrig> allFaces;
-	glm::vec3 position;
+	std::vector<CollisionTrig> allFaces; /*!< Vector to store all the faces, used to get the faces from Game Engine Mesh. */
+	//glm::vec3 position;
 
-  std::vector<std::sr1::shared_ptr<ColliderColumn> > cols;
+  std::vector<std::sr1::shared_ptr<ColliderColumn> > cols; /*!< Vector stores all the collision columns. */
   Extent extent;
-  std::sr1::zero_initialized<float> resolution;
-  std::sr1::zero_initialized<float> tryStep;
-  std::sr1::zero_initialized<float> maxStep;
-  std::sr1::zero_initialized<float> tryInc;
-  std::sr1::zero_initialized<float> maxInc;
-  std::vector<CollisionTrig> collisions;
+  std::sr1::zero_initialized<float> resolution; /*!< Resolution Variable. */
+  std::sr1::zero_initialized<float> tryStep; /*!< try step Variable. */
+  std::sr1::zero_initialized<float> maxStep;/*!< max step Variable. */
+  std::sr1::zero_initialized<float> tryInc; /*!< try inc Variable. */
+  std::sr1::zero_initialized<float> maxInc; /*!< max inc Variable. */
+  std::vector<CollisionTrig> collisions; /*!< Vector for all collision. */
 
 	void getColliding(glm::vec3 position, glm::vec3 size,
 	  std::vector<CollisionTrig>& collisions);
 
-  void generateExtent();
+	/**
+	* Generate Extent function.
+	*/
+  void generateExtent(); 
+  /**
+  * Function to add each face into Collider Column cols vector.
+  */
   void addFace(CollisionTrig face);
+  /**
+  * Function to get the faces normal.
+  */
   glm::vec3 faceNormal(CollisionTrig& face);
 
 public:
+	/**
+	* on initalise function, overwrites the components on initalise.
+	*/
   void onInitalise();
+  /**
+  * Function returns the Extent.
+  */
   Extent getExtent();
 
-
+  /**
+  * Checks if there is a collision takes in a Face, position and size.
+  */
   bool isColliding(CollisionTrig& face, glm::vec3 position,
     glm::vec3 size);
 
+  /**
+  * Checks if there is a collision takes a position and size.
+  */
   bool isColliding(glm::vec3 position, glm::vec3 size);
+  /**
+  * Get Colliding.
+  */
   void getColliding(glm::vec3 position, glm::vec3 size);
 
+  /**
+  * This function gets the collision Response
+  */
   glm::vec3 getCollisionResponse(glm::vec3 position,
     glm::vec3 size, bool& solved);
 

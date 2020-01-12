@@ -12,7 +12,7 @@ MeshRender::~MeshRender()
 void MeshRender::onInitalise()
 {
 	//std::string _fileloc = getCore()->getEnviroment()->fileLocations();
-    m_geMaterial = getCore()->getResources()->load<Material>("/shader/meshTexShader");
+    //m_geMaterial = getCore()->getResources()->load<Material>("/shader/meshTexShader");
 
 }
 
@@ -21,14 +21,14 @@ std::shared_ptr<Mesh> MeshRender::getMesh()
 	return _mesh;
 }
 
-void MeshRender::SetMesh(std::shared_ptr<Mesh> _mesh)
+void MeshRender::setMesh(std::shared_ptr<Mesh> _mesh)
 {
 	this->_mesh = _mesh;
 }
 
-void MeshRender::SetMaterial(std::shared_ptr<Material> _material)
+void MeshRender::setMaterial(std::shared_ptr<Material> _material)
 {
-	this->_text = _material->_rnTexture;
+	this->m_geMaterial = _material;
 	//this->m_geMaterial = _material->_rnShader;
 }
 
@@ -38,10 +38,10 @@ void MeshRender::onDraw()
 	std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();
 
 	//check if there is a texture
-	if (_text)
+	if (m_geMaterial->m_rnTexture)
 	{
 		//if there is use
-		_mesh->_internal->setTexture("u_Texture", _text);
+		_mesh->_internal->setTexture("u_Texture", m_geMaterial->m_rnTexture);
 	}
 	else
 	{
@@ -50,11 +50,11 @@ void MeshRender::onDraw()
 	}
 
 	//check if there is a shader
-	if (m_geMaterial->_rnShader)
+	if (m_geMaterial->m_rnShader)
 	{
-        m_geMaterial->_rnShader->setUniform("u_Model", _trans->getModel());
-		m_geMaterial->_rnShader->setUniform("u_View", getCore()->getCamera()->GetView());
-		m_geMaterial->_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
+        m_geMaterial->m_rnShader->setUniform("u_Model", _trans->getModel());
+		m_geMaterial->m_rnShader->setUniform("u_View", getCore()->getCamera()->GetView());
+		m_geMaterial->m_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
 
 	}
 	else
@@ -63,9 +63,9 @@ void MeshRender::onDraw()
 	}
 	
 	//set mesh
-	m_geMaterial->_rnShader->setMesh(_mesh->_internal);
+	m_geMaterial->m_rnShader->setMesh(_mesh->_internal);
 	//render
-	m_geMaterial->_rnShader->render();
+	m_geMaterial->m_rnShader->render();
 
 }
 

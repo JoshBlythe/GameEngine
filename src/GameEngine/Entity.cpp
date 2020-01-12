@@ -16,12 +16,6 @@ Entity::~Entity()
 
 void Entity::Ticks()
 {
-	Update();
-}
-
-void Entity::Update()
-{
-
 	for (std::list<std::shared_ptr<Component>>::iterator m_it =
 		m_component.begin(); m_it != m_component.end(); m_it++)
 	{
@@ -29,19 +23,26 @@ void Entity::Update()
 	}
 
 	//deleted a component if flagged to be deleted
-    for (auto it = m_component.begin(); it != m_component.end();)
-    {
-        if ((*it)->m_compIsAlive == false)
-        {
-            it = m_component.erase(it);
-        }
-        else
-        {
-            it++;
-        }
-    }
-
+	for (auto it = m_component.begin(); it != m_component.end();)
+	{
+		if ((*it)->m_compIsAlive == false)
+		{
+			it = m_component.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+	//Update();
 }
+
+//void Entity::Update()
+//{
+//
+//	
+//
+//}
 
 
 void Entity::onDisplay()
