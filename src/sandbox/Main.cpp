@@ -196,7 +196,7 @@ int main(int argc, char* argv[])
 	std::shared_ptr<MeshRender> _renderMap = _map->addComponent<MeshRender>();
 
 	//add collision component to mesh
-   //std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
+    //std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
     //std::shared_ptr<CollisionDetection> _mapCollsion = _map->addComponent<CollisionDetection>();
 
     //load mesh from file
