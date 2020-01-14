@@ -427,7 +427,7 @@ void ModelCollider::addFace(CollisionTrig face)
 
 	if (!found)
 	{
- 		throw Exception("Face not assigned spatial partition");
+ 		//throw Exception("Face not assigned spatial partition");
 	}
 
 	

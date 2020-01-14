@@ -3,14 +3,14 @@
 #include "Enviroment.h"
 #include "Material.h"
 
-void Shader::load(std::string& _fileName)
+void Shader::onLoad(const std::string& _fileName)
 {
     //m_shaderIntern = std::make_shared<rend::Shader>();
     //get enviroment
     std::string _fileloc = getCore()->getEnviroment()->fileLocations();
-
-    std::string fn = _fileName + _fileName + ".glsl";
-	//_shaderIntern = getCore()->m_graphicalContext->createShader();
+	//abort();
+    std::string fn = _fileloc + _fileName + ".glsl";
+	m_shaderIntern = getCore()->getGraphicalContext()->createShader();
 	
 	//convert location in string above to fstream format to be then used
 	std::fstream _vertReadIn(fn.c_str());
@@ -36,7 +36,7 @@ void Shader::load(std::string& _fileName)
         _fileData += _fileLine + "\n";
 	}
 
-    //m_shaderIntern->parse(_vertfileData);
+    m_shaderIntern->parse(_fileData);
 }
 
 void Shader::setShader(std::shared_ptr<Shader> _shader)

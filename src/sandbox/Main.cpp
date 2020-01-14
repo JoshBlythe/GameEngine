@@ -246,7 +246,7 @@ int main(int argc, char* argv[])
 	std::shared_ptr<CollisionDetection> _catCollsionTest = _catUnitTest->addComponent<CollisionDetection>();
 	
 	//TODO: ADD BACK AND FIX STATIC COLLISION
-	//std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
+	std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
 
 
 	_catUnit->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
@@ -256,6 +256,7 @@ int main(int argc, char* argv[])
 	//add movement to camera.
 	_cam->addComponent<cameraMovement>();
 	_catUnit->addComponent<movePlayer>();
+	std::shared_ptr<Player> _player = _cam->addComponent <Player>();
 	
 	//start the engine's main loop
 	_core->runCore();

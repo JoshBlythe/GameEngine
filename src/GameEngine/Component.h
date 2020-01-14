@@ -62,6 +62,8 @@ public:
 	*/
 	virtual void onTick();
 
+	virtual void onGUI();
+
 protected: 
 	
 	friend class Entity; /*!< Friend Class, allows access to the private variables of Entity. */

@@ -67,6 +67,15 @@ void Entity::onDisplay()
 	}
 }
 
+void Entity::onGUI()
+{
+	for (std::list<std::shared_ptr<Component>>::iterator m_it =
+		m_component.begin(); m_it != m_component.end(); m_it++)
+	{
+		(*m_it)->onGUI();
+	}
+}
+
 void Entity::killEntity()
 {
 	//flagging a entity to be deleted

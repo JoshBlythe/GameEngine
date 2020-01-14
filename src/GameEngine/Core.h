@@ -20,6 +20,7 @@ class Material;
 class Camera;
 class Keyboard;
 class Enviroment;
+class GUI;
 //class CollisionDetection;
 
 /**
@@ -98,6 +99,8 @@ public:
 	*/
 	std::shared_ptr<rend::Context> getGraphicalContext();
 
+	std::shared_ptr<GUI> getGUI();
+
 	/**
 	* Function is used to initalise the SDL Window.
 	*/
@@ -134,7 +137,7 @@ public:
 private:
 	//friend classes, allows the class to access private variaibles of core
 	friend class Camera; /*!< Friend Class, allows access to the private variables of Camera. */
-
+	friend class Resources;
 	//initalise SDL window;
 	SDL_Window* m_window; /*!< Initalise SDL window. */
 
@@ -155,6 +158,7 @@ private:
 
 	//camera pointer
 	std::weak_ptr<Camera> m_camera; /*!< weak pointer to Camera class. */
+	std::shared_ptr<GUI> m_gui;
 
 	//store width and height of screen to use
 	int m_windowW; /*!< Variable used to store Window Width. */

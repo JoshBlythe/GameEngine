@@ -18,7 +18,7 @@ public:
 	/**
 	* This function takes in a string and loads the material and shader.
 	*/
-    void load(std::string& _fileName);
+    void onLoad(const std::string& _fileName);
 
     std::shared_ptr<rend::Shader> m_shaderIntern; /*!< Shared pointer to rend shader. */
 

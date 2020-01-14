@@ -17,9 +17,11 @@
 #include "SoundSource.h"
 #include "Keyboard.h"
 #include "Enviroment.h"
+#include "GUI.h"
 #include "CollisionDetection.h"
 #include "ModelCollider.h"
 #include "RendInc.h"
+#include "sandbox/Player.h"
 
 #endif // !GAMEENGINE_GAMEENGINE_H
 

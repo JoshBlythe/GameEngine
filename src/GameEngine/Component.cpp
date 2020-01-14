@@ -54,17 +54,9 @@ void Component::onTick()
 	//}
 }
 
-//void Object::begin()
-//{
-//	std::cout << "Begin function!" << std::endl;
-//}
+void Component::onGUI()
+{
 
-
-//void Component::onUpdate()
-//{
-//	//std::cout << "This is Object Update! " << std::endl;
-//}
-
-
+}
 
 
