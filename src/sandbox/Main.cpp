@@ -225,7 +225,7 @@ int main(int argc, char* argv[])
 	//set position of models
     _catUnit->getTransform()->setPosition(glm::vec3(0, 0, -4));
 	_catUnitTest->getTransform()->setPosition(glm::vec3(2, 0, -4));
-    //_map->getTransform()->setPosition(glm::vec3(0, -2, -8));
+    _map->getTransform()->setPosition(glm::vec3(0, -2, -8));
     //_cam->getTransform()->setPosition(glm::vec3(0, 0, 0));
 
 	//sound loading

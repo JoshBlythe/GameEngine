@@ -156,8 +156,9 @@ void ModelCollider::getColliding(glm::vec3 position,
 
 	if (idx >= cols.size()) return;
 
-	cols.at(idx)->getColliding(position, size, collisions);
+	//cols.at(idx)->getColliding(position, size, collisions);
 	//getColliding(position, size, collisions);
+	//collisions.at(idx);
 	//std::cout << idx << std::endl;
 }
 
