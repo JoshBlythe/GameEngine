@@ -15,7 +15,7 @@
 class Sound : public Resource
 {
 public:
-	~Sound();
+	virtual ~Sound();
 
 	/**
 	* This function takes in a string and loads the material and shader.

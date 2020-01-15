@@ -20,7 +20,7 @@ class Player : public Component
 {
 public:
 	Player();
-	~Player();
+	virtual ~Player();
 	 
     void initPlayer(std::shared_ptr<Mesh> _obj, glm::vec3 _position);
 	void Update();

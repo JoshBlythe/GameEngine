@@ -22,7 +22,7 @@ class SoundSource : public Component
 {
 public:
 
-	~SoundSource();
+	virtual ~SoundSource();
 
 	//void onInitialise();
 	//void onInitialise(std::shared_ptr<Sound> _sound);

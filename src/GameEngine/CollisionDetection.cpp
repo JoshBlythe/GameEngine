@@ -6,26 +6,28 @@
 
 CollisionDetection::CollisionDetection()
 {
+	//initalise vector, as glm doesn't initalise to 0,
+	//this is mostly useful when porting the different verisions of openGL then the one used.
+	//as the used version through the SDK is patched by Karsten.
     m_offSet = { 0, 0, 0 };
 }
 
 CollisionDetection::~CollisionDetection()
 {
+	// no memory clean up as smart pointer are used,
+	// so as this goes out of scope the pointer are clean up.
 }
 
 
 void CollisionDetection::onInitalise()
 {
-    //std::cout << getEntity() << std::endl;
-
-        //getEntity()->getTransform()->getRotation();
-    //std::cout << getEntity()->hasComponent<Transform>() << std::endl;
+	//get the position of the Entity
     m_lastPos = getEntity()->getTransform()->getPosition();
 }
 
 void CollisionDetection::setSize(glm::vec3 _size)
 {
-	//m_boxSize = _size;
+	//set the box size.
     m_boxSize.x = _size.x;
     m_boxSize.y = _size.y;
     m_boxSize.z = _size.z;
@@ -33,6 +35,7 @@ void CollisionDetection::setSize(glm::vec3 _size)
 
 void CollisionDetection::setOffSet(glm::vec3 _offSet)
 {
+	//set the offset of the box
 	m_offSet = _offSet;
 }
 
@@ -72,7 +75,9 @@ void CollisionDetection::collisionLoop()
 		
 		_currPos = _sp;
 		_currPos = _currPos - m_offSet;
+		//set entity position
         getEntity()->getTransform()->setPosition(_currPos);
+		// set last position.
 		m_lastPos = _currPos;
 
 	}
@@ -112,51 +117,51 @@ void CollisionDetection::collideStaticMesh()
 
 bool CollisionDetection::isColliding(glm::vec3 _pos, glm::vec3 _size)
 {
-    glm::vec3 a = getEntity()->getTransform()->getPosition() + m_offSet;
-	glm::vec3& as = this->m_boxSize;
-	glm::vec3& b = _pos;
-	glm::vec3& bs = _size;
+    glm::vec3 _a = getEntity()->getTransform()->getPosition() + m_offSet;
+	glm::vec3& _as = this->m_boxSize;
+	glm::vec3& _b = _pos;
+	glm::vec3& _bs = _size;
 
-	if (a.x > b.x) // a right of b
+	if (_a.x > _b.x) // a right of b
 	{
-		if (a.x - as.x > b.x + bs.x) // left edge of a greater than right edge of b (not colliding)
+		if (_a.x - _as.x > _b.x + _bs.x) // left edge of a greater than right edge of b (not colliding)
 		{
 			return false;
 		}
 	}
 	else
 	{
-		if (b.x - bs.x > a.x + as.x)
+		if (_b.x - _bs.x > _a.x + _as.x)
 		{
 			return false;
 		}
 	}
 
-	if (a.z > b.z) // a front of b
+	if (_a.z > _b.z) // a front of b
 	{
-		if (a.z - as.z > b.z + bs.z) // back edge of a greater than front edge of b (not colliding)
+		if (_a.z - _as.z > _b.z + _bs.z) // back edge of a greater than front edge of b (not colliding)
 		{
 			return false;
 		}
 	}
 	else
 	{
-		if (b.z - bs.z > a.z + as.z)
+		if (_b.z - _bs.z > _a.z + _as.z)
 		{
 			return false;
 		}
 	}
 
-	if (a.y > b.y) // a above b
+	if (_a.y > _b.y) // a above b
 	{
-		if (a.y - as.y > b.y + bs.y) // bottom edge of a greater than top edge of b (not colliding)
+		if (_a.y - _as.y > _b.y + _bs.y) // bottom edge of a greater than top edge of b (not colliding)
 		{
 			return false;
 		}
 	}
 	else
 	{
-		if (b.y - bs.y > a.y + as.y)
+		if (_b.y - _bs.y > _a.y + _as.y)
 		{
 			return false;
 		}
@@ -167,31 +172,31 @@ bool CollisionDetection::isColliding(glm::vec3 _pos, glm::vec3 _size)
 
 glm::vec3 CollisionDetection::getCollisionRes(glm::vec3 _pos, glm::vec3 _size)
 {
-	float amount = 0.1f;
-	float step = 0.1f;
+	float _amount = 0.1f;
+	float _step = 0.1f;
 
 	while (true)
 	{
 		if (!isColliding(_pos, _size)) break;
-		_pos.x += amount;
+		_pos.x += _amount;
 		if (!isColliding(_pos, _size)) break;
-		_pos.x -= amount;
-		_pos.x -= amount;
+		_pos.x -= _amount;
+		_pos.x -= _amount;
 		if (!isColliding(_pos, _size)) break;
-		_pos.x += amount;
-		_pos.z += amount;
+		_pos.x += _amount;
+		_pos.z += _amount;
 		if (!isColliding(_pos, _size)) break;
-		_pos.z -= amount;
-		_pos.z -= amount;
+		_pos.z -= _amount;
+		_pos.z -= _amount;
 		if (!isColliding(_pos, _size)) break;
-		_pos.z += amount;
-		_pos.y += amount;
+		_pos.z += _amount;
+		_pos.y += _amount;
 		if (!isColliding(_pos, _size)) break;
-		_pos.y -= amount;
-		_pos.y -= amount;
+		_pos.y -= _amount;
+		_pos.y -= _amount;
 		if (!isColliding(_pos, _size)) break;
-		_pos.y += amount;
-		amount += step;
+		_pos.y += _amount;
+		_amount += _step;
 	}
 
 	return _pos;

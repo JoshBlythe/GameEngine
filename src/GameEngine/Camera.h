@@ -20,8 +20,12 @@ class Screen;
 class Camera : public Component
 {
 public:
+	/**
+	* This class is used to create the view and projection materix of the camera,
+	* it is also used to create camera's within the engine.
+	*/
 	Camera();
-	~Camera();
+	virtual ~Camera();
 
 	/**
 	* The Initalise function for Camera, this overwrites the inherited Class 'Component'
@@ -31,11 +35,11 @@ public:
 	/**
 	* This Function, initalises, sets then returns the View materix
 	*/
-	glm::mat4 GetView();
+	glm::mat4 getView();
 	/**
 	* This Function, initalises, sets then returns the Projection materix
 	*/
-	glm::mat4 GetProj();
+	glm::mat4 getProj();
 
 	Ray createRay(glm::ivec2 _mouseCoords, int _windowW, int _windowH);
 

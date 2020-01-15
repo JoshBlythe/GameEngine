@@ -22,14 +22,13 @@ class Mesh : public Resource
 {
 public:
 	Mesh();
-	~Mesh();
+	virtual ~Mesh();
 
 	std::shared_ptr<rend::Mesh> _internal; /*!< Pointer to Rend Mesh. */
 
 	//std::vector<CollisionTrig>& _out
 	/**
 	* This function gets all the Mesh Faces and pushes them back into the vector passed into the function.
-	.
 	*/
 	void getFaces(std::vector<CollisionTrig>& _out);
 

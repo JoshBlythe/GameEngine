@@ -82,7 +82,7 @@ public:
 	template<typename T>
 	std::shared_ptr<T> getComponent()
 	{
-        std::shared_ptr<T> t_rtn;// = std::make_shared<T>();
+        std::shared_ptr<T> t_rtn;
 
 		for (auto it = m_component.begin(); 
 			it != m_component.end(); it++)
@@ -104,7 +104,7 @@ public:
 	template<typename T>
     bool hasComponent()
 	{
-        std::shared_ptr<T> t_rtn;// = std::make_shared<T>();
+        std::shared_ptr<T> t_rtn;
 
 		for (auto it = m_component.begin();
 			it != m_component.end(); it++)
@@ -173,7 +173,7 @@ private:
 	bool m_entIsAlive; /*!< Variable used to Flag the Entity for deletion, if is false the Entity will get deleted. */
 	//int m_tick;
 	
-	//pointer to transform
+	//pointers
 	std::weak_ptr<Transform> m_trans; /*!< Weak pointer to Transform, used to return a smart pointer of Transform. */
 	std::weak_ptr<CollisionDetection> m_checkCol; /*!< Weak pointer to Collision Detection, used to return a smart pointer of Collision Detection. */
 	std::weak_ptr<ModelCollider> m_checkModelCol; /*!< Weak pointer to Model Collider, used to return a smart pointer of Model Collider. */

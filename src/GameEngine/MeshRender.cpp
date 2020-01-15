@@ -53,8 +53,8 @@ void MeshRender::onDraw()
 	if (m_geMaterial->m_rnShader)
 	{
         m_geMaterial->m_rnShader->setUniform("u_Model", _trans->getModel());
-		m_geMaterial->m_rnShader->setUniform("u_View", getCore()->getCamera()->GetView());
-		m_geMaterial->m_rnShader->setUniform("u_Projection", getCore()->getCamera()->GetProj());
+		m_geMaterial->m_rnShader->setUniform("u_View", getCore()->getCamera()->getView());
+		m_geMaterial->m_rnShader->setUniform("u_Projection", getCore()->getCamera()->getProj());
 
 	}
 	else

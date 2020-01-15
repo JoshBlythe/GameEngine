@@ -21,8 +21,15 @@ class Mesh;
 class CollisionDetection : public Component
 {
 public:
+	/**
+	* This Class is used to handle Collision between Entities that have a Collision component
+	* attached to them, this can be either 'CollisionDetection' or 'ModelCollider'.
+	* To do this the onTick function calls the collisionLoop and CollideStaticMesh functions
+	* these get Entities if they have a either component stated above attached them and add them to 
+	* a list and check for collision with all varibles in the list.
+	*/
 	CollisionDetection();
-	~CollisionDetection();
+	virtual ~CollisionDetection();
 
 	/**
 	* The Initalise function for Collision, this overwrites the inherited Class 'Component'

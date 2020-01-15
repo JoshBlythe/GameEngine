@@ -53,8 +53,6 @@ add_library(GameEngine
 	src/GameEngine/Screen.h
 	src/GameEngine/Mesh.cpp
 	src/GameEngine/Mesh.h
-	src/GameEngine/Texture.cpp
-	src/GameEngine/Texture.h
 	src/GameEngine/Shader.cpp
 	src/GameEngine/Shader.h
 	src/GameEngine/Resource.cpp
@@ -62,7 +60,6 @@ add_library(GameEngine
 	src/GameEngine/Resources.h
 	src/GameEngine/Material.cpp
 	src/GameEngine/Material.h
-	src/GameEngine/MaterialAttribute.h
 	src/GameEngine/Enviroment.cpp
 	src/GameEngine/Enviroment.h
 	src/GameEngine/Sound.cpp	
@@ -75,8 +72,6 @@ add_library(GameEngine
 	src/GameEngine/CollisionDetection.h
 	src/GameEngine/ModelCollider.cpp
 	src/GameEngine/ModelCollider.h
-	src/GameEngine/UserInput.cpp
-	src/GameEngine/UserInput.h
 	src/GameEngine/Keyboard.cpp
 	src/GameEngine/Keyboard.h
 	src/GameEngine/GUI.cpp

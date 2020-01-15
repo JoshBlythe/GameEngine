@@ -6,7 +6,7 @@
 #include "Enviroment.h"
 #include "Camera.h"
 #include "Keyboard.h"
-#include "CollisionDetection.h"
+//#include "CollisionDetection.h"
 #include "GUI.h"
 
 #include <AL/al.h>

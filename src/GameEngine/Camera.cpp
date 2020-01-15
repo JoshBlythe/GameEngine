@@ -22,14 +22,14 @@ void Camera::onInitalise()
 	getCore()->m_camera = getEntity()->getComponent<Camera>();
 }
 
-glm::mat4 Camera::GetView()
+glm::mat4 Camera::getView()
 {
     glm::mat4 m_viewMat = glm::inverse(getEntity()->getComponent<Transform>()->getModel());
 
 	return m_viewMat;
 }
 
-glm::mat4 Camera::GetProj()
+glm::mat4 Camera::getProj()
 {
     //std::cout<< getCore()->getWindowW() << std::endl;
     //std::cout << "[]" << getCore()->getScreen()->getScreen().x << std::endl;

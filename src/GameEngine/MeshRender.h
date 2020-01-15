@@ -51,17 +51,8 @@ public:
 
 private:
 
-	//std::shared_ptr<Mesh> m_geMesh;
-	//std::shared_ptr<Shader> m_geShader; /*!< Pointer to Shader Class of the Game Engine. */
 	std::shared_ptr<Material> m_geMaterial; /*!< Pointer to Material Class of the Game Engine. */
 	std::sr1::shared_ptr<Mesh> _mesh; /*!< Pointer to Mesh function of the Game Engine. */
-
-	//std::sr1::shared_ptr<GameEngine::Context> _context;
-	//TODO REMOVE GAMEENGINE 
-	//std::sr1::shared_ptr<GameEngine::Shader> _shader; /*!< Pointer to Shader function of the Rend Library. */
-	//std::sr1::shared_ptr<GameEngine::Buffer> _buffer; /*!< Pointer to Buffer function of the Rend Library. */
-	//std::sr1::shared_ptr<GameEngine::Texture> _text; /*!< Pointer to Texture function of the Rend Library. */
-
 };
 
 #endif // !_MeshRender_
