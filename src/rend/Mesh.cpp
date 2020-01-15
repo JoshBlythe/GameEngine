@@ -8,24 +8,7 @@
 namespace rend
 {
 
-struct Face
-{
-  vec3 pa;
-  vec3 pb;
-  vec3 pc;
 
-  vec2 tca;
-  vec2 tcb;
-  vec2 tcc;
-
-  vec3 na;
-  vec3 nb;
-  vec3 nc;
-
-  vec2 lmca;
-  vec2 lmcb;
-  vec2 lmcc;
-};
 
 void Mesh::setBuffer(const std::string& name, const std::sr1::shared_ptr<Buffer>& buffer)
 {
@@ -88,7 +71,7 @@ void Mesh::safeParse(const std::string& data, std::string& currentLine)
   std::sr1::vector<vec2> tcs;
   std::sr1::vector<vec3> normals;
   std::sr1::vector<vec2> lmcs;
-  std::sr1::vector<Face> faces;
+  
 
   for(std::sr1::vector<std::string>::iterator lit = lines.begin();
     lit != lines.end(); lit++)

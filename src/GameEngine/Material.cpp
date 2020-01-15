@@ -24,10 +24,10 @@ void Material::onLoad(const std::string& _fileName)
 	if (_data)
 	{
         //create a texture
-		_rnTexture = getCore()->getGraphicalContext()->createTexture();
+		m_rnTexture = getCore()->getGraphicalContext()->createTexture();
 		//throw Exception("Unable to load texture file!");
         //set the size of the texture
-		_rnTexture->setSize(_w, _h);
+		m_rnTexture->setSize(_w, _h);
 
 		for (int y = 0; y <_h; y++)
 		{
@@ -35,7 +35,7 @@ void Material::onLoad(const std::string& _fileName)
 			{
 				int _r = y * _w * 3 + x * 3;
 
-				_rnTexture->setPixel(x, y, glm::vec3(
+				m_rnTexture->setPixel(x, y, glm::vec3(
 					_data[_r] / 255.0f,
 					_data[_r + 1] / 255.0f,
 					_data[_r + 2] / 255.0f
@@ -69,11 +69,11 @@ void Material::onLoad(const std::string& _fileName)
         std::shared_ptr<Shader> _defualtShader = getResources()->load<Shader>("/shader/meshTexShader");
         //_defualtShader->setShader(_defualtShader);
         //set rend context in material to be the rend context of the defualt shader.
-        _rnShader = _defualtShader->m_shaderIntern;
+        m_rnShader = _defualtShader->m_shaderIntern;
     }
 
     //create a shader.
-    _rnShader = getCore()->getGraphicalContext()->createShader();
+    m_rnShader = getCore()->getGraphicalContext()->createShader();
 
     //file data
     std::string _vertfileData;
@@ -89,7 +89,7 @@ void Material::onLoad(const std::string& _fileName)
         _vertfileData += _vertfileLine + "\n";
     }
 
-	_rnShader->parse(_vertfileData);
+	m_rnShader->parse(_vertfileData);
 }
 
 //void Material::setShader(std::shared_ptr<Shader> _shader)

@@ -5,11 +5,8 @@
 
 SoundSource::~SoundSource()
 {
+	//clean up of source ID
 	alDeleteSources(1, &m_sourceId);
-	//alDeleteBuffers(1, &bufferId);
-	//alcMakeContextCurrent(NULL);
-	//alcDestroyContext(m_context);
-	//alcCloseDevice(m_device);
 }
 
 //void SoundSource::onInitialise()
@@ -29,22 +26,19 @@ void SoundSource::onTick()
 		if (m_state == AL_STOPPED)
 		{
 			//std::cout << "Sound Stopped!" << std::endl;
-			//setAutoRemove(m_compIsAlive);
-			//getEntity()->getComponent<SoundSource>()->m_compIsAlive = false;
             m_compIsAlive = false;
-            //alDeleteSources(1, &m_sourceId);
 		}
 
 	}
 	//setAutoRemove(m_compIsAlive);
 }
 
-void SoundSource::setAutoRemove(bool _autoRemove)
-{
-	_autoRemove = getEntity()->getComponent<SoundSource>()->m_compIsAlive;
-
-	_autoRemove = false;
-}
+//void SoundSource::setAutoRemove(bool _autoRemove)
+//{
+//	_autoRemove = getEntity()->getComponent<SoundSource>()->m_compIsAlive;
+//
+//	_autoRemove = false;
+//}
 
 void SoundSource::setSound(std::shared_ptr<Sound> _sound)
 {
@@ -53,7 +47,7 @@ void SoundSource::setSound(std::shared_ptr<Sound> _sound)
 
 	alSource3f(m_sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f);
 	alSourcei(m_sourceId, AL_BUFFER, _sound->getBufferID());
+	//play the sound
 	alSourcePlay(m_sourceId);
 
-	//setAutoRemove(m_compIsAlive);
 }

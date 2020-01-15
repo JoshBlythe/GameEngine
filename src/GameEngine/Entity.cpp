@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Enviroment.h"
 #include "CollisionDetection.h"
+#include "ModelCollider.h"
 
 Entity::Entity()
 {
@@ -15,12 +16,6 @@ Entity::~Entity()
 
 void Entity::Ticks()
 {
-	Update();
-}
-
-void Entity::Update()
-{
-
 	for (std::list<std::shared_ptr<Component>>::iterator m_it =
 		m_component.begin(); m_it != m_component.end(); m_it++)
 	{
@@ -28,19 +23,26 @@ void Entity::Update()
 	}
 
 	//deleted a component if flagged to be deleted
-    for (auto it = m_component.begin(); it != m_component.end();)
-    {
-        if ((*it)->m_compIsAlive == false)
-        {
-            it = m_component.erase(it);
-        }
-        else
-        {
-            it++;
-        }
-    }
-
+	for (auto it = m_component.begin(); it != m_component.end();)
+	{
+		if ((*it)->m_compIsAlive == false)
+		{
+			it = m_component.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+	//Update();
 }
+
+//void Entity::Update()
+//{
+//
+//	
+//
+//}
 
 
 void Entity::onDisplay()
@@ -80,6 +82,11 @@ std::shared_ptr<CollisionDetection> Entity::getCollision()
 {
 	//return m_checkCol.lock();
 	return getComponent<CollisionDetection>();
+}
+
+std::shared_ptr<ModelCollider> Entity::getModelCollision()
+{
+	return getComponent<ModelCollider>();
 }
 
 std::shared_ptr<Core> Entity::getCore()

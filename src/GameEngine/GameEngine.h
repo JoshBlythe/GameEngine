@@ -18,6 +18,7 @@
 #include "Keyboard.h"
 #include "Enviroment.h"
 #include "CollisionDetection.h"
+#include "ModelCollider.h"
 #include "RendInc.h"
 
 #endif // !GAMEENGINE_GAMEENGINE_H

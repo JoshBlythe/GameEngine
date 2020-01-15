@@ -1,11 +1,12 @@
 #include "CollisionDetection.h"
+#include "ModelCollider.h"
 #include "Core.h"
 #include "Entity.h"
 #include "Transform.h"
 
 CollisionDetection::CollisionDetection()
 {
-	m_offSet = { 2, 2, 2 };
+    m_offSet = { 0, 0, 0 };
 }
 
 CollisionDetection::~CollisionDetection()
@@ -15,13 +16,19 @@ CollisionDetection::~CollisionDetection()
 
 void CollisionDetection::onInitalise()
 {
+    //std::cout << getEntity() << std::endl;
+
+        //getEntity()->getTransform()->getRotation();
+    //std::cout << getEntity()->hasComponent<Transform>() << std::endl;
     m_lastPos = getEntity()->getTransform()->getPosition();
 }
 
 void CollisionDetection::setSize(glm::vec3 _size)
 {
 	//m_boxSize = _size;
-	m_boxSize.x = _size.x, m_boxSize.y = _size.y, m_boxSize.z = _size.z;
+    m_boxSize.x = _size.x;
+    m_boxSize.y = _size.y;
+    m_boxSize.z = _size.z;
 }
 
 void CollisionDetection::setOffSet(glm::vec3 _offSet)
@@ -31,7 +38,10 @@ void CollisionDetection::setOffSet(glm::vec3 _offSet)
 
 void CollisionDetection::onTick()
 {
-	collisionLoop();
+
+    //getEntity()->getComponent<Transform>()->getRotation();
+    //collideStaticMesh();
+    //collisionLoop();
 }
 
 void CollisionDetection::collisionLoop()
@@ -40,8 +50,10 @@ void CollisionDetection::collisionLoop()
     std::list<std::shared_ptr<Entity>> _allCollisionTag;
 
 	//get entity based on its component
-    //getCore()->getEntities<CollisionDetection>(_allCollisionTag);
+    getCore()->getEntities<CollisionDetection>(_allCollisionTag);
+
 	glm::vec3 _currPos = getEntity()->getTransform()->getPosition() + m_offSet;
+	//std::cout << _currPos.x << _currPos.y << _currPos.z << std::endl;
 
     for (std::list<std::shared_ptr<Entity>>::iterator it = _allCollisionTag.begin();
 		it != _allCollisionTag.end(); it++)
@@ -61,6 +73,38 @@ void CollisionDetection::collisionLoop()
 		_currPos = _sp;
 		_currPos = _currPos - m_offSet;
         getEntity()->getTransform()->setPosition(_currPos);
+		m_lastPos = _currPos;
+
+	}
+}
+
+void CollisionDetection::collideStaticMesh()
+{
+	std::list<std::shared_ptr<Entity>> _staticTag;
+
+	getCore()->getEntities<ModelCollider>(_staticTag);
+
+	glm::vec3 _currPos = getEntity()->getTransform()->getPosition(); +m_offSet;
+
+	for (std::list<std::shared_ptr<Entity>>::iterator it = _staticTag.begin(); 
+		it != _staticTag.end(); it++)
+	{
+		std::shared_ptr<ModelCollider> _staticMesh = (*it)->getComponent<ModelCollider>();
+
+		bool _solved = false;
+		glm::vec3 _sp = _staticMesh->getCollisionResponse(_currPos, m_boxSize, _solved);
+		
+		if (_solved)
+		{
+			_currPos = _sp;
+		}
+		else
+		{
+			_sp = m_lastPos + m_offSet;
+		}
+
+		_currPos = _currPos - m_offSet;
+		getEntity()->getTransform()->setPosition(_currPos);
 		m_lastPos = _currPos;
 
 	}

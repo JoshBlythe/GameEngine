@@ -49,7 +49,7 @@ void Component::onTick()
 	//for (int i = 0; i < m_ticks; i++)
 	//{
 		//std::cout << "ticking through object! " << std::endl;
-        onUpdate();
+        //onUpdate();
 
 	//}
 }
@@ -60,10 +60,10 @@ void Component::onTick()
 //}
 
 
-void Component::onUpdate()
-{
-	//std::cout << "This is Object Update! " << std::endl;
-}
+//void Component::onUpdate()
+//{
+//	//std::cout << "This is Object Update! " << std::endl;
+//}
 
 
 

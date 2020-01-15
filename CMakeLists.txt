@@ -5,7 +5,7 @@ include_directories(
 	${PROJECT_SOURCE_DIR}/src
 )
 
-#add_definitions(-DSTD_SR1_DEBUG)
+add_definitions(-DGLM_FORCE_CTOR_INIT)
 
 add_library(rend
   	src/rend/Exception.cpp
@@ -29,7 +29,7 @@ add_library(rend
 	src/rend/Util.h
 )
 
-if(MSVC)
+if(WIN32)
 target_link_libraries(rend glew32 SDL2 opengl32 openal32)
 else()
 target_link_libraries(rend GLEW SDL2 GL openal)

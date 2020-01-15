@@ -1,45 +1,75 @@
+/**
+* Include guard, as the class is Inherited from other classes,
+* therefore the header is called within other function.
+*/
 #pragma once
 
+#ifndef _Component_
+#define _Component_
+
+/**
+* Included Libraries.
+*/
 #include <iostream>
 #include <memory>
 
+/**
+* Forward declaration Class's used within the Class
+*/
 //#include "Mesh.h"
 //#include "Material.h"
 class Core;
 class Entity;
 class Resources;
 
+/**
+* Initalisation of the class.
+*/
 class Component
 {
 public:
 	Component();
 	~Component();
 
-	friend class Entity;
-	//void setMesh(std::shared_ptr<Mesh> mesh) { m_mesh = mesh; }
-	//void setMaterial(std::shared_ptr<Material> mat) { m_material = mat; }
-
-	//float getPos() { return m_objectPosition.x, m_objectPosition.y, m_objectPosition.z; }
-
+	/**
+	* Function to return a shared pointer to Entity, used to go back up the hierachy
+	*/
 	std::shared_ptr<Entity> getEntity();
+	/**
+	* Function to return a shared pointer to Core, used to go back up the hierachy
+	*/
 	std::shared_ptr<Core> getCore();
+	/**
+	* Function to return a shared pointer to Resource
+	*/
 	std::shared_ptr<Resources> getResources();
 
-	//void getEntity();  //shared_ptr of entity
 
+	/**
+	* Virtual function declaration, this is overwritten by inherited classes functions
+	* of the same name.
+	*/
 	virtual void onDraw();
+	/**
+	* Virtual function declaration, this is overwritten by inherited classes functions
+	* of the same name.
+	*/
 	virtual void onInitalise();
-	//virtual void begin();
-	virtual void onTick();
-	//virtual void onDisplay();
 
-    virtual void onUpdate();
-protected:
+	/**
+	* Virtual function declaration, this is overwritten by inherited classes functions
+	* of the same name.
+	*/
+	virtual void onTick();
+
+protected: 
 	
-	std::weak_ptr<Entity> entity;
-	int m_ticks;
-	bool m_compIsAlive;
-	//std::shared_ptr<Mesh> m_mesh;
-	//std::shared_ptr<Material> m_material;
+	friend class Entity; /*!< Friend Class, allows access to the private variables of Entity. */
+
+	std::weak_ptr<Entity> entity; /*!< Weak pointer to Entity. */
+
+	bool m_compIsAlive; /*!< Variable used to Flag the Component for deletion, if is false the Component will get deleted. */
 
 };
+
+#endif // !_Component_

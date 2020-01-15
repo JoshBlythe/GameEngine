@@ -3,7 +3,7 @@
 #include "Enviroment.h"
 #include "Material.h"
 
-std::string Shader::load(std::string& _fileName)
+void Shader::load(std::string& _fileName)
 {
     //m_shaderIntern = std::make_shared<rend::Shader>();
     //get enviroment
@@ -37,13 +37,9 @@ std::string Shader::load(std::string& _fileName)
 	}
 
     //m_shaderIntern->parse(_vertfileData);
-
-    //return pointer
-    //return m_shaderIntern;
-    return _fileData;
 }
 
 void Shader::setShader(std::shared_ptr<Shader> _shader)
 {
-    m_mat.lock()->_rnShader = _shader->m_shaderIntern;
+    m_mat.lock()->m_rnShader = _shader->m_shaderIntern;
 }
