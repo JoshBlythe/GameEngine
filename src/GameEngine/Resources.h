@@ -42,20 +42,20 @@ public:
 	template<typename T>
 	std::shared_ptr<T> load(const std::string& _path)
 	{
+		for (size_t i = 0; i < m_resources.size(); i++)
+		{
+			if (m_resources.at(i)->m_pathLocation == _path)
+			{
+				return std::dynamic_pointer_cast<T>(m_resources.at(i));
+			}
+		}
+
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
-
+		t_rtn->m_resources = m_core.lock()->m_resources;
         t_rtn->m_core = m_core;
-
 		t_rtn->onLoad(_path);
 
-		/*for (auto it = _resources.begin(); it != _resources.end(); it++)
-		{
-			t_rtn = std::dynamic_pointer_cast<T>(*it);
-			if (t_rtn)
-			{
-				return t_rtn;
-			}
-		}*/
+
 		return t_rtn;
 //		throw Exception("Specified Type was not found");
 	}
@@ -82,7 +82,7 @@ public:
 private:
 	friend class Core; /*!< Friend Class, allows access to the private variables of Core. */
 
-    std::list<std::shared_ptr<Resource>> m_resources; /*!< Vector to store all the loaded resources. */
+    std::vector<std::shared_ptr<Resource>> m_resources; /*!< Vector to store all the loaded resources. */
 	std::weak_ptr<Core> m_core; /*!< Weak pointer to Core, used to return a smart pointer of Core. */
 
 };

@@ -220,7 +220,7 @@ int main(int argc, char* argv[])
 	//set position of models
     _catUnit->getTransform()->setPosition(glm::vec3(0, 0, -4));
 	_catUnitTest->getTransform()->setPosition(glm::vec3(2, 0, -4));
-    //_map->getTransform()->setPosition(glm::vec3(0, -2, -8));
+    _map->getTransform()->setPosition(glm::vec3(0, -2, -8));
     //_cam->getTransform()->setPosition(glm::vec3(0, 0, 0));
 
 	//sound loading
@@ -237,18 +237,20 @@ int main(int argc, char* argv[])
 
 
 	//add collision component to mesh
-    //std::shared_ptr<CollisionDetection> _catCollsion =
-           //_catUnit->addComponent<CollisionDetection>();
+    std::shared_ptr<CollisionDetection> _catCollsion = _catUnit->addComponent<CollisionDetection>();
     std::shared_ptr<CollisionDetection> _catCollsionTest = _catUnitTest->addComponent<CollisionDetection>();
 	
 	//TODO: ADD BACK AND FIX STATIC COLLISION
-	//std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
+    //std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
 
 
-    //_catUnit->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
-    //_catUnitTest->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
+    _catUnit->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
+    _catUnitTest->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
 	//_map->getComponent<ModelCollider>()->setSize(glm::vec3(1, 1, 1));
 
+	//add player for GUI
+	std::shared_ptr<Player> _player = _cam->addComponent <Player>();
+	
 	//add movement to camera.
     _cam->addComponent<cameraMovement>();
     _catUnit->addComponent<movePlayer>();

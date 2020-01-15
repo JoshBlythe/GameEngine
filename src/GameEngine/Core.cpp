@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Keyboard.h"
 #include "CollisionDetection.h"
+#include "GUI.h"
 
 #include <AL/al.h>
 #include <AL/alc.h>
@@ -19,10 +20,16 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 	//referencing c_rtn to weak_ptr of core
 	//this will be used to moving up through the hierearchy
 	c_rtn->m_self = c_rtn;
+	
+	//initalise screen
+	c_rtn->m_screen = std::make_shared<Screen>();
+	c_rtn->getScreen()->m_core = c_rtn;
 
-    //initalise screen
-    c_rtn->m_screen = std::make_shared<Screen>();
-    c_rtn->getScreen()->m_core = c_rtn;
+	//initalise SDL window
+	c_rtn->windowInit();
+	//pass sdl window into context to ensure rend doesn't hold onto sdl once the engine has
+	//closed
+	c_rtn->m_graphicalContext = rend::Context::initialize(c_rtn->m_window);
 
     //initalise Resources
 	c_rtn->m_resources = std::make_shared<Resources>();
@@ -42,16 +49,10 @@ std::shared_ptr<Core> Core::onInitalise(int argc, char** argv)
 	//c_rtn->m_camera = std::make_shared<Camera>();
 	//c_rtn->m_enviroment = std::make_shared<Enviroment>();
 
-    //initalise SDL window
-    c_rtn->windowInit();
     //here needs to be included for sound to run
     c_rtn->soundInit();
 
-	//pass sdl window into context to ensure rend doesn't hold onto sdl once the engine has
-	//closed
-	c_rtn->m_graphicalContext = rend::Context::initialize(c_rtn->m_window);
-	
-
+	c_rtn->m_gui = std::make_shared<GUI>(c_rtn);
 
 	//return core
 	return c_rtn;
@@ -110,6 +111,11 @@ std::shared_ptr<Keyboard> Core::getKeyboard()
 std::shared_ptr<rend::Context> Core::getGraphicalContext()
 {
 	return m_graphicalContext;
+}
+
+std::shared_ptr<GUI> Core::getGUI()
+{
+	return m_gui;
 }
 
 
@@ -255,7 +261,6 @@ void Core::runCore()
             }
         }
 
-
 		//clear screen before render
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -267,6 +272,16 @@ void Core::runCore()
 			//unasign pointer allowing use to access Entity functions
 			//std::cout << "?" << std::endl;
             (*iter)->onDisplay();
+		}
+
+		glClear(GL_DEPTH_BUFFER_BIT);
+
+		for (std::list<std::shared_ptr<Entity>>::iterator
+			iter = m_entities.begin(); iter != m_entities.end(); iter++)
+		{
+			//unasign pointer allowing use to access Entity functions
+			//std::cout << "?" << std::endl;
+			(*iter)->onGUI();
 		}
 
 		//tell the engine which window to use

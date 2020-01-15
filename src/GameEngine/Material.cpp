@@ -49,9 +49,6 @@ void Material::onLoad(const std::string& _fileName)
     //load the shader related to the texture.
     fn = _fileloc + "/" + _fileName + ".glsl";
 	
-	//std::string fn = _fileName + ".txt";
-
-
 	//convert location in string above to fstream format to be then used
 	std::fstream _vertReadIn(fn.c_str());
 
@@ -67,9 +64,10 @@ void Material::onLoad(const std::string& _fileName)
 
         //create new shader for defualt shader
         std::shared_ptr<Shader> _defualtShader = getResources()->load<Shader>("/shader/meshTexShader");
-        //_defualtShader->setShader(_defualtShader);
-        //set rend context in material to be the rend context of the defualt shader.
-        m_rnShader = _defualtShader->m_shaderIntern;
+        
+		//set rend context in material to be the rend context of the defualt shader.
+        //m_rnShader = _defualtShader->m_shaderIntern;
+		return;
     }
 
     //create a shader.
@@ -79,6 +77,11 @@ void Material::onLoad(const std::string& _fileName)
     std::string _vertfileData;
     //file line
     std::string _vertfileLine;
+
+	//if (!_vertReadIn.is_open())
+	//{
+	//	throw Exception("File couldnt open");
+	//}
 
     //while file hasn't closed
     while (!_vertReadIn.eof())

@@ -135,6 +135,8 @@ public:
 	*/
     virtual void onDisplay();
 
+	void onGUI();
+
 	//flag to be deleted
 	/**
 	* This function flags a component to be deleted.

@@ -1,3 +1,5 @@
+#pragma once 
+
 #include <iostream>
 #include <memory>
 #include <list>
@@ -10,7 +12,11 @@ class Ray;
 class UserInput;
 class Camera;
 
-class Player
+#include "GameEngine/Component.h"
+
+class Core;
+
+class Player : public Component
 {
 public:
 	Player();
@@ -23,6 +29,8 @@ public:
 
 	void moveCamera(float _deltaTime);
 
+	void onGUI();
+
 private:
 
 	bool m_isSelected;
@@ -31,7 +39,7 @@ private:
 
 	std::list<std::shared_ptr<Mesh>> m_playerUnits;
 
-	std::weak_ptr<UserInput> m_inputMang;
-	std::weak_ptr<Camera> m_cam;
+	//std::weak_ptr<UserInput> m_inputMang;
+	//std::weak_ptr<Camera> m_cam;
 	
 };
