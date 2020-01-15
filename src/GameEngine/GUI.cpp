@@ -8,9 +8,10 @@
 GUI::GUI(std::shared_ptr<Core> _core)
 {
 	m_playerCore = _core;
+	//load the path
+	m_shader = _core->getResources()->load<Shader>("shader/GUIShader");
 
-	m_shader = _core->getResources()->load<Shader>("/shader/GUIShader");
-
+	//create contexts of for rend
 	m_rnMesh = _core->getGraphicalContext()->createMesh();
 	m_rnBuffer = _core->getGraphicalContext()->createBuffer();
 

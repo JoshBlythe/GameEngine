@@ -9,29 +9,29 @@ void Shader::onLoad(const std::string& _fileName)
     //get enviroment
     std::string _fileloc = getCore()->getEnviroment()->fileLocations();
 	//abort();
-    std::string fn = _fileloc + _fileName + ".glsl";
-	m_shaderIntern = getCore()->getGraphicalContext()->createShader();
+	std::string fn = _fileloc + "/" + _fileName + ".glsl";
 	
 	//convert location in string above to fstream format to be then used
-	std::fstream _vertReadIn(fn.c_str());
+	std::fstream _readIn(fn.c_str());
 
 	//if file didn't open
-	if (!_vertReadIn.is_open())
+	if (!_readIn.is_open())
 	{
 		//throw below exception message 
 		throw Exception("Error during opening of vertex shader file");
 	}
 
+	m_shaderIntern = getCore()->getGraphicalContext()->createShader();
 	//file data
     std::string _fileData;
 	//file line
     std::string _fileLine;
 
 	//while file hasn't closed
-	while (!_vertReadIn.eof())
+	while (!_readIn.eof())
 	{
 		//get the current line
-        std::getline(_vertReadIn, _fileLine);
+        std::getline(_readIn, _fileLine);
 		//store data.
         _fileData += _fileLine + "\n";
 	}

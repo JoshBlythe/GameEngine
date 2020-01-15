@@ -49,9 +49,6 @@ void Material::onLoad(const std::string& _fileName)
     //load the shader related to the texture.
     fn = _fileloc + "/" + _fileName + ".glsl";
 	
-	//std::string fn = _fileName + ".txt";
-
-
 	//convert location in string above to fstream format to be then used
 	std::fstream _vertReadIn(fn.c_str());
 

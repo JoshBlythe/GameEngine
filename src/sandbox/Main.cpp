@@ -253,10 +253,12 @@ int main(int argc, char* argv[])
 	_catUnitTest->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
 	//_map->getComponent<ModelCollider>()->setSize(glm::vec3(1, 1, 1));
 
+	//add player for GUI
+	std::shared_ptr<Player> _player = _cam->addComponent <Player>();
+	
 	//add movement to camera.
 	_cam->addComponent<cameraMovement>();
 	_catUnit->addComponent<movePlayer>();
-	std::shared_ptr<Player> _player = _cam->addComponent <Player>();
 	
 	//start the engine's main loop
 	_core->runCore();

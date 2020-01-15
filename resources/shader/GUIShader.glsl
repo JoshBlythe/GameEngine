@@ -12,12 +12,8 @@ gl_Position = u_Projection * u_Model * vec4(a_Position, 0, 1);
 
 }
 
-
-
 #endif
-
 #ifdef FRAGMENT
-
 
 void main()
 {
@@ -25,6 +21,4 @@ void main()
  gl_FragColor = vec4(1, 0, 0, 1);
 
 }
-
-
-n#endif
+#endif
