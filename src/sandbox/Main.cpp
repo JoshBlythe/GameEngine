@@ -37,7 +37,7 @@ struct cameraMovement : public Component
   void onTick()
   {
       //std::cout << getCore()->getEnviroment()->getDelts() << std::endl;
-
+      //get the keys pressed.
       if (getCore()->getKeyboard()->getKey(GE_UP))
 	  {
 		  //update Camera Position - Move Forward 
@@ -67,16 +67,16 @@ struct cameraMovement : public Component
 	  }
 
 	  //rotate Camara
-	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_Q))
+      if (getCore()->getKeyboard()->getKey(GE_N))
 	  {
 		  //update Camera Position - Move Backwards
-		  _currRot -= _camRot * _rotator;
+          _currRot -= _camRot * _rotator * getCore()->getEnviroment()->getDelts();
 		  getEntity()->getTransform()->setRotation(_currRot);
 	  }
-	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_E))
+      if (getCore()->getKeyboard()->getKey(GE_M))
 	  {
 		  //update Camera Position - Move Backwards
-		  _currRot += _camRot * _rotator;
+          _currRot += _camRot * _rotator * getCore()->getEnviroment()->getDelts();
 		  getEntity()->getTransform()->setRotation(_currRot);
 	  }
 
@@ -89,7 +89,6 @@ struct movePlayer : public Component
 	//amounts and delta store
 	float _camMove;
 	float _camRot;
-    //float _delta;
 
 	//store current data
 	glm::vec3 _currPos;
@@ -102,7 +101,7 @@ struct movePlayer : public Component
 
 	void onInitalise()
 	{
-        //_delta = getCore()->getEnviroment()->getDelts();
+        //set the variables
 		_currPos = getEntity()->getTransform()->getPosition();
 		_currRot = getEntity()->getTransform()->getRotation();
 
@@ -227,12 +226,12 @@ int main(int argc, char* argv[])
     std::shared_ptr<CollisionDetection> _catCollsionTest = _catUnitTest->addComponent<CollisionDetection>();
 	
 	//TODO: ADD BACK AND FIX STATIC COLLISION
+    //std::shared_ptr<ModelCollider> _catCollsion = _catUnit->addComponent<ModelCollider>();
     std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
-
 
     _catUnit->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
     _catUnitTest->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));
-	//_map->getComponent<ModelCollider>()->setSize(glm::vec3(1, 1, 1));
+    //_map->getComponent<ModelCollider>()->setSize(glm::vec3(1, 1, 1));
 
 	//add player for GUI
 	std::shared_ptr<Player> _player = _cam->addComponent <Player>();
@@ -240,7 +239,6 @@ int main(int argc, char* argv[])
 	//add movement to camera.
     _cam->addComponent<cameraMovement>();
     _catUnit->addComponent<movePlayer>();
-    //_catUnit->addComponent<Player>();
 	
 	//start the engine's main loop
 	_core->runCore();

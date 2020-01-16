@@ -14,6 +14,15 @@
 #define GE_DOWN SDLK_DOWN
 #define GE_LEFT SDLK_LEFT
 #define GE_RIGHT SDLK_RIGHT
+
+//Camera Rotate Keys
+
+/**
+* Define Camera Rotate keys.
+*/
+#define GE_N SDLK_n
+#define GE_M SDLK_m
+
 //Player Movement
 /**
 * Define Player Movement keys.

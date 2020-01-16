@@ -83,7 +83,7 @@ void ColliderColumn::getColliding(glm::vec3 position, glm::vec3 size,
 void ModelCollider::getColliding(glm::vec3 position, glm::vec3 size,
 	std::vector<CollisionTrig>& collisions)
 {
-	for (std::vector<CollisionTrig>::iterator i = allFaces.begin(); i != allFaces.end(); i++)
+    for (std::vector<CollisionTrig>::iterator i = m_allFaces.begin(); i != m_allFaces.end(); i++)
 	{
 		float f[3][3] = { 0 };
 		f[0][0] = i->a.x;
@@ -187,8 +187,8 @@ void ModelCollider::getColliding(glm::vec3 position,
 
 	if (idx >= cols.size()) return;
 	//getColliding(position, size, allFaces);
-	//cols.at(idx)->getColliding(position, size, collisions);
-	//getColliding(position, size, collisions);
+    cols.at(idx)->getColliding(position, size, collisions);
+    //getColliding(position, size, collisions);
 	//collisions.at(idx);
 	//std::cout << idx << std::endl;
 }
@@ -316,15 +316,15 @@ glm::vec3 ModelCollider::getCollisionResponse(
 void ModelCollider::generateExtent()
 {
 	std::vector<glm::vec3> positions;
-	std::sr1::shared_ptr<MeshRender> mr = getEntity()->getComponent<MeshRender>();
-	std::sr1::shared_ptr<Mesh> model = mr->getMesh();
+    //std::sr1::shared_ptr<MeshRender> mr = getEntity()->getComponent<MeshRender>();
+    //std::sr1::shared_ptr<Mesh> model = mr->getMesh();
 
 	//model->getFaces();
-	model->getFaces(allFaces);
+   //model->getFaces(m_allFaces);
 
-	for (size_t f = 0; f < allFaces.size(); f++)
+    for (size_t f = 0; f < m_allFaces.size(); f++)
 	{
-		CollisionTrig face = allFaces.at(f);
+        CollisionTrig face = m_allFaces.at(f);
 		positions.push_back(face.a);
 		positions.push_back(face.b);
 		positions.push_back(face.c);
@@ -363,22 +363,23 @@ void ModelCollider::generateExtent()
 
 void ModelCollider::onInitalise()
 {
-	resolution = 10;
+    resolution = 10.0f;
 	tryStep = 0.001f;
 	maxStep = 1.0f;
 	tryInc = 0.01f;
 	maxInc = 0.5f;
 
-	std::sr1::shared_ptr<MeshRender> mr = getEntity()->getComponent<MeshRender>();
-	std::sr1::shared_ptr<Mesh> model = mr->getMesh(); 
+    std::sr1::shared_ptr<MeshRender> _mr = getEntity()->getComponent<MeshRender>();
+    std::sr1::shared_ptr<Mesh> _model = _mr->getMesh();
 	
-	model->getFaces(allFaces);
+    _model->getFaces(m_allFaces);
 	
-	generateExtent();
+    generateExtent();
 
 	// Create collision columns
 	glm::vec3 size = extent.max - extent.min;
-	glm::vec3 colSize = size /= resolution;
+    //TODO: The /= could be wrong
+    glm::vec3 colSize = size /= resolution;
 	colSize.y = size.y;
 
 	for (size_t y = 0; y < resolution; y++)
@@ -403,9 +404,9 @@ void ModelCollider::onInitalise()
 		}
 	}
 
-	for (size_t f = 0; f < allFaces.size(); f++)
+    for (size_t f = 0; f < m_allFaces.size(); f++)
 	{
-		CollisionTrig face = allFaces.at(f);
+        CollisionTrig face = m_allFaces.at(f);
 		
 		addFace(face);
 		//allFaces.push_back(face);

@@ -71,7 +71,7 @@ class ModelCollider : public Component
 	* The class then checks collision on a per faces bases.
 	*/
 {
-	std::vector<CollisionTrig> allFaces; /*!< Vector to store all the faces, used to get the faces from Game Engine Mesh. */
+    std::vector<CollisionTrig> m_allFaces; /*!< Vector to store all the faces, used to get the faces from Game Engine Mesh. */
 	//glm::vec3 position;
 
   std::vector<std::sr1::shared_ptr<ColliderColumn> > cols; /*!< Vector stores all the collision columns. */
