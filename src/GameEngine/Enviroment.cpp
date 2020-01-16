@@ -26,14 +26,14 @@ Enviroment::Enviroment(int argc, char** argv)
 #endif
 
 #else
-    char path[FILENAME_MAX] = {0};
-    DIR* dir = NULL;
+    char _path[FILENAME_MAX] = {0};
+    DIR* _dir = NULL;
 
-    dir = opendir("resources");
+    _dir = opendir("resources");
 
-    if(dir)
+    if(_dir)
     {
-        dirName = "resources";
+        m_dirName = "resources";
     }
     else
     {
@@ -47,11 +47,11 @@ Enviroment::Enviroment(int argc, char** argv)
         throw Exception("Issue Loading File Source, on Linux!");
      }
 
-      fgets(path, FILENAME_MAX, _process);
+      fgets(_path, FILENAME_MAX, _process);
           pclose(_process);
 
-      dirName = path;
-      dirName += "/resources";
+      m_dirName = _path;
+      m_dirName += "/resources";
     }
 
     //std::cout<< dirName << std::endl;
