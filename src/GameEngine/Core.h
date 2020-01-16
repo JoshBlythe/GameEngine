@@ -33,6 +33,12 @@ class GUI;
 /**
 * Initalisation of the class.
 */
+
+/**
+* The Core class is the base of the Engine, classes and sub-system either are initalised or travers up the Core to again access other classes which,
+* branch off from core.
+* The core also holds a list of all the entities currently alive in the Engine.
+*/
 class Core
 {
 public:

@@ -36,6 +36,12 @@ class ModelCollider;
 class Entity
 {
 public:
+	/**
+	* The Entity class allows components to be added to it, it has a list of Components that have been attached to it.
+	* this allow the engine to get Entity based on Components that are attached to it.
+	* It also allows use to loop through all the Componets and draw there functions, example being onDisplay. This function is used to Display to the Screen,
+	* another example being onTick, this function is called every frame and is used to update the engine.
+	*/
 	Entity();
 	~Entity();
 

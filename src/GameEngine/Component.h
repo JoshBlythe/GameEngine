@@ -28,6 +28,12 @@ class Resources;
 class Component
 {
 public:
+
+	/**
+	* The Component class has the ability to move up the hierachy to the Entity class.
+	* It purpose is to be able to implement different components types to a Entity, to do this
+	* the class has different classes inherit from it and overwrite it's virtual functions.
+	*/
 	Component();
 	~Component();
 

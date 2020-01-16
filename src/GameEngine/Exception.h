@@ -19,6 +19,10 @@
 class Exception
 {
 public:
+	/**
+	* This function is used to if a error occurs, to output a Exception inside of crashing the Engine,
+	* this gives a level of error handling to the engine, by preventing it from just crashing and giving a more tailored message. 
+	*/
 	Exception(const std::string &exp);
 	virtual ~Exception() throw();
 

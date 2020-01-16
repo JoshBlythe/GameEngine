@@ -20,25 +20,22 @@ struct cameraMovement : public Component
 
   void onInitalise()
   {
-    _delta = getCore()->getEnviroment()->getDelts();
+    //_delta = getCore()->getEnviroment()->getDelts();
 	_currPos = getEntity()->getTransform()->getPosition();
 	_currRot = getEntity()->getTransform()->getRotation();
 
+	//initalise the move directions
 	_moveZ = { 0, 0, -1 };
 	_moveX = { -1, 0, 0 };
 	_rotator = { 0, -1, 0 };
 
-    _camMove = 0.01f;
-    _camRot = 0.01f;
+	//initalise the amount to move
+    _camMove = 1.0f;
+    _camRot = 1.0f;
   }
 
   void onTick()
   {
-
-    /*rot+= 0.001f;
-    getEntity()->getTransform()->setRotation(glm::vec3(0, rot, 0));*/
-
-
       //std::cout << getCore()->getEnviroment()->getDelts() << std::endl;
 
       if (getCore()->getKeyboard()->getKey(GE_UP))
@@ -46,29 +43,26 @@ struct cameraMovement : public Component
 		  //update Camera Position - Move Forward 
 
           //std::cout << _currPos.x << _currPos.z << std::endl;
-          _currPos += _camMove * _moveZ;
+          _currPos += _camMove * _moveZ * getCore()->getEnviroment()->getDelts();
 		  getEntity()->getTransform()->setPosition(_currPos);
 	  }
       if (getCore()->getKeyboard()->getKey(GE_DOWN))
 	  {
 		  //update Camera Position - Move Backwards
-
-		  //getEntity()->getTransform()->setPosition(glm::vec3(0, 0, _camMove));
-		  _currPos -= _camMove * _moveZ;
+		  _currPos -= _camMove * _moveZ * getCore()->getEnviroment()->getDelts();
 		  getEntity()->getTransform()->setPosition(_currPos);
 	  }
       if (getCore()->getKeyboard()->getKey(GE_LEFT))
 	  {
 		  //update Camera Position - Move Backwards
 		  //getEntity()->getTransform()->setPosition(glm::vec3(-_camMove, 0, 0));
-		  _currPos += _camMove * _moveX;
+		  _currPos += _camMove * _moveX * getCore()->getEnviroment()->getDelts();
 		  getEntity()->getTransform()->setPosition(_currPos);
 	  }
       if (getCore()->getKeyboard()->getKey(GE_RIGHT))
 	  {
 		  //update Camera Position - Move Backwards
-		  //getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
-		  _currPos -= _camMove * _moveX;
+		  _currPos -= _camMove * _moveX * getCore()->getEnviroment()->getDelts();
 		  getEntity()->getTransform()->setPosition(_currPos);
 	  }
 
@@ -76,14 +70,12 @@ struct cameraMovement : public Component
 	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_Q))
 	  {
 		  //update Camera Position - Move Backwards
-		  //getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
 		  _currRot -= _camRot * _rotator;
 		  getEntity()->getTransform()->setRotation(_currRot);
 	  }
 	  if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_E))
 	  {
 		  //update Camera Position - Move Backwards
-		  //getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
 		  _currRot += _camRot * _rotator;
 		  getEntity()->getTransform()->setRotation(_currRot);
 	  }
@@ -110,7 +102,7 @@ struct movePlayer : public Component
 
 	void onInitalise()
 	{
-        _delta = getCore()->getEnviroment()->getDelts();
+        //_delta = getCore()->getEnviroment()->getDelts();
 		_currPos = getEntity()->getTransform()->getPosition();
 		_currRot = getEntity()->getTransform()->getRotation();
 
@@ -118,8 +110,8 @@ struct movePlayer : public Component
 		_moveX = { -1, 0, 0 };
 		_rotator = { 0, -1, 0 };
 
-        _camMove = 0.01f;
-        _camRot = 0.01f;
+        _camMove = 1.0f;
+        _camRot = 1.0f;
 	}
 
 	void onTick()
@@ -128,30 +120,26 @@ struct movePlayer : public Component
 		{
 			//update Camera Position - Move Forward 
 			//std::cout << _currPos.x << _currPos.z << std::endl;
-			//getEntity()->getTransform()->setPosition(glm::vec3(0, 0, -_camMove));
-			_currPos += _camMove * _moveZ;
+			_currPos += _camMove * _moveZ * getCore()->getEnviroment()->getDelts();
 			getEntity()->getTransform()->setPosition(_currPos);
 		}
         if (getCore()->getKeyboard()->getKey(GE_S))
 		{
 			//update Camera Position - Move Backwards
 			// std::cout << _currPos.x << _currPos.z << std::endl;
-			//getEntity()->getTransform()->setPosition(glm::vec3(0, 0, _camMove));
-			_currPos -= _camMove * _moveZ;
+			_currPos -= _camMove * _moveZ * getCore()->getEnviroment()->getDelts();
 			getEntity()->getTransform()->setPosition(_currPos);
 		}
         if (getCore()->getKeyboard()->getKey(GE_A))
 		{
 			//update Camera Position - Move Backwards
-			//getEntity()->getTransform()->setPosition(glm::vec3(-_camMove, 0, 0));
-			_currPos += _camMove * _moveX;
+			_currPos += _camMove * _moveX * getCore()->getEnviroment()->getDelts();
 			getEntity()->getTransform()->setPosition(_currPos);
 		}
         if (getCore()->getKeyboard()->getKey(GE_D))
 		{
 			//update Camera Position - Move Backwards
-			//getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
-			_currPos -= _camMove * _moveX;
+			_currPos -= _camMove * _moveX * getCore()->getEnviroment()->getDelts();
 			getEntity()->getTransform()->setPosition(_currPos);
 		}
 
@@ -159,15 +147,13 @@ struct movePlayer : public Component
         if (getCore()->getKeyboard()->getKey(GE_Q))
 		{
 			//update Camera Position - Move Backwards
-			//getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
-			_currRot -= _camRot * _rotator;
+			_currRot -= _camRot * _rotator * getCore()->getEnviroment()->getDelts();
             getEntity()->getTransform()->setRotation(_currRot);
 		}
         if (getCore()->getKeyboard()->getKey(GE_E))
 		{
 			//update Camera Position - Move Backwards
-			//getEntity()->getTransform()->setPosition(glm::vec3(_camMove, 0, 0));
-			_currRot += _camRot * _rotator;
+			_currRot += _camRot * _rotator * getCore()->getEnviroment()->getDelts();
 			getEntity()->getTransform()->setRotation(_currRot);
 		}
 	}
@@ -241,7 +227,7 @@ int main(int argc, char* argv[])
     std::shared_ptr<CollisionDetection> _catCollsionTest = _catUnitTest->addComponent<CollisionDetection>();
 	
 	//TODO: ADD BACK AND FIX STATIC COLLISION
-    //std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
+    std::shared_ptr<ModelCollider> _mapCollsion = _map->addComponent<ModelCollider>();
 
 
     _catUnit->getCollision()->setSize(glm::vec3(0.3, 0.3, 0.3));

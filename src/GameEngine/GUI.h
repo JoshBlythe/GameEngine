@@ -23,8 +23,8 @@ class GUI
 {
 public:
 	/**
-	* This class is used to Initalise the GUI variables, this is done it its constructor,
-	* then is draw in the setTexture function.
+	* This class is used to Initalise the GUI variables, this is done it its constructor, it also goes through core to get a shader resource and load it.
+	* Then will draw the GUI in the setTexture function.
 	*/
 	GUI(std::shared_ptr<Core> _core);
 	~GUI();

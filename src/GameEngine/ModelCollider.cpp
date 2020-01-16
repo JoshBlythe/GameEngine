@@ -80,6 +80,37 @@ void ColliderColumn::getColliding(glm::vec3 position, glm::vec3 size,
 	}
 }
 
+void ModelCollider::getColliding(glm::vec3 position, glm::vec3 size,
+	std::vector<CollisionTrig>& collisions)
+{
+	for (std::vector<CollisionTrig>::iterator i = allFaces.begin(); i != allFaces.end(); i++)
+	{
+		float f[3][3] = { 0 };
+		f[0][0] = i->a.x;
+		f[0][1] = i->a.y;
+		f[0][2] = i->a.z;
+		f[1][0] = i->b.x;
+		f[1][1] = i->b.y;
+		f[1][2] = i->b.z;
+		f[2][0] = i->c.x;
+		f[2][1] = i->c.y;
+		f[2][2] = i->c.z;
+
+		float bc[3] = { 0 };
+		bc[0] = position.x;
+		bc[1] = position.y;
+		bc[2] = position.z;
+		float bhs[3] = { 0 };
+		bhs[0] = size.x / 2.0f;
+		bhs[1] = size.y / 2.0f;
+		bhs[2] = size.z / 2.0f;
+
+		if (triBoxOverlap(bc, bhs, f))
+		{
+			collisions.push_back(*i);
+		}
+	}
+}
 bool ModelCollider::isColliding(CollisionTrig& face,
 	glm::vec3 position, glm::vec3 size)
 {
@@ -155,7 +186,7 @@ void ModelCollider::getColliding(glm::vec3 position,
 	size_t idx = y * resolution + x;
 
 	if (idx >= cols.size()) return;
-
+	//getColliding(position, size, allFaces);
 	//cols.at(idx)->getColliding(position, size, collisions);
 	//getColliding(position, size, collisions);
 	//collisions.at(idx);

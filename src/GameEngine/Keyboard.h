@@ -42,6 +42,10 @@ class Camera;
 class Keyboard
 {
 public:
+	/**
+	* This class is used to handle user input from the keyboard, if a key is pressed or released it is moved into or removed from the vectors defined below.
+	* It also defines the keys which can be pressed by the user above.
+	*/
     Keyboard();
     ~Keyboard();
 

@@ -25,11 +25,15 @@ class Core;
 */
 #include "Exception.h"
 
+/**
+* Contructor of Enviroment.
+*/
 class Enviroment
 {
 public:
 	/**
-	* Contructor of Enviroment.
+	* This Class is used to get the current enviroment (the local path to load resources from).
+	* It also initalises Delta time to be then called by other classes/function in the engine.
 	*/
     Enviroment(int argc, char** argv);
 	~Enviroment();
@@ -37,7 +41,7 @@ public:
 	/**
 	* Initalise Delta time.
 	*/
-	void initDelts();
+	void updateDelts();
 	/**
 	* This function returns the file location.
 	*/
@@ -45,15 +49,16 @@ public:
 	/**
 	* This function returns the Delta time.
 	*/
-	float getDelts() { return m_lastTime; }
+	float getDelts();
 
 private:
 	friend class Core; /*!< Friend Class, allows access to the private variables of Camera. */
 
 	//initalise variable
 	float m_lastTime; /*!< Variable used to store the Delta time. */
-	std::string fullpath; /*!< Variable used to store the full path. */
-	std::string baseName; /*!< Variable used to store the base path. */
+	float m_deltaTime;
+	std::string m_fullpath; /*!< Variable used to store the full path. */
+	std::string m_baseName; /*!< Variable used to store the base path. */
 	std::string dirName; /*!< Variable used to store the dir path. */
 
 	std::weak_ptr<Core> m_eCore; /*!< Weak pointer to Core. */

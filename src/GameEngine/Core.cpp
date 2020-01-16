@@ -184,8 +184,7 @@ void Core::soundInit()
 
 void Core::runCore()
 {
-    //call the enviroment initalise function
-     getEnviroment()->initDelts();
+
 	//loop variable
 	bool m_looper = true;
 	//loop condition
@@ -226,7 +225,8 @@ void Core::runCore()
 		}
 
 
-
+		//call the enviroment initalise function
+		getEnviroment()->updateDelts();
 		//loop through m_entites using iterator.
 		for (std::list<std::shared_ptr<Entity>>::iterator 
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)

@@ -21,6 +21,10 @@ struct CollisionTrig;
 class Mesh : public Resource
 {
 public:
+	/**
+	* This class inherits from Resources, it is used to load a 3D Model.
+	* it also has a context to rend Mesh to allow the mesh data loaded to be processed and then later drawn.
+	*/
 	Mesh();
 	virtual ~Mesh();
 

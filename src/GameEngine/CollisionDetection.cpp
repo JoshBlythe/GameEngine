@@ -43,7 +43,7 @@ void CollisionDetection::onTick()
 {
 
     //getEntity()->getComponent<Transform>()->getRotation();
-    //collideStaticMesh();
+    collideStaticMesh();
     collisionLoop();
 }
 

@@ -11,14 +11,20 @@ Enviroment::Enviroment(int argc, char** argv)
 #ifdef _WIN32
     char strExePath[MAX_PATH];
     GetModuleFileName(NULL, strExePath, MAX_PATH);
-    fullpath = strExePath;
+	m_fullpath = strExePath;
 
-    baseName = fullpath.substr(fullpath.find_last_of("\\"));
-    baseName = baseName.substr(0, baseName.length() - 4);
-    std::string dirname = fullpath.substr(0, fullpath.find_last_of("\\"));
+	m_baseName = m_fullpath.substr(m_fullpath.find_last_of("\\"));
+	m_baseName = m_baseName.substr(0, m_baseName.length() - 4);
+    std::string dirname = m_fullpath.substr(0, m_fullpath.find_last_of("\\"));
 
     //share / {basename} is found;
+#ifdef _DEBUG
     dirName =  dirname + "/../../resources";
+
+#else
+	dirName = dirname + "/resources";
+#endif
+
 #else
     char path[FILENAME_MAX] = {0};
     DIR* dir = NULL;
@@ -53,6 +59,9 @@ Enviroment::Enviroment(int argc, char** argv)
    //return _command;
 
 #endif
+
+	m_lastTime = SDL_GetTicks();
+	m_deltaTime = 0;
 };
 
 Enviroment::~Enviroment()
@@ -60,10 +69,10 @@ Enviroment::~Enviroment()
 
 };
 
-void Enviroment::initDelts()
+void Enviroment::updateDelts()
 {
 	//storing this variable
-	m_lastTime = SDL_GetTicks();
+	
 
 	//initalise delta time
 	//do this in envirmoent then return time
@@ -71,7 +80,7 @@ void Enviroment::initDelts()
 
 	float time = SDL_GetTicks();
 	float _differ = time - m_lastTime;
-	m_lastTime = _differ / 1000.0f;
+	m_deltaTime = _differ / 1000.0f;
 	m_lastTime = time;
 
 };
@@ -80,4 +89,9 @@ void Enviroment::initDelts()
 std::string Enviroment::fileLocations()
 {
     return dirName;
+}
+
+float Enviroment::getDelts()
+{
+	return m_deltaTime;
 }
