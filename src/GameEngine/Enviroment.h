@@ -59,7 +59,7 @@ private:
 	float m_deltaTime;
 	std::string m_fullpath; /*!< Variable used to store the full path. */
 	std::string m_baseName; /*!< Variable used to store the base path. */
-	std::string dirName; /*!< Variable used to store the dir path. */
+	std::string m_dirName; /*!< Variable used to store the dir path. */
 
 	std::weak_ptr<Core> m_eCore; /*!< Weak pointer to Core. */
 };

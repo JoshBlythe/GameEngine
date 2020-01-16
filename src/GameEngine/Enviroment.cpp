@@ -9,20 +9,20 @@
 Enviroment::Enviroment(int argc, char** argv)
 {
 #ifdef _WIN32
-    char strExePath[MAX_PATH];
-    GetModuleFileName(NULL, strExePath, MAX_PATH);
-	m_fullpath = strExePath;
+    char _strExePath[MAX_PATH];
+    GetModuleFileName(NULL, _strExePath, MAX_PATH);
+	m_fullpath = _strExePath;
 
 	m_baseName = m_fullpath.substr(m_fullpath.find_last_of("\\"));
 	m_baseName = m_baseName.substr(0, m_baseName.length() - 4);
-    std::string dirname = m_fullpath.substr(0, m_fullpath.find_last_of("\\"));
+    std::string _dirname = m_fullpath.substr(0, m_fullpath.find_last_of("\\"));
 
     //share / {basename} is found;
 #ifdef _DEBUG
-    dirName =  dirname + "/../../resources";
+	m_dirName = _dirname + "/../../resources";
 
 #else
-	dirName = dirname + "/resources";
+	m_dirName = _dirname + "/resources";
 #endif
 
 #else
@@ -88,7 +88,7 @@ void Enviroment::updateDelts()
 
 std::string Enviroment::fileLocations()
 {
-    return dirName;
+    return m_dirName;
 }
 
 float Enviroment::getDelts()
