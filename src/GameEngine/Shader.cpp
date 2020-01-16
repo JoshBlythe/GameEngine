@@ -3,6 +3,11 @@
 #include "Enviroment.h"
 #include "Material.h"
 
+Shader::~Shader()
+{
+
+}
+
 void Shader::onLoad(const std::string& _fileName)
 {
     //m_shaderIntern = std::make_shared<rend::Shader>();

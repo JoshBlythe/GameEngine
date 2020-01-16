@@ -24,6 +24,11 @@
 class Transform : public Component
 {
 public:
+    /**
+    * This Class inherits from Component, its purpose is to set the Entities Transform/Scale/Rotation
+    * a transform is applied to every entity on its creation. This is done in the addEntity function in core.
+    * The Class also allows for the Transform/Scale/Rotation to be obtained or updated.
+    */
 	Transform();
     virtual ~Transform();
 

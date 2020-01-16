@@ -14,6 +14,10 @@ class Material;
 class Shader : public Resource
 {
 public:
+    /**
+    * This Class inherits from Resource, it purpose is to load in the data of a Shader file (.glsl) format.
+    */
+    virtual ~Shader();
 
 	/**
 	* This function takes in a string and loads the material and shader.

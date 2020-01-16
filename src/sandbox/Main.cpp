@@ -89,7 +89,7 @@ struct movePlayer : public Component
 	//amounts and delta store
 	float _camMove;
 	float _camRot;
-	float _delta;
+    //float _delta;
 
 	//store current data
 	glm::vec3 _currPos;
@@ -240,6 +240,7 @@ int main(int argc, char* argv[])
 	//add movement to camera.
     _cam->addComponent<cameraMovement>();
     _catUnit->addComponent<movePlayer>();
+    //_catUnit->addComponent<Player>();
 	
 	//start the engine's main loop
 	_core->runCore();

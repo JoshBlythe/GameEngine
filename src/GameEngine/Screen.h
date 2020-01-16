@@ -22,6 +22,10 @@ class Core;
 class Screen
 {
 public:
+    /**
+    * This Class is used to define the screens width and Height, core then uses these variables
+    * to initalise the SDL Window.
+    */
 	Screen();
 	~Screen();
 

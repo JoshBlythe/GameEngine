@@ -15,6 +15,9 @@
 class Sound : public Resource
 {
 public:
+    /**
+    * This Class inherits from Resource, it purpose is to load in the data of a OGG file.
+    */
 	virtual ~Sound();
 
 	/**

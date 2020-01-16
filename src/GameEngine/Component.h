@@ -1,6 +1,6 @@
 /**
 * Include guard, as the class is Inherited from other classes,
-* therefore the header is called within other function.
+* as the header is called within other function.
 */
 #pragma once
 

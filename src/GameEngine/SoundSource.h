@@ -21,7 +21,11 @@ class Entity;
 class SoundSource : public Component
 {
 public:
-
+    /**
+    * This Class inherits from Component, it purpose is to play a sound loaded in from the
+    * the resource Sub-System. Using the function setSound below allows you to set the sound
+    * that you want to play, this class can be attached to a Entity as it inherits from Component.
+    */
 	virtual ~SoundSource();
 
 	//void onInitialise();
