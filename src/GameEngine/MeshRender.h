@@ -24,6 +24,13 @@
 class MeshRender : public Component
 {
 public:
+	/**
+	* This Class inherits from Component, it can be attached to a Entity to set a current model and
+	* then render it.
+	* Before renders the model it check to see first if a texture has been loaded in, then if a shader
+	* was loaded. If either hasnt been set then a Exception is thrown.
+	* Finally it sets the mesh through rend then renders it.
+	*/
 	MeshRender();
 	virtual ~MeshRender();
 

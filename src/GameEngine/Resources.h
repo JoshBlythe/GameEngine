@@ -31,6 +31,9 @@ class Resource;
 class Resources
 {
 public:
+	/**
+	* Initalisation of the class.
+	*/
 	Resources() {};
 	~Resources() {};
 

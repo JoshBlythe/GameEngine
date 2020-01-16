@@ -29,6 +29,10 @@ class Resources;
 class Resource
 {
 public:
+	/**
+	* This class is similar to component, however it has different resources attached to it.
+	* The onLoad virtual function is overwritten by the deriving class's attached to it.
+	*/
 	Resource();
 	~Resource();
 

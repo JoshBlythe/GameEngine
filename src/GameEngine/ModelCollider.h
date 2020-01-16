@@ -61,6 +61,15 @@ struct ColliderColumn
 * Initalisation of the class, it inherits from Component.
 */
 class ModelCollider : public Component
+	/**
+	* This Class inherits from Component, this allows it to be attached to a Entity,
+	* the purpose of the class is to test collision against the faces of a Model,
+	* The faces of the currents models faces are stored in rend.
+	* To get the faces the function calls the mesh within resouces, which has the current mesh's
+	* faces passed to it from the MeshRender class, once it has the current mesh it pushes all the faces
+	* into a vector which passed into the pass, this is the allFaces vector below.
+	* The class then checks collision on a per faces bases.
+	*/
 {
 	std::vector<CollisionTrig> allFaces; /*!< Vector to store all the faces, used to get the faces from Game Engine Mesh. */
 	//glm::vec3 position;

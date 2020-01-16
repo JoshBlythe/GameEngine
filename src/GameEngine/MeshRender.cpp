@@ -34,7 +34,7 @@ void MeshRender::setMaterial(std::shared_ptr<Material> _material)
 
 void MeshRender::onDraw()
 {
-	//might need to check this
+	//get the transform
 	std::shared_ptr<Transform> _trans = getEntity()->getComponent<Transform>();
 
 	//check if there is a texture
