@@ -32,12 +32,16 @@ public:
 	* onInitalise function.
 	*/
 	void onInitalise();
+	
 	/**
 	* This Function, initalises, sets then returns the View materix
+	@return View Materix.
 	*/
 	glm::mat4 getView();
+	
 	/**
-	* This Function, initalises, sets then returns the Projection materix
+	* This Function, initalises, sets then returns the Projection materix.
+	@return Projection Materix.
 	*/
 	glm::mat4 getProj();
 

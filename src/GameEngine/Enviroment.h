@@ -42,12 +42,17 @@ public:
 	* Initalise Delta time.
 	*/
 	void updateDelts();
+	
 	/**
 	* This function returns the file location.
+	@return A string of the full local path to the resource folder.
 	*/
     std::string fileLocations();
+	
 	/**
 	* This function returns the Delta time.
+	@return A float of the delta time.
+	@see m_deltaTime.
 	*/
 	float getDelts();
 
@@ -55,8 +60,8 @@ private:
 	friend class Core; /*!< Friend Class, allows access to the private variables of Camera. */
 
 	//initalise variable
-	float m_lastTime; /*!< Variable used to store the Delta time. */
-	float m_deltaTime;
+	float m_lastTime; /*!< Variable used to store the Last time. */
+	float m_deltaTime; /*!< Variable used to store the Delta time. */
 	std::string m_fullpath; /*!< Variable used to store the full path. */
 	std::string m_baseName; /*!< Variable used to store the base path. */
 	std::string m_dirName; /*!< Variable used to store the dir path. */

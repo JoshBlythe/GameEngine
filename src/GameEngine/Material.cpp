@@ -6,6 +6,10 @@
 
 #include "stb_image.h"
 
+Material::~Material()
+{
+}
+
 void Material::onLoad(const std::string& _fileName)
 {
     //get the file location from the Enviroment getEnviroment function

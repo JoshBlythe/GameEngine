@@ -22,12 +22,16 @@ public:
 
 	/**
 	* This function takes in a string and loads the material and shader.
+	@param _fileName takes in a string, this will be the file name and the folder it is inside of.
 	*/
 	void onLoad(const std::string &_path);
+	
 	/**
 	* This function returns the buffere ID .
+	@return A BufferID.
+	@see m_bufferID.
 	*/
-	ALuint getBufferID() { return m_bufferID; }
+	ALuint getBufferID();
 
 private:
 	ALuint m_bufferID; /*!< Varibale holds the buffer id. */
@@ -36,6 +40,10 @@ private:
 
 	/**
 	* This function Loads the sound ogg file .
+	@param _fileName takes in a string, this will be the file name and the folder it is inside of.
+	@param _buffer is a vector of type char which holds the buffer.
+	@param _format is the format of the ogg file.
+	@param _freq is the fequency of the file.
 	*/
 	void load_ogg(const std::string& _fileName, 
 		std::vector<char>& _buffer, ALenum& _format, ALsizei& _freq);

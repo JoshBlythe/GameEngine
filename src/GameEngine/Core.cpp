@@ -95,35 +95,38 @@ std::shared_ptr<Camera> Core::getCamera()
 
 std::shared_ptr<Screen> Core::getScreen()
 {
+	//gets a context of Screen
 	return m_screen;
 }
 
 std::shared_ptr<Enviroment> Core::getEnviroment()
 {
+	//gets a context of Enviroment
 	return m_enviroment;
 }
 
 std::shared_ptr<Keyboard> Core::getKeyboard()
 {
+	//gets a context of Keyboard
 	return m_keyboard;
 }
 
 std::shared_ptr<rend::Context> Core::getGraphicalContext()
 {
+	//gets a context of rend Context
 	return m_graphicalContext;
 }
 
 std::shared_ptr<GUI> Core::getGUI()
 {
+	//gets a context of GUI
 	return m_gui;
 }
 
 
 void Core::windowInit()
 {
-	//get screen coordinates
-    //m_screen = std::make_shared<Screen>();
-
+	//get screen coordinates from keyboard
     m_windowW = m_screen->getScreen().x;
     m_windowH = m_screen->getScreen().y;
 
@@ -181,10 +184,19 @@ void Core::soundInit()
 	alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
 }
 
+int Core::getWindowW()
+{
+	return m_windowW;
+}
+
+int Core::getWindowH()
+{
+	return m_windowH;
+}
+
 
 void Core::runCore()
 {
-
 	//loop variable
 	bool m_looper = true;
 	//loop condition
@@ -199,15 +211,13 @@ void Core::runCore()
 				m_looper = false;
 				//throw Exception("Close temp");
 			}
-
-            //TODO have keys just hold all the keys pressed,
-            //have keys down the keys that are currently down, and key is up remove them from the
-            // vector and add them up the up
+			// if key is down, add it to the keys Pressed vector in keyboard
             else if(m_event.type == SDL_KEYDOWN)
             {
-                //add key to vector
+                //add the key to vector
                 m_keyboard->m_keysPressed.push_back(m_event.key.keysym.sym);
             }
+			// if key is up, add it to the keys Released vector in keyboard
             else if (m_event.type == SDL_KEYUP)
             {
                 for (size_t i = 0; i < m_keyboard->m_keysPressed.size(); i++ )
@@ -234,12 +244,6 @@ void Core::runCore()
 			//unasign pointer allowing use to access Entity functions
 			(*iter)->Ticks();
 		}
-
-       //TODO: isAlive initialized?
-		//TODO, check removal of soundSource
-		//add componet removal
-		//add camera movement (keyboard class)
-
 		//check if a items within the list has been flagged to be deleted
         for (std::list<std::shared_ptr<Entity>>::iterator
             iter = m_entities.begin(); iter != m_entities.end();)
@@ -273,8 +277,6 @@ void Core::runCore()
 			//std::cout << "?" << std::endl;
             (*iter)->onDisplay();
 		}
-
-		glClear(GL_DEPTH_BUFFER_BIT);
 
 		for (std::list<std::shared_ptr<Entity>>::iterator
 			iter = m_entities.begin(); iter != m_entities.end(); iter++)

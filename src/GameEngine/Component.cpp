@@ -23,7 +23,7 @@ void Component::onDraw()
 std::shared_ptr<Entity> Component::getEntity()
 {
     //return a smart point to entity
-	return entity.lock();
+	return m_entity.lock();
 }
 
 std::shared_ptr<Core> Component::getCore()

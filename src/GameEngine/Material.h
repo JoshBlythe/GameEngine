@@ -32,12 +32,14 @@ class Material : public Resource
 {
 public:
 	/**
-	* This class inherits from Resources, it is used to load a Material and a shader for that material if it is defined.
+	* Material inherits from Resources, it is used to load a Material and a shader for that material if it is defined.
 	* It also holds a context of rend Shader and Material, these allow the data read in to be processed in rend and stored, then used later on.
 	*/
+	virtual ~Material();
 
 	/**
 	* This function takes in a string and loads the material and shader.
+	@param _fileName takes in a string, this will be the file name and the folder it is inside of.
 	*/
 	void onLoad(const std::string& _fileName);
 

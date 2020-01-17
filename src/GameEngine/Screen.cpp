@@ -9,3 +9,8 @@ Screen::~Screen()
 {
 
 }
+
+glm::vec2 Screen::getScreen()
+{
+	return m_screenSize;
+}

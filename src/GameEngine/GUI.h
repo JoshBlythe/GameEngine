@@ -25,6 +25,7 @@ public:
 	/**
 	* This class is used to Initalise the GUI variables, this is done it its constructor, it also goes through core to get a shader resource and load it.
 	* Then will draw the GUI in the setTexture function.
+	@param _core takes a shared pointer of core, this is used to initalise GUI in Core and get a context of Core.
 	*/
 	GUI(std::shared_ptr<Core> _core);
 	~GUI();

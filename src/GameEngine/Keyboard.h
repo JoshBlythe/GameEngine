@@ -61,6 +61,9 @@ public:
 	/**
 	* This function check if key is pressed and returns true if it is.
 	* If it isn't the function will return false.
+	@param _key A int value of the key pressed.
+	@see m_keysPressed.
+	@return A bool if the key is pressed or not.
 	*/
     bool getKey(int _key);
 

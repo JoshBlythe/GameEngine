@@ -38,11 +38,16 @@ public:
 	~Resources() {};
 
 	/**
-	* Calls the load function of the type passed into function.
+	* Defines the key passed in.
 	*/
-
-	//TODO: Do cache system.
 	template<typename T>
+	/**
+	* Function takes in a Resource defined by T, it will add the resource to a list (adding it to the cache)
+	* Calls the load function of the type passed into function.
+	* When called again the function will check if the Resource has been loaded before, if it has then it will reuse it from
+	* the cache, if it hasn't then it will add it to the cache and load it.
+	@param _path, this is the path of the Resource to be loaded.
+	*/
 	std::shared_ptr<T> load(const std::string& _path)
 	{
 		for (size_t i = 0; i < m_resources.size(); i++)
@@ -60,13 +65,16 @@ public:
 
 
 		return t_rtn;
-//		throw Exception("Specified Type was not found");
+		//throw Exception("Specified Type was not found");
 	}
 
 	/**
-	* Create a Resource, adds it to the list.
+	* Defines the key passed in.
 	*/
 	template<typename T>
+	/**
+	* Create a Resource, adds it to the list.
+	*/
 	std::shared_ptr<T> createResource()
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
@@ -78,7 +86,8 @@ public:
 	}
 
 	/**
-	* Returns pointe to Core, used to go up the hierachy.
+	* Returns pointer to Core, used to go up the hierachy.
+	@return A pointer of Core.
 	*/
 	std::shared_ptr<Core> getCore();
 

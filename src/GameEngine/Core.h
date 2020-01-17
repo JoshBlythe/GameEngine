@@ -55,9 +55,13 @@ public:
 	std::shared_ptr<Entity> addEntity();
 
 	/**
-	* This function returns a Entity if it has a component type passed into function, attached to it.
+	* Defines the Type passed in.
 	*/
 	template<typename T>
+	/**
+	* This function returns a Entity if it has a component type passed into function, attached to it.
+	@param _list a reference of a list passed into the function, its purpose to store any Entities, that have the passed in component type.
+	*/
     void getEntities(std::list<std::shared_ptr<Entity>>& _list)
 	{
 		//std::shared_ptr<T> t_rtn = std::make_shared<T>();
@@ -81,30 +85,44 @@ public:
 
 	/**
 	* Function to return a shared pointer to Resource.
+	@return A Context of Resources.
 	*/
 	std::shared_ptr<Resources> getResources();
+	
 	/**
 	* Function to return a shared pointer to Camera.
+	@return A Context of Camera.
 	*/
 	std::shared_ptr<Camera> getCamera();
+	
 	/**
 	* Function to return a shared pointer to Screen.
+	@return A Context of Screen.
 	*/
 	std::shared_ptr<Screen> getScreen();
+	
 	/**
 	* Function to return a shared pointer to Enviroment.
+	@return A Context of Enviroment.
 	*/
 	std::shared_ptr<Enviroment> getEnviroment();
+	
 	/**
 	* Function to return a shared pointer to Keyboard.
+	@return A Context of Enviroment.
 	*/
 	std::shared_ptr<Keyboard> getKeyboard();
-	//std::shared_ptr<CollisionDetection> getCollision();
+
 	/**
-	* Function to return a shared pointer to Rend Context.
+	* Function to return a shared pointer to rend Context.
+	@return A Context of rend::Context.
 	*/
 	std::shared_ptr<rend::Context> getGraphicalContext();
 
+	/**
+	* Function to return a shared pointer to GUI.
+	@return A Context of GUI.
+	*/
 	std::shared_ptr<GUI> getGUI();
 
 	/**
@@ -118,12 +136,17 @@ public:
 
 	/**
 	* Function is used to return the window width.
+	@return Window Width.
+	@see m_windowW.
 	*/
-    int getWindowW() {return m_windowW;}
+	int getWindowW();
+	
 	/**
 	* Function is used to return the window height.
+	@return Window Height.
+	@see m_windowH.
 	*/
-    int getWindowH() {return m_windowH;}
+	int getWindowH();
 
 	/**
 	* Core deconstructor, used to clean up any raw pointer that didn't get wrapped by a smart pointer.
@@ -137,13 +160,14 @@ public:
 	* user input.
 	*/
 	void runCore();
+	
 	//stop running main loop
 	void stopCore();
 
 private:
 	//friend classes, allows the class to access private variaibles of core
 	friend class Camera; /*!< Friend Class, allows access to the private variables of Camera. */
-	friend class Resources;
+	friend class Resources; /*!< Friend Class, allows access to the private variables of Resources. */
 	//initalise SDL window;
 	SDL_Window* m_window; /*!< Initalise SDL window. */
 
@@ -164,7 +188,7 @@ private:
 
 	//camera pointer
 	std::weak_ptr<Camera> m_camera; /*!< weak pointer to Camera class. */
-	std::shared_ptr<GUI> m_gui;
+	std::shared_ptr<GUI> m_gui; /*!< Smart pointer to GUI class. */
 
 	//store width and height of screen to use
 	int m_windowW; /*!< Variable used to store Window Width. */

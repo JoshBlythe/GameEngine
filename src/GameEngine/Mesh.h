@@ -28,19 +28,18 @@ public:
 	Mesh();
 	virtual ~Mesh();
 
-	std::shared_ptr<rend::Mesh> _internal; /*!< Pointer to Rend Mesh. */
-
-	//std::vector<CollisionTrig>& _out
 	/**
 	* This function gets all the Mesh Faces and pushes them back into the vector passed into the function.
+	@param _out is a vector that will be passed into the funciton its purpose is to store the faces of the current model into that vector.
 	*/
 	void getFaces(std::vector<CollisionTrig>& _out);
 
 	/**
 	* This function Loads the Mesh (Model) from the path passed into it.
 	* It gets the local path from the enviroment class. It also overwrites the Resource onLoad. 
+	@param _fileName takes in a string, this will be the file name and the folder it is inside of.
 	*/
 	void onLoad(const std::string& _fileName);
 
-	//std::vector<CollisionTrig> m_modelFaces;
+	std::shared_ptr<rend::Mesh> _internal; /*!< Pointer to Rend Mesh. */
 };

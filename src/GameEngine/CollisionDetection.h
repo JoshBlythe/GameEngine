@@ -39,10 +39,13 @@ public:
 	
 	/**
 	* This Function is used to set the size of the Collision box.
+	@param _size varaibles that sets the size of the Collsion box.
 	*/
 	void setSize(glm::vec3 _size);
+	
 	/**
 	* This Function is used to set the offset of the Collision box.
+	@param _offset varaibles that sets the offset of the Collsion box.
 	*/
 	void setOffSet(glm::vec3 _offSet);
 
@@ -52,29 +55,37 @@ private:
 	* onTick function. 
 	*/
 	void onTick();
+	
 	/**
 	* This Function handles the Box Collision, for all Entities that have a,
 	* CollsionDetection Component attached to it.
 	*/
 	void collisionLoop();
+	
 	/**
 	* This Function handles the Static Model Collision, for all Entities that have a,
 	* ModelCollision, Component attached to it.
 	*/
 	void collideStaticMesh();
+	
 	/**
 	* This Function Checks for Collision between the objects, passed through to it by
 	* the Collision Loop.
+	@param _pos this is a vec3 that is used to pass in the postion.
+	@param _size this is a vec3 that is used to pass in the size.
+	@return true or falses, depending on if it's colliding or not.
 	*/
 	bool isColliding(glm::vec3 _pos, glm::vec3 _size);
+	
 	/**
 	* This Function handles the collsion of the objects passed to it by the 
 	* the isCollision Function.
+	@param _pos this is a vec3 that is used to pass in the postion.
+	@param _size this is a vec3 that is used to pass in the size.
+	@return a vec3 of the collision response.
 	*/
 	glm::vec3 getCollisionRes(glm::vec3 _pos, glm::vec3 _size);
-	//bool triangle_intersect(glm::vec3 a1, glm::vec3 b1, glm::vec3 c1,
-		//glm::vec3 a2, glm::vec3 b2, glm::vec3 c2);
-
+	
 	friend class Core; /*!< Friend Class, allows access to the private variables of Core. */
 
 	glm::vec3 m_boxSize; /*!< Initalision of the Box Size. */

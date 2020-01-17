@@ -27,8 +27,8 @@
 */
 struct Extent
 {
-  glm::vec3 max;
-  glm::vec3 min;
+  glm::vec3 max; /*!< Max Extent. */
+  glm::vec3 min;/*!< Min Extent. */
 };
 
 /**
@@ -36,9 +36,9 @@ struct Extent
 */
 struct CollisionTrig
 {
-	glm::vec3 a;
-	glm::vec3 b;
-	glm::vec3 c;
+	glm::vec3 a; /*!< Point a of the face. */
+	glm::vec3 b;/*!< Point b of the face. */
+	glm::vec3 c;/*!< Point c of the face. */
 };
 
 /**
@@ -47,14 +47,26 @@ struct CollisionTrig
 */
 struct ColliderColumn
 {
-	glm::vec3 position;
-	glm::vec3 size;
-	std::vector<CollisionTrig> faces;
+	glm::vec3 position; /*!< Position vec3. */
+	glm::vec3 size; /*!< Size vec3. */
+	std::vector<CollisionTrig> faces; /*!< vector of CollisionTrig. */
 
-  bool isColliding(glm::vec3 position, glm::vec3 size);
+	/**
+	* This function checks if there is a Collision against one of the columns.
+	@param _position is a vec3
+	@param _size is a vec3
+	@return True or False.
+	*/
+  bool isColliding(glm::vec3 _position, glm::vec3 _size);
 
-  void getColliding(glm::vec3 position, glm::vec3 size,
-    std::vector<CollisionTrig>& collisions);
+  /**
+  * This function checks gets the collsion at the columns.
+  @param _position is a vec3
+  @param _size is a vec3
+  @param _collisions this is a vector of CollisionTrig.
+  */
+  void getColliding(glm::vec3 _position, glm::vec3 _size,
+    std::vector<CollisionTrig>& _collisions);
 };
 
 /**
@@ -75,7 +87,7 @@ class ModelCollider : public Component
 	//glm::vec3 position;
 
   std::vector<std::sr1::shared_ptr<ColliderColumn> > cols; /*!< Vector stores all the collision columns. */
-  Extent extent;
+  Extent extent; /*!< Extent Object. */
   std::sr1::zero_initialized<float> resolution; /*!< Resolution Variable. */
   std::sr1::zero_initialized<float> tryStep; /*!< try step Variable. */
   std::sr1::zero_initialized<float> maxStep;/*!< max step Variable. */
@@ -83,52 +95,77 @@ class ModelCollider : public Component
   std::sr1::zero_initialized<float> maxInc; /*!< max inc Variable. */
   std::vector<CollisionTrig> collisions; /*!< Vector for all collision. */
 
-	void getColliding(glm::vec3 position, glm::vec3 size,
-	  std::vector<CollisionTrig>& collisions);
+  /**
+  * This function checks gets the collsion at the columns.
+	@param _position is a vec3
+	@param _size is a vec3
+	@param _collisions this is a vector of CollisionTrig.
+  */
+	void getColliding(glm::vec3 _position, glm::vec3 _size,
+	  std::vector<CollisionTrig>& _collisions);
 
 	/**
 	* Generate Extent function.
 	*/
   void generateExtent(); 
+  
   /**
   * Function to add each face into Collider Column cols vector.
+  @param _face this a CollisionTrig.
   */
-  void addFace(CollisionTrig face);
+  void addFace(CollisionTrig _face);
+  
   /**
   * Function to get the faces normal.
+  @param _face this a CollisionTrig.
   */
-  glm::vec3 faceNormal(CollisionTrig& face);
+  glm::vec3 faceNormal(CollisionTrig& _face);
 
 public:
 	/**
 	* on initalise function, overwrites the components on initalise.
 	*/
   void onInitalise();
+  
   /**
   * Function returns the Extent.
+  @return A context of Extent.
   */
   Extent getExtent();
 
   /**
   * Checks if there is a collision takes in a Face, position and size.
+  @param _face CollisionTrig
+  @param _position is a vec3
+  @param _size is a vec3
+  @return True or False.
   */
-  bool isColliding(CollisionTrig& face, glm::vec3 position,
-    glm::vec3 size);
+  bool isColliding(CollisionTrig& _face, glm::vec3 _position,
+    glm::vec3 _size);
 
   /**
-  * Checks if there is a collision takes a position and size.
+  * This function checks if there is a Collisions.
+	@param _position is a vec3
+	@param _size is a vec3
+	@return True or False.
   */
-  bool isColliding(glm::vec3 position, glm::vec3 size);
+  bool isColliding(glm::vec3 _position, glm::vec3 _size);
+  
   /**
-  * Get Colliding.
+  * This function checks gets the collsion.
+  @param _position is a vec3
+  @param _size is a vec3
   */
-  void getColliding(glm::vec3 position, glm::vec3 size);
+  void getColliding(glm::vec3 _position, glm::vec3 _size);
 
   /**
   * This function gets the collision Response
+  @param _position is a vec3
+  @param _size is a vec3
+  @param _solved is a bool
   */
-  glm::vec3 getCollisionResponse(glm::vec3 position,
-    glm::vec3 size, bool& solved);
+  glm::vec3 getCollisionResponse(glm::vec3 _position,
+    glm::vec3 _size, bool& _solved);
 
 };
 

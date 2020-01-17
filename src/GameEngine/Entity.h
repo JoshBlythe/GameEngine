@@ -45,16 +45,21 @@ public:
 	Entity();
 	~Entity();
 
+
+	/**
+	* Defines the Type passed in.
+	*/
+	template<typename T> 
 	//create object template without value
 	/**
 	* This function creates a component of type passed into function.
+	@return A shared pointer of the type passed in.
 	*/
-	template<typename T> 
 	std::shared_ptr<T> addComponent()
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 		
-		t_rtn->entity = m_entSelf;
+		t_rtn->m_entity = m_entSelf;
 		//t_rtn->m_compIsAlive = true;
 
 		m_component.push_back(t_rtn);
@@ -64,16 +69,20 @@ public:
 		return t_rtn;
 	}
 
+	/**
+	* Defines the Type passed in, and can have a variable passed in as well.
+	*/
+	template <typename T, typename V>
 	//create object template with value
 	/**
 	* This function creates a component of type passed into functionm with a value attached.
+	@return A shared pointer of the type passed in.
 	*/
-	template <typename T, typename V>
 	std::shared_ptr<T> addComponent(V v)
 	{
 		std::shared_ptr<T> t_rtn = std::make_shared<T>();
 		
-		t_rtn->entity = m_entSelf;
+		t_rtn->m_entity = m_entSelf;
 
 		m_component.push_back(t_rtn);
 
@@ -83,9 +92,13 @@ public:
 	}
 
 	/**
-	* This function gets a component of type passed into function.
+	* Defines the Type passed in.
 	*/
 	template<typename T>
+	/**
+	* This function gets a component of type passed into function.
+	@return A shared pointer of the type passed in.
+	*/
 	std::shared_ptr<T> getComponent()
 	{
         std::shared_ptr<T> t_rtn;
@@ -104,10 +117,14 @@ public:
 	}
 
 	/**
-	* This function gets a component of type passed into function,
-	* returns true if there is a component of that type.
+	* Defines the Type passed in.
 	*/
 	template<typename T>
+	/**
+	* This function gets a component of type passed into function,
+	* returns true if there is a component of that type.
+	@return True or False, depending on if the Entitiy has the Component Type (passed in) attached to it.
+	*/
     bool hasComponent()
 	{
         std::shared_ptr<T> t_rtn;
@@ -133,14 +150,16 @@ public:
 	* If they have been then deletes them from the list, if not continues.
 	*/
 	void Ticks();
-	//update
-	//void Update();
+	
 	//display function to be overide
 	/**
 	* This function loops though each component and calls there onDisplay function.
 	*/
     virtual void onDisplay();
 
+	/**
+	* This function loops though each component and calls there onGUI function.
+	*/
 	void onGUI();
 
 	//flag to be deleted
@@ -152,20 +171,26 @@ public:
 	//return pointers to classes
 	/**
 	* Function to return a shared pointer to Transform.
+	@return A shared pointer of Transform.
 	*/
     std::shared_ptr<Transform> getTransform();
+	
 	/**
 	* Function to return a shared pointer to Collision Detection.
+	@return A shared pointer of CollisionDetection.
 	*/
 	std::shared_ptr<CollisionDetection> getCollision();
+	
 	/**
 	* Function to return a shared pointer to Model Collison.
+	@return A shared pointer of ModelCollision.
 	*/
 	std::shared_ptr<ModelCollider> getModelCollision();
 
 	//return pointer to core
 	/**
 	* Function to return a shared pointer to Core, this is used to go up the hierachy.
+	@return A shared pointer of Core.
 	*/
     std::shared_ptr<Core> getCore();
 

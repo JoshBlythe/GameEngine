@@ -36,18 +36,31 @@ public:
 	Resource();
 	~Resource();
 
+	/**
+	* This function returns a context of Resources
+	@return A pointer of Resources.
+	*/
 	std::shared_ptr<Resources> getResources();
+
+	/**
+	* This function returns a context of Core
+	@return A pointer of Core.
+	*/
 	std::shared_ptr<Core> getCore();
 
+	/**
+	* This function takes in a _filename, it is virtual so class's that inherit from it will overwrite this function.
+	@param _fileName takes in a string, this will be the file name and the folder it is inside of.
+	*/
 	virtual void onLoad(const std::string& _fileName);
 
 private:
-    std::string m_pathLocation;
+	friend class Resources; /*!< Friend Class, allows access to the private variables of Resources. */
 	
-	friend class Resources;
+    std::string m_pathLocation; /*!< path location name. */
 
-    std::weak_ptr<Resources> m_resources;
-    std::weak_ptr<Core> m_core;
+    std::weak_ptr<Resources> m_resources; /*!< Weak pointer to Resources. */
+    std::weak_ptr<Core> m_core; /*!< Weak pointer to Core. */
 };
 
 #endif // !_Resource_

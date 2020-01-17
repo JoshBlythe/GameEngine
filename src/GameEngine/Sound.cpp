@@ -32,6 +32,11 @@ void Sound::onLoad(const std::string &_path)
 
 }
 
+ALuint Sound::getBufferID()
+{
+	return m_bufferID;
+}
+
 void Sound::load_ogg(const std::string& _fileName, std::vector<char>& _buffer, 
 	ALenum& _format, ALsizei& _freq)
 {

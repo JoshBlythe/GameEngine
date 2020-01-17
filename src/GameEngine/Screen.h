@@ -31,8 +31,10 @@ public:
 
 	/**
 	* Function returns the screens coordinates.
+	@return A vec2 that stores the screen coordinates.
+	@see m_screenSize
 	*/
-    glm::vec2 getScreen() { return m_screenSize; }
+	glm::vec2 getScreen();
 
 private:
     friend class Core; /*!< Friend Class, allows access to the private variables of Core. */

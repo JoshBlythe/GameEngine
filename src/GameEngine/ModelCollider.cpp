@@ -12,7 +12,7 @@
 int triBoxOverlap(float boxcenter[3],
 	float boxhalfsize[3], float triverts[3][3]);
 
-bool ColliderColumn::isColliding(glm::vec3 position, glm::vec3 size)
+bool ColliderColumn::isColliding(glm::vec3 _position, glm::vec3 _size)
 {
 	//glm::vec3 _currentPos = getEntity()->getTransform()->getPosition();
 
@@ -30,14 +30,14 @@ bool ColliderColumn::isColliding(glm::vec3 position, glm::vec3 size)
 		f[2][2] = i->c.z;
 
 		float bc[3] = { 0 };
-		bc[0] = position.x;
-		bc[1] = position.y;
-		bc[2] = position.z;
+		bc[0] = _position.x;
+		bc[1] = _position.y;
+		bc[2] = _position.z;
 		
 		float bhs[3] = { 0 };
-		bhs[0] = size.x / 2.0f;
-		bhs[1] = size.y / 2.0f;
-		bhs[2] = size.z / 2.0f;
+		bhs[0] = _size.x / 2.0f;
+		bhs[1] = _size.y / 2.0f;
+		bhs[2] = _size.z / 2.0f;
 
 		if (triBoxOverlap(bc, bhs, f))
 		{
@@ -48,8 +48,8 @@ bool ColliderColumn::isColliding(glm::vec3 position, glm::vec3 size)
 	return false;
 }
 
-void ColliderColumn::getColliding(glm::vec3 position, glm::vec3 size,
-	std::vector<CollisionTrig>& collisions)
+void ColliderColumn::getColliding(glm::vec3 _position, glm::vec3 _size,
+	std::vector<CollisionTrig>& _collisions)
 {
 	for (std::vector<CollisionTrig>::iterator i = faces.begin(); i != faces.end(); i++)
 	{
@@ -65,23 +65,23 @@ void ColliderColumn::getColliding(glm::vec3 position, glm::vec3 size,
 		f[2][2] = i->c.z;
 
 		float bc[3] = { 0 };
-		bc[0] = position.x;
-		bc[1] = position.y;
-		bc[2] = position.z;
+		bc[0] = _position.x;
+		bc[1] = _position.y;
+		bc[2] = _position.z;
 		float bhs[3] = { 0 };
-		bhs[0] = size.x / 2.0f;
-		bhs[1] = size.y / 2.0f;
-		bhs[2] = size.z / 2.0f;
+		bhs[0] = _size.x / 2.0f;
+		bhs[1] = _size.y / 2.0f;
+		bhs[2] = _size.z / 2.0f;
 
 		if (triBoxOverlap(bc, bhs, f))
 		{
-			collisions.push_back(*i);
+			_collisions.push_back(*i);
 		}
 	}
 }
 
-void ModelCollider::getColliding(glm::vec3 position, glm::vec3 size,
-	std::vector<CollisionTrig>& collisions)
+void ModelCollider::getColliding(glm::vec3 _position, glm::vec3 _size,
+	std::vector<CollisionTrig>& _collisions)
 {
     for (std::vector<CollisionTrig>::iterator i = m_allFaces.begin(); i != m_allFaces.end(); i++)
 	{
@@ -97,42 +97,42 @@ void ModelCollider::getColliding(glm::vec3 position, glm::vec3 size,
 		f[2][2] = i->c.z;
 
 		float bc[3] = { 0 };
-		bc[0] = position.x;
-		bc[1] = position.y;
-		bc[2] = position.z;
+		bc[0] = _position.x;
+		bc[1] = _position.y;
+		bc[2] = _position.z;
 		float bhs[3] = { 0 };
-		bhs[0] = size.x / 2.0f;
-		bhs[1] = size.y / 2.0f;
-		bhs[2] = size.z / 2.0f;
+		bhs[0] = _size.x / 2.0f;
+		bhs[1] = _size.y / 2.0f;
+		bhs[2] = _size.z / 2.0f;
 
 		if (triBoxOverlap(bc, bhs, f))
 		{
-			collisions.push_back(*i);
+			_collisions.push_back(*i);
 		}
 	}
 }
-bool ModelCollider::isColliding(CollisionTrig& face,
-	glm::vec3 position, glm::vec3 size)
+bool ModelCollider::isColliding(CollisionTrig& _face,
+	glm::vec3 _position, glm::vec3 _size)
 {
 	float f[3][3] = { 0 };
-	f[0][0] = face.a.x;
-	f[0][1] = face.a.y;
-	f[0][2] = face.a.z;
-	f[1][0] = face.b.x;
-	f[1][1] = face.b.y;
-	f[1][2] = face.b.z;
-	f[2][0] = face.c.x;
-	f[2][1] = face.c.y;
-	f[2][2] = face.c.z;
+	f[0][0] = _face.a.x;
+	f[0][1] = _face.a.y;
+	f[0][2] = _face.a.z;
+	f[1][0] = _face.b.x;
+	f[1][1] = _face.b.y;
+	f[1][2] = _face.b.z;
+	f[2][0] = _face.c.x;
+	f[2][1] = _face.c.y;
+	f[2][2] = _face.c.z;
 
 	float bc[3] = { 0 };
-	bc[0] = position.x;
-	bc[1] = position.y;
-	bc[2] = position.z;
+	bc[0] = _position.x;
+	bc[1] = _position.y;
+	bc[2] = _position.z;
 	float bhs[3] = { 0 };
-	bhs[0] = size.x / 2.0f;
-	bhs[1] = size.y / 2.0f;
-	bhs[2] = size.z / 2.0f;
+	bhs[0] = _size.x / 2.0f;
+	bhs[1] = _size.y / 2.0f;
+	bhs[2] = _size.z / 2.0f;
 
 	if (triBoxOverlap(bc, bhs, f))
 	{
@@ -142,8 +142,8 @@ bool ModelCollider::isColliding(CollisionTrig& face,
 	return false;
 }
 
-bool ModelCollider::isColliding(glm::vec3 position,
-	glm::vec3 size)
+bool ModelCollider::isColliding(glm::vec3 _position,
+	glm::vec3 _size)
 {
 	for (std::vector<CollisionTrig>::iterator i = collisions.begin();
 		i != collisions.end(); i++)
@@ -160,13 +160,13 @@ bool ModelCollider::isColliding(glm::vec3 position,
 		f[2][2] = i->c.z;
 
 		float bc[3] = { 0 };
-		bc[0] = position.x;
-		bc[1] = position.y;
-		bc[2] = position.z;
+		bc[0] = _position.x;
+		bc[1] = _position.y;
+		bc[2] = _position.z;
 		float bhs[3] = { 0 };
-		bhs[0] = size.x / 2.0f;
-		bhs[1] = size.y / 2.0f;
-		bhs[2] = size.z / 2.0f;
+		bhs[0] = _size.x / 2.0f;
+		bhs[1] = _size.y / 2.0f;
+		bhs[2] = _size.z / 2.0f;
 
 		if (triBoxOverlap(bc, bhs, f))
 		{
@@ -177,23 +177,23 @@ bool ModelCollider::isColliding(glm::vec3 position,
 	return false;
 }
 
-void ModelCollider::getColliding(glm::vec3 position,
-	glm::vec3 size)
+void ModelCollider::getColliding(glm::vec3 _position,
+	glm::vec3 _size)
 {
-	glm::vec3 pos = position - extent.min;
-	size_t x = (size_t)(pos.x / cols.at(0)->size.x);
-	size_t y = (size_t)(pos.z / cols.at(0)->size.z);
+	glm::vec3 _pos = _position - extent.min;
+	size_t x = (size_t)(_pos.x / cols.at(0)->size.x);
+	size_t y = (size_t)(_pos.z / cols.at(0)->size.z);
 	size_t idx = y * resolution + x;
 
 	if (idx >= cols.size()) return;
 	//getColliding(position, size, allFaces);
-    cols.at(idx)->getColliding(position, size, collisions);
+    cols.at(idx)->getColliding(_position, _size, collisions);
     //getColliding(position, size, collisions);
 	//collisions.at(idx);
 	//std::cout << idx << std::endl;
 }
 
-glm::vec3 ModelCollider::faceNormal(CollisionTrig& face)
+glm::vec3 ModelCollider::faceNormal(CollisionTrig& _face)
 {
 	// Winding for CCW?
 	//qsoft::Vector3 N = qsoft::Vector3::cross(
@@ -201,32 +201,32 @@ glm::vec3 ModelCollider::faceNormal(CollisionTrig& face)
 	//  qsoft::Vector3(face.c.position) - qsoft::Vector3(face.a.position));
 
 	glm::vec3 N = glm::cross(
-		glm::vec3(face.b) - glm::vec3(face.c),
-		glm::vec3(face.a) - glm::vec3(face.c));
+		glm::vec3(_face.b) - glm::vec3(_face.c),
+		glm::vec3(_face.a) - glm::vec3(_face.c));
 
 	return N;
 }
 
 glm::vec3 ModelCollider::getCollisionResponse(
-	glm::vec3 position, glm::vec3 size, bool& solved)
+	glm::vec3 _position, glm::vec3 _size, bool& _solved)
 {
-	glm::vec3 solve = position;
-	solved = false;
+	glm::vec3 _solve = _position;
+	_solved = false;
 
 	collisions.clear();
-	getColliding(solve, size);
+	getColliding(_solve, _size);
 
-	if (!isColliding(solve, size))
+	if (!isColliding(_solve, _size))
 	{
-		solved = true;
-		return solve;
+		_solved = true;
+		return _solve;
 	}
 
 	// Favour Y faces first.
 	for (std::vector<CollisionTrig>::iterator it = collisions.begin();
 		it != collisions.end(); it++)
 	{
-		if (!isColliding(*it, solve, size))
+		if (!isColliding(*it, _solve, _size))
 		{
 			continue;
 		}
@@ -241,14 +241,14 @@ glm::vec3 ModelCollider::getCollisionResponse(
 
 		while (true)
 		{
-			solve = solve + n * amount;
+			_solve = _solve + n * amount;
 
-			if (!isColliding(*it, solve, size))
+			if (!isColliding(*it, _solve, _size))
 			{
 				break;
 			}
 
-			solve = solve - n * amount;
+			_solve = _solve - n * amount;
 			amount += tryStep;
 
 			if (amount > maxStep)
@@ -258,10 +258,10 @@ glm::vec3 ModelCollider::getCollisionResponse(
 		}
 	}
 
-	if (!isColliding(solve, size))
+	if (!isColliding(_solve, _size))
 	{
-		solved = true;
-		return solve;
+		_solved = true;
+		return _solve;
 	}
 
 	float amount = tryInc;
@@ -278,29 +278,29 @@ glm::vec3 ModelCollider::getCollisionResponse(
 			//n = n.normalize();
 			n = glm::normalize(n);
 			total = total + n;
-			solve = solve + n * amount;
+			_solve = _solve + n * amount;
 
-			if (!isColliding(solve, size))
+			if (!isColliding(_solve, _size))
 			{
-				solved = true;
-				return solve;
+				_solved = true;
+				return _solve;
 			}
 
-			solve = solve - n * amount;
+			_solve = _solve - n * amount;
 		}
 
 		// Try to uncollide using averaged face normals
 		//total = total.normalize();
 		total = glm::normalize(total);
-		solve = solve + total * amount;
+		_solve = _solve + total * amount;
 
-		if (!isColliding(solve, size))
+		if (!isColliding(_solve, _size))
 		{
-			solved = true;
-			return solve;
+			_solved = true;
+			return _solve;
 		}
 
-		solve = solve - total * amount;
+		_solve = _solve - total * amount;
 		amount += tryInc;
 
 		if (amount > maxInc)
@@ -309,13 +309,13 @@ glm::vec3 ModelCollider::getCollisionResponse(
 		}
 	}
 
-	solved = false;
-	return position;
+	_solved = false;
+	return _position;
 }
 
 void ModelCollider::generateExtent()
 {
-	std::vector<glm::vec3> positions;
+	std::vector<glm::vec3> _positions;
     //std::sr1::shared_ptr<MeshRender> mr = getEntity()->getComponent<MeshRender>();
     //std::sr1::shared_ptr<Mesh> model = mr->getMesh();
 
@@ -325,22 +325,22 @@ void ModelCollider::generateExtent()
     for (size_t f = 0; f < m_allFaces.size(); f++)
 	{
         CollisionTrig face = m_allFaces.at(f);
-		positions.push_back(face.a);
-		positions.push_back(face.b);
-		positions.push_back(face.c);
+		_positions.push_back(face.a);
+		_positions.push_back(face.b);
+		_positions.push_back(face.c);
 	}
 
-	extent.max = positions.at(0);
-	extent.min = positions.at(0);
+	extent.max = _positions.at(0);
+	extent.min = _positions.at(0);
 
-	for (size_t i = 1; i < positions.size(); i++)
+	for (size_t i = 1; i < _positions.size(); i++)
 	{
-		if (positions.at(i).x > extent.max.x) extent.max.x = positions.at(i).x;
-		if (positions.at(i).y > extent.max.y) extent.max.y = positions.at(i).y;
-		if (positions.at(i).z > extent.max.z) extent.max.z = positions.at(i).z;
-		if (positions.at(i).x < extent.min.x) extent.min.x = positions.at(i).x;
-		if (positions.at(i).y < extent.min.y) extent.min.y = positions.at(i).y;
-		if (positions.at(i).z < extent.min.z) extent.min.z = positions.at(i).z;
+		if (_positions.at(i).x > extent.max.x) extent.max.x = _positions.at(i).x;
+		if (_positions.at(i).y > extent.max.y) extent.max.y = _positions.at(i).y;
+		if (_positions.at(i).z > extent.max.z) extent.max.z = _positions.at(i).z;
+		if (_positions.at(i).x < extent.min.x) extent.min.x = _positions.at(i).x;
+		if (_positions.at(i).y < extent.min.y) extent.min.y = _positions.at(i).y;
+		if (_positions.at(i).z < extent.min.z) extent.min.z = _positions.at(i).z;
 	}
 
 	extent.min = extent.min -= 1;
@@ -418,18 +418,18 @@ Extent ModelCollider::getExtent()
 	return extent;
 }
 
-void ModelCollider::addFace(CollisionTrig face)
+void ModelCollider::addFace(CollisionTrig _face)
 {
 	float f[3][3] = { 0 };
-	f[0][0] = face.a.x;
-	f[0][1] = face.a.y;
-	f[0][2] = face.a.z;
-	f[1][0] = face.b.x;
-	f[1][1] = face.b.y;
-	f[1][2] = face.b.z;
-	f[2][0] = face.c.x;
-	f[2][1] = face.c.y;
-	f[2][2] = face.c.z;
+	f[0][0] = _face.a.x;
+	f[0][1] = _face.a.y;
+	f[0][2] = _face.a.z;
+	f[1][0] = _face.b.x;
+	f[1][1] = _face.b.y;
+	f[1][2] = _face.b.z;
+	f[2][0] = _face.c.x;
+	f[2][1] = _face.c.y;
+	f[2][2] = _face.c.z;
 
 	bool found = false;
 
@@ -452,7 +452,7 @@ void ModelCollider::addFace(CollisionTrig face)
 
 		if (triBoxOverlap(bc, bhs, f))
 		{
-			cols.at(i)->faces.push_back(face);
+			cols.at(i)->faces.push_back(_face);
 			//std::cout << "Pushing face into " << i << std::endl;
 			found = true;
 		}

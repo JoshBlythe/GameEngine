@@ -40,12 +40,16 @@ public:
 	void onInitalise();
 	/**
 	* This function takes in a Mesh and sets it to the current Mesh.
+	@param _mesh takes a Mesh shared pointer and sets the Mesh passed in to m_mesh to be used in this function.
 	*/
 	void setMesh(std::shared_ptr<Mesh> _mesh);
+	
 	/**
 	* This function takes in a Material and sets it to the current Material.
+	@param _material takes in shared pointer, it is used to set the Material to the m_material inside this function.
 	*/
 	void setMaterial(std::shared_ptr<Material> _material);
+	
 	/**
 	* This function is for the drawing of objects in this class, it overwrites the onDraw in Component.
 	*/
@@ -53,13 +57,14 @@ public:
 
 	/**
 	* This function returns the current Mesh.
+	@return A context of Mesh
 	*/
 	std::shared_ptr<Mesh> getMesh();
 
 private:
 
-	std::shared_ptr<Material> m_geMaterial; /*!< Pointer to Material Class of the Game Engine. */
-	std::sr1::shared_ptr<Mesh> _mesh; /*!< Pointer to Mesh function of the Game Engine. */
+	std::shared_ptr<Material> m_material; /*!< Pointer to Material Class of the Game Engine. */
+	std::shared_ptr<Mesh> m_mesh; /*!< Pointer to Mesh function of the Game Engine. */
 };
 
 #endif // !_MeshRender_

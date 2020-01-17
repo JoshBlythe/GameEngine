@@ -9,36 +9,20 @@ SoundSource::~SoundSource()
 	alDeleteSources(1, &m_sourceId);
 }
 
-//void SoundSource::onInitialise()
-//{
-//
-//}
-
 void SoundSource::onTick()
 {
-
-	//abort();
-    //while (true)
-	{
 		m_state = 0;
 		alGetSourcei(m_sourceId, AL_SOURCE_STATE, &m_state);
 		
+		//check if the sound has stopped
 		if (m_state == AL_STOPPED)
 		{
 			//std::cout << "Sound Stopped!" << std::endl;
+			//if it has then flag the component to be deleted
             m_compIsAlive = false;
 		}
-
-	}
-	//setAutoRemove(m_compIsAlive);
 }
 
-//void SoundSource::setAutoRemove(bool _autoRemove)
-//{
-//	_autoRemove = getEntity()->getComponent<SoundSource>()->m_compIsAlive;
-//
-//	_autoRemove = false;
-//}
 
 void SoundSource::setSound(std::shared_ptr<Sound> _sound)
 {

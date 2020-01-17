@@ -58,6 +58,7 @@ add_library(GameEngine
 	src/GameEngine/Resource.cpp
 	src/GameEngine/Resource.h
 	src/GameEngine/Resources.h
+	src/GameEngine/Resources.cpp
 	src/GameEngine/Material.cpp
 	src/GameEngine/Material.h
 	src/GameEngine/Enviroment.cpp
